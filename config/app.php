@@ -175,6 +175,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * Inyeccion del Servicio para acceder al Directorio Activo
+         */
+        Adldap\Laravel\AdldapServiceProvider::class,
     ],
 
     /*
@@ -229,6 +233,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        //alias para utilizarlo para recuperar las credeciales del directorio activo
+        'Adldap' => Adldap\Laravel\Facades\Adldap::class
 
     ],
 
