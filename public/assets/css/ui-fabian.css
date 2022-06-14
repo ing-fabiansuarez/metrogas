@@ -1,0 +1,39 @@
+:root {
+    --color-primary: #b2ca01;
+    --color-secundary: #05418b;
+    --color-third: #009bd8;
+}
+
+.navbar-vertical.navbar-expand-xs .navbar-collapse {
+    height: auto;
+}
+
+.navbar-vertical .navbar-brand-img,
+.navbar-vertical .navbar-brand>img {
+    max-height: 100%;
+    max-width: 70%;
+}
+
+.sidenav .navbar-brand {
+    padding: 0rem 2rem;
+}
+
+.bg-gradient-primary {
+    background-image: linear-gradient(310deg, var(--color-primary), var(--color-primary));
+}
+
+.navbar-vertical .navbar-nav>.nav-item .nav-link.active .icon {
+    background-image: linear-gradient(310deg, var(--color-primary), var(--color-primary));
+}
+
+.text-gradient.text-info {
+    background-image: linear-gradient(310deg, var(--color-primary), var(--color-primary));
+}
+
+.bg-gradient-info {
+    background-image: linear-gradient(310deg, var(--color-primary), var(--color-primary));
+}
+
+.bg-gradient-dark {
+    background-image: linear-gradient(310deg, var(--color-secundary), var(--color-secundary));
+}
