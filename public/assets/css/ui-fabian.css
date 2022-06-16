@@ -37,3 +37,6 @@
 .bg-gradient-dark {
     background-image: linear-gradient(310deg, var(--color-secundary), var(--color-secundary));
 }
+.text-message-validation{
+    font-size: 0.8rem;
+}

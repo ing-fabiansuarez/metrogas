@@ -16,4 +16,5 @@ return [
     'save'=>'Guardar',
 
     'message.save'=>'El registro se creó correctamente!',
+    'message.god_job'=>'Buen Trabajo!',
 ];

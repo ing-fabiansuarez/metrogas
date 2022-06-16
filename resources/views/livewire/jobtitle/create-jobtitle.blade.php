@@ -19,8 +19,12 @@
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">{{ __('forms.jobtitle.name') }}</label>
                             <input wire:model.defer="name" type="text" class="form-control" id="recipient-name">
+                            @error('name')
+                                <span class="text-danger text-message-validation">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary"
@@ -40,5 +44,4 @@
             $('#modal-new-jobtitle').modal('hide');
         });
     </script>
-   
 @endpush

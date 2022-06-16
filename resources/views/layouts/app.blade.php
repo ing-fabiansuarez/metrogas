@@ -80,9 +80,9 @@
     @stack('scripts')
     @livewireScripts
     <script>
-        Livewire.on('alert', function(message) {
+        Livewire.on('alert', function(title, message) {
             Swal.fire(
-                'Good job!',
+                title,
                 message,
                 'success'
             )
