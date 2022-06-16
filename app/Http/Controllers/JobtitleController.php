@@ -14,8 +14,7 @@ class JobtitleController extends Controller
      */
     public function index()
     {
-        $jobtitles = Jobtitle::all();
-        return view('mtto.jobtitle.index', compact('jobtitles'));
+        return view('mtto.jobtitle.index');
     }
 
     /**

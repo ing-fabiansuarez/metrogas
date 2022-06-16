@@ -10,6 +10,7 @@ use App\Http\Controllers\SessionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\ShowJobtitles;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,10 @@ Route::group(['middleware' => 'auth'], function () {
 	/**
 	 * Manteniminetos
 	 */
-	Route::resource('cargos',JobtitleController::class);
+	/* Route::resource('cargos',JobtitleController::class); */
 
-	/** */
+
+	Route::get('cargos', [JobtitleController::class, 'index'])->name('cargos.index');
 
 
 	Route::get('billing', function () {
