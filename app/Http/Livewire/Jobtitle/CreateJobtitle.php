@@ -12,7 +12,7 @@ class CreateJobtitle extends Component
 
     //Reglas de validacion
     protected $rules = [
-        'name' => 'required|email'
+        'name' => 'required'
     ];
 
     //Se ejecuta cada vez que un Atributo cambia su valor, cualquier atributo

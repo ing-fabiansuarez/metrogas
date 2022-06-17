@@ -29,7 +29,9 @@
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary"
                             data-bs-dismiss="modal">{{ __('forms.close') }}</button>
-                        <button type="submit" class="btn bg-gradient-primary">{{ __('forms.save') }}</button>
+                        <button wire:loading.remove type="submit"
+                            class="btn bg-gradient-primary">{{ __('forms.save') }}</button>
+                        <span wire:loading wire:target="store">{{ __('forms.message.loading') }}</span>
                     </div>
                 </form>
             </div>
