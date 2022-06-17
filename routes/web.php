@@ -4,6 +4,7 @@ use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\JobtitleController;
+use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ShowJobtitles;
+use Illuminate\Contracts\Foundation\MaintenanceMode;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,15 +29,13 @@ use App\Http\Livewire\ShowJobtitles;
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/', [HomeController::class, 'home'])->name('home');
+	Route::get('/', [HomeController::class, 'home'])->name('home');
 	Route::get('dashboard', function () {
 		return view('dashboard');
 	})->name('dashboard');
 
-	/**
-	 * Manteniminetos
-	 */
-	/* Route::resource('cargos',JobtitleController::class); */
+
+	Route::get('menu-mantenimientos', [MaintenanceController::class, 'menu'])->name('menu-mainten');
 
 
 	Route::get('cargos', [JobtitleController::class, 'index'])->name('cargos.index');
@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
 	/* Route::get('usuarios', [UserController::class,'index'])->name('user.index');
 	Route::get('usuarios/create', [UserController::class,'create'])->name('user.create'); */
 
-	Route::resource('usuarios', UserController::class);
+	Route::resource('usuarios', UserController::class)->names('usuarios');
 
 	Route::get('billing', function () {
 		return view('billing');

@@ -37,12 +37,21 @@
 .bg-gradient-dark {
     background-image: linear-gradient(310deg, var(--color-secundary), var(--color-secundary));
 }
-.text-message-validation{
+
+.text-message-validation {
     font-size: 0.8rem;
 }
+
 .page-item.active .page-link {
     background-color: var(--color-secundary);
-    border-color:  var(--color-third);
+    border-color: var(--color-third);
     color: #fff;
     z-index: 3;
+}
+
+.accordion-flush .accordion-item .accordion-button {
+    border-radius: 15px;
+    background-color: #0000005e;
+    color: white;
+   
 }
