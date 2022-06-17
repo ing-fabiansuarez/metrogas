@@ -40,7 +40,7 @@
 
 </div>
 
-@push('scripts')
+@push('js')
     <script>
         window.addEventListener('close-modal', event => {
             $('#modal-new-jobtitle').modal('hide');

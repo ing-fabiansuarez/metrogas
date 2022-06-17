@@ -14,7 +14,10 @@ class ShowJobtitles extends Component
     public $jobtitle;
 
     public $search;
-    protected $listeners = ['render' => 'render'];
+    protected $listeners = [
+        'render' => 'render',
+        'delete' => 'delete'
+    ];
 
     public $cantEntradas = 10;
 
@@ -53,5 +56,10 @@ class ShowJobtitles extends Component
     public function updatingSearch()
     {
         $this->resetPage();
+    }
+
+    public function delete(Jobtitle $jobtitle)
+    {
+        $jobtitle->delete();
     }
 }

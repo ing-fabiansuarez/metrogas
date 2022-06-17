@@ -15,9 +15,15 @@ return [
     'close' => 'Cerrar',
     'save' => 'Guardar',
     'update'=>'Actualizar',
+    'yes_deleteled' => 'Si, eliminelo',
+    'deleted' => 'Eliminadó!',
 
     'message.save' => 'El registro se creó correctamente!',
     'message.god_job' => 'Buen Trabajo!',
     'message.loading' => 'Cargando...',
     'message.update' => 'Se actualizó correctamente!',
+    'message.are_you_sure' => '¿Estas seguro?',
+    'message.before_delete' => 'Se eliminará el registro.',
+    'message.delete' => 'Se eliminó correctamente el registro.',
+
 ];

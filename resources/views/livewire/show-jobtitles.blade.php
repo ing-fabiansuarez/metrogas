@@ -93,9 +93,9 @@
                                         data-bs-original-title="Edit user">
                                         <i class="fas fa-user-edit text-secondary"></i>
                                     </a>
-                                    <span>
+                                    <a wire:click="$emit('deletePost',{{ $jobtitle->id }})">
                                         <i class="cursor-pointer fas fa-trash text-secondary"></i>
-                                    </span>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -142,7 +142,42 @@
             </div>
         </div>
     </div>
-    @push('scripts')
+    @push('js')
+        {{-- mesajes --}}
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            Livewire.on('alert', function(title, message) {
+                Swal.fire(
+                    title,
+                    message,
+                    'success'
+                )
+            });
+        </script>
+        <script>
+            Livewire.on('deletePost', jobtitleId => {
+                Swal.fire({
+                    title: '{{ __('forms.message.are_you_sure') }}',
+                    text: '{{ __('forms.message.before_delete') }}',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '{{ __('forms.yes_deleteled') }}',
+                    cancelButtonText: '{{ __('forms.close') }}',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        Livewire.emitTo('show-jobtitles', 'delete', jobtitleId);
+                        Swal.fire(
+                            '{{ __('forms.deleted') }}',
+                            '{{ __('forms.message.delete') }}',
+                            'success'
+                        )
+                    }
+                })
+            });
+        </script>
         <script>
             window.addEventListener('close-modal', event => {
                 $('#modal_edit_jobtitle').modal('hide');
