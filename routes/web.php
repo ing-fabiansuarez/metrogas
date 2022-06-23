@@ -37,13 +37,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('menu-mantenimientos', [MaintenanceController::class, 'menu'])->name('menu-mainten');
 
+	//USUARIOS
+	Route::get('usuarios', [UserController::class, 'index'])->name('user.index');
+	Route::get('usuarios/create', [UserController::class, 'create'])->name('user.create');
+	Route::post('buscar-usuario', [UserController::class, 'searchUser'])->name('user.searchuser');
 
+	//CARGOS
 	Route::get('cargos', [JobtitleController::class, 'index'])->name('cargos.index');
 
-	/* Route::get('usuarios', [UserController::class,'index'])->name('user.index');
-	Route::get('usuarios/create', [UserController::class,'create'])->name('user.create'); */
-
-	Route::resource('usuarios', UserController::class)->names('usuarios');
 
 	Route::get('billing', function () {
 		return view('billing');
@@ -90,10 +91,10 @@ Route::group(['middleware' => 'guest'], function () {
 	Route::post('/register', [RegisterController::class, 'store']);
 	Route::get('/login', [SessionsController::class, 'create']);
 	Route::post('/session', [SessionsController::class, 'store']);
-	Route::get('/login/forgot-password', [ResetController::class, 'create']);
+	/* Route::get('/login/forgot-password', [ResetController::class, 'create']);
 	Route::post('/forgot-password', [ResetController::class, 'sendEmail']);
 	Route::get('/reset-password/{token}', [ResetController::class, 'resetPass'])->name('password.reset');
-	Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update');
+	Route::post('/reset-password', [ChangePasswordController::class, 'changePassword'])->name('password.update'); */
 });
 
 Route::get('/login', function () {

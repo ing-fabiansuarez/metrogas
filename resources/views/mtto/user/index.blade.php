@@ -19,7 +19,8 @@
                             <div>
                                 <h5 class="mb-0">Usuarios</h5>
                             </div>
-                            <a href="{{route('usuarios.create')}}" class="btn bg-gradient-primary btn-sm mb-0" type="button">+&nbsp; Agregar Usuario</a>
+                            <a href="{{ route('usuarios.create') }}" class="btn bg-gradient-primary btn-sm mb-0"
+                                type="button">+&nbsp; Agregar Usuario</a>
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
@@ -29,10 +30,6 @@
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             ID
-                                        </th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Foto
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -62,11 +59,6 @@
                                             <td class="ps-4">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $user->id }}</p>
                                             </td>
-                                            <td>
-                                                <div>
-                                                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3">
-                                                </div>
-                                            </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $user->name }}</p>
                                             </td>
@@ -85,7 +77,7 @@
                                                     data-bs-original-title="Edit user">
                                                     <i class="fas fa-user-edit text-secondary"></i>
                                                 </a>
-                                                
+
                                             </td>
                                         </tr>
                                     @endforeach

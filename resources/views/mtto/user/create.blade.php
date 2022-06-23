@@ -1,93 +1,140 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+    <div>
+        <div class="container-fluid">
+            <div class="page-header min-height-100 border-radius-xl">
+                <span class="mask bg-gradient-primary opacity-6"></span>
+            </div>
+            <div class="card card-body blur shadow-blur mx-4 mt-n6">
+                <div class="row gx-4">
+                    <div class="col-12">
+                        <form action="{{ route('user.searchuser') }}" method="post">
+                            @csrf
+                            <div class="input-group">
 
-<div>
-    <div class="container-fluid">
-        <div class="page-header min-height-100 border-radius-xl">
-            <span class="mask bg-gradient-primary opacity-6"></span>
-        </div>
-        <div class="card card-body blur shadow-blur mx-4 mt-n6">
-            <div class="row gx-4">
-                <div class="col-12">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <button class="btn bg-gradient-secondary mb-0" type="button" id="button-addon2">Buscar</button>
-                      </div>
+                                <input name="username" type="text" class="form-control" placeholder="Username"
+                                    aria-describedby="button-addon2">
+                                <button class="btn bg-gradient-secondary mb-0" type="submit"
+                                    id="button-addon2">Buscar</button>
+                            </div>
+                            @error('username')
+                                <span class="text-danger text-message-validation">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </form>
+                        {{-- Aqui se muestra los mensajes de alerta --}}
+                        @if (session('msg'))
+                            <div class="{{ session('msg')['class'] }} mt-2 mb-0 py-2" style="font-size: 0.8rem"
+                                role="alert">
+                                {{ session('msg')['body'] }}
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container-fluid py-4">
-        <div class="card">
-            <div class="card-header pb-0 px-3">
-                <h6 class="mb-0">{{ __('information_general') }}</h6>
-            </div>
-            <div class="card-body pt-4 p-3">
-                <form action="{{url('/usuarios')}}" method="POST" role="form text-left">
-                    @csrf
-                    @if($errors->any())
-                        <div class="mt-3  alert alert-primary alert-dismissible fade show" role="alert">
-                            <span class="alert-text text-white">
-                            {{$errors->first()}}</span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                <i class="fa fa-close" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    @endif
-                    @if(session('success'))
-                        <div class="m-3  alert alert-success alert-dismissible fade show" id="alert-success" role="alert">
-                            <span class="alert-text text-white">
-                            {{ session('success') }}</span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                                <i class="fa fa-close" aria-hidden="true"></i>
-                            </button>
-                        </div>
-                    @endif
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="user-name" class="form-control-label">{{ __('Full Name') }}</label>
-                                <div class="@error('user.name')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" value="{{ auth()->user()->name }}" type="text" placeholder="Name" id="user-name" name="name">
-                                        @error('name')
-                                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                                        @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="user-email" class="form-control-label">{{ __('Email') }}</label>
-                                <div class="@error('email')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" value="{{ auth()->user()->email }}" type="email" placeholder="@example.com" id="user-email" name="email">
-                                        @error('email')
-                                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                                        @enderror
-                                </div>
-                            </div>
-                        </div>
+        @if (isset($newUser))
+            <div class="container-fluid py-4">
+                <div class="card">
+                    <div class="card-header pb-0 px-3">
+                        <h6 class="mb-0">{{ __('forms.user.information_general') }}</h6>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="user.phone" class="form-control-label">{{ __('Phone') }}</label>
-                                <div class="@error('user.phone')border border-danger rounded-3 @enderror">
-                                    <input class="form-control" type="tel" placeholder="40770888444" id="number" name="phone" value="{{ auth()->user()->phone }}">
-                                        @error('phone')
-                                            <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                                        @enderror
+                    <div class="card-body pt-4 p-3">
+                        <form action="{{ url('/usuarios') }}" method="POST" role="form text-left">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="input_object_guid"
+                                            class="form-control-label">{{ __('forms.user.object_guid') }}</label>
+                                        <input class="form-control form-control-sm" type="text"
+                                            placeholder="{{ __('forms.user.object_guid') }}" id="input_object_guid"
+                                            name="object_guid" value="{{ $newUser->objectguid }}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input_name"
+                                            class="form-control-label">{{ __('forms.user.name') }}</label>
+                                        <input class="form-control form-control-sm" type="text"
+                                            placeholder="{{ __('forms.user.name') }}" id="input_name" name="nombre"
+                                            value="{{ $newUser->name }}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input_username"
+                                            class="form-control-label">{{ __('forms.user.username') }}</label>
+                                        <input class="form-control form-control-sm" type="text"
+                                            placeholder="{{ __('forms.user.username') }}" id="input_username"
+                                            name="username" value="{{ $newUser->username }}" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input_user_principal_name"
+                                            class="form-control-label">{{ __('forms.user.user_principal_name') }}</label>
+                                        <input class="form-control form-control-sm" type="text"
+                                            placeholder="{{ __('forms.user.user_principal_name') }}"
+                                            id="input_user_principal_name" name="nombre_principal" value="" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input_email"
+                                            class="form-control-label">{{ __('forms.user.email') }}</label>
+                                        <input class="form-control form-control-sm" type="text"
+                                            placeholder="{{ __('forms.user.email') }}" id="input_email" name="email"
+                                            value="" disabled>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ 'Guardar Cambios' }}</button>
-                    </div>
-                </form>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="input_jobtitle_ldap"
+                                            class="form-control-label">{{ __('forms.user.jobtitle_ldap') }}</label>
+                                        <input class="form-control form-control-sm" type="text"
+                                            placeholder="{{ __('forms.user.jobtitle_ldap') }}" id="input_jobtitle_ldap"
+                                            name="jobtitle_ldap" value="" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="input_email"
+                                            class="form-control-label">{{ __('forms.user.jobtitle') }}</label>
+                                        <select class="form-select form-select-sm" id="input_email">
+                                            <option value="" selected>{{ __('forms.select.selected') }}</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
 
+                                    <div class="form-group">
+                                        <label for="input_perfil"
+                                            class="form-control-label">{{ __('forms.user.perfil') }}</label>
+                                        <select class="form-select form-select-sm" id="input_perfil">
+                                            <option value="" selected>{{ __('forms.select.selected') }}</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="input_state"
+                                            class="form-control-label">{{ __('forms.user.state') }}</label>
+                                        <select class="form-select form-select-sm" id="input_state">
+                                            <option value="" selected>{{ __('forms.select.selected') }}</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit"
+                                    class="btn bg-gradient-dark btn-md mt-4 mb-4">{{ __('forms.user.button.new') }}</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
             </div>
-        </div>
+        @endif
+
     </div>
-</div>
 @endsection
