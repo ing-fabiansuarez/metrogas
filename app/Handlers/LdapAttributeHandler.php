@@ -21,7 +21,7 @@ class LdapAttributeHandler
         /**
          * Aqui relacionamos lso atributos que vamos a sincronysar
          */
-        $eloquentUser->username = $ldapUser->getUserPrincipalName();
+        $eloquentUser->username = $ldapUser->getAccountName();
         $eloquentUser->name = $ldapUser->getCommonName();
         $eloquentUser->email = $ldapUser->getUserPrincipalName();
         $eloquentUser->jobtitle_ldap = $ldapUser->getDescription();
