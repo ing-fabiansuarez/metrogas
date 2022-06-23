@@ -21,6 +21,14 @@ return new class extends Migration
             $table->string('email_aux')->after('email');
             $table->string('jobtitle_ldap')->after('email_aux');
             $table->tinyInteger('estado')->default(0)->after('objectguid');
+
+            //capo para el cargo
+            $table->unsignedBigInteger('id_jobtitle');
+            $table->foreign("id_jobtitle")
+                ->references("id")
+                ->on("jobtitles")
+                ->onDelete("cascade")
+                ->onUpdate("cascade");
         });
     }
 
