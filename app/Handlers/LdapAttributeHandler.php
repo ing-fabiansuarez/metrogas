@@ -27,15 +27,21 @@ class LdapAttributeHandler
         $eloquentUser->jobtitle_ldap = $ldapUser->getDescription();
         $eloquentUser->email_aux = $ldapUser->getEmail();
 
-        //Agregamos la logica para crear un jobtitle en el sistema
-        $jobtitle = Jobtitle::where('name', $eloquentUser->jobtitle_ldap)->first();
+        /**
+         * Hay que determinar si existe el usuario para que no cambie el cargo que tiene asignado.
+         */
 
-        if (isset($jobtitle)) { //determina si el cargo exite, si es asi se lo coloca si no lo crea nuevo
-            $eloquentUser->id_jobtitle = $jobtitle->id;
-        } else {
-            $eloquentUser->id_jobtitle = Jobtitle::create([
-                'name' => $eloquentUser->jobtitle_ldap
-            ]);
+        if (!$eloquentUser->exists()) {
+            //Agregamos la logica para crear un jobtitle en el sistema
+            $jobtitle = Jobtitle::where('name', $eloquentUser->jobtitle_ldap)->first();
+            if (isset($jobtitle)) { //determina si el cargo exite, si es asi se lo coloca si no lo crea nuevo
+                $eloquentUser->id_jobtitle = $jobtitle->id;
+            } else {
+                $eloquentUser->id_jobtitle = Jobtitle::create([
+                    'name' => $eloquentUser->jobtitle_ldap
+                ]);
+            }
         }
+
     }
 }
