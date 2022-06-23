@@ -29,8 +29,6 @@ class UserController extends Controller
             $user = Adldap::search()->where('samaccountname', '=', $request->username)->first();
             if (isset($user)) {
                 $newUser = new User();
-              
-               
                 return view('mtto.user.create', compact('newUser'));
             }
 

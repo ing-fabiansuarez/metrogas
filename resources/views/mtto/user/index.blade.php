@@ -19,7 +19,7 @@
                             <div>
                                 <h5 class="mb-0">Usuarios</h5>
                             </div>
-                            <a href="{{ route('usuarios.create') }}" class="btn bg-gradient-primary btn-sm mb-0"
+                            <a href="{{ route('user.create') }}" class="btn bg-gradient-primary btn-sm mb-0"
                                 type="button">+&nbsp; Agregar Usuario</a>
                         </div>
                     </div>

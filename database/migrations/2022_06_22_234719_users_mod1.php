@@ -18,6 +18,8 @@ return new class extends Migration
             // $table->dropColumn('email_verified_at');
             $table->string('username')->unique()->after('id')->nullable();
             $table->string('objectguid')->nullable()->after('username');
+            $table->string('email_aux')->after('email');
+            $table->string('jobtitle_ldap')->after('email_aux');
             $table->tinyInteger('estado')->default(0)->after('objectguid');
         });
     }
@@ -34,6 +36,8 @@ return new class extends Migration
             // $table->timestamp('email_verified_at')->nullable()->after('email');
             $table->dropColumn('username');
             $table->dropColumn('objectguid');
+            $table->dropColumn('email_aux');
+            $table->dropColumn('jobtitle_ldap');
             $table->dropColumn('estado');
         });
     }

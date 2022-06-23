@@ -60,10 +60,17 @@ return [
     */
 
     'providers' => [
+
+        'users' => [
+            'driver' => 'ldap',
+            'model' => App\Models\User::class,
+        ],
+
+        /* Este era el original se cambio por ldap
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
-        ],
+        ], */
 
         // 'users' => [
         //     'driver' => 'database',

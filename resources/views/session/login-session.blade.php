@@ -16,9 +16,9 @@
                                         @csrf
                                         <label>Usuario</label>
                                         <div class="mb-3">
-                                            <input type="email" class="form-control" name="email" id="email"
-                                                placeholder="Email" value="admin@softui.com" aria-label="Email"
-                                                aria-describedby="email-addon">
+                                            <input type="text" class="form-control" name="email" id="email"
+                                                placeholder="{{ __('forms.user.username') }}" value="{{ old('email') }}"
+                                                aria-label="Email" aria-describedby="email-addon">
                                             @error('email')
                                                 <p class="text-danger text-xs mt-2">{{ $message }}</p>
                                             @enderror
@@ -43,7 +43,7 @@
                                     </form>
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                                  
+
                                 </div>
                             </div>
                         </div>
