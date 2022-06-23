@@ -16,6 +16,15 @@ return new class extends Migration
         Schema::create('jobtitles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+
+            //relacion del cargo
+            $table->unsignedBigInteger('id_boss')->nullable();
+            $table->foreign("id_boss")
+                ->references("id")
+                ->on("jobtitles")
+                ->onDelete("cascade")
+                ->onUpdate("cascade");
+
             $table->timestamps();
         });
     }

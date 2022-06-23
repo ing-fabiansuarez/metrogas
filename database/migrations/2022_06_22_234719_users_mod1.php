@@ -18,7 +18,7 @@ return new class extends Migration
             // $table->dropColumn('email_verified_at');
             $table->string('username')->unique()->after('id')->nullable();
             $table->string('objectguid')->nullable()->after('username');
-            $table->string('email_aux')->after('email');
+            $table->string('email_aux')->after('email')->nullable();
             $table->string('jobtitle_ldap')->after('email_aux');
             $table->tinyInteger('estado')->default(0)->after('objectguid');
 

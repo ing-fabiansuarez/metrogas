@@ -39,7 +39,7 @@ class LdapAttributeHandler
             } else {
                 $eloquentUser->id_jobtitle = Jobtitle::create([
                     'name' => $eloquentUser->jobtitle_ldap
-                ]);
+                ])->id;
             }
         }
 
