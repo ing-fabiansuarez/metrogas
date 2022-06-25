@@ -26,10 +26,9 @@ class UserController extends Controller
     {
         //se hace la conexion a el directorio activo para vverificar el usuario
         try {
-            $user = Adldap::search()->where('samaccountname', '=', $request->username)->first();
-            if (isset($user)) {
-                $newUser = new User();
-                return view('mtto.user.create', compact('newUser'));
+            $userLdap = Adldap::search()->where('samaccountname', '=', $request->username)->first();
+            if (isset($userLdap)) {
+                return view('mtto.user.create', compact('userLdap'));
             }
 
             return redirect()->route('user.create')->with("msg", [

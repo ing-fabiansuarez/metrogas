@@ -40,7 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
 	//USUARIOS
 	Route::get('usuarios', [UserController::class, 'index'])->name('user.index');
 	Route::get('usuarios/create', [UserController::class, 'create'])->name('user.create');
-	Route::post('buscar-usuario', [UserController::class, 'searchUser'])->name('user.searchuser');
+	Route::post('usuarios/create', [UserController::class, 'searchUser'])->name('user.searchuser');
 
 	//CARGOS
 	Route::get('cargos', [JobtitleController::class, 'index'])->name('jobtitle.index');

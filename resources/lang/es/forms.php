@@ -40,4 +40,6 @@ return [
     'message.before_delete' => 'Se eliminará el registro.',
     'message.delete' => 'Se eliminó correctamente el registro.',
 
+    'button.search' => 'Buscar',
+
 ];

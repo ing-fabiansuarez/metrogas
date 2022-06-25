@@ -12,11 +12,11 @@
                         <form action="{{ route('user.searchuser') }}" method="post">
                             @csrf
                             <div class="input-group">
-
                                 <input name="username" type="text" class="form-control" placeholder="Username"
-                                    aria-describedby="button-addon2">
+                                    aria-describedby="button-addon2"
+                                    value="{{ old('username', isset($userLdap) ? $userLdap->getAccountName() : '') }}">
                                 <button class="btn bg-gradient-secondary mb-0" type="submit"
-                                    id="button-addon2">Buscar</button>
+                                    id="button-addon2">{{ __('forms.button.search') }}</button>
                             </div>
                             @error('username')
                                 <span class="text-danger text-message-validation">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        @if (isset($newUser))
+        @if (isset($userLdap))
             <div class="container-fluid py-4">
                 <div class="card">
                     <div class="card-header pb-0 px-3">
@@ -51,35 +51,36 @@
                                             class="form-control-label">{{ __('forms.user.object_guid') }}</label>
                                         <input class="form-control form-control-sm" type="text"
                                             placeholder="{{ __('forms.user.object_guid') }}" id="input_object_guid"
-                                            name="object_guid" value="{{ $newUser->objectguid }}" disabled>
+                                            name="object_guid" value="{{ $userLdap->getAuthIdentifier() }}" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label for="input_name"
                                             class="form-control-label">{{ __('forms.user.name') }}</label>
                                         <input class="form-control form-control-sm" type="text"
                                             placeholder="{{ __('forms.user.name') }}" id="input_name" name="nombre"
-                                            value="{{ $newUser->name }}" disabled>
+                                            value="{{ $userLdap->getCommonName() }}" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label for="input_username"
                                             class="form-control-label">{{ __('forms.user.username') }}</label>
                                         <input class="form-control form-control-sm" type="text"
                                             placeholder="{{ __('forms.user.username') }}" id="input_username"
-                                            name="username" value="{{ $newUser->username }}" disabled>
+                                            name="username" value="{{ $userLdap->getAccountName() }}" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label for="input_user_principal_name"
                                             class="form-control-label">{{ __('forms.user.user_principal_name') }}</label>
                                         <input class="form-control form-control-sm" type="text"
                                             placeholder="{{ __('forms.user.user_principal_name') }}"
-                                            id="input_user_principal_name" name="nombre_principal" value="" disabled>
+                                            id="input_user_principal_name" name="nombre_principal"
+                                            value="{{ $userLdap->getUserPrincipalName() }}" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label for="input_email"
                                             class="form-control-label">{{ __('forms.user.email') }}</label>
                                         <input class="form-control form-control-sm" type="text"
                                             placeholder="{{ __('forms.user.email') }}" id="input_email" name="email"
-                                            value="" disabled>
+                                            value="{{ $userLdap->getEmail() }}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -88,7 +89,7 @@
                                             class="form-control-label">{{ __('forms.user.jobtitle_ldap') }}</label>
                                         <input class="form-control form-control-sm" type="text"
                                             placeholder="{{ __('forms.user.jobtitle_ldap') }}" id="input_jobtitle_ldap"
-                                            name="jobtitle_ldap" value="" disabled>
+                                            name="jobtitle_ldap" value="{{ $userLdap->getDescription() }}" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label for="input_email"
