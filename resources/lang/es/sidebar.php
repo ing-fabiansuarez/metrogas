@@ -4,5 +4,6 @@ return [
     'home' => 'Inicio',
     'users' => 'Usuarios',
     'jobtitles' => 'Cargos',
-    'maintenaince' => 'Mantenimientos'
+    'maintenaince' => 'Mantenimientos',
+    'viaticos' => 'Viaticos'
 ];

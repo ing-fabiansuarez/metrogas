@@ -46,6 +46,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('cargos', [JobtitleController::class, 'index'])->name('jobtitle.index');
 
 
+	//SOLICITUD DE VIATICOS
+	
+
+
 	Route::get('billing', function () {
 		return view('billing');
 	})->name('billing');
