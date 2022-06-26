@@ -47,10 +47,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('cargos', [JobtitleController::class, 'index'])->name('jobtitle.index');
 
 	//SITIOS DESTINO
-	Route::get('sitios-destino', function () {
+	Route::get('sitios-de-destino', function () {
 		return view('livewire.destination-site.index');
 	});
 
+	//Sitios Origen
+	Route::get('sitios-de-origen', function () {
+		return view('livewire.origin-site.index');
+	});
 
 	/* 
 	Route::get('billing', function () {

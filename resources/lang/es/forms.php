@@ -14,6 +14,12 @@ return [
     'destination_site.button.new' => '+ Nuevo Sitio',
     'destination_site.title.new' => 'Crear Sitio',
 
+    'origin_site' => 'Sitios de Origen',
+    'origin_site.id' => 'Id',
+    'origin_site.name' => 'Nombre',
+    'origin_site.button.new' => '+ Nuevo Sitio',
+    'origin_site.title.new' => 'Crear Sitio',
+
 
     'user.information_general' => 'Información General',
     'user.object_guid' => 'Object GUID',
