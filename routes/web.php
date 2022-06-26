@@ -9,6 +9,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\UserController;
+use App\Http\Livewire\Originsites;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
@@ -45,7 +46,13 @@ Route::group(['middleware' => 'auth'], function () {
 	//CARGOS
 	Route::get('cargos', [JobtitleController::class, 'index'])->name('jobtitle.index');
 
+	//SITIOS DESTINO
+	Route::get('sitios-destino', function () {
+		return view('livewire.destination-site.index');
+	});
 
+
+	/* 
 	Route::get('billing', function () {
 		return view('billing');
 	})->name('billing');
@@ -57,9 +64,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('rtl', function () {
 		return view('rtl');
 	})->name('rtl');
-
-
-
 	Route::get('tables', function () {
 		return view('tables');
 	})->name('tables');
@@ -74,11 +78,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('static-sign-up', function () {
 		return view('static-sign-up');
-	})->name('sign-up');
+	})->name('sign-up');*/
 
 	Route::get('/logout', [SessionsController::class, 'destroy']);
-	Route::get('/user-profile', [InfoUserController::class, 'create']);
-	Route::post('/user-profile', [InfoUserController::class, 'store']);
+	/* 	Route::get('/user-profile', [InfoUserController::class, 'create']);
+	Route::post('/user-profile', [InfoUserController::class, 'store']); */
 	Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
@@ -87,8 +91,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 Route::group(['middleware' => 'guest'], function () {
-	Route::get('/register', [RegisterController::class, 'create']);
-	Route::post('/register', [RegisterController::class, 'store']);
+	/* Route::get('/register', [RegisterController::class, 'create']);
+	Route::post('/register', [RegisterController::class, 'store']); */
 	Route::get('/login', [SessionsController::class, 'create']);
 	Route::post('/session', [SessionsController::class, 'store']);
 	/* Route::get('/login/forgot-password', [ResetController::class, 'create']);

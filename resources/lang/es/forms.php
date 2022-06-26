@@ -7,6 +7,14 @@ return [
     'jobtitle.button.new_jobtitle' => '+ Nuevo Cargo',
     'jobtitle.title.new_jobtitle' => 'Crear Cargo',
 
+
+    'destination_site' => 'Sitios de Destino',
+    'destination_site.id' => 'Id',
+    'destination_site.name' => 'Nombre',
+    'destination_site.button.new' => '+ Nuevo Sitio',
+    'destination_site.title.new' => 'Crear Sitio',
+
+
     'user.information_general' => 'Información General',
     'user.object_guid' => 'Object GUID',
     'user.name' => 'Nombre',
