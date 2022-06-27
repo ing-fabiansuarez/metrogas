@@ -20,6 +20,13 @@ return [
     'origin_site.button.new' => '+ Nuevo Sitio',
     'origin_site.title.new' => 'Crear Sitio',
 
+    'viatic_request.justificacion' => 'Justificación',
+    'viatic_request.justificacion.placeholder' => 'Ingrese el ¿por qué? del viaje',
+    'viatic_request.destination_site' => 'Destino',
+    'viatic_request.origin_site' => 'Origen',
+    'viatic_request.start_date' => 'Fecha Inicio',
+    'viatic_request.end_date' => 'Fecha Regreso',
+
 
     'user.information_general' => 'Información General',
     'user.object_guid' => 'Object GUID',
@@ -55,5 +62,6 @@ return [
     'message.delete' => 'Se eliminó correctamente el registro.',
 
     'button.search' => 'Buscar',
+    'button.agregar' => 'Agregar',
 
 ];

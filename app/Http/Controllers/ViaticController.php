@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ViaticRequest;
 use Illuminate\Http\Request;
 
-class ViaticRequestController extends Controller
+class ViaticController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class ViaticRequestController extends Controller
      */
     public function create()
     {
-        //
+        return view('viatic.viatic-request.index');
     }
 
     /**

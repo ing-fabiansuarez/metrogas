@@ -9,11 +9,13 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ViaticController;
 use App\Http\Livewire\Originsites;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ShowJobtitles;
+use App\Models\ViaticRequest;
 use Illuminate\Contracts\Foundation\MaintenanceMode;
 
 /*
@@ -55,6 +57,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('sitios-de-origen', function () {
 		return view('livewire.origin-site.index');
 	});
+
+	//Viaticios
+	Route::get('solicitud-viaticos/create', [ViaticController::class, 'create'])->name('viatic.create');
 
 	/* 
 	Route::get('billing', function () {
