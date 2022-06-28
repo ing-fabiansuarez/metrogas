@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12">
-                <div class="card px-3 pt-4 pb-0 mt-3 mb-3">
+                <div class="card px-3 pt-4 pb-0 mt-0 mb-3">
                     <form id="msform">
                         <!-- progressbar -->
                         <ul id="progressbar" class="px-0">
@@ -122,7 +122,7 @@
 
                                 </div>
                             </div>
-                            <input type="button" name="next" class="next action-button" value="Next" />
+                            <input type="button" name="next" class="next action-button" value="Crear" />
                         </fieldset>
                         <fieldset>
                             <div class="form-card">
@@ -291,9 +291,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="button" name="next" class="next action-button" value="Next" />
+                            <input type="button" name="next" class="next action-button" value="Aprobar" />
                             <input type="button" name="previous" class="previous action-button-previous"
-                                value="Previous" />
+                                value="Rechazar" />
                         </fieldset>
                         <fieldset>
                             <div class="form-card text-center">
@@ -302,7 +302,7 @@
                                         <h2 class="fs-title">{{ __('messages.sign_aprove') }}</h2>
                                     </div>
                                     <div class="col-5">
-                                        <h2 class="steps">Step 3 - 4</h2>
+                                        <h2 class="steps">Paso 3</h2>
                                     </div>
                                 </div>
                                 <p>En esta sección se debe imprimir el documento, firmarlo y luego subirlo para poder
@@ -325,7 +325,7 @@
 
                             </div>
 
-                            <input type="button" name="next" class="next action-button" value="Submit" />
+                            <input type="button" name="next" class="next action-button" value="Enviar" />
                             <input type="button" name="previous" class="previous action-button-previous"
                                 value="Previous" />
                         </fieldset>
@@ -336,10 +336,10 @@
                                         <h2 class="fs-title">{{ __('messages.sign_aprove') }}</h2>
                                     </div>
                                     <div class="col-5">
-                                        <h2 class="steps">Step 3 - 4</h2>
+                                        <h2 class="steps">Paso 4</h2>
                                     </div>
                                 </div>
-                               
+
 
                             </div>
 
@@ -354,7 +354,7 @@
                                         <h2 class="fs-title">Finish:</h2>
                                     </div>
                                     <div class="col-5">
-                                        <h2 class="steps">Step 4 - 4</h2>
+                                        <h2 class="steps">Paso 5</h2>
                                     </div>
                                 </div>
                                 <br><br>
