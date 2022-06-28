@@ -4,6 +4,7 @@ return [
     'home' => 'Inicio',
     'users' => 'Usuarios',
     'jobtitles' => 'Cargos',
-    'maintenaince' => 'Mantenimientos',
-    'viaticos' => 'Viaticos'
+    'maintenaince' => 'Configuración',
+    'viaticos' => 'Viáticos',
+    'viatic_request' => 'Solicitud de viáticos',
 ];

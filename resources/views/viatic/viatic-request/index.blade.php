@@ -10,6 +10,7 @@
                             <li class="active" id="account"><strong>{{ __('messages.viatic_request') }}</strong> </li>
                             <li id="personal"><strong>{{ __('messages.aprove_boss') }}</strong></li>
                             <li id="payment"><strong>{{ __('messages.sign_aprove') }}</strong></li>
+                            <li id="boss"><strong>{{ __('messages.general_aprove') }}</strong></li>
                             <li id="confirm"><strong>{{ __('messages.legalization') }}</strong></li>
                         </ul>
                         <div class="progress">
@@ -283,8 +284,6 @@
                                                                 </div>
                                                             </div>
                                                         </td>
-
-
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -297,20 +296,53 @@
                                 value="Previous" />
                         </fieldset>
                         <fieldset>
-                            <div class="form-card">
+                            <div class="form-card text-center">
                                 <div class="row">
                                     <div class="col-7">
-                                        <h2 class="fs-title">Image Upload:</h2>
+                                        <h2 class="fs-title">{{ __('messages.sign_aprove') }}</h2>
                                     </div>
                                     <div class="col-5">
                                         <h2 class="steps">Step 3 - 4</h2>
                                     </div>
                                 </div>
-                                <label class="fieldlabels">Upload Your Photo:</label>
-                                <input type="file" name="pic" accept="image/*">
-                                <label class="fieldlabels">Upload Signature Photo:</label>
-                                <input type="file" name="pic" accept="image/*">
+                                <p>En esta sección se debe imprimir el documento, firmarlo y luego subirlo para poder
+                                    continuar con el proceso.</p>
+
+                                <button type="button" class="btn bg-gradient-secondary">imprimir Documento</button>
+                                <div class="row">
+                                    <div class="col-md-3">
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="file" class="form-control form-control-sm">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
+
+                            <input type="button" name="next" class="next action-button" value="Submit" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-card text-center">
+                                <div class="row">
+                                    <div class="col-7">
+                                        <h2 class="fs-title">{{ __('messages.sign_aprove') }}</h2>
+                                    </div>
+                                    <div class="col-5">
+                                        <h2 class="steps">Step 3 - 4</h2>
+                                    </div>
+                                </div>
+                               
+
+                            </div>
+
                             <input type="button" name="next" class="next action-button" value="Submit" />
                             <input type="button" name="previous" class="previous action-button-previous"
                                 value="Previous" />

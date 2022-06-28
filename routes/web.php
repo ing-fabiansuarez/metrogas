@@ -51,12 +51,12 @@ Route::group(['middleware' => 'auth'], function () {
 	//SITIOS DESTINO
 	Route::get('sitios-de-destino', function () {
 		return view('livewire.destination-site.index');
-	});
+	})->name('destinationsite.index');
 
 	//Sitios Origen
 	Route::get('sitios-de-origen', function () {
 		return view('livewire.origin-site.index');
-	});
+	})->name('originsite.index');
 
 	//Viaticios
 	Route::get('solicitud-viaticos/create', [ViaticController::class, 'create'])->name('viatic.create');

@@ -6,6 +6,7 @@ return [
     'viatic_request' => 'Solicitud de Anticipo',
     'aprove_boss' => 'Aprobación Jefe Inmediato',
     'sign_aprove' => 'Aceptación Empleado',
+    'general_aprove' => 'Aprobacion General',
     'legalization' => 'Legalización',
     'request_by' => 'Solicitado por',
     'information_about_comision' => 'Información sobre la comisión',
