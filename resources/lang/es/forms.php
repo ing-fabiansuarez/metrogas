@@ -20,6 +20,13 @@ return [
     'origin_site.button.new' => '+ Nuevo Sitio',
     'origin_site.title.new' => 'Crear Sitio',
 
+    'other_expense' => 'Otros Gastos',
+    'other_expense.id' => 'Id',
+    'other_expense.name' => 'Nombre',
+    'other_expense.button.new' => '+ Nuevo Gasto',
+    'other_expense.title.new' => 'Crear Gasto',
+
+
     'viatic_request.justificacion' => 'Justificación',
     'viatic_request.justificacion.placeholder' => 'Ingrese el ¿por qué? del viaje',
     'viatic_request.destination_site' => 'Destino',

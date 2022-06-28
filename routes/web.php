@@ -58,6 +58,11 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('livewire.origin-site.index');
 	})->name('originsite.index');
 
+	//OTROS GASTOS
+	Route::get('otros-gastos', function () {
+		return view('livewire.other-expense.index');
+	})->name('otherexpense.index');
+
 	//Viaticios
 	Route::get('solicitud-viaticos/create', [ViaticController::class, 'create'])->name('viatic.create');
 

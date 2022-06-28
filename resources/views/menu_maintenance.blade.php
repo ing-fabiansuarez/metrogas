@@ -44,6 +44,8 @@
                             <a href="{{ route('originsite.index') }}"
                                 class="list-group-item list-group-item-action">Sitios
                                 Origen</a>
+                            <a href="{{ route('otherexpense.index') }}"
+                                class="list-group-item list-group-item-action">Otros Gastos</a>
                         </div>
 
                     </div>

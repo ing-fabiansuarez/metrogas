@@ -46,7 +46,8 @@
                 Request::is('usuarios') ||
                 Request::is('usuarios/create') ||
                 Request::is('sitios-de-destino') ||
-                Request::is('sitios-de-origen')
+                Request::is('sitios-de-origen') ||
+                Request::is('otros-gastos')
                     ? 'active'
                     : '' }}"
                     href="{{ route('menu-mainten') }}">
