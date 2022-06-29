@@ -16,31 +16,16 @@ return new class extends Migration
         Schema::create('viatic_requests', function (Blueprint $table) {
             $table->id();
             $table->string('justification', 500)->nullable();
-            $table->timestamps();
 
             //relacion de la person aque hace la solicitud
-            $table->unsignedBigInteger('request_by')->nullable();
+            $table->unsignedBigInteger('request_by');
             $table->foreign("request_by")
                 ->references("id")
                 ->on("users")
                 ->onDelete("cascade")
                 ->onUpdate("cascade");
 
-            //relacion del sitio origen
-            $table->unsignedBigInteger('origin_site')->nullable();
-            $table->foreign("origin_site")
-                ->references("id")
-                ->on("origin_sites")
-                ->onDelete("cascade")
-                ->onUpdate("cascade");
-
-            //relacion del sitio destino
-            $table->unsignedBigInteger('destination_site')->nullable();
-            $table->foreign("destination_site")
-                ->references("id")
-                ->on("destination_sites")
-                ->onDelete("cascade")
-                ->onUpdate("cascade");
+            $table->timestamps();
         });
     }
 

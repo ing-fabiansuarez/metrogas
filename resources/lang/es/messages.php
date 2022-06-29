@@ -18,4 +18,5 @@ return [
     'municipal_transport' => 'Transporte Municipal',
     'step_1' => 'Paso N° 1',
     'step_2' => 'Paso N° 2',
+    'validation.comission' => 'Debe agregar por lo menos un sitio de destino y origen con sus repectivas fechas'
 ];
