@@ -65,6 +65,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	//Viaticios
 	Route::get('solicitud-viaticos/create', [ViaticController::class, 'create'])->name('viatic.create');
+	Route::get('solicitud-viaticos/{id}', [ViaticController::class, 'show'])->name('viatic.show');
+
 
 	/* 
 	Route::get('billing', function () {

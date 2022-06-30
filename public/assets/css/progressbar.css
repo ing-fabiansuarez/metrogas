@@ -20,7 +20,6 @@ p {
 #msform {
     text-align: center;
     position: relative;
-    margin-top: 20px;
 }
 
 #msform fieldset {
@@ -100,7 +99,7 @@ p {
 
 /*FieldSet headings*/
 .fs-title {
-    font-size: 25px;
+    font-size: 1.2rem;
     color: #673AB7;
     margin-bottom: 15px;
     font-weight: normal;
@@ -114,8 +113,8 @@ p {
 
 /*Step Count*/
 .steps {
-    font-size: 25px;
-    color: gray;
+    font-size: 1.2rem;
+    color: red;
     margin-bottom: 10px;
     font-weight: normal;
     text-align: right;
@@ -139,7 +138,7 @@ p {
 
 #progressbar li {
     list-style-type: none;
-    font-size: 15px;
+    font-size: 0.8rem;
     width: 20%;
     float: left;
     position: relative;
@@ -161,6 +160,7 @@ p {
     font-family: FontAwesome;
     content: "\f030";
 }
+
 #progressbar #boss:before {
     font-family: FontAwesome;
     content: "\f030";

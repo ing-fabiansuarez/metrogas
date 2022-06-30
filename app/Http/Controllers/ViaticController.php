@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EStateRequest;
 use App\Models\ViaticRequest;
 use Illuminate\Http\Request;
 
@@ -44,9 +45,19 @@ class ViaticController extends Controller
      * @param  \App\Models\ViaticRequest  $viaticRequest
      * @return \Illuminate\Http\Response
      */
-    public function show(ViaticRequest $viaticRequest)
+    public function show($id)
     {
-        //
+        $viaticRequest = ViaticRequest::find($id);
+        if (isset($viaticRequest)) {
+            if ($viaticRequest->sw_state == EStateRequest::CREATED->getId()) {
+                return view('viatic.viatic-request.aprove_boss', compact('viaticRequest'));
+            }
+            echo "EXITE";
+            return;
+        }
+
+        echo "NO EXISTE";
+        return;
     }
 
     /**

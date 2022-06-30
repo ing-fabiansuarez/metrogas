@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\ProcessViaticRequest;
 
+use App\Enums\EStateRequest;
 use App\Models\DestinationSite;
 use App\Models\OriginSite;
 use App\Models\ViaticRequest as ModelsViaticRequest;
@@ -45,8 +46,8 @@ class ViaticRequest extends Component
             'start_date' => 'required',
             'end_date' => 'required',
         ]);
-        $modelDestination = DestinationSite::find($this->origin);
-        $modelOrigin = OriginSite::find($this->destination);
+        $modelDestination = DestinationSite::find($this->destination);
+        $modelOrigin = OriginSite::find($this->origin);
         array_push($this->listSite, [
             'id_origin_site' => $this->origin,
             'id_destination_site' =>  $this->destination,
@@ -82,32 +83,33 @@ class ViaticRequest extends Component
             return;
         }
 
-        try {
-            DB::beginTransaction();
-            $viaticRequest = new ModelsViaticRequest();
-            $viaticRequest->justification = $this->justification;
-            $viaticRequest->request_by = auth()->user()->id;
-            $viaticRequest->save();
-            $listModelSites = [];
-            foreach ($this->listSite as $site) {
-                $newDetalle = new ViaticRequestsSitesDetalle();
-                $newDetalle->id_origin_site = 1;
-                $newDetalle->id_destination_site = 1;
-                $newDetalle->start_date = '2021-09-20';
-                $newDetalle->end_date = '2021-09-20';
-                $newDetalle->viatic_request_id = $viaticRequest->id;
+        /* try { */
+        DB::beginTransaction();
+        $viaticRequest = new ModelsViaticRequest();
+        $viaticRequest->justification = $this->justification;
+        $viaticRequest->request_by = auth()->user()->id;
+        $viaticRequest->sw_state = EStateRequest::CREATED->getId();
+        $viaticRequest->save();
+        $listModelSites = [];
+        foreach ($this->listSite as $site) {
+            $newDetalle = new ViaticRequestsSitesDetalle();
+            $newDetalle->id_origin_site = 1;
+            $newDetalle->id_destination_site = 1;
+            $newDetalle->start_date = '2021-09-20';
+            $newDetalle->end_date = '2021-09-20';
+            $newDetalle->viatic_request_id = $viaticRequest->id;
 
-                $newDetalle->save();
+            $newDetalle->save();
 
-                array_push($listModelSites, $newDetalle);
-            }
-            //mostrar el mensaje de que se creo correctamente
-            $this->emit('requestSave');
+            array_push($listModelSites, $newDetalle);
+        }
+        //mostrar el mensaje de que se creo correctamente
+        $this->emit('requestSave');
 
-            DB::commit();
-        } catch (\Exception $e) {
+        DB::commit();
+        /*   } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['message' => 'Error']);
-        }
+        } */
     }
 }

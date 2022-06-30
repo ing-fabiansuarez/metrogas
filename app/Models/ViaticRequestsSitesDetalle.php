@@ -17,4 +17,18 @@ class ViaticRequestsSitesDetalle extends Model
         'id_origin_site',
         'id_destination_site',
     ];
+
+    public function viaticRequest()
+    {
+        return $this->belongsTo(ViaticRequest::class);
+    }
+
+    public function originSite()
+    {
+        return $this->belongsTo(OriginSite::class,'id_origin_site','id',);
+    }
+    public function destinationSite()
+    {
+        return $this->belongsTo(DestinationSite::class,'id_destination_site','id');
+    }
 }

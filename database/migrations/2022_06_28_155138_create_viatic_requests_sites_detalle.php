@@ -37,6 +37,12 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
 
+            $table->double('accommodation_value')->default(0);
+            $table->double('feeding_value')->default(0);
+            $table->double('intermunicipal_trans_value')->default(0);
+            $table->double('municipal_trans_value')->default(0);
+            $table->double('total_value')->default(0);
+
             $table->timestamps();
         });
     }

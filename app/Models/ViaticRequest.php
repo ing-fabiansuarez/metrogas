@@ -11,6 +11,11 @@ class ViaticRequest extends Model
 
     public function sites()
     {
-        return $this->hasMany('App\Models\ViaticRequestsSitesDetalle', 'id', 'viatic_request_id');
+        return $this->hasMany(ViaticRequestsSitesDetalle::class, 'viatic_request_id', 'id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'request_by', 'id');
     }
 }

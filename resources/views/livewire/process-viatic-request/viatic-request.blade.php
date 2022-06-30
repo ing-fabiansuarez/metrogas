@@ -3,18 +3,19 @@
         <!-- progressbar -->
         <ul id="progressbar" class="px-0">
             <li class="active" id="account"><strong>{{ __('messages.viatic_request') }}</strong> </li>
-            <li class="active" id="personal"><strong>{{ __('messages.aprove_boss') }}</strong></li>
-            <li class="active" id="payment"><strong>{{ __('messages.sign_aprove') }}</strong></li>
+            <li id="personal"><strong>{{ __('messages.aprove_boss') }}</strong></li>
+            <li id="payment"><strong>{{ __('messages.sign_aprove') }}</strong></li>
             <li id="boss"><strong>{{ __('messages.general_aprove') }}</strong></li>
             <li id="confirm"><strong>{{ __('messages.legalization') }}</strong></li>
         </ul>
         <div class="progress">
-            <div style="width: 75%" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0"
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0"
                 aria-valuemax="100"></div>
         </div>
         <br>
         <!-- fieldsets -->
-        <fieldset>
+        <div>
+
             <div class="form-card">
                 <div class="row">
                     <div class="col-7">
@@ -155,8 +156,8 @@
             </div>
             <button wire:click="$emit('createViaticRequest')" type="button" name="next"
                 class="next action-button">Crear</button>
-        </fieldset>
-        <fieldset>
+        </div>
+        {{-- <fieldset>
             <div class="form-card">
                 <div class="row">
                     <div class="col-7">
@@ -393,7 +394,7 @@
                     </div>
                 </div>
             </div>
-        </fieldset>
+        </fieldset> --}}
     </div>
 </div>
 @push('js')

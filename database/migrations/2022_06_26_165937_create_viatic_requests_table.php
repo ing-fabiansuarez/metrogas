@@ -24,7 +24,8 @@ return new class extends Migration
                 ->on("users")
                 ->onDelete("cascade")
                 ->onUpdate("cascade");
-
+                
+            $table->integer('sw_state');
             $table->timestamps();
         });
     }
