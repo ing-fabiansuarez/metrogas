@@ -10,6 +10,7 @@ enum EStateRequest
     case APROVED;
     case ACCEPTED_EMPLOYEE;
     case APROVED_GENERAL;
+    case CLOSE;
 
     public function getId(): int
     {
@@ -17,7 +18,8 @@ enum EStateRequest
             EStateRequest::CREATED => 1,
             EStateRequest::APROVED => 2,
             EStateRequest::ACCEPTED_EMPLOYEE => 3,
-            EStateRequest::APROVED_GENERAL => 4
+            EStateRequest::APROVED_GENERAL => 4,
+            EStateRequest::CLOSE => 5,
         };
     }
 
@@ -27,7 +29,8 @@ enum EStateRequest
             EStateRequest::CREATED => 'PENDIENTE APROBACION',
             EStateRequest::APROVED => 'APROBADO JEFE INM.',
             EStateRequest::ACCEPTED_EMPLOYEE => 'FIRMADO POR EMPLEADO',
-            EStateRequest::APROVED_GENERAL => 'APROBADO GENERAL'
+            EStateRequest::APROVED_GENERAL => 'APROBADO GENERAL',
+            EStateRequest::CLOSE => 'CERRADO',
         };
     }
 
