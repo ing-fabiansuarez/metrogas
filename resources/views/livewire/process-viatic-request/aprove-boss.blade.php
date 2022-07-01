@@ -6,10 +6,11 @@
             <li class="active" id="personal"><strong>{{ __('messages.aprove_boss') }}</strong></li>
             <li id="payment"><strong>{{ __('messages.sign_aprove') }}</strong></li>
             <li id="boss"><strong>{{ __('messages.general_aprove') }}</strong></li>
+            <li id="confirm"><strong>Tesoreria y Dirección Financiera</strong></li>
             <li id="confirm"><strong>{{ __('messages.legalization') }}</strong></li>
         </ul>
         <div class="progress">
-            <div style="width: 40%" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+            <div style="width: 33.2%" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                 aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <br>

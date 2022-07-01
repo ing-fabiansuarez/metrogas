@@ -5,12 +5,12 @@
             <li class="active" id="account"><strong>{{ __('messages.viatic_request') }}</strong> </li>
             <li class="active" id="personal"><strong>{{ __('messages.aprove_boss') }}</strong></li>
             <li class="active" id="payment"><strong>{{ __('messages.sign_aprove') }}</strong></li>
-            <li id="boss"><strong>{{ __('messages.general_aprove') }}</strong></li>
+            <li class="active" id="boss"><strong>{{ __('messages.general_aprove') }}</strong></li>
             <li id="confirm"><strong>Tesoreria y Dirección Financiera</strong></li>
             <li id="confirm"><strong>{{ __('messages.legalization') }}</strong></li>
         </ul>
         <div class="progress">
-            <div style="width: 49.8%" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+            <div style="width: 66.4%" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                 aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <br>
@@ -263,46 +263,52 @@
                 </div>
             </div>
             <br>
-            <form wire:submit.prevent="acceptRequest" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col-md-2">
 
-                    </div>
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="fileuplo">Debes subir firmado el archivo que se imprime.</label>
-                            <input wire:model.defer="file_sign" class="form-control form-control-sm" type="file"
-                                accept=".pdf,.jpg,.png" />
-                            @error('file_sign')
-                                <span class="text-danger text-message-validation">
-                                    {{ $message }}
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-2">
+            <div class="row">
 
-                    </div>
+                <div class="col-md-6">
+
+
+                    <a target="_blank" href="{{ route('viatic.pdf', $viaticRequest->id) }}" style="color: white"
+                        type="button" class="btn bg-secundary btn-sm">Descargar
+                        Anticipo</a>
+
+
                 </div>
 
-
-                <button type="submit" name="next" class="btn bg-secundary btn-sm action-button">Enviar</button>
-                <a target="_blank" href="{{ route('viatic.pdf', $viaticRequest->id) }}"
-                    class="btn bg-primary btn-sm action-button">impirmir</a>
-                {{-- <input type="button" name="previous" class="btn previous action-button-previous" value="Rechazar" /> --}}
-            </form>
-
+            </div>
+            <button wire:click="$emit('beforeAproveViaticRequest')" type="submit" name="next"
+                class="btn bg-secundary btn-sm action-button">Aprobar</button>
+            <a href="{{ route('viatic.pdf', $viaticRequest->id) }}"
+                class="btn bg-primary btn-sm action-button">Rechazar</a>
+            {{-- <input type="button" name="previous" class="btn previous action-button-previous" value="Rechazar" /> --}}
         </fieldset>
     </div>
 </div>
 @push('js')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        Livewire.on('response', function(status, route) {
+        Livewire.on('beforeAproveViaticRequest', function() {
+            Swal.fire({
+                title: 'Se Aprobará la solicitud',
+                text: '¿Esta Seguro?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: '{{ __('forms.close') }}',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emitTo('process-viatic-request.aprove-general', 'aproveViaticRequest');
+                }
+            })
+        });
+        Livewire.on('responseAprove', function(status, route) {
             if (status) {
                 Swal.fire(
-                    "Solicitud Enviada!",
-                    'Se Envio correctamente',
+                    "Solicitud Aprobada!",
+                    'Se Aprobó correctamente',
                     'success'
                 )
                 window.location.replace(route);

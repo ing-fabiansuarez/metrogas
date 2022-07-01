@@ -62,6 +62,9 @@ class ViaticController extends Controller
                 case EStateRequest::APROVED->getId():
                     return view('viatic.viatic-request.aceptation', compact('viaticRequest'));
                     break;
+                case EStateRequest::ACCEPTED_EMPLOYEE->getId():
+                    return view('viatic.viatic-request.aprove_general', compact('viaticRequest'));
+                    break;
             }
 
             echo "EXITE";
@@ -112,6 +115,13 @@ class ViaticController extends Controller
         if (isset($viaticRequest)) {
             switch ($viaticRequest->sw_state) {
                 case EStateRequest::APROVED->getId(): //solo va imprimir si esta en estado aprobado
+
+                    $pdf = App::make('dompdf.wrapper');
+                    $pdf->loadView('pdf.viatic-request.viatic-request', compact('viaticRequest'));
+                    return $pdf->stream();
+                    /* return view('pdf.viatic-request.viatic-request', compact('viaticRequest')); */
+                    break;
+                case EStateRequest::ACCEPTED_EMPLOYEE->getId(): //solo va imprimir si esta en estado aprobado
 
                     $pdf = App::make('dompdf.wrapper');
                     $pdf->loadView('pdf.viatic-request.viatic-request', compact('viaticRequest'));
