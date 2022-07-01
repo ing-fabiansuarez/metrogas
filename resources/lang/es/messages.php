@@ -7,7 +7,7 @@ return [
     'aprove_boss' => 'Aprobación Jefe Inmediato',
     'sign_aprove' => 'Aceptación Empleado',
     'general_aprove' => 'Aprobacion General',
-    'legalization' => 'Legalización',
+    'legalization' => 'Completa!',
     'request_by' => 'Solicitado por',
     'information_about_comision' => 'Información sobre la comisión',
     'information_request' => 'Información de la Solicitud',

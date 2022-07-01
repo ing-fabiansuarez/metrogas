@@ -68,6 +68,9 @@ class ViaticController extends Controller
                 case EStateRequest::APROVED_GENERAL->getId():
                     return view('viatic.viatic-request.supports', compact('viaticRequest'));
                     break;
+                case EStateRequest::CLOSE->getId():
+                    return view('viatic.viatic-request.viatic_request_closed', compact('viaticRequest'));
+                    break;
             }
 
             echo "EXITE";

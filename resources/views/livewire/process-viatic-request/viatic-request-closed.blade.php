@@ -1,0 +1,428 @@
+<div class="card px-3 pt-4 pb-0 mt-0 mb-3">
+    <div id="msform">
+        <!-- progressbar -->
+        <ul id="progressbar" class="px-0">
+            <li class="active" id="account"><strong>{{ __('messages.viatic_request') }}</strong> </li>
+            <li class="active" id="personal"><strong>{{ __('messages.aprove_boss') }}</strong></li>
+            <li class="active" id="payment"><strong>{{ __('messages.sign_aprove') }}</strong></li>
+            <li class="active" id="boss"><strong>{{ __('messages.general_aprove') }}</strong></li>
+            <li class="active" id="confirm"><strong>Tesoreria y Dirección Financiera</strong></li>
+            <li class="active" id="confirm"><strong>{{ __('messages.legalization') }}</strong></li>
+        </ul>
+        <div class="progress">
+            <div style="width: 100%" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <br>
+
+        <fieldset>
+            <div class="form-card">
+                <div class="row">
+                    <div class="col-7">Finalizada
+                        <h2 class="fs-title"></h2>
+                    </div>
+                    <div class="col-5">
+                        <h2 class="steps">Paso 6</h2>
+                    </div>
+                </div>
+                <br><br>
+                <h2 class="purple-text text-center"><strong>COMPLETA !</strong></h2>
+                <br>
+
+            </div>
+            {{-- </fieldset>
+        <fieldset> --}}
+            <div class="form-card">
+                <div class="row">
+                    <div class="col-7">
+                        <h2 class="fs-title">Solicitud de anticipo</h2>
+                    </div>
+
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12 text-center">
+                        <div>
+                            <span style="font-size: 1rem;color:black;"> <b>Solicitud N°
+                                    {{ $viaticRequest->id }}</b></span>
+                        </div>
+                        <br>
+                        <span style="font-size: 1rem">{{ $viaticRequest->user->name }}</span><br>
+                        <span style="font-size: 0.8rem">{{ $viaticRequest->user->jobtitle->name }}</span><br>
+                        <span style="font-size: 0.8rem">NIVEL {{ $viaticRequest->user->jobtitle->level }}</span>
+
+
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">{{ __('forms.viatic_request.justificacion') }}</label>
+                    <textarea class="form-control form-control-sm" rows="3"
+                        placeholder="{{ __('forms.viatic_request.justificacion.placeholder') }}" disabled>{{ $viaticRequest->justification }}</textarea>
+                </div>
+
+                <div class="table-responsive p-0">
+                    <label for="exampleFormControlTextarea1">{{ __('messages.information_about_comision') }}</label>
+                    <div class="card bg-gray-100">
+                        <div class="card-body p-2">
+                            <table class="table table-hover table-bordered align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            {{ __('forms.viatic_request.origin_site') }}
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            {{ __('forms.viatic_request.destination_site') }}
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            {{ __('forms.viatic_request.start_date') }}
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            {{ __('forms.viatic_request.end_date') }}
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            N° dias
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($viaticRequest->sites as $index => $site)
+                                        <tr>
+                                            <td>
+                                                <span class="text-secondary text-xs">
+                                                    Destino {{ $index + 1 }}
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="text-secondary text-xs">
+                                                    {{ $site->originSite->name }}
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="text-secondary text-xs">
+                                                    {{ $site->destinationSite->name }}
+                                                </span>
+                                            </td>
+
+                                            <td class="text-center">
+                                                <span class="text-secondary text-xs">
+                                                    {{ $site->start_date }}
+                                                </span>
+                                            </td>
+
+                                            <td class="text-center">
+                                                <span class="text-secondary text-xs">
+                                                    {{ $site->end_date }}
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="text-secondary text-xs">
+                                                    {{ $site->calculateNumDays() }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive p-0">
+                    <label for="exampleFormControlTextarea1">{{ __('messages.rates') }}</label>
+
+                    <table class="table table-hover table-bordered align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.accommodation') }}
+                                </th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.feeding') }}
+                                </th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.intermunicipal_transport') }}
+                                </th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.municipal_transport') }}
+                                </th>
+                                <th style="width: 15%"
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Total
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($viaticRequest->sites as $index => $site)
+                                <tr>
+                                    <td>
+                                        <span class="text-secondary text-xs">
+                                            Destino {{ $index + 1 }}
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <button class="form-control form-control-sm"
+                                                disabled>{{ number_format($site->accommodation_value) }}</button>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <button class="form-control form-control-sm"
+                                                disabled>{{ number_format($site->feeding_value) }}</button>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <button class="form-control form-control-sm"
+                                                disabled>{{ number_format($site->intermunicipal_trans_value) }}</button>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <div class="input-group">
+                                            <button class="form-control form-control-sm"
+                                                disabled>{{ number_format($site->municipal_trans_value) }}</button>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <button class="form-control form-control-sm"
+                                                disabled>{{ number_format($site->total_value) }}</button>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                            @foreach ($viaticRequest->otherExpenses as $otherExpense)
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td class="text-center">
+                                    </td>
+                                    <td class="text-center">
+                                    </td>
+                                    <td class="text-center">
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="text-secondary text-xs">
+                                            {{ $otherExpense->name }}
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <button class="form-control form-control-sm"
+                                                disabled>{{ number_format($otherExpense->pivot->value) }}</button>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                            <tr>
+                                <td>
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                    <span class="text-secondary text-xs">
+                                        TOTAL ANTICIPO
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="input-group">
+                                        <button type="number" class="form-control form-control-sm"
+                                            disabled>{{ number_format($viaticRequest->getTotalViaticRequest()) }}</button>
+                                        <span class="input-group-text py-0">$</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+
+                    </table>
+                    @error('tipo_otro_gasto')
+                        <span class="text-danger text-message-validation">
+                            {{ $message }}
+                        </span>
+                        <br>
+                    @enderror
+
+                    @error('cantidad_otro_gasto')
+                        <span class="text-danger text-message-validation">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <a target="_blank" href="{{ route('viatic.pdf', $viaticRequest->id) }}"
+                            style="color: white" type="button" class="btn bg-secundary btn-sm">Descargar
+                            Anticipo</a>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="table-responsive p-0">
+                            <label for="exampleFormControlTextarea1">TESORERIA</label>
+                            <div class="card bg-gray-100">
+                                <div class="card-body p-2">
+                                    <table class="table table-hover table-bordered align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Nombre Soporte
+                                                </th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Observacion
+                                                </th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($viaticRequest->sites as $index => $site)
+                                                <tr>
+                                                    <td>
+                                                        <span class="text-secondary text-xs">
+                                                            {{ $index + 1 }}
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <span class="text-secondary text-xs">
+                                                            Soporte del portal.jpg
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <span class="text-secondary text-xs">
+                                                            Evidencia Portal Bancario
+                                                        </span>
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                        <a>
+                                                            <i
+                                                                class="cursor-pointer fas fa-download text-secondary"></i>
+                                                        </a>
+                                                        <a>
+                                                            <i style="color: red"
+                                                                class="cursor-pointer fas fa-trash "></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="table-responsive p-0">
+                            <label for="exampleFormControlTextarea1">DIRECCIÓN FINANCIERA</label>
+                            <div class="card bg-gray-100">
+                                <div class="card-body p-2">
+                                    <table class="table table-hover table-bordered align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Nombre Soporte
+                                                </th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Observacion
+                                                </th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($viaticRequest->sites as $index => $site)
+                                                <tr>
+                                                    <td>
+                                                        <span class="text-secondary text-xs">
+                                                            {{ $index + 1 }}
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <span class="text-secondary text-xs">
+                                                            consignacion.pdf
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <span class="text-secondary text-xs">
+                                                            Soporte de consignación
+                                                        </span>
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                        <a>
+                                                            <i
+                                                                class="cursor-pointer fas fa-download text-secondary"></i>
+                                                        </a>
+                                                        <a>
+                                                            <i style="color: red"
+                                                                class="cursor-pointer fas fa-trash "></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+
+
+            {{-- <button wire:click="$emit('beforeClose')" type="submit" name="next"
+                class="btn bg-secundary btn-sm action-button">Finalizar Anticipo</button> --}}
+            {{-- <a href="{{ route('viatic.pdf', $viaticRequest->id) }}"
+                class="btn bg-primary btn-sm action-button">Rechazar</a> --}}
+            {{-- <input type="button" name="previous" class="btn previous action-button-previous" value="Rechazar" /> --}}
+        </fieldset>
+    </div>
+</div>
