@@ -15,7 +15,9 @@ class ViaticController extends Controller
      */
     public function index()
     {
-        //
+        return view('viatic.viatic-request.list_request', [
+            'viaticRequests' => ViaticRequest::where('request_by', auth()->user()->id)->get()
+        ]);
     }
 
     /**
@@ -49,6 +51,7 @@ class ViaticController extends Controller
     {
         $viaticRequest = ViaticRequest::find($id);
         if (isset($viaticRequest)) {
+            //se redirecciona segun el estado
             if ($viaticRequest->sw_state == EStateRequest::CREATED->getId()) {
                 return view('viatic.viatic-request.aprove_boss', compact('viaticRequest'));
             }

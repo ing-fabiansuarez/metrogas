@@ -5,7 +5,7 @@ $(document).ready(function () {
     var current = 1;
     var steps = $("fieldset").length;
 
-    setProgressBar(current);
+    /*   setProgressBar(current); */
 
     Livewire.on('requestSave', function () {
         current_fs = $(this).parent();
@@ -89,12 +89,12 @@ $(document).ready(function () {
         setProgressBar(--current);
     });
 
-   /*  function setProgressBar(curStep) {
+    function setProgressBar(curStep) {
         var percent = parseFloat(100 / steps) * curStep;
         percent = percent.toFixed();
         $(".progress-bar")
             .css("width", percent + "%")
-    } */
+    }
 
     $(".submit").click(function () {
         return false;

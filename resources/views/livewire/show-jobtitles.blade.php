@@ -44,6 +44,13 @@
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 {{ __('forms.jobtitle.name') }}
                             </th>
+
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                {{ __('forms.jobtitle.boss') }}
+                            </th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                {{ __('forms.jobtitle.level') }}
+                            </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 {{ __('forms.updated_at') }}
                             </th>
@@ -76,6 +83,19 @@
                                         {{ $jobtitle->name }}
                                     </p>
                                 </td>
+
+                                <td class="text-center">
+                                    <p class="text-xs font-weight-bold mb-0">
+                                        {{ $jobtitle->boss->name }}
+                                    </p>
+                                </td>
+
+                                <td class="text-center">
+                                    <p class="text-xs font-weight-bold mb-0">
+                                        {{ $jobtitle->level }}
+                                    </p>
+                                </td>
+
 
                                 <td class="text-center">
                                     <span class="text-secondary text-xs font-weight-bold">
@@ -129,6 +149,40 @@
                                     {{ $message }}
                                 </span>
                             @enderror
+
+
+
+                            <div class="form-group">
+                                <label for="recipient-name"
+                                    class="col-form-label">{{ __('forms.jobtitle.boss') }}</label>
+                                <select wire:model.defer="jobtitle.id_boss" class="form-select"
+                                    aria-label=".form-select-sm example">
+                                    @foreach ($jobtitles as $jobtitle)
+                                        <option value="{{ $jobtitle->id }}">{{ $jobtitle->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('jobtitle.id_boss')
+                                    <span class="text-danger text-message-validation">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name"
+                                    class="col-form-label">{{ __('forms.jobtitle.level') }}</label>
+                                <select wire:model.defer="jobtitle.level" class="form-select"
+                                    aria-label=".form-select-sm example">
+                                    <option value="1">NIVEL I</option>
+                                    <option value="2">NIVEL II</option>
+                                    <option value="3">NIVEL III</option>
+
+                                </select>
+                                @error('jobtitle.level')
+                                    <span class="text-danger text-message-validation">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

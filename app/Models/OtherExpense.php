@@ -12,4 +12,10 @@ class OtherExpense extends Model
     protected $fillable = [
         'name'
     ];
+
+    //relacion muchos a muchos para viatic quest
+    public function viaticRequests()
+    {
+        return $this->belongsToMany(ViaticRequest::class)->withTimestamps();
+    }
 }

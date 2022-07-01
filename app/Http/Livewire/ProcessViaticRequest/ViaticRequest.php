@@ -24,7 +24,7 @@ class ViaticRequest extends Component
     //escuchadores de eventos
     protected $listeners = [
         'removeSite' => 'removeSite',
-        'createViaticRequest' => 'createViaticRequest'
+        'createViaticRequest' => 'createViaticRequest',
     ];
 
     public function __construct()
@@ -90,23 +90,20 @@ class ViaticRequest extends Component
         $viaticRequest->request_by = auth()->user()->id;
         $viaticRequest->sw_state = EStateRequest::CREATED->getId();
         $viaticRequest->save();
-        $listModelSites = [];
         foreach ($this->listSite as $site) {
             $newDetalle = new ViaticRequestsSitesDetalle();
-            $newDetalle->id_origin_site = 1;
-            $newDetalle->id_destination_site = 1;
-            $newDetalle->start_date = '2021-09-20';
-            $newDetalle->end_date = '2021-09-20';
+            $newDetalle->id_origin_site = $site['id_origin_site'];
+            $newDetalle->id_destination_site = $site['id_destination_site'];
+            $newDetalle->start_date = $site['start_date'];
+            $newDetalle->end_date = $site['end_date'];
             $newDetalle->viatic_request_id = $viaticRequest->id;
-
             $newDetalle->save();
-
-            array_push($listModelSites, $newDetalle);
         }
         //mostrar el mensaje de que se creo correctamente
-        $this->emit('requestSave');
+        $this->emit('requestSave', route('viatic.show', $viaticRequest->id));
 
         DB::commit();
+
         /*   } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['message' => 'Error']);

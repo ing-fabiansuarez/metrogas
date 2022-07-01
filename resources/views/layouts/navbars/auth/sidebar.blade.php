@@ -66,8 +66,12 @@
                     {{ __('sidebar.viaticos') }}</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('solicitud-viaticos/create') ? 'active' : '' }}"
-                    href="{{ route('viatic.create') }}">
+                <a class="nav-link {{ Request::is('solicitud-viaticos/create') ||
+                Request::is('solicitud-viaticos') ||
+                Request::is('solicitud-viaticos/*')
+                    ? 'active'
+                    : '' }}"
+                    href="{{ route('viatic.index') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"

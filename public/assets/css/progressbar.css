@@ -1,19 +1,20 @@
-* {
-    margin: 0;
-    padding: 0;
+:root {
+    --color-primary: #b2ca01;
+    --color-secundary: #05418b;
+    --color-third: #009bd8;
 }
+
+
 
 html {
     height: 100%;
 }
 
-p {
-    color: grey;
-}
+
 
 #heading {
     text-transform: uppercase;
-    color: #673AB7;
+    color: var(--color-secundary);
     font-weight: normal;
 }
 
@@ -48,18 +49,17 @@ p {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    border: 1px solid #673AB7;
+    border: 1px solid var(--color-secundary);
     outline-width: 0;
 }
 
 /*Next Buttons*/
 #msform .action-button {
     width: 100px;
-    background: #673AB7;
+    background: var(--color-secundary);
     font-weight: bold;
     color: white;
     border: 0 none;
-    border-radius: 0px;
     cursor: pointer;
     padding: 10px 5px;
     margin: 10px 0px 10px 5px;
@@ -68,7 +68,7 @@ p {
 
 #msform .action-button:hover,
 #msform .action-button:focus {
-    background-color: #311B92;
+    background-color: var(--color-secundary);
 }
 
 /*Previous Buttons*/
@@ -78,7 +78,6 @@ p {
     font-weight: bold;
     color: white;
     border: 0 none;
-    border-radius: 0px;
     cursor: pointer;
     padding: 10px 5px;
     margin: 10px 5px 10px 0px;
@@ -100,14 +99,14 @@ p {
 /*FieldSet headings*/
 .fs-title {
     font-size: 1.2rem;
-    color: #673AB7;
+    color: var(--color-secundary);
     margin-bottom: 15px;
     font-weight: normal;
     text-align: left;
 }
 
 .purple-text {
-    color: #673AB7;
+    color: var(--color-secundary);
     font-weight: normal;
 }
 
@@ -133,7 +132,7 @@ p {
 }
 
 #progressbar .active {
-    color: #673AB7;
+    color: var(--color-secundary);
 }
 
 #progressbar li {
@@ -201,7 +200,7 @@ p {
 /*Color number of the step and the connector before it*/
 #progressbar li.active:before,
 #progressbar li.active:after {
-    background: #673AB7;
+    background: var(--color-secundary);
 }
 
 /*Animated Progress Bar*/
@@ -210,7 +209,7 @@ p {
 }
 
 .progress-bar {
-    background-color: #673AB7;
+    background-color: var(--color-secundary);
 }
 
 /*Fit image in bootstrap div*/

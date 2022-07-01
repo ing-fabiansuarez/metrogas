@@ -21,9 +21,7 @@ return new class extends Migration
             $table->unsignedBigInteger('request_by');
             $table->foreign("request_by")
                 ->references("id")
-                ->on("users")
-                ->onDelete("cascade")
-                ->onUpdate("cascade");
+                ->on("users");
                 
             $table->integer('sw_state');
             $table->timestamps();

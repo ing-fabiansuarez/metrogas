@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Adldap\Laravel\Facades\Adldap;
 use App\Http\Requests\UserRequest;
+use App\Models\Jobtitle;
 use App\Models\User;
 use Exception;
 use GuzzleHttp\Psr7\Response;
@@ -28,7 +29,18 @@ class UserController extends Controller
         try {
             $userLdap = Adldap::search()->where('samaccountname', '=', $request->username)->first();
             if (isset($userLdap)) {
-                return view('mtto.user.create', compact('userLdap'));
+
+                $posibleJobtitle = Jobtitle::where('name', $userLdap->getDescription())->first();
+                if (isset($posibleJobtitle)) { //determina si el cargo exite, si es asi se lo coloca si no lo crea nuevo
+                    $posibleJobtitle = $posibleJobtitle;
+                } else {
+                    $posibleJobtitle = new Jobtitle();
+                }
+                return view('mtto.user.create', [
+                    'userLdap' => $userLdap,
+                    'posibleJobtitle' => $posibleJobtitle,
+                    'jobtitles' => Jobtitle::all()
+                ]);
             }
 
             return redirect()->route('user.create')->with("msg", [
@@ -46,6 +58,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $datos = request()->all();
-        return response()->json($datos);
+        return response()->json($request);
     }
 }

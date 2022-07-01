@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('usuarios', [UserController::class, 'index'])->name('user.index');
 	Route::get('usuarios/create', [UserController::class, 'create'])->name('user.create');
 	Route::post('usuarios/create', [UserController::class, 'searchUser'])->name('user.searchuser');
+	Route::post('usuarios', [UserController::class, 'store'])->name('user.store');
 
 	//CARGOS
 	Route::get('cargos', [JobtitleController::class, 'index'])->name('jobtitle.index');
@@ -66,7 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
 	//Viaticios
 	Route::get('solicitud-viaticos/create', [ViaticController::class, 'create'])->name('viatic.create');
 	Route::get('solicitud-viaticos/{id}', [ViaticController::class, 'show'])->name('viatic.show');
-
+	Route::get('solicitud-viaticos', [ViaticController::class, 'index'])->name('viatic.index');
 
 	/* 
 	Route::get('billing', function () {

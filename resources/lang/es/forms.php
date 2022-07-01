@@ -4,6 +4,8 @@ return [
     'jobtitle' => 'Cargos',
     'jobtitle.id' => 'Id',
     'jobtitle.name' => 'Nombre',
+    'jobtitle.boss' => 'Jefe Inmediato',
+    'jobtitle.level' => 'Nivel',
     'jobtitle.button.new_jobtitle' => '+ Nuevo Cargo',
     'jobtitle.title.new_jobtitle' => 'Crear Cargo',
 

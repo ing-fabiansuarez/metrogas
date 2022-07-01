@@ -9,8 +9,8 @@
             <li id="confirm"><strong>{{ __('messages.legalization') }}</strong></li>
         </ul>
         <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0"
-                aria-valuemax="100"></div>
+            <div style="width: 20%" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                aria-valuemin="0" aria-valuemax="100"></div>
         </div>
         <br>
         <!-- fieldsets -->
@@ -154,7 +154,7 @@
                     </div>
                 </div>
             </div>
-            <button wire:click="$emit('createViaticRequest')" type="button" name="next"
+            <button wire:click="$emit('beforeCreateViaticRequest')" type="button" name="next"
                 class="next action-button">Crear</button>
         </div>
         {{-- <fieldset>
@@ -422,5 +422,30 @@
             })
         });
     </script>
-    <script></script>
+    <script>
+        Livewire.on('beforeCreateViaticRequest', function() {
+            Swal.fire({
+                title: 'Se creara una nueva solicitud',
+                text: '¿Esta Seguro?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: '{{ __('forms.close') }}',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emitTo('process-viatic-request.viatic-request', 'createViaticRequest');
+                }
+            })
+        });
+        Livewire.on('requestSave', url => {
+            Swal.fire(
+                "Solicitud creada!",
+                'Se creo correctamente la Solicitud, espera a que el jefe inmediato lo apruebe',
+                'success'
+            )
+            window.location.replace(url);
+        });
+    </script>
 @endpush

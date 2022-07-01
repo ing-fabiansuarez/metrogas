@@ -22,7 +22,9 @@ class ShowJobtitles extends Component
     public $cantEntradas = 10;
 
     protected $rules = [
-        'jobtitle.name' => 'required'
+        'jobtitle.name' => 'required',
+        'jobtitle.id_boss' => 'required',
+        'jobtitle.level' => 'required'
     ];
 
     public function render()

@@ -3,7 +3,12 @@
     --color-secundary: #05418b;
     --color-third: #009bd8;
 }
-
+.bg-primary{
+    background: var(--color-primary) !important;
+}
+.bg-secundary{
+    background: var(--color-secundary) !important;
+}
 .navbar-vertical.navbar-expand-xs .navbar-collapse {
     height: auto;
 }

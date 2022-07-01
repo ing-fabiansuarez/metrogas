@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -25,10 +26,18 @@ class ViaticRequestsSitesDetalle extends Model
 
     public function originSite()
     {
-        return $this->belongsTo(OriginSite::class,'id_origin_site','id',);
+        return $this->belongsTo(OriginSite::class, 'id_origin_site', 'id',);
     }
     public function destinationSite()
     {
-        return $this->belongsTo(DestinationSite::class,'id_destination_site','id');
+        return $this->belongsTo(DestinationSite::class, 'id_destination_site', 'id');
+    }
+
+    public function calculateNumDays()
+    {
+        $fecha1 = new DateTime($this->start_date);
+        $fecha2 = new DateTime($this->end_date);
+        $diff = $fecha1->diff($fecha2);
+        return $diff->days + 1;
     }
 }

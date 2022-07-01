@@ -42,7 +42,7 @@
                         <h6 class="mb-0">{{ __('forms.user.information_general') }}</h6>
                     </div>
                     <div class="card-body pt-4 p-3">
-                        <form action="{{ url('/usuarios') }}" method="POST" role="form text-left">
+                        <form action="{{ route('user.store') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
@@ -51,7 +51,9 @@
                                             class="form-control-label">{{ __('forms.user.object_guid') }}</label>
                                         <input class="form-control form-control-sm" type="text"
                                             placeholder="{{ __('forms.user.object_guid') }}" id="input_object_guid"
-                                            name="object_guid" value="{{ $userLdap->getAuthIdentifier() }}" disabled>
+                                            value="{{ $userLdap->getAuthIdentifier() }}" disabled>
+                                        <input type="hidden" name="object_guid"
+                                            value="{{ $userLdap->getAuthIdentifier() }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="input_name"
@@ -94,22 +96,20 @@
                                     <div class="form-group">
                                         <label for="input_email"
                                             class="form-control-label">{{ __('forms.user.jobtitle') }}</label>
-                                        <select class="form-select form-select-sm" id="input_email">
-                                            <option value="" selected>{{ __('forms.select.selected') }}</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                        <select name="id_cargo" class="form-select form-select-sm" id="input_email">
+                                            @foreach ($jobtitles as $job)
+                                                <option value="{{ $job->id }}" <?php if($job->id==$posibleJobtitle->id):?>
+                                                    selected<?php endif;?>>{{ $job->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="input_perfil"
-                                            class="form-control-label">{{ __('forms.user.perfil') }}</label>
+                                    {{-- <div class="form-group">
+                                        <label for="input_perfil" class="form-control-label">Nivel</label>
                                         <select class="form-select form-select-sm" id="input_perfil">
-                                            <option value="" selected>{{ __('forms.select.selected') }}</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
+                                            <option value="1">NIVEL I</option>
+                                            <option value="2">NIVEL II</option>
+                                            <option value="3">NIVEL III</option>
                                         </select>
                                     </div>
 
@@ -122,7 +122,7 @@
                                             <option value="2">Two</option>
                                             <option value="3">Three</option>
                                         </select>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
                             </div>

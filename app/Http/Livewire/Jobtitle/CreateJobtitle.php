@@ -9,10 +9,14 @@ class CreateJobtitle extends Component
 {
     /* Atributos */
     public $name;
+    public $boss;
+    public $level;
 
     //Reglas de validacion
     protected $rules = [
-        'name' => 'required'
+        'name' => 'required',
+        'boss' => 'required',
+        'level' => 'required',
     ];
 
     //Se ejecuta cada vez que un Atributo cambia su valor, cualquier atributo
@@ -28,14 +32,18 @@ class CreateJobtitle extends Component
     */
     public function render()
     {
-        return view('livewire.jobtitle.create-jobtitle');
+        return view('livewire.jobtitle.create-jobtitle', [
+            'allJobtitles' => Jobtitle::all(),
+        ]);
     }
 
     public function store()
     {
         $this->validate();
         Jobtitle::create([
-            'name' => $this->name
+            'name' => $this->name,
+            'id_boss' => $this->boss,
+            'level' => $this->level,
         ]);
         //resetear las propiedades
         $this->reset(['name']);

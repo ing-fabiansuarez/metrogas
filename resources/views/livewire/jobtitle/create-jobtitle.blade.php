@@ -25,6 +25,38 @@
                                 </span>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">{{ __('forms.jobtitle.boss') }}</label>
+                            <select wire:model.defer="boss" class="form-select" aria-label=".form-select-sm example">
+                                <option value="" selected>{{ __('forms.select.selected') }}
+                                </option>
+                                @foreach ($allJobtitles as $jobtitle)
+                                    <option value="{{ $jobtitle->id }}">{{ $jobtitle->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('boss')
+                                <span class="text-danger text-message-validation">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name"
+                                class="col-form-label">{{ __('forms.jobtitle.level') }}</label>
+                            <select wire:model.defer="level" class="form-select" aria-label=".form-select-sm example">
+                                <option value="" selected>{{ __('forms.select.selected') }}
+                                </option>
+                                <option value="1">NIVEL I</option>
+                                <option value="2">NIVEL II</option>
+                                <option value="3">NIVEL III</option>
+
+                            </select>
+                            @error('level')
+                                <span class="text-danger text-message-validation">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary"

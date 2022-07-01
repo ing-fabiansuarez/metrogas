@@ -14,12 +14,17 @@ class JobtitleSeeder extends Seeder
      */
     public function run()
     {
+        $GERENTE = Jobtitle::create(['name' => 'Gerente', 'id_boss' => 1, 'level' => 1]);
+        $DIRECTOR_ADMINISTRATIVO_Y_FINANCIERO = Jobtitle::create(['name' => 'Director Administrativo y Financiero', 'id_boss' => $GERENTE->id, 'level' => 1]);
+        $JEFE_DE_SISTEMAS = Jobtitle::create(['name' => 'Jefe de Sistemas', 'id_boss' => $DIRECTOR_ADMINISTRATIVO_Y_FINANCIERO->id, 'level' => 2]);
+        $ANALISTA_DE_DESARROLLO = Jobtitle::create(['name' => 'Analista de Desarrollo', 'id_boss' => $JEFE_DE_SISTEMAS->id, 'level' => 3]);
+
         //SE CREA UN NO APLICA
-        $NO_APLICA = Jobtitle::create(['name' => 'NO APLICA']);
+        /* $NO_APLICA = Jobtitle::create(['name' => 'NO APLICA']);
 
         //GERENCIA
         $GERENTE = Jobtitle::create(['name' => 'GERENTE',  'id_boss' => $NO_APLICA->id]);
-        $SECRETARIA_DE_GERENCIA = Jobtitle::create(['name' => 'SECRETARIA DE GERENCIA',  'id_boss' => $NO_APLICA->id]);
+         $SECRETARIA_DE_GERENCIA = Jobtitle::create(['name' => 'SECRETARIA DE GERENCIA',  'id_boss' => $NO_APLICA->id]);
 
         
         //CARGOS QUE NO SE ENCONTRAROS
@@ -156,6 +161,6 @@ class JobtitleSeeder extends Seeder
 
         //CARGOS QUE NO SE ENCONTRAROS
         $APRENDIZ_SENA_SISTEMAS = Jobtitle::create(['name' => 'APRENDIZ SENA SISTEMAS',  'id_boss' => $JEFE_DE_SISTEMAS->id]);
-        $APRENDIZ_SENA_HSEQ = Jobtitle::create(['name' => 'APRENDIZ SENA HSEQ',  'id_boss' => $JEFE_DE_HSEQ->id]); 
+        $APRENDIZ_SENA_HSEQ = Jobtitle::create(['name' => 'APRENDIZ SENA HSEQ',  'id_boss' => $JEFE_DE_HSEQ->id]);  */
     }
 }

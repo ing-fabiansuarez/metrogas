@@ -26,9 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_jobtitle');
             $table->foreign("id_jobtitle")
                 ->references("id")
-                ->on("jobtitles")
-                ->onDelete("cascade")
-                ->onUpdate("cascade");
+                ->on("jobtitles");
         });
     }
 

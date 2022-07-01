@@ -41,8 +41,20 @@
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Rol
+                                            Cargo
                                         </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Jefe Inmediato
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Nivel
+                                        </th>
+                                        {{-- <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Rol
+                                        </th> --}}
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Fecha de Creaci&oacute;n
@@ -66,8 +78,19 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $user->email }}</p>
                                             </td>
                                             <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">Roleeee</p>
+                                                <p class="text-xs font-weight-bold mb-0">{{ $user->jobtitle->name }}</p>
                                             </td>
+                                            <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">{{ $user->jobtitle->boss->name }}
+                                                </p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">{{ $user->jobtitle->level }}
+                                                </p>
+                                            </td>
+                                            {{-- <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">Roleeee</p>
+                                            </td> --}}
                                             <td class="text-center">
                                                 <span
                                                     class="text-secondary text-xs font-weight-bold">{{ $user->created_at }}</span>

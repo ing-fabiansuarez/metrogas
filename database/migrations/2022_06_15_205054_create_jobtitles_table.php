@@ -25,7 +25,7 @@ return new class extends Migration
                 ->onDelete("cascade")
                 ->onUpdate("cascade");
 
-            $table->tinyInteger('level');
+            $table->tinyInteger('level')->default(3);
 
             $table->timestamps();
         });

@@ -24,11 +24,15 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-12">
-
-                        <span style="font-size: 1rem;color:black;"> <b>Solicitud N°
-                                {{ $viaticRequest->id }}</b></span><br>
-                        <span style="font-size: 1rem">{{ $viaticRequest->user->name }}</span>
+                    <div class="col-12 text-center">
+                        <div>
+                            <span style="font-size: 1rem;color:black;"> <b>Solicitud N°
+                                    {{ $viaticRequest->id }}</b></span>
+                        </div>
+                        <br>
+                        <span style="font-size: 1rem">{{ $viaticRequest->user->name }}</span><br>
+                        <span style="font-size: 0.8rem">{{ $viaticRequest->user->jobtitle->name }}</span><br>
+                        <span style="font-size: 0.8rem">NIVEL {{ $viaticRequest->user->jobtitle->level }}</span>
 
 
                     </div>
@@ -48,6 +52,7 @@
                                 <thead>
                                     <tr>
                                         <th></th>
+
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             {{ __('forms.viatic_request.origin_site') }}
@@ -64,6 +69,10 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             {{ __('forms.viatic_request.end_date') }}
                                         </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            N° dias
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,14 +85,15 @@
                                             </td>
                                             <td class="text-center">
                                                 <span class="text-secondary text-xs">
-                                                    {{ $site->destinationSite->name }}
+                                                    {{ $site->originSite->name }}
                                                 </span>
                                             </td>
                                             <td class="text-center">
                                                 <span class="text-secondary text-xs">
-                                                    {{ $site->originSite->name }}
+                                                    {{ $site->destinationSite->name }}
                                                 </span>
                                             </td>
+
                                             <td class="text-center">
                                                 <span class="text-secondary text-xs">
                                                     {{ $site->start_date }}
@@ -93,6 +103,11 @@
                                             <td class="text-center">
                                                 <span class="text-secondary text-xs">
                                                     {{ $site->end_date }}
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="text-secondary text-xs">
+                                                    {{ $site->calculateNumDays() }}
                                                 </span>
                                             </td>
                                         </tr>
@@ -126,7 +141,7 @@
                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     {{ __('messages.municipal_transport') }}
                                 </th>
-                                <th
+                                <th style="width: 15%"
                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     Total
                                 </th>
@@ -171,9 +186,8 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="input-group">
-                                            <input type="number" class="form-control form-control-sm"
-                                                wire:model="viaticRequest.sites.{{ $index }}.total_value"
-                                                disabled>
+                                            <button class="form-control form-control-sm"
+                                                disabled>{{ number_format($viaticRequest->sites[$index]->total_value) }}</button>
                                             <span class="input-group-text py-0">$</span>
                                         </div>
                                     </td>
@@ -196,9 +210,11 @@
                                         </span>
                                     </td>
                                     <td class="text-center">
-                                        <span class="text-secondary text-xs">
-                                            {{ $otherExpense['cantidad_otro_gasto'] }}
-                                        </span>
+                                        <div class="input-group">
+                                            <button class="form-control form-control-sm"
+                                                disabled>{{ number_format($otherExpense['cantidad_otro_gasto']) }}</button>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -219,7 +235,8 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="input-group">
-                                        <input type="number" class="form-control form-control-sm" disabled>
+                                        <button type="number" class="form-control form-control-sm"
+                                            disabled>{{ number_format($totalAnticipo) }}</button>
                                         <span class="input-group-text py-0">$</span>
                                     </div>
                                 </td>
@@ -276,9 +293,46 @@
                     @enderror
                 </div>
             </div>
-            <button wire:click="$emit('saveAprove')" type="button" name="next"
-                class="next action-button">Aprobar</button>
-            <input type="button" name="previous" class="previous action-button-previous" value="Rechazar" />
+            <button wire:click="$emit('beforeAproveViaticRequest')" name="next"
+                class="btn bg-secundary btn-sm action-button">Aprobar</button>
+            <input type="button" name="previous" class="btn previous action-button-previous" value="Rechazar" />
         </fieldset>
     </div>
 </div>
+@push('js')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Livewire.on('beforeAproveViaticRequest', function() {
+            Swal.fire({
+                title: 'Se Aprobará la solicitud',
+                text: '¿Esta Seguro?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: '{{ __('forms.close') }}',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emitTo('process-viatic-request.aprove-boss', 'aproveViaticRequest');
+                }
+            })
+        });
+        Livewire.on('responseAprove', function(status, route) {
+            if (status) {
+                Swal.fire(
+                    "Solicitud Aprobada!",
+                    'Se Aprobó correctamente',
+                    'success'
+                )
+                window.location.replace(route);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No se pudo establecer la conexión',
+                })
+            }
+        });
+    </script>
+@endpush
