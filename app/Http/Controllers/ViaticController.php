@@ -52,9 +52,16 @@ class ViaticController extends Controller
         $viaticRequest = ViaticRequest::find($id);
         if (isset($viaticRequest)) {
             //se redirecciona segun el estado
-            if ($viaticRequest->sw_state == EStateRequest::CREATED->getId()) {
-                return view('viatic.viatic-request.aprove_boss', compact('viaticRequest'));
+
+            switch ($viaticRequest->sw_state) {
+                case EStateRequest::CREATED->getId():
+                    return view('viatic.viatic-request.aprove_boss', compact('viaticRequest'));
+                    break;
+                case EStateRequest::APROVED->getId():
+                    return view('viatic.viatic-request.aceptation', compact('viaticRequest'));
+                    break;
             }
+
             echo "EXITE";
             return;
         }

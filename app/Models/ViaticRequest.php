@@ -25,7 +25,7 @@ class ViaticRequest extends Model
 
     public function otherExpenses()
     {
-        return $this->belongsToMany(OtherExpense::class, 'other_expense_viatic_request', 'viatic_request_id', 'other_expense_id')->withTimestamps();
+        return $this->belongsToMany(OtherExpense::class, 'other_expense_viatic_request', 'viatic_request_id', 'other_expense_id')->withPivot('value')->withTimestamps();
     }
 
     public function getNameState()
@@ -33,6 +33,27 @@ class ViaticRequest extends Model
         return EStateRequest::from($this->sw_state)->getName();
     }
 
+    //calcula el total con sitios y gatos adicionales y retorna el total de los viaticos
+    public function getTotalViaticRequest()
+    {
+        //se calcula los gasto principales de cada sitio
+        $total = 0;
+        foreach ($this->sites as $site) {
+            $total +=
+                $site->accommodation_value +
+                $site->feeding_value +
+                $site->intermunicipal_trans_value +
+                $site->municipal_trans_value;
+        }
+        //se calculan los otros gastos si pucieron
+        foreach ($this->otherExpenses as $other) {
+            $total +=
+                $other->pivot->value;
+        }
+        return $total;
+    }
+
+    //este metodo solo se puede ejecutar cuando el viaticrequest no se halla creado, este es el metodo que calcula automaticamente los montos.
     public function calculateAmounts()
     {
         //en esta funcion vamos a calcular los motos para los viaticos
