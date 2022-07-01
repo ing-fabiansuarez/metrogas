@@ -262,30 +262,56 @@
                 </div>
             </div>
             <br>
-            <div class="row">
-                <div class="col-md-2">
+            <form wire:submit.prevent="acceptRequest" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-2">
 
-                </div>
-                <div class="col-md-8">
-                    <div class="form-group">
-                        <label for="fileuplo">Debes subir firmado el archivo que se imprime.</label>
-                        <input class="form-control form-control-sm" type="file" />
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="fileuplo">Debes subir firmado el archivo que se imprime.</label>
+                            <input wire:model.defer="file_sign" class="form-control form-control-sm" type="file"
+                                accept=".pdf,.jpg,.png" />
+                            @error('file_sign')
+                                <span class="text-danger text-message-validation">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+
                     </div>
                 </div>
-                <div class="col-md-2">
-
-                </div>
-            </div>
 
 
-            <button wire:click="$emit('beforeAproveViaticRequest')" name="next"
-                class="btn bg-secundary btn-sm action-button">Enviar</button>
-            <a href="{{ route('viatic.pdf', $viaticRequest->id) }}"
-                class="btn bg-primary btn-sm action-button">impirmir</a>
-            {{-- <input type="button" name="previous" class="btn previous action-button-previous" value="Rechazar" /> --}}
+                <button type="submit" name="next" class="btn bg-secundary btn-sm action-button">Enviar</button>
+                <a href="{{ route('viatic.pdf', $viaticRequest->id) }}"
+                    class="btn bg-primary btn-sm action-button">impirmir</a>
+                {{-- <input type="button" name="previous" class="btn previous action-button-previous" value="Rechazar" /> --}}
+            </form>
+
         </fieldset>
     </div>
 </div>
 @push('js')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Livewire.on('response', function(status, route) {
+            if (status) {
+                Swal.fire(
+                    "Solicitud Enviada!",
+                    'Se Envio correctamente',
+                    'success'
+                )
+                window.location.replace(route);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No se pudo establecer la conexión',
+                })
+            }
+        });
+    </script>
 @endpush
