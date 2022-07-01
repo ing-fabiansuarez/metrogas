@@ -280,33 +280,12 @@
 
             <button wire:click="$emit('beforeAproveViaticRequest')" name="next"
                 class="btn bg-secundary btn-sm action-button">Enviar</button>
-            <button class="btn bg-primary btn-sm action-button">impirmir</button>
+            <a href="{{ route('viatic.pdf', $viaticRequest->id) }}"
+                class="btn bg-primary btn-sm action-button">impirmir</a>
             {{-- <input type="button" name="previous" class="btn previous action-button-previous" value="Rechazar" /> --}}
         </fieldset>
     </div>
 </div>
 @push('js')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        $(document).ready(function() {
-
-        });
-        document.querySelector("#btnImprimir").addEventListener("click", function() {
-            var div = document.querySelector("#imprimible");
-            imprimirElemento(div);
-        });
-
-        function imprimirElemento(elemento) {
-            var ventana = window.open('', 'PRINT', 'height=400,width=600');
-            ventana.document.write('<html><head><title>' + document.title + '</title>');
-            ventana.document.write('</head><body >');
-            ventana.document.write(elemento.innerHTML);
-            ventana.document.write('</body></html>');
-            ventana.document.close();
-            ventana.focus();
-            ventana.print();
-            ventana.close();
-            return true;
-        }
-    </script>
 @endpush

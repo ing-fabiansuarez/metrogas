@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Enums\EStateRequest;
 use App\Models\ViaticRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use PDF;
 
 class ViaticController extends Controller
 {
@@ -102,5 +104,25 @@ class ViaticController extends Controller
     public function destroy(ViaticRequest $viaticRequest)
     {
         //
+    }
+
+    public function pdf($id)
+    {
+        $viaticRequest = ViaticRequest::find($id);
+        if (isset($viaticRequest)) {
+            switch ($viaticRequest->sw_state) {
+                case EStateRequest::APROVED->getId(): //solo va imprimir si esta en estado aprobado
+
+                    $pdf = App::make('dompdf.wrapper');
+                    $pdf->loadView('pdf.viatic-request.viatic-request', compact('viaticRequest'));
+                    return $pdf->stream();
+                    /* return view('pdf.viatic-request.viatic-request', compact('viaticRequest')); */
+                    break;
+            }
+            echo "EXITE";
+            return;
+        }
+        echo "NO EXISTE";
+        return;
     }
 }

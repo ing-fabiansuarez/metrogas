@@ -179,6 +179,7 @@ return [
          * Inyeccion del Servicio para acceder al Directorio Activo
          */
         Adldap\Laravel\AdldapServiceProvider::class,
+    
     ],
 
     /*
@@ -235,7 +236,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         //alias para utilizarlo para recuperar las credeciales del directorio activo
-        'Adldap' => Adldap\Laravel\Facades\Adldap::class
+        'Adldap' => Adldap\Laravel\Facades\Adldap::class,
+
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+
 
     ],
 
