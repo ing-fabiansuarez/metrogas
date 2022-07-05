@@ -16,6 +16,11 @@ class ViaticRequest extends Model
         return $this->hasMany(ViaticRequestsSitesDetalle::class, 'viatic_request_id', 'id');
     }
 
+    public function observations()
+    {
+        return $this->hasMany(ObservationViaticModel::class, 'viatic_request_id', 'id');
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'request_by', 'id');
@@ -26,6 +31,12 @@ class ViaticRequest extends Model
     public function otherExpenses()
     {
         return $this->belongsToMany(OtherExpense::class, 'other_expense_viatic_request', 'viatic_request_id', 'other_expense_id')->withPivot('value')->withTimestamps();
+    }
+
+    //muchos a muchos otros items
+    public function otherItems()
+    {
+        return $this->belongsToMany(OtherItem::class, 'other_item_viatic_request', 'viatic_request_id', 'other_item_id')->withTimestamps();
     }
 
     public function getNameState()

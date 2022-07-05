@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\ProcessViaticRequest;
 
 use App\Enums\EStateRequest;
+use App\Models\ObservationViaticModel;
 use App\Models\OtherExpense;
 use App\Models\ViaticRequest;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,12 @@ class AproveBoss extends Component
     public $listOtherExpenses;
     public $tipo_otro_gasto;
     public $cantidad_otro_gasto;
+
+    /** Otros Items */
+    public $gestion = [];
+
+    //observacion
+    public $observation;
 
     //total de todo el anticipo
     public $totalAnticipo;
@@ -114,6 +121,20 @@ class AproveBoss extends Component
                 $this->viaticRequest->otherExpenses()->attach([
                     $other['tipo_otro_gasto'] => ['value' => $other['cantidad_otro_gasto']]
                 ]);
+            }
+            //se guardan los otros items
+            foreach ($this->gestion as $item) {
+                $this->viaticRequest->otherItems()->attach([
+                    $item
+                ]);
+            }
+            //se guarda la observacion
+            if (!empty($this->observation)) {
+                $obs = new ObservationViaticModel();
+                $obs->message = $this->observation;
+                $obs->create_by = auth()->user()->id;
+                $obs->viatic_request_id = $this->viaticRequest->id;
+                $obs->save();
             }
 
             $this->emit('responseAprove', true, route('viatic.show', $this->viaticRequest->id));

@@ -37,8 +37,35 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('dashboard');
 
+	//MANTENIMIENTOS
 
-	Route::get('menu-mantenimientos', [MaintenanceController::class, 'menu'])->name('menu-mainten');
+
+	Route::prefix('mantenimientos')->group(function () {
+		//Menu dle mantenimiento
+		Route::get('/', [MaintenanceController::class, 'menu'])->name('menu-mainten');
+		//SITIOS DESTINO
+		Route::get('sitios-de-destino', function () {
+			return view('livewire.destination-site.index');
+		})->name('destinationsite.index');
+
+		//Sitios Origen
+		Route::get('sitios-de-origen', function () {
+			return view('livewire.origin-site.index');
+		})->name('originsite.index');
+
+		//OTROS GASTOS
+		Route::get('otros-gastos', function () {
+			return view('livewire.other-expense.index');
+		})->name('otherexpense.index');
+
+		//otros items para la gestion
+		Route::get('otros-items', function () {
+			return view('livewire.other-item.index');
+		})->name('otheritem.index');
+	});
+
+
+
 
 	//USUARIOS
 	Route::get('usuarios', [UserController::class, 'index'])->name('user.index');
@@ -49,20 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
 	//CARGOS
 	Route::get('cargos', [JobtitleController::class, 'index'])->name('jobtitle.index');
 
-	//SITIOS DESTINO
-	Route::get('sitios-de-destino', function () {
-		return view('livewire.destination-site.index');
-	})->name('destinationsite.index');
 
-	//Sitios Origen
-	Route::get('sitios-de-origen', function () {
-		return view('livewire.origin-site.index');
-	})->name('originsite.index');
-
-	//OTROS GASTOS
-	Route::get('otros-gastos', function () {
-		return view('livewire.other-expense.index');
-	})->name('otherexpense.index');
 
 	//Viaticios
 	Route::get('solicitud-viaticos/create', [ViaticController::class, 'create'])->name('viatic.create');

@@ -39,12 +39,14 @@
                     </div>
 
                 </div>
+                {{-- justificacion --}}
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">{{ __('forms.viatic_request.justificacion') }}</label>
                     <textarea class="form-control form-control-sm" rows="3"
                         placeholder="{{ __('forms.viatic_request.justificacion.placeholder') }}" disabled>{{ $viaticRequest->justification }}</textarea>
                 </div>
 
+                {{-- informacion sobre la comision --}}
                 <div class="table-responsive p-0">
                     <label for="exampleFormControlTextarea1">{{ __('messages.information_about_comision') }}</label>
                     <div class="card bg-gray-100">
@@ -119,6 +121,8 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- tarifas --}}
                 <div class="table-responsive p-0">
                     <label for="exampleFormControlTextarea1">{{ __('messages.rates') }}</label>
 
@@ -293,6 +297,25 @@
                         </span>
                     @enderror
                 </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        {{-- Gestion --}}
+                        <div class="form-group">
+                            <label>Gestión</label>
+                            <x-selects.other-items />
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        {{-- Observacion --}}
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Observación</label>
+                            <textarea wire:model="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <button wire:click="$emit('beforeAproveViaticRequest')" name="next"
                 class="btn bg-secundary btn-sm action-button">Aprobar</button>
@@ -300,7 +323,11 @@
         </fieldset>
     </div>
 </div>
+@push('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endpush
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         Livewire.on('beforeAproveViaticRequest', function() {
@@ -334,6 +361,14 @@
                     text: 'No se pudo establecer la conexión',
                 })
             }
+        });
+    </script>
+    <script>
+        document.addEventListener('livewire:load', function() {
+            $('.js-example-basic-multiple').select2();
+            $('.js-example-basic-multiple').on('change', function() {
+                @this.set('gestion', $(this).val());
+            });
         });
     </script>
 @endpush

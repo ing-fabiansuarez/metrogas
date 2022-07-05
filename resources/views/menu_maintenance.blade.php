@@ -46,6 +46,8 @@
                                 Origen</a>
                             <a href="{{ route('otherexpense.index') }}"
                                 class="list-group-item list-group-item-action">Otros Gastos</a>
+                            <a href="{{ route('otheritem.index') }}" class="list-group-item list-group-item-action">Items
+                                Gestión</a>
                         </div>
 
                     </div>
