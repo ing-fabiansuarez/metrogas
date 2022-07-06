@@ -275,7 +275,7 @@
             </td>
         </tr>
         <tr>
-            <td style="text-align: justify">
+            <td style="text-align: justify; line-height: 13px">
                 Declaro haber recibido de Metrogas S.A. E.S.P. a título Anticipo de Gastos de Viaje, el monto aquí
                 indicado, me comprometo a legalizar los gastos correspondientes y presentar los soportes que sustenten
                 dichos gastos en un máximo de 3 días habiles después del viaje conforme al procedimiento de anticipos de

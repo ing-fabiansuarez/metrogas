@@ -123,7 +123,7 @@ class ViaticController extends Controller
                 case EStateRequest::APROVED->getId(): //solo va imprimir si esta en estado aprobado
 
                     $pdf = App::make('dompdf.wrapper');
-                    $pdf->loadView('pdf.viatic-request.viatic-request', compact('viaticRequest'));
+                    $pdf->loadView('pdf.viatic-request.viatic-request', compact('viaticRequest'))->setPaper('letter','portrait');
                     return $pdf->stream();
                     /* return view('pdf.viatic-request.viatic-request', compact('viaticRequest')); */
                     break;

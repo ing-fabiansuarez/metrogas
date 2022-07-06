@@ -22,8 +22,11 @@ return new class extends Migration
             $table->foreign("request_by")
                 ->references("id")
                 ->on("users");
-                
+
             $table->integer('sw_state');
+
+            $table->string('url_aceptation')->nullable();
+
             $table->timestamps();
         });
     }

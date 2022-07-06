@@ -262,28 +262,94 @@
                     @enderror
                 </div>
 
+                {{-- gestion y observaciones --}}
+                <div class="row mt-3">
+                    <div class="col-md-3">
+                        {{-- Gestion --}}
+                        <label class="mb-2">Gestión</label>
+                        <ul class="list-group">
+                            @foreach ($viaticRequest->otherItems as $item)
+                                <li style="color: black;font-size: 0.8rem" class="list-group-item">
+                                    {{ $item->name }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        {{-- Observacion --}}
+                        <label class="mb-2">Observaciones</label>
+                        @foreach ($viaticRequest->observations as $obs)
+                            <div class="card bg-gray-200">
+                                <div class="card-body p-3">
+                                    <p style="font-size: 0.8rem" class="card-description mb-1">
+                                        {{ $obs->message }}
+                                    </p>
+                                    <div class="author align-items-center">
+                                        <div class="avatar shadow mx-2">
+                                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                                y="0px" viewBox="0 0 488.4 488.4"
+                                                style="enable-background:new 0 0 488.4 488.4;" xml:space="preserve">
+                                                <g>
+                                                    <g>
+                                                        <path
+                                                            d="M416.2,73.398h-65.5c-39.9,0-72.2,32.3-72.2,72.2c0,31.9,20.7,58.9,49.4,68.5v34.4c0,3.2,3.9,4.8,6.1,2.5l33.2-33.2h49
+                                                    c39.9,0,72.2-32.3,72.2-72.2C488.4,105.798,456,73.398,416.2,73.398z M362.7,154.598h-17.9v-17.9h17.9V154.598z M392.4,154.598
+                                                    h-17.9v-17.9h17.9V154.598z M422,154.598h-17.9v-17.9H422V154.598z" />
+                                                        <path
+                                                            d="M329.1,347.598c-43.5-35.8-90.5-59.6-100.1-64.2c-1.1-0.5-1.7-1.6-1.7-2.8v-33.2c5.1-8.8,8.4-18.1,9.7-26.6
+                                                    c3.7-0.3,8.6-5.5,13.9-24.1c6.8-23.9,0.5-28.7-5.7-28.7c0.6-2,1.1-4.1,1.4-6.1c11-65.9-21.5-68.2-21.5-68.2s-5.4-10.3-19.5-18.2
+                                                    c-9.5-5.6-22.7-10-40.1-8.5c-5.6,0.3-11,1.4-16,3l0,0c-6.4,2.2-12.3,5.3-17.6,9c-6.5,4.1-12.7,9.2-18.1,15
+                                                    c-8.6,8.8-16.2,20.1-19.6,34.3c-2.8,10.6-2.2,21.6,0.2,33.5l0,0c0.4,2,0.9,4.1,1.4,6.1c-6.1,0.1-12.1,5.1-5.4,28.6
+                                                    c5.3,18.6,10.2,23.8,13.9,24.1c1.3,8.4,4.6,17.7,9.7,26.6v33.2c0,1.2-0.7,2.3-1.7,2.8c-9.5,4.7-56.5,28.4-100.1,64.2
+                                                    c-7.8,6.4-12.2,16.1-12.2,26.2v48.1h341.5v-48.1C341.3,363.698,336.9,354.098,329.1,347.598z" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+
+                                        </div>
+                                        <div class="name ps-1">
+                                            <span style="font-size: 0.7rem">{{ $obs->createBy->name }}</span>
+                                            <div style="font-size: 0.7rem" class="stats">
+                                                <small>{{ $obs->createBy->jobtitle->name }}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        @endforeach
+                        <br>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Tu observación</label>
+                            <textarea wire:model="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-6">
-                        <a target="_blank" href="{{ route('viatic.pdf', $viaticRequest->id) }}"
+                        <a target="_blank" href="{{ Storage::url($viaticRequest->url_aceptation) }}"
                             style="color: white" type="button" class="btn bg-secundary btn-sm">Descargar
                             Anticipo</a>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="table-responsive p-0">
-                            <label for="exampleFormControlTextarea1">TESORERIA</label>
+                            <label for="exampleFormControlTextarea1">SOPORTES</label>
                             <div class="card bg-gray-100">
                                 <div class="card-body p-2">
+
                                     <table class="table table-hover table-bordered align-items-center mb-0">
                                         <thead>
                                             <tr>
-                                                <th></th>
-
+                                                <th>
+                                                    Id
+                                                </th>
                                                 <th
                                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    Nombre Soporte
+                                                    Creado Por
                                                 </th>
                                                 <th
                                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -297,30 +363,34 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($viaticRequest->sites as $index => $site)
+
+                                            @foreach ($supports as $support)
                                                 <tr>
                                                     <td>
                                                         <span class="text-secondary text-xs">
-                                                            {{ $index + 1 }}
+                                                            {{ $support->id }}
                                                         </span>
                                                     </td>
                                                     <td class="text-center">
                                                         <span class="text-secondary text-xs">
-                                                            Soporte del portal.jpg
+                                                            {{ $support->createdBy->name }}
+                                                            <br>
+                                                            <b> {{ $support->createdBy->jobtitle->name }}</b>
                                                         </span>
                                                     </td>
                                                     <td class="text-center">
                                                         <span class="text-secondary text-xs">
-                                                            Evidencia Portal Bancario
+                                                            {{ $support->observation }}
                                                         </span>
                                                     </td>
 
                                                     <td class="text-center">
-                                                        <a>
+                                                        <a target="_blank"
+                                                            href="{{ Storage::url($support->url) }}">
                                                             <i
                                                                 class="cursor-pointer fas fa-download text-secondary"></i>
                                                         </a>
-                                                        <a>
+                                                        <a wire:click="$emit('deleteSupport',{{ $support->id }})">
                                                             <i style="color: red"
                                                                 class="cursor-pointer fas fa-trash "></i>
                                                         </a>
@@ -328,130 +398,52 @@
                                                 </tr>
                                             @endforeach
                                             <tr>
-                                                <td>
 
+                                                <td>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="form-group">
-                                                        <input class="form-control form-control-sm pt-1"
-                                                            type="file" accept=".pdf,.jpg,.png" />
-                                                        {{-- @error('file_sign')
+                                                        <input wire:model.defer="newSupportFile"
+                                                            class="form-control form-control-sm pt-1" type="file"
+                                                            accept="image/*" />
+                                                        @error('newSupportFile')
                                                             <span class="text-danger text-message-validation">
                                                                 {{ $message }}
                                                             </span>
-                                                        @enderror --}}
+                                                        @enderror
                                                     </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="input-group input-group-sm">
-                                                        <input type="text" class="form-control input-control-sm"
+                                                        <input wire:model.defer="newSupportObs" type="text"
+                                                            class="form-control input-control-sm"
                                                             placeholder="Observación">
                                                     </div>
+                                                    @error('newSupportObs')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
                                                 </td>
                                                 <td class="text-center">
-                                                    <a>
+                                                    <button wire:click="addSupport" style="border: white">
                                                         <i style="color: #b2ca01"
                                                             class="cursor-pointer fas fa-upload"></i>
-                                                    </a>
+                                                    </button>
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                    @error('supportss')
+                                        <span class="text-danger text-message-validation">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="table-responsive p-0">
-                            <label for="exampleFormControlTextarea1">DIRECCIÓN FINANCIERA</label>
-                            <div class="card bg-gray-100">
-                                <div class="card-body p-2">
-                                    <table class="table table-hover table-bordered align-items-center mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
 
-                                                <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    Nombre Soporte
-                                                </th>
-                                                <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    Observacion
-                                                </th>
-                                                <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                                </th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($viaticRequest->sites as $index => $site)
-                                                <tr>
-                                                    <td>
-                                                        <span class="text-secondary text-xs">
-                                                            {{ $index + 1 }}
-                                                        </span>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="text-secondary text-xs">
-                                                            consignacion.pdf
-                                                        </span>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="text-secondary text-xs">
-                                                            Soporte de consignación
-                                                        </span>
-                                                    </td>
-
-                                                    <td class="text-center">
-                                                        <a>
-                                                            <i
-                                                                class="cursor-pointer fas fa-download text-secondary"></i>
-                                                        </a>
-                                                        <a>
-                                                            <i style="color: red"
-                                                                class="cursor-pointer fas fa-trash "></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            <tr>
-                                                <td>
-
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="form-group">
-                                                        <input class="form-control form-control-sm pt-1"
-                                                            type="file" accept=".pdf,.jpg,.png" />
-                                                        {{-- @error('file_sign')
-                                                            <span class="text-danger text-message-validation">
-                                                                {{ $message }}
-                                                            </span>
-                                                        @enderror --}}
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="input-group input-group-sm">
-                                                        <input type="text" class="form-control input-control-sm"
-                                                            placeholder="Observación">
-                                                    </div>
-                                                </td>
-
-                                                <td class="text-center">
-                                                    <a>
-                                                        <i style="color: #b2ca01"
-                                                            class="cursor-pointer fas fa-upload"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
             </div>
@@ -500,6 +492,45 @@
                     text: 'No se pudo establecer la conexión',
                 })
             }
+        });
+        Livewire.on('responseUpload', function(status) {
+            if (status) {
+                Swal.fire(
+                    "Se subio el archivo correctamente!",
+                    'Se subio correctamente',
+                    'success'
+                )
+                window.location.replace(route);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No se pudo establecer la conexión',
+                })
+            }
+        });
+
+        Livewire.on('deleteSupport', objId => {
+            Swal.fire({
+                title: '{{ __('forms.message.are_you_sure') }}',
+                text: '{{ __('forms.message.before_delete') }}',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '{{ __('forms.yes_deleteled') }}',
+                cancelButtonText: '{{ __('forms.close') }}',
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    Livewire.emitTo('process-viatic-request.supports', 'destroySupport', objId);
+                    Swal.fire(
+                        '{{ __('forms.deleted') }}',
+                        '{{ __('forms.message.delete') }}',
+                        'success'
+                    )
+                }
+            })
         });
     </script>
 @endpush

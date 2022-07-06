@@ -11,6 +11,10 @@ class ViaticRequest extends Model
 {
     use HasFactory;
 
+    public function supports(){
+        return $this->hasMany(SupportsViaticRequests::class, 'viatic_request_id', 'id');
+    }
+
     public function sites()
     {
         return $this->hasMany(ViaticRequestsSitesDetalle::class, 'viatic_request_id', 'id');
