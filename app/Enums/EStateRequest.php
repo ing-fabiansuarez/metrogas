@@ -11,6 +11,7 @@ enum EStateRequest
     case ACCEPTED_EMPLOYEE;
     case APROVED_GENERAL;
     case CLOSE;
+    case CANCELED;
 
     public function getId(): int
     {
@@ -20,6 +21,7 @@ enum EStateRequest
             EStateRequest::ACCEPTED_EMPLOYEE => 3,
             EStateRequest::APROVED_GENERAL => 4,
             EStateRequest::CLOSE => 5,
+            EStateRequest::CANCELED => 6,
         };
     }
 
@@ -31,6 +33,7 @@ enum EStateRequest
             EStateRequest::ACCEPTED_EMPLOYEE => 'FIRMADO POR EMPLEADO',
             EStateRequest::APROVED_GENERAL => 'APROBADO GENERAL',
             EStateRequest::CLOSE => 'CERRADO',
+            EStateRequest::CANCELED => 'CANCELADA'
         };
     }
 

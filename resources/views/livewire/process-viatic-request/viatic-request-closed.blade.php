@@ -333,7 +333,6 @@
                             </div>
                             <br>
                         @endforeach
-                        <br>
                     </div>
                 </div>
 
@@ -346,20 +345,23 @@
                     </div>
                 </div>
 
+                {{-- soportes --}}
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="table-responsive p-0">
-                            <label for="exampleFormControlTextarea1">TESORERIA</label>
+                            <label for="exampleFormControlTextarea1">SOPORTES</label>
                             <div class="card bg-gray-100">
                                 <div class="card-body p-2">
+
                                     <table class="table table-hover table-bordered align-items-center mb-0">
                                         <thead>
                                             <tr>
-                                                <th></th>
-
+                                                <th>
+                                                    Id
+                                                </th>
                                                 <th
                                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    Nombre Soporte
+                                                    Creado Por
                                                 </th>
                                                 <th
                                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -373,106 +375,43 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($viaticRequest->sites as $index => $site)
+
+                                            @foreach ($viaticRequest->supports as $support)
                                                 <tr>
                                                     <td>
                                                         <span class="text-secondary text-xs">
-                                                            {{ $index + 1 }}
+                                                            {{ $support->id }}
                                                         </span>
                                                     </td>
                                                     <td class="text-center">
                                                         <span class="text-secondary text-xs">
-                                                            Soporte del portal.jpg
+                                                            {{ $support->createdBy->name }}
+                                                            <br>
+                                                            <b> {{ $support->createdBy->jobtitle->name }}</b>
                                                         </span>
                                                     </td>
                                                     <td class="text-center">
                                                         <span class="text-secondary text-xs">
-                                                            Evidencia Portal Bancario
+                                                            {{ $support->observation }}
                                                         </span>
                                                     </td>
 
                                                     <td class="text-center">
-                                                        <a>
+                                                        <a target="_blank"
+                                                            href="{{ Storage::url($support->url) }}">
                                                             <i
                                                                 class="cursor-pointer fas fa-download text-secondary"></i>
-                                                        </a>
-                                                        <a>
-                                                            <i style="color: red"
-                                                                class="cursor-pointer fas fa-trash "></i>
                                                         </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
-
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="table-responsive p-0">
-                            <label for="exampleFormControlTextarea1">DIRECCIÓN FINANCIERA</label>
-                            <div class="card bg-gray-100">
-                                <div class="card-body p-2">
-                                    <table class="table table-hover table-bordered align-items-center mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
 
-                                                <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    Nombre Soporte
-                                                </th>
-                                                <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    Observacion
-                                                </th>
-                                                <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                                </th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($viaticRequest->sites as $index => $site)
-                                                <tr>
-                                                    <td>
-                                                        <span class="text-secondary text-xs">
-                                                            {{ $index + 1 }}
-                                                        </span>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="text-secondary text-xs">
-                                                            consignacion.pdf
-                                                        </span>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <span class="text-secondary text-xs">
-                                                            Soporte de consignación
-                                                        </span>
-                                                    </td>
-
-                                                    <td class="text-center">
-                                                        <a>
-                                                            <i
-                                                                class="cursor-pointer fas fa-download text-secondary"></i>
-                                                        </a>
-                                                        <a>
-                                                            <i style="color: red"
-                                                                class="cursor-pointer fas fa-trash "></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
             </div>

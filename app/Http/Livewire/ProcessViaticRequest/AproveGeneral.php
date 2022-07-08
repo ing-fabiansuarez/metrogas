@@ -14,9 +14,12 @@ class AproveGeneral extends Component
 
     public $observation;
 
+    public $obsCanceled;
+
     /** Listeners */
     protected $listeners = [
-        'aproveViaticRequest' => 'aproveViaticRequest'
+        'aproveViaticRequest' => 'aproveViaticRequest',
+        'canceledRequest'
     ];
 
     public function mount(ViaticRequest $viaticRequest)
@@ -51,5 +54,28 @@ class AproveGeneral extends Component
             DB::rollBack();
             $this->emit('responseAprove', false, null);
         }
+    }
+
+    public function canceledRequest()
+    {
+        //comprobar si esta autorizado para cancelar la autorizacion
+
+        //validacion de que llegue la observacion
+        $this->validate([
+            'obsCanceled' => 'required'
+        ]);
+
+        DB::beginTransaction();
+        //Se cambia el estado
+        $this->viaticRequest->sw_state = EStateRequest::CANCELED->getId();
+        $this->viaticRequest->save();
+        //Se guarda la observacion de la cancelación
+        $obs = new ObservationViaticModel();
+        $obs->message = "Se ANULÓ la solicitud porque... " . $this->obsCanceled;
+        $obs->create_by = auth()->user()->id;
+        $obs->viatic_request_id = $this->viaticRequest->id;
+        $obs->save();
+        $this->emit('responseCanceled', true, route('viatic.show', $this->viaticRequest->id));
+        DB::commit();
     }
 }

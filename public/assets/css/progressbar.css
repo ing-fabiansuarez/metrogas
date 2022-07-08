@@ -170,6 +170,11 @@ html {
     content: "\f00c";
 }
 
+#progressbar #anulada:before {
+    font-family: FontAwesome;
+    content: "\f00d";
+}
+
 
 /*Icon ProgressBar before any progress*/
 #progressbar li:before {

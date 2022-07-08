@@ -71,6 +71,9 @@ class ViaticController extends Controller
                 case EStateRequest::CLOSE->getId():
                     return view('viatic.viatic-request.viatic_request_closed', compact('viaticRequest'));
                     break;
+                case EStateRequest::CANCELED->getId():
+                    return view('viatic.viatic-request.viatic_request_canceled', compact('viaticRequest'));
+                    break;
             }
 
             echo "EXITE";
@@ -123,7 +126,7 @@ class ViaticController extends Controller
                 case EStateRequest::APROVED->getId(): //solo va imprimir si esta en estado aprobado
 
                     $pdf = App::make('dompdf.wrapper');
-                    $pdf->loadView('pdf.viatic-request.viatic-request', compact('viaticRequest'))->setPaper('letter','portrait');
+                    $pdf->loadView('pdf.viatic-request.viatic-request', compact('viaticRequest'))->setPaper('letter', 'portrait');
                     return $pdf->stream();
                     /* return view('pdf.viatic-request.viatic-request', compact('viaticRequest')); */
                     break;
