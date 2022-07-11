@@ -62,10 +62,11 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('otros-items', function () {
 			return view('livewire.other-item.index');
 		})->name('otheritem.index');
+
+		Route::get('tipo-identificacion', function () {
+			return view('livewire.type-identification.index');
+		})->name('typeidenfification.index');
 	});
-
-
-
 
 	//USUARIOS
 	Route::get('usuarios', [UserController::class, 'index'])->name('user.index');
@@ -76,13 +77,18 @@ Route::group(['middleware' => 'auth'], function () {
 	//CARGOS
 	Route::get('cargos', [JobtitleController::class, 'index'])->name('jobtitle.index');
 
-
-
-	//Viaticios
+	//VIATICOS
+	//solicitud de viaticos
 	Route::get('solicitud-viaticos/create', [ViaticController::class, 'create'])->name('viatic.create');
 	Route::get('solicitud-viaticos/{id}', [ViaticController::class, 'show'])->name('viatic.show');
 	Route::get('solicitud-viaticos', [ViaticController::class, 'index'])->name('viatic.index');
 	Route::get('solicitud-viaticos/{id}/pdf', [ViaticController::class, 'pdf'])->name('viatic.pdf');
+	//legalizaciones
+
+	Route::get('legalizaciones', [ViaticController::class, 'indexlegalization'])->name('legalization.index');
+	Route::get('legalizaciones/create', [ViaticController::class, 'createlegalization'])->name('legalization.create');
+	Route::post('legalizaciones/create', [ViaticController::class, 'storelegalization'])->name('legalization.store');
+	Route::get('legalizaciones/{id}', [ViaticController::class, 'showlegalization'])->name('legalization.show');
 
 	/* 
 	Route::get('billing', function () {

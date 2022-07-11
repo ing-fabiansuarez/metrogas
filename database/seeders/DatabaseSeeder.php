@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             JobtitleSeeder::class,
             RolSeeder::class,
             //UserSeeder::class,
-            SitesSeeder::class
+            SitesSeeder::class,
+            TypeIdentificationSeeder::class
         ]);
     }
 }
