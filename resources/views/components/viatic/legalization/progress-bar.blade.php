@@ -21,6 +21,7 @@
             class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0"
             aria-valuemax="100"></div>
     </div>
+
 </div>
 @push('css')
     <link href="{{ asset('assets/css/progressbar.css') }}" rel="stylesheet" />

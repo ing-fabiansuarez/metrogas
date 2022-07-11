@@ -11,7 +11,8 @@ class ViaticRequest extends Model
 {
     use HasFactory;
 
-    public function supports(){
+    public function supports()
+    {
         return $this->hasMany(SupportsViaticRequests::class, 'viatic_request_id', 'id');
     }
 
@@ -46,6 +47,11 @@ class ViaticRequest extends Model
     public function getNameState()
     {
         return EStateRequest::from($this->sw_state)->getName();
+    }
+
+    public function stateColor()
+    {
+        return EStateRequest::from($this->sw_state)->getColor();
     }
 
     //calcula el total con sitios y gatos adicionales y retorna el total de los viaticos

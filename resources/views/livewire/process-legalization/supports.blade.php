@@ -17,6 +17,19 @@
                 </div>
             </div>
 
+            <div class="row mb-3">
+                <div class="col-12 text-center">
+                    <div>
+                        <span style="font-size: 1rem;color:black;"> <b>Legalización N°
+                                {{ $legalization->id }}</b></span>
+                    </div>
+                    <br>
+                    <span style="font-size: 1rem">{{ $legalization->user->name }}</span><br>
+                    <span style="font-size: 0.8rem">{{ $legalization->user->jobtitle->name }}</span><br>
+                    <span style="font-size: 0.8rem">NIVEL {{ $legalization->user->jobtitle->level }}</span>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label>{{ __('forms.viatic_request.justificacion') }}</label>
                 <textarea class="form-control form-control-sm" rows="3" disabled>{{ $legalization->justification }}</textarea>
@@ -41,16 +54,16 @@
                             <label class="btn btn-outline-primary" for="btnradio2">Reintegro</label>
                         </div>
 
-                        @if (session('origen'))
-                            <span class="text-danger text-message-validation">
-                                {{ session('origen') }}
-                            </span>
+                        <br>
+                        @if ($legalization->viatic_request_id != null)
+                            <a target="_blank" href="{{ route('viatic.show', $legalization->viatic_request_id) }}">
+                                Solicitud Anticipo N°
+                                {{ $legalization->viatic_request_id }}</a><br>
+                            Total Anticipo: $
+                            <p>{{ number_format($legalization->viaticRequest->getTotalViaticRequest()) }}</p>
                         @endif
-                        @error('origen')
-                            <span class="text-danger text-message-validation">
-                                {{ $message }}
-                            </span>
-                        @enderror
+                        <br>
+                        Total Legalización :<p id="totalLegalization"> $ {{ number_format($totalLegalization) }}</p>
 
                     </div>
                 </div>
@@ -201,8 +214,8 @@
 
                         <label>Razon Social / Nombre</label>
                         <div class="input-group input-group-sm">
-                            <input wire:model.defer="nombreEmpresa" type="text" class="form-control input-control-sm"
-                                placeholder="Nombre de la empresa">
+                            <input wire:model.defer="nombreEmpresa" type="text"
+                                class="form-control input-control-sm" placeholder="Nombre de la empresa">
                         </div>
                         @error('nombreEmpresa')
                             <span class="text-danger text-message-validation">
@@ -319,7 +332,7 @@
         });
         Livewire.on('beforeSend', function() {
             Swal.fire({
-                title: 'Total legalización: $ ' + {{ $legalization->calculateTotal() }},
+                title: 'Total legalización: ' + $('#totalLegalization').text(),
                 text: '¿Esta Seguro de enviar estos soportes?',
                 icon: 'warning',
                 showCancelButton: true,

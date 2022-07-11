@@ -86,6 +86,9 @@ class ViaticController extends Controller
 
     public function indexlegalization()
     {
+        return view('viatic.legalization.list_legalizations', [
+            'Legalizations' => Legalization::where('created_by', auth()->user()->id)->orderBy('id', 'desc')->get()
+        ]);
         return redirect()->route('legalization.create');
     }
 
@@ -138,6 +141,15 @@ class ViaticController extends Controller
             switch ($legalization->sw_state) {
                 case EStateLegalization::CREATED->getId():
                     return view('viatic.legalization.supports', compact('legalization'));
+                    break;
+                case EStateLegalization::SEND->getId():
+                    return view('viatic.legalization.aprove_boss', compact('legalization'));
+                    break;
+                case EStateLegalization::APROVE_BOSS->getId():
+                    return view('viatic.legalization.aprove_general', compact('legalization'));
+                    break;
+                case EStateLegalization::APROVE_GENERAL->getId():
+                    return view('viatic.legalization.completed', compact('legalization'));
                     break;
             }
             return;

@@ -32,8 +32,19 @@ enum EStateRequest
             EStateRequest::APROVED => 'APROBADO JEFE INM.',
             EStateRequest::ACCEPTED_EMPLOYEE => 'FIRMADO POR EMPLEADO',
             EStateRequest::APROVED_GENERAL => 'APROBADO GENERAL',
-            EStateRequest::CLOSE => 'CERRADO',
-            EStateRequest::CANCELED => 'CANCELADA'
+            EStateRequest::CLOSE => 'COMPLETA',
+            EStateRequest::CANCELED => 'ANULADA'
+        };
+    }
+    public function getColor(): string
+    {
+        return match ($this) {
+            EStateRequest::CREATED => 'bg-gradient-light',
+            EStateRequest::APROVED => 'bg-gradient-dark',
+            EStateRequest::ACCEPTED_EMPLOYEE => 'bg-gradient-info',
+            EStateRequest::APROVED_GENERAL => 'bg-gradient-warning',
+            EStateRequest::CLOSE => 'bg-gradient-success',
+            EStateRequest::CANCELED => 'bg-gradient-danger'
         };
     }
 

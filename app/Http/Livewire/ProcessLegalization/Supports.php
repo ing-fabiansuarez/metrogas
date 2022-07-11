@@ -25,6 +25,8 @@ class Supports extends Component
     public $descripcion;
     public $nombreEmpresa;
 
+    public $totalLegalization;
+
     /**Listeners */
     protected $listeners = [
         'saveSupport' => 'saveSupport',
@@ -35,13 +37,16 @@ class Supports extends Component
     public function mount($legalization)
     {
         $this->legalization = $legalization;
+        $this->totalLegalization =  $this->legalization->calculateTotal();
     }
+   
     public function render()
     {
+        $this->totalLegalization =  $this->legalization->calculateTotal();
         return view('livewire.process-legalization.supports', [
             'supports' => SupportsLegalization::latest()
                 ->where('legalization_id', $this->legalization->id)->get(),
-            'TypeIdentifications' => TypeIdentification::latest()->get()
+            'TypeIdentifications' => TypeIdentification::latest()->get(),
         ]);
     }
 
