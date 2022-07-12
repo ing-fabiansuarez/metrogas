@@ -19,4 +19,9 @@ class Jobtitle extends Model
     {
         return $this->belongsTo(Jobtitle::class, 'id_boss', 'id');
     }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'id_jobtitle', 'id');
+    }
 }

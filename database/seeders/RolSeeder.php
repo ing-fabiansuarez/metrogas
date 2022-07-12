@@ -17,11 +17,11 @@ class RolSeeder extends Seeder
     public function run()
     {
         //creacion de Roles
-        $roleAdmin = Role::create(['name' => 'Admin']);
-        $roleBasic = Role::create(['name' => 'Rol_basico']);
+        $roleAdmin = Role::create(['name' => 'Administrador']);
+        $roleBasic = Role::create(['name' => 'Rol Basico']);
 
-        //creacion de permisos y se le asocian los roles con el metodo syncRoles([])
-        Permission::create(['name' => 'home'])->syncRoles([$roleAdmin, $roleBasic]);
+        //SE CREO UN SOLO PERMISO PARA TODA LA CUESTION DE CONFIGURACION Y MANTENIMIENTOS
+        Permission::create(['name' => 'menu-mainten'])->syncRoles([$roleAdmin]);
 
         //Asignar permisos a un Rol
         $roleAdmin->permissions();

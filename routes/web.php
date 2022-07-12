@@ -15,8 +15,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ShowJobtitles;
+use App\Mail\ViaticRequestMaileable;
 use App\Models\ViaticRequest;
 use Illuminate\Contracts\Foundation\MaintenanceMode;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
 	//MANTENIMIENTOS
 
 
-	Route::prefix('mantenimientos')->group(function () {
+	Route::prefix('mantenimientos')->middleware('can:menu-mainten')->group(function () {
 		//Menu dle mantenimiento
 		Route::get('/', [MaintenanceController::class, 'menu'])->name('menu-mainten');
 		//SITIOS DESTINO
@@ -66,16 +68,21 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('tipo-identificacion', function () {
 			return view('livewire.type-identification.index');
 		})->name('typeidenfification.index');
+
+		//CARGOS
+		Route::get('cargos', [JobtitleController::class, 'index'])->name('jobtitle.index');
 	});
 
 	//USUARIOS
-	Route::get('usuarios', [UserController::class, 'index'])->name('user.index');
-	Route::get('usuarios/create', [UserController::class, 'create'])->name('user.create');
-	Route::post('usuarios/create', [UserController::class, 'searchUser'])->name('user.searchuser');
-	Route::post('usuarios', [UserController::class, 'store'])->name('user.store');
+	Route::prefix('usuarios')->middleware('can:menu-mainten')->group(function () {
+		Route::get('/', [UserController::class, 'index'])->name('user.index');
+		Route::get('/create', [UserController::class, 'create'])->name('user.create');
+		Route::post('/create', [UserController::class, 'searchUser'])->name('user.searchuser');
+		Route::post('/', [UserController::class, 'store'])->name('user.store');
+		Route::get('/{User}', [UserController::class, 'roles'])->name('user.roles');
+		Route::post('/{User}', [UserController::class, 'storeRoles'])->name('user.storeRoles');
+	});
 
-	//CARGOS
-	Route::get('cargos', [JobtitleController::class, 'index'])->name('jobtitle.index');
 
 	//VIATICOS
 	//solicitud de viaticos
@@ -124,6 +131,18 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
+
+
+	Route::get('/mail', function () {
+
+	/* 	$correo = new ViaticRequestMaileable(ViaticRequest::find(1));
+		$correo->subject("estamos activos");
+		Mail::to('fabian280999@gmail.com')->send($correo);
+		return "Mensaje enviado"; */
+
+		$viaticRequest = ViaticRequest::find(1);
+		return $viaticRequest->user->jobtitle->boss->users()->get();
+	});
 });
 
 

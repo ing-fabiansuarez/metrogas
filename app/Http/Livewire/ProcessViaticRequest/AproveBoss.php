@@ -3,10 +3,12 @@
 namespace App\Http\Livewire\ProcessViaticRequest;
 
 use App\Enums\EStateRequest;
+use App\Mail\ViaticRequestMaileable;
 use App\Models\ObservationViaticModel;
 use App\Models\OtherExpense;
 use App\Models\ViaticRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class AproveBoss extends Component
@@ -110,42 +112,57 @@ class AproveBoss extends Component
 
     public function aproveViaticRequest()
     {
-        try {
-            DB::beginTransaction();
-            //Se cambia el estado
-            $this->viaticRequest->sw_state = EStateRequest::APROVED->getId();
-            $this->viaticRequest->save();
-            //se guardan los detalles
-            foreach ($this->viaticRequest->sites as $site) {
-                $site->save();
-            }
-            //se guardan los otros gasto
-            foreach ($this->listOtherExpenses as $other) {
-                $this->viaticRequest->otherExpenses()->attach([
-                    $other['tipo_otro_gasto'] => ['value' => $other['cantidad_otro_gasto']]
-                ]);
-            }
-            //se guardan los otros items
-            foreach ($this->gestion as $item) {
-                $this->viaticRequest->otherItems()->attach([
-                    $item
-                ]);
-            }
-            //se guarda la observacion
-            if (!empty($this->observation)) {
-                $obs = new ObservationViaticModel();
-                $obs->message = $this->observation;
-                $obs->create_by = auth()->user()->id;
-                $obs->viatic_request_id = $this->viaticRequest->id;
-                $obs->save();
-            }
+        /* try { */
+        DB::beginTransaction();
+        //Se cambia el estado
+        $this->viaticRequest->sw_state = EStateRequest::APROVED->getId();
+        $this->viaticRequest->save();
+        //se guardan los detalles
+        foreach ($this->viaticRequest->sites as $site) {
+            $site->save();
+        }
+        //se guardan los otros gasto
+        foreach ($this->listOtherExpenses as $other) {
+            $this->viaticRequest->otherExpenses()->attach([
+                $other['tipo_otro_gasto'] => ['value' => $other['cantidad_otro_gasto']]
+            ]);
+        }
+        //se guardan los otros items
+        foreach ($this->gestion as $item) {
+            $this->viaticRequest->otherItems()->attach([
+                $item
+            ]);
+        }
+        //se guarda la observacion
+        if (!empty($this->observation)) {
+            $obs = new ObservationViaticModel();
+            $obs->message = $this->observation;
+            $obs->create_by = auth()->user()->id;
+            $obs->viatic_request_id = $this->viaticRequest->id;
+            $obs->save();
+        }
 
-            $this->emit('responseAprove', true, route('viatic.show', $this->viaticRequest->id));
-            DB::commit();
-        } catch (\Exception $e) {
+        /**CORREOS ELECTRONICOS */
+        //enviar el correo electronico de que se creo un viatico
+        $correo = new ViaticRequestMaileable($this->viaticRequest);
+        $correo->subject("Solicitud de Anticipo N° " . $this->viaticRequest->id . " fue aprobada. - " . $this->viaticRequest->getNameState());
+        $correosJefes = [];
+        foreach ($this->viaticRequest->user->jobtitle->boss->users()->get() as $user) {
+            array_push($correosJefes, $user->email_aux);
+        }
+        array_push($correosJefes, 'sandra.hernandez@metrogassaesp.com');
+
+        Mail::to($this->viaticRequest->user->email_aux)
+            ->cc($correosJefes)
+            ->queue($correo);
+        /**____________________FIN CORREOS ELECTRONICOS_________________ */
+
+        $this->emit('responseAprove', true, route('viatic.show', $this->viaticRequest->id));
+        DB::commit();
+        /* } catch (\Exception $e) {
             DB::rollBack();
             $this->emit('responseAprove', false, null);
-        }
+        } */
     }
 
     public function canceledRequest()
@@ -167,6 +184,22 @@ class AproveBoss extends Component
         $obs->create_by = auth()->user()->id;
         $obs->viatic_request_id = $this->viaticRequest->id;
         $obs->save();
+
+        /**CORREOS ELECTRONICOS */
+        //enviar el correo electronico de que se creo un viatico
+        $correo = new ViaticRequestMaileable($this->viaticRequest);
+        $correo->subject("Solicitud de Anticipo N° " . $this->viaticRequest->id . " fue ANULADA. - " . $this->viaticRequest->getNameState());
+        $correosJefes = [];
+        foreach ($this->viaticRequest->user->jobtitle->boss->users()->get() as $user) {
+            array_push($correosJefes, $user->email_aux);
+        }
+        array_push($correosJefes, 'sandra.hernandez@metrogassaesp.com');
+
+        Mail::to($this->viaticRequest->user->email_aux)
+            ->cc($correosJefes)
+            ->queue($correo);
+        /**____________________FIN CORREOS ELECTRONICOS_________________ */
+
         $this->emit('responseCanceled', true, route('viatic.show', $this->viaticRequest->id));
         DB::commit();
     }

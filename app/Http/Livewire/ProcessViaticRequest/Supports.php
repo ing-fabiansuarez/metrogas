@@ -3,10 +3,12 @@
 namespace App\Http\Livewire\ProcessViaticRequest;
 
 use App\Enums\EStateRequest;
+use App\Mail\ViaticRequestMaileable;
 use App\Models\ObservationViaticModel;
 use App\Models\SupportsViaticRequests;
 use App\Models\ViaticRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -64,6 +66,22 @@ class Supports extends Component
                 $obs->viatic_request_id = $this->viaticRequest->id;
                 $obs->save();
             }
+
+            /**CORREOS ELECTRONICOS */
+            //enviar el correo electronico de que se creo un viatico
+            $correo = new ViaticRequestMaileable($this->viaticRequest);
+            $correo->subject("Solicitud de Anticipo N° " . $this->viaticRequest->id . " fue COMPLETADA. - " . $this->viaticRequest->getNameState());
+            $correosJefes = [];
+            foreach ($this->viaticRequest->user->jobtitle->boss->users()->get() as $user) {
+                array_push($correosJefes, $user->email_aux);
+            }
+            array_push($correosJefes, 'sandra.hernandez@metrogassaesp.com');
+            //array_push($correosJefes, 'hugo.bonilla@metrogassaesp.com');
+
+            Mail::to($this->viaticRequest->user->email_aux)
+                ->cc($correosJefes)
+                ->queue($correo);
+            /**____________________FIN CORREOS ELECTRONICOS_________________ */
 
             $this->emit('responseAprove', true, route('viatic.show', $this->viaticRequest->id));
             DB::commit();

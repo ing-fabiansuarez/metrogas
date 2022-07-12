@@ -3,11 +3,13 @@
 namespace App\Http\Livewire\ProcessViaticRequest;
 
 use App\Enums\EStateRequest;
+use App\Mail\ViaticRequestMaileable;
 use App\Models\DestinationSite;
 use App\Models\OriginSite;
 use App\Models\ViaticRequest as ModelsViaticRequest;
 use App\Models\ViaticRequestsSitesDetalle;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class ViaticRequest extends Component
@@ -99,6 +101,22 @@ class ViaticRequest extends Component
             $newDetalle->viatic_request_id = $viaticRequest->id;
             $newDetalle->save();
         }
+
+        /**CORREOS ELECTRONICOS */
+        //enviar el correo electronico de que se creo un viatico
+        $correo = new ViaticRequestMaileable($viaticRequest);
+        $correo->subject("Nueva solicitud de Anticipo - " . $viaticRequest->getNameState());
+        $correosJefes = [];
+        foreach ($viaticRequest->user->jobtitle->boss->users()->get() as $user) {
+            array_push($correosJefes, $user->email_aux);
+        }
+        //array_push($correosJefes, 'sandra.hernandez@metrogassaesp.com');
+
+        Mail::to($viaticRequest->user->email_aux)
+            ->cc($correosJefes)
+            ->queue($correo);
+        /**____________________FIN CORREOS ELECTRONICOS_________________ */
+
         //mostrar el mensaje de que se creo correctamente
         $this->emit('requestSave', route('viatic.show', $viaticRequest->id));
 

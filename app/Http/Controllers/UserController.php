@@ -9,6 +9,7 @@ use App\Models\User;
 use Exception;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -59,5 +60,24 @@ class UserController extends Controller
     {
         $datos = request()->all();
         return response()->json($request);
+    }
+
+    public function roles($id)
+    {
+        $user = User::find($id);
+        return view('mtto.user.roles', [
+            'user' => $user,
+            'roles' => Role::all(),
+        ]);
+    }
+
+    public function storeRoles(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->roles()->sync($request->roles);
+        return redirect()->route('user.roles', $user->id)->with('msg', [
+            'class'=>'alert-success',
+            'body'=>'Se guardo correctamente!'
+        ]);
     }
 }

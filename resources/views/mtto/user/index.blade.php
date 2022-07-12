@@ -96,8 +96,8 @@
                                                     class="text-secondary text-xs font-weight-bold">{{ $user->created_at }}</span>
                                             </td>
                                             <td class="text-center">
-                                                <a href="#" class="mx-3" data-bs-toggle="tooltip"
-                                                    data-bs-original-title="Edit user">
+                                                <a href="{{ route('user.roles', $user->id) }}" class="mx-3"
+                                                    data-bs-toggle="tooltip" data-bs-original-title="Asignar Roles">
                                                     <i class="fas fa-user-edit text-secondary"></i>
                                                 </a>
 
