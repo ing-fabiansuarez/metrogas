@@ -16,6 +16,39 @@ class ViaticRequest extends Model
         return $this->hasMany(SupportsViaticRequests::class, 'viatic_request_id', 'id');
     }
 
+    public function canAproveBoss()
+    {
+        //estamos validando si podemos aprobar una solicitud
+        foreach ($this->bosses() as $user) {
+            if ($user->id == auth()->user()->id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function canAproveGeneral()
+    {
+        //aqui va la aprobacion por parte de la direccion financiera
+        if (auth()->user()->id == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public function canUploadSupports()
+    {
+        if (auth()->user()->id == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public function bosses()
+    {
+        return $this->user->jobtitle->boss->users()->get();
+    }
+
     public function sites()
     {
         return $this->hasMany(ViaticRequestsSitesDetalle::class, 'viatic_request_id', 'id');

@@ -323,10 +323,12 @@
                                 <br>
                             @endforeach
                             <br>
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Tu observación</label>
-                                <textarea wire:model="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
-                            </div>
+                            @if ($viaticRequest->canUploadSupports())
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Tu observación</label>
+                                    <textarea wire:model="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
+                                </div>
+                            @endif
                         </div>
                     </div>
 
@@ -338,131 +340,135 @@
                         </div>
                     </div>
 
-                    {{-- soportes --}}
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-responsive p-0">
-                                <label for="exampleFormControlTextarea1">SOPORTES</label>
-                                <div class="card bg-gray-100">
-                                    <div class="card-body p-2">
+                    @if ($viaticRequest->canUploadSupports())
+                        {{-- soportes --}}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive p-0">
+                                    <label for="exampleFormControlTextarea1">SOPORTES</label>
+                                    <div class="card bg-gray-100">
+                                        <div class="card-body p-2">
 
-                                        <table class="table table-hover table-bordered align-items-center mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        Id
-                                                    </th>
-                                                    <th
-                                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                        Creado Por
-                                                    </th>
-                                                    <th
-                                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                        Observacion
-                                                    </th>
-                                                    <th
-                                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-
-                                                    </th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                @foreach ($supports as $support)
+                                            <table class="table table-hover table-bordered align-items-center mb-0">
+                                                <thead>
                                                     <tr>
-                                                        <td>
-                                                            <span class="text-secondary text-xs">
-                                                                {{ $support->id }}
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="text-secondary text-xs">
-                                                                {{ $support->createdBy->name }}
-                                                                <br>
-                                                                <b> {{ $support->createdBy->jobtitle->name }}</b>
-                                                            </span>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <span class="text-secondary text-xs">
-                                                                {{ $support->observation }}
-                                                            </span>
-                                                        </td>
+                                                        <th>
+                                                            Id
+                                                        </th>
+                                                        <th
+                                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                            Creado Por
+                                                        </th>
+                                                        <th
+                                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                            Observacion
+                                                        </th>
+                                                        <th
+                                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
 
-                                                        <td class="text-center">
-                                                            <a target="_blank"
-                                                                href="{{ Storage::url($support->url) }}">
-                                                                <i
-                                                                    class="cursor-pointer fas fa-download text-secondary"></i>
-                                                            </a>
-                                                            <a
-                                                                wire:click="$emit('deleteSupport',{{ $support->id }})">
-                                                                <i style="color: red"
-                                                                    class="cursor-pointer fas fa-trash "></i>
-                                                            </a>
-                                                        </td>
+                                                        </th>
+
                                                     </tr>
-                                                @endforeach
-                                                <tr>
+                                                </thead>
+                                                <tbody>
 
-                                                    <td>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group">
-                                                            <input wire:model.defer="newSupportFile"
-                                                                class="form-control form-control-sm pt-1"
-                                                                type="file" accept="image/*" />
-                                                            @error('newSupportFile')
+                                                    @foreach ($supports as $support)
+                                                        <tr>
+                                                            <td>
+                                                                <span class="text-secondary text-xs">
+                                                                    {{ $support->id }}
+                                                                </span>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <span class="text-secondary text-xs">
+                                                                    {{ $support->createdBy->name }}
+                                                                    <br>
+                                                                    <b> {{ $support->createdBy->jobtitle->name }}</b>
+                                                                </span>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <span class="text-secondary text-xs">
+                                                                    {{ $support->observation }}
+                                                                </span>
+                                                            </td>
+
+                                                            <td class="text-center">
+                                                                <a target="_blank"
+                                                                    href="{{ Storage::url($support->url) }}">
+                                                                    <i
+                                                                        class="cursor-pointer fas fa-download text-secondary"></i>
+                                                                </a>
+                                                                <a
+                                                                    wire:click="$emit('deleteSupport',{{ $support->id }})">
+                                                                    <i style="color: red"
+                                                                        class="cursor-pointer fas fa-trash "></i>
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                    <tr>
+
+                                                        <td>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="newSupportFile"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*" />
+                                                                @error('newSupportFile')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="input-group input-group-sm">
+                                                                <input wire:model.defer="newSupportObs" type="text"
+                                                                    class="form-control input-control-sm"
+                                                                    placeholder="Observación">
+                                                            </div>
+                                                            @error('newSupportObs')
                                                                 <span class="text-danger text-message-validation">
                                                                     {{ $message }}
                                                                 </span>
                                                             @enderror
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="input-group input-group-sm">
-                                                            <input wire:model.defer="newSupportObs" type="text"
-                                                                class="form-control input-control-sm"
-                                                                placeholder="Observación">
-                                                        </div>
-                                                        @error('newSupportObs')
-                                                            <span class="text-danger text-message-validation">
-                                                                {{ $message }}
-                                                            </span>
-                                                        @enderror
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <button wire:click="addSupport" style="border: white">
-                                                            <i style="color: #b2ca01"
-                                                                class="cursor-pointer fas fa-upload"></i>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        @error('supportss')
-                                            <span class="text-danger text-message-validation">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <button wire:click="addSupport" style="border: white">
+                                                                <i style="color: #b2ca01"
+                                                                    class="cursor-pointer fas fa-upload"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            @error('supportss')
+                                                <span class="text-danger text-message-validation">
+                                                    {{ $message }}
+                                                </span>
+                                            @enderror
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                    </div>
+                        </div>
+                    @endif
 
                 </div>
                 <br>
 
+                @if ($viaticRequest->canUploadSupports())
+                    <button wire:click="$emit('beforeClose')" type="submit" name="next"
+                        class="btn bg-secundary btn-sm action-button">Finalizar Anticipo</button>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn bg-danger action-button" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Anular
+                    </button>
+                @endif
 
-                <button wire:click="$emit('beforeClose')" type="submit" name="next"
-                    class="btn bg-secundary btn-sm action-button">Finalizar Anticipo</button>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn bg-danger action-button" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
-                    Anular
-                </button>
             </fieldset>
         </div>
     </div>

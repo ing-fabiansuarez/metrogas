@@ -68,6 +68,7 @@
                                         <input class="form-control form-control-sm" type="text"
                                             placeholder="{{ __('forms.user.username') }}" id="input_username"
                                             name="username" value="{{ $userLdap->getAccountName() }}" disabled>
+                                        <input type="hidden" name="username" value="{{ $userLdap->getAccountName() }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="input_user_principal_name"

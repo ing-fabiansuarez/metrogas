@@ -7,6 +7,13 @@
             <img src="../assets/img/logo.png" class="navbar-brand-img h-100" alt="...">
             {{-- <span class="ms-3 font-weight-bold">Metrogas SA ESP</span> --}}
         </a>
+        <div class="row my-3 w-auto">
+            <div style="font-size: 0.9rem" class="col text-center">
+                <strong>{{ auth()->user()->name }}</strong><br>
+                <span style="font-size: 0.8rem">{{ auth()->user()->jobtitle->name }}</span>
+            </div>
+        </div>
+
     </div>
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
@@ -115,15 +122,16 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('legalizaciones*') ? 'active' : '' }}"
-                    href="{{ route('legalization.index') }}">
+                <a class="nav-link {{ Request::is('por-aprobar') ? 'active' : '' }}"
+                    href="{{ route('byAprove') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>office</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF"
+                                    fill-rule="nonzero">
                                     <g transform="translate(1716.000000, 291.000000)">
                                         <g id="office" transform="translate(153.000000, 2.000000)">
                                             <path class="color-background opacity-6"
@@ -138,7 +146,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Por Aprobar</span>
+                    <span class="nav-link-text ms-1">Aprobar</span>
                 </a>
             </li>
         </ul>

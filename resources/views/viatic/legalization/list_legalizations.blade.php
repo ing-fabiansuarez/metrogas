@@ -81,6 +81,11 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @if (count($Legalizations) < 1)
+                                <p class="m-3">
+                                    No hay datos
+                                </p>
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -58,6 +58,72 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        //se hace la conexion a el directorio activo para vverificar el usuario
+        try {
+            $ldapUser = Adldap::search()->where('samaccountname', '=', $request->username)->first();
+            if (isset($ldapUser)) {
+                $posibleJobtitle = Jobtitle::find($request->id_cargo);
+                if (isset($posibleJobtitle)) { //determina si el cargo exite, si es asi se lo coloca si no lo crea nuevo
+
+                    //determina si el usuario existe
+                    if ($user = User::where('username', $ldapUser->getAccountName())->first()) {
+                        //agregamos el cargo que se nos paso
+                        $user->id_jobtitle = $request->id_cargo;
+                        $user->save();
+                        return redirect()->route('user.index')->with("msg", [
+                            "class" => "alert alert-warning",
+                            'body' => "Ya existe el usuario, sin embargo se actualizo el cargo."
+                        ]);
+                    }
+
+                    $eloquentUser = new User();
+                    $eloquentUser->username = $ldapUser->getAccountName();
+                    $eloquentUser->name = $ldapUser->getCommonName();
+                    $eloquentUser->email = $ldapUser->getUserPrincipalName();
+                    $eloquentUser->jobtitle_ldap = $ldapUser->getDescription();
+                    $eloquentUser->email_aux = $ldapUser->getEmail();
+                    $eloquentUser->objectguid = $ldapUser->getAuthIdentifier();
+
+                    //asignamos el rol aqui
+                    if ($eloquentUser->username == 'fsuarez') {
+                        $eloquentUser->syncRoles('Administrador');
+                    } else {
+                        $eloquentUser->syncRoles('Rol Basico');
+                    }
+
+                    //agregamos el cargo que se nos paso
+                    $eloquentUser->id_jobtitle = $request->id_cargo;
+
+                    $eloquentUser->save();
+
+
+                    return redirect()->route('user.index')->with("msg", [
+                        "class" => "alert alert-success",
+                        'body' => "Se guardo exitosamente el usuario"
+                    ]);
+                } else {
+                    return redirect()->route('user.index')->with("msg", [
+                        "class" => "alert alert-danger",
+                        'body' => "No se encuentra el cargo que ingreso"
+                    ]);
+                }
+            }
+            return redirect()->route('user.index')->with("msg", [
+                "class" => "alert alert-warning",
+                'body' => __('messages.not_user_found')
+            ]);
+        } catch (Exception $e) {
+            return redirect()->route('user.index')->with("msg", [
+                "class" => "alert alert-danger",
+                'body' => $e->getMessage()
+            ]);
+        }
+
+
+
+
+
+
         $datos = request()->all();
         return response()->json($request);
     }
@@ -76,8 +142,8 @@ class UserController extends Controller
         $user = User::find($id);
         $user->roles()->sync($request->roles);
         return redirect()->route('user.roles', $user->id)->with('msg', [
-            'class'=>'alert-success',
-            'body'=>'Se guardo correctamente!'
+            'class' => 'alert-success',
+            'body' => 'Se guardo correctamente!'
         ]);
     }
 }

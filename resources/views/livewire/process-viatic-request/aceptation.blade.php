@@ -325,33 +325,32 @@
                 </div>
 
                 {{-- documento --}}
+                @if ($viaticRequest->user->id == auth()->user()->id)
+                    <form wire:submit.prevent="acceptRequest" enctype="multipart/form-data">
+                        <div class="row mt-3">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="fileuplo">Debes subir firmado el archivo que se imprime.</label>
+                                    <input wire:model.defer="file_sign" class="form-control form-control-sm"
+                                        type="file" accept=".pdf,.jpg,.png" />
+                                    @error('file_sign')
+                                        <span class="text-danger text-message-validation">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-2">
 
-                <form wire:submit.prevent="acceptRequest" enctype="multipart/form-data">
-                    <div class="row mt-3">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="fileuplo">Debes subir firmado el archivo que se imprime.</label>
-                                <input wire:model.defer="file_sign" class="form-control form-control-sm"
-                                    type="file" accept=".pdf,.jpg,.png" />
-                                @error('file_sign')
-                                    <span class="text-danger text-message-validation">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
                             </div>
                         </div>
-                        <div class="col-md-2">
-
-                        </div>
-                    </div>
-
-
-                    <button type="submit" name="next"
-                        class="btn bg-secundary btn-sm action-button">Enviar</button>
-                    <a target="_blank" href="{{ route('viatic.pdf', $viaticRequest->id) }}"
-                        class="btn bg-primary btn-sm action-button">impirmir</a>
-                    {{-- <input type="button" name="previous" class="btn previous action-button-previous" value="Rechazar" /> --}}
-                </form>
+                        <button type="submit" name="next"
+                            class="btn bg-secundary btn-sm action-button">Enviar</button>
+                        {{-- <input type="button" name="previous" class="btn previous action-button-previous" value="Rechazar" /> --}}
+                    </form>
+                @endif
+                <a target="_blank" href="{{ route('viatic.pdf', $viaticRequest->id) }}"
+                    class="btn bg-primary btn-sm action-button">impirmir</a>
             </div>
             <br>
 

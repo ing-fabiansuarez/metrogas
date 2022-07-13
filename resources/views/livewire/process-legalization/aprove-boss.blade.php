@@ -1,4 +1,14 @@
 <div>
+    <div class="alert alert-success" role="alert">
+        <strong>Usuarios que pueden aprobar:</strong><br>
+        @foreach ($legalization->bosses() as $user)
+            {{ $user->name . ' (' . $user->jobtitle->name . ')' }} <br>
+        @endforeach
+        @if (count($legalization->bosses()) <= 0)
+            Aún no hay usuarios registrados que puedan autorizar, por favor dile a tu jefe inmediato que inicie
+            sesión.
+        @endif
+    </div>
     @if (session('msg'))
         <div class="alert {{ session('msg.class') }}" role="alert">
             {{ session('msg.body') }}
@@ -60,7 +70,8 @@
                         <p>{{ number_format($legalization->viaticRequest->getTotalViaticRequest()) }}</p>
                     @endif
                     <br>
-                    Total Legalización :<p id="totalLegalization"> $ {{ number_format($legalization->calculateTotal()) }}</p>
+                    Total Legalización :<p id="totalLegalization"> $
+                        {{ number_format($legalization->calculateTotal()) }}</p>
 
                 </div>
             </div>
@@ -170,25 +181,24 @@
 
     <h2 class="my-3">Total Legalización $ {{ number_format($legalization->calculateTotal()) }}</h2>
 
-    {{-- observation --}}
-
-    <div class="form-group">
-        <label for="exampleFormControlTextarea1">Observación</label>
-        <textarea wire:model.defer="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
-        @error('observation')
-            <span class="text-danger text-message-validation">
-                {{ $message }}
-            </span>
-        @enderror
-    </div>
-
-
-    <button wire:click="$emit('beforeAprove')" name="next"
-        class="btn bg-secundary btn-sm action-button">Aprobar</button>
-    <!-- Button trigger modal -->
-    <button wire:click="$emit('beforeCanceled')" type="button" class="btn bg-danger action-button">
-        Anular
-    </button>
+    @if ($legalization->canAproveBoss())
+        {{-- observation --}}
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Observación</label>
+            <textarea wire:model.defer="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
+            @error('observation')
+                <span class="text-danger text-message-validation">
+                    {{ $message }}
+                </span>
+            @enderror
+        </div>
+        <button wire:click="$emit('beforeAprove')" name="next"
+            class="btn bg-secundary btn-sm action-button">Aprobar</button>
+        <!-- Button trigger modal -->
+        <button wire:click="$emit('beforeCanceled')" type="button" class="btn bg-danger action-button">
+            Anular
+        </button>
+    @endif
 </div>
 
 

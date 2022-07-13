@@ -219,24 +219,29 @@
                 <br>
             @endforeach
 
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Su Observación</label>
-                <textarea wire:model.defer="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
-                @error('observation')
-                    <span class="text-danger text-message-validation">
-                        {{ $message }}
-                    </span>
-                @enderror
-            </div>
+            @if ($legalization->canAproveGeneral())
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Su Observación</label>
+                    <textarea wire:model.defer="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
+                    @error('observation')
+                        <span class="text-danger text-message-validation">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <button wire:click="$emit('beforeAprove')" name="next"
+                    class="btn bg-secundary btn-sm action-button">Aprobar</button>
+                <!-- Button trigger modal -->
+                <button wire:click="$emit('beforeCanceled')" type="button" class="btn bg-danger action-button">
+                    Anular
+                </button>
+            @endif
+
         </div>
     </div>
 
-    <button wire:click="$emit('beforeAprove')" name="next"
-        class="btn bg-secundary btn-sm action-button">Aprobar</button>
-    <!-- Button trigger modal -->
-    <button wire:click="$emit('beforeCanceled')" type="button" class="btn bg-danger action-button">
-        Anular
-    </button>
+
 </div>
 
 

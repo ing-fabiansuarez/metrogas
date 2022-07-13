@@ -21,12 +21,34 @@ class ViaticController extends Controller
     }
     public function create()
     {
+        //Antes de que muestre la vista hay que revisar que no tenga mas solicitudes de anticipos abiertas
+        $viaticRequests = ViaticRequest::where('request_by', auth()->user()->id)->where(function ($query) {
+            $query->where('sw_state', '!=', EStateRequest::CLOSE->getId())
+                ->where('sw_state', '!=', EStateRequest::CANCELED->getId());
+        })->count();
+
+        if ($viaticRequests > 0) {
+            return redirect()->route('viatic.index')->with('msg', ['class' => 'alert-success', 'body' => 'No puedes crear solicitud de anticipo, tienes otros abiertos.']);
+        }
         return view('viatic.viatic-request.index');
     }
     public function show($id)
     {
         $viaticRequest = ViaticRequest::find($id);
         if (isset($viaticRequest)) {
+
+            //valida que sea el dueño de la solicitud para poder verla
+            if ($viaticRequest->user->id != auth()->user()->id) {
+                //Verifica si es uno de los jefes
+                if (!$viaticRequest->canAproveBoss()) {
+                    if (!$viaticRequest->canAproveGeneral()) {
+                        if (!$viaticRequest->canUploadSupports()) {
+                            return "NO TIENE ACCESO PARA GESTIONAR ESTA SOLICITUD";
+                        }
+                    }
+                }
+            }
+
             //se redirecciona segun el estado
 
             switch ($viaticRequest->sw_state) {
@@ -89,7 +111,6 @@ class ViaticController extends Controller
         return view('viatic.legalization.list_legalizations', [
             'Legalizations' => Legalization::where('created_by', auth()->user()->id)->orderBy('id', 'desc')->get()
         ]);
-        return redirect()->route('legalization.create');
     }
 
     public function createlegalization()
@@ -157,5 +178,20 @@ class ViaticController extends Controller
 
         echo "NO EXISTE";
         return;
+    }
+
+    public function byAprove()
+    {
+        $idsSubordinates = [];
+        /**Se recuperan los id de los usuarios que son subordinados del que ha iniciado sesion, para despues hacer la consulta */
+        foreach (auth()->user()->jobtitle->subordinates()->get() as $jobtitle) {
+            foreach ($jobtitle->users as $user) {
+                array_push($idsSubordinates, $user->id);
+            }
+        }
+        return view('viatic.by-aprove', [
+            'viaticRequests' => ViaticRequest::where('sw_state', EStateRequest::CREATED->getId())->whereIn('request_by', $idsSubordinates)->get(),
+            'legalizations' => Legalization::where('sw_state', EStateLegalization::SEND->getId())->whereIn('created_by', $idsSubordinates)->get(),
+        ]);
     }
 }

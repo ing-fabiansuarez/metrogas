@@ -4,6 +4,11 @@
     <div>
         <div class="row">
             <div class="col-12">
+                @if (session('msg'))
+                    <div class="alert {{ session('msg.class') }}" role="alert">
+                        <strong>{{ session('msg.body') }}</strong>
+                    </div>
+                @endif
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <div class="d-flex flex-row justify-content-between">
@@ -15,6 +20,8 @@
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
+
+
                         <div class="table-responsive p-0">
                             <table class="table align-items-center mb-0">
                                 <thead>
@@ -68,6 +75,11 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            @if (count($viaticRequests) < 1)
+                                <p class="m-3">
+                                    No hay datos
+                                </p>
+                            @endif
                         </div>
                     </div>
                 </div>

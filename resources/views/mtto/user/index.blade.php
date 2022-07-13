@@ -13,6 +13,12 @@
 
         <div class="row">
             <div class="col-12">
+                @if (session('msg'))
+                    <div class="{{ session('msg')['class'] }} mt-2 mb-0 py-2" style="font-size: 0.8rem" role="alert">
+                        {{ session('msg')['body'] }}
+                    </div>
+                    <br>
+                @endif
                 <div class="card mb-4">
                     <div class="card-header pb-0">
                         <div class="d-flex flex-row justify-content-between">

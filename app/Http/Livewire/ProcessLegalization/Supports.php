@@ -3,9 +3,11 @@
 namespace App\Http\Livewire\ProcessLegalization;
 
 use App\Enums\EStateLegalization;
+use App\Mail\LegalizationMailable;
 use App\Models\SupportsLegalization;
 use App\Models\TypeIdentification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -39,7 +41,7 @@ class Supports extends Component
         $this->legalization = $legalization;
         $this->totalLegalization =  $this->legalization->calculateTotal();
     }
-   
+
     public function render()
     {
         $this->totalLegalization =  $this->legalization->calculateTotal();
@@ -103,6 +105,24 @@ class Supports extends Component
     {
         $this->legalization->sw_state = EStateLegalization::SEND->getId();
         $this->legalization->save();
+
+
+        /**CORREOS ELECTRONICOS */
+        //enviar el correo electronico de que se creo un viatico
+        $correo = new LegalizationMailable($this->legalization);
+        $correo->subject("Legalización N° " . $this->legalization->id . " fue ENVIADA. - " . $this->legalization->getNameState());
+        $correosJefes = [];
+        foreach ($this->legalization->user->jobtitle->boss->users()->get() as $user) {
+            array_push($correosJefes, $user->email_aux);
+        }
+        array_push($correosJefes, 'sandra.hernandez@metrogassaesp.com');
+
+        Mail::to($this->legalization->user->email_aux)
+            ->cc($correosJefes)
+            ->queue($correo);
+        /**____________________FIN CORREOS ELECTRONICOS_________________ */
+
+
         $this->emit('responseSend', true, route('legalization.show', $this->legalization->id));
     }
 }

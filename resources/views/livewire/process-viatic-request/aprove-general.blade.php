@@ -328,10 +328,12 @@
                                 <br>
                             @endforeach
                             <br>
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Tu observación</label>
-                                <textarea wire:model="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
-                            </div>
+                            @if ($viaticRequest->canAproveGeneral())
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Tu observación</label>
+                                    <textarea wire:model="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
+                                </div>
+                            @endif
                         </div>
                     </div>
 
@@ -347,12 +349,14 @@
                             Anticipo</a>
                     </div>
                 </div>
-                <button wire:click="$emit('beforeAproveViaticRequest')" type="submit" name="next"
-                    class="btn bg-secundary btn-sm action-button">Aprobar</button>
-                <button type="button" class="btn bg-danger action-button" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">
-                    Anular
-                </button>
+                @if ($viaticRequest->canAproveGeneral())
+                    <button wire:click="$emit('beforeAproveViaticRequest')" type="submit" name="next"
+                        class="btn bg-secundary btn-sm action-button">Aprobar</button>
+                    <button type="button" class="btn bg-danger action-button" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Anular
+                    </button>
+                @endif
                 {{-- <input type="button" name="previous" class="btn previous action-button-previous" value="Rechazar" /> --}}
             </fieldset>
         </div>

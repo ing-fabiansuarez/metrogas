@@ -97,6 +97,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('legalizaciones/create', [ViaticController::class, 'storelegalization'])->name('legalization.store');
 	Route::get('legalizaciones/{id}', [ViaticController::class, 'showlegalization'])->name('legalization.show');
 
+	Route::get('por-aprobar', [ViaticController::class, 'byAprove'])->name('byAprove');
+
 	/* 
 	Route::get('billing', function () {
 		return view('billing');
@@ -131,18 +133,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/login', function () {
 		return view('dashboard');
 	})->name('sign-up');
-
-
-	Route::get('/mail', function () {
-
-	/* 	$correo = new ViaticRequestMaileable(ViaticRequest::find(1));
-		$correo->subject("estamos activos");
-		Mail::to('fabian280999@gmail.com')->send($correo);
-		return "Mensaje enviado"; */
-
-		$viaticRequest = ViaticRequest::find(1);
-		return $viaticRequest->user->jobtitle->boss->users()->get();
-	});
 });
 
 

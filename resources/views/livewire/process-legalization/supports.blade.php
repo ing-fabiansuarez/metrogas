@@ -59,8 +59,8 @@
                             <a target="_blank" href="{{ route('viatic.show', $legalization->viatic_request_id) }}">
                                 Solicitud Anticipo N°
                                 {{ $legalization->viatic_request_id }}</a><br>
-                            Total Anticipo: $
-                            <p>{{ number_format($legalization->viaticRequest->getTotalViaticRequest()) }}</p>
+                            Total Anticipo: 
+                            <p>$ {{ number_format($legalization->viaticRequest->getTotalViaticRequest()) }}</p>
                         @endif
                         <br>
                         Total Legalización :<p id="totalLegalization"> $ {{ number_format($totalLegalization) }}</p>
@@ -171,121 +171,116 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="row mt-3 justify-content-center">
-                    <div class="col-md-8">
-                        <label for="exampleFormControlTextarea1">Subir Soporte</label>
-                        <div class="form-group">
-                            <input wire:model.defer="soporte" class="form-control form-control-sm pt-1" type="file"
-                                accept="image/*" />
-                            @error('soporte')
-                                <span class="text-danger text-message-validation">
-                                    {{ $message }}
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <label>Fecha Factura</label>
-                                <div class="input-group input-group-sm">
-                                    <input wire:model.defer="fechaFactura" type="date"
-                                        class="form-control input-control-sm" placeholder="Fecha Factura">
-                                </div>
-                                @error('fechaFactura')
+                @if (auth()->user()->id == $legalization->user->id)
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-md-8">
+                            <label for="exampleFormControlTextarea1">Subir Soporte</label>
+                            <div class="form-group">
+                                <input wire:model.defer="soporte" class="form-control form-control-sm pt-1"
+                                    type="file" accept="image/*" />
+                                @error('soporte')
                                     <span class="text-danger text-message-validation">
                                         {{ $message }}
                                     </span>
                                 @enderror
                             </div>
-                            <div class="col">
-                                <label>Total Factura</label>
-                                <div class="input-group input-group-sm">
-                                    <input wire:model.defer="totalFactura" type="number"
-                                        class="form-control input-control-sm" placeholder="Total Factura">
+
+                            <div class="row">
+                                <div class="col">
+                                    <label>Fecha Factura</label>
+                                    <div class="input-group input-group-sm">
+                                        <input wire:model.defer="fechaFactura" type="date"
+                                            class="form-control input-control-sm" placeholder="Fecha Factura">
+                                    </div>
+                                    @error('fechaFactura')
+                                        <span class="text-danger text-message-validation">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
-                                @error('totalFactura')
-                                    <span class="text-danger text-message-validation">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <label>Razon Social / Nombre</label>
-                        <div class="input-group input-group-sm">
-                            <input wire:model.defer="nombreEmpresa" type="text"
-                                class="form-control input-control-sm" placeholder="Nombre de la empresa">
-                        </div>
-                        @error('nombreEmpresa')
-                            <span class="text-danger text-message-validation">
-                                {{ $message }}
-                            </span>
-                        @enderror
-
-
-                        <div class="row">
-                            <div class="col">
-                                <label>Tipo Identificación</label>
-                                <div class="form-group">
-                                    <select wire:model.defer="tipoIdentificacion" class="form-select form-select-sm"
-                                        aria-label=".form-select-sm example">
-                                        <option value="">{{ __('forms.select.selected') }}</option>
-                                        @foreach ($TypeIdentifications as $item)
-                                            <option value="{{ $item->id }}">
-                                                {{ $item->abrev . ' - ' . $item->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('tipoIdentificacion')
+                                <div class="col">
+                                    <label>Total Factura</label>
+                                    <div class="input-group input-group-sm">
+                                        <input wire:model.defer="totalFactura" type="number"
+                                            class="form-control input-control-sm" placeholder="Total Factura">
+                                    </div>
+                                    @error('totalFactura')
                                         <span class="text-danger text-message-validation">
                                             {{ $message }}
                                         </span>
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col">
-                                <label>Número Identificación</label>
-                                <div class="input-group input-group-sm">
-                                    <input wire:model.defer="numeroIdentificacion" type="text"
-                                        class="form-control input-control-sm" placeholder="Número de Factura">
-                                </div>
-                                @error('numeroIdentificacion')
-                                    <span class="text-danger text-message-validation">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
+
+                            <label>Razon Social / Nombre</label>
+                            <div class="input-group input-group-sm">
+                                <input wire:model.defer="nombreEmpresa" type="text"
+                                    class="form-control input-control-sm" placeholder="Nombre de la empresa">
                             </div>
-                        </div>
+                            @error('nombreEmpresa')
+                                <span class="text-danger text-message-validation">
+                                    {{ $message }}
+                                </span>
+                            @enderror
 
 
-                        <label>Descripción</label>
-                        <div class="input-group input-group-sm">
-                            <input wire:model.defer="descripcion" type="text"
-                                class="form-control input-control-sm" placeholder="Descripción">
+                            <div class="row">
+                                <div class="col">
+                                    <label>Tipo Identificación</label>
+                                    <div class="form-group">
+                                        <select wire:model.defer="tipoIdentificacion"
+                                            class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                            <option value="">{{ __('forms.select.selected') }}</option>
+                                            @foreach ($TypeIdentifications as $item)
+                                                <option value="{{ $item->id }}">
+                                                    {{ $item->abrev . ' - ' . $item->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('tipoIdentificacion')
+                                            <span class="text-danger text-message-validation">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <label>Número Identificación</label>
+                                    <div class="input-group input-group-sm">
+                                        <input wire:model.defer="numeroIdentificacion" type="text"
+                                            class="form-control input-control-sm" placeholder="Número de Factura">
+                                    </div>
+                                    @error('numeroIdentificacion')
+                                        <span class="text-danger text-message-validation">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            <label>Descripción</label>
+                            <div class="input-group input-group-sm">
+                                <input wire:model.defer="descripcion" type="text"
+                                    class="form-control input-control-sm" placeholder="Descripción">
+                            </div>
+                            @error('descripcion')
+                                <span class="text-danger text-message-validation">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                            <br>
+                            <button wire:click="$emit('saveSupport')" style="border: white">
+                                <i style="color: #b2ca01;font-size: 2rem" class="cursor-pointer fas fa-upload"></i>
+                            </button>
                         </div>
-                        @error('descripcion')
-                            <span class="text-danger text-message-validation">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                        <br>
-                        <button wire:click="$emit('saveSupport')" style="border: white">
-                            <i style="color: #b2ca01;font-size: 2rem" class="cursor-pointer fas fa-upload"></i>
-                        </button>
                     </div>
-                </div>
-
-
+                    <button wire:click="$emit('beforeSend')" id="button_create" type="submit" name="next"
+                        class="btn next action-button">Pasar
+                        Aprobación</button>
+                @endif
             </div>
-
         </div>
-
-        <button wire:click="$emit('beforeSend')" id="button_create" type="submit" name="next"
-            class="btn next action-button">Pasar
-            Aprobación</button>
-
-
     </div>
 </div>
 
