@@ -12,7 +12,7 @@
                                     <h3 class="font-weight-bolder text-info text-gradient">Bienvenido!</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form" method="POST" action="/session">
+                                    <form role="form" method="POST" action="{{ route('session') }}">
                                         @csrf
                                         <label>Usuario</label>
                                         <div class="mb-3">
@@ -50,7 +50,7 @@
                         <div class="col-md-6">
                             <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
                                 <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
-                                    style="background:url('../assets/img/logo-login.png')"></div>
+                                    style="background:url('{{ asset('assets/img/logo-login.png') }}')"></div>
                             </div>
                         </div>
                     </div>
