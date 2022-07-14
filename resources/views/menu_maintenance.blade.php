@@ -17,6 +17,7 @@
 
                             <a href="{{ route('user.index') }}"
                                 class="list-group-item list-group-item-action">{{ __('sidebar.users') }}</a>
+                            <a href="{{ route('roles.index') }}" class="list-group-item list-group-item-action">Roles</a>
                             <a href="{{ route('jobtitle.index') }}"
                                 class="list-group-item list-group-item-action">{{ __('sidebar.jobtitles') }}</a>
                             <a href="{{ route('typeidenfification.index') }}"

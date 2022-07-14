@@ -65,9 +65,15 @@ Route::group(['middleware' => 'auth'], function () {
 			return view('livewire.other-item.index');
 		})->name('otheritem.index');
 
+		//tipo identificacion
 		Route::get('tipo-identificacion', function () {
 			return view('livewire.type-identification.index');
 		})->name('typeidenfification.index');
+
+		//Mantenimineto de los roles
+		Route::get('roles', function () {
+			return view('livewire.roles.index');
+		})->name('roles.index');
 
 		//CARGOS
 		Route::get('cargos', [JobtitleController::class, 'index'])->name('jobtitle.index');
