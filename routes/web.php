@@ -1,24 +1,13 @@
 <?php
 
-use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\JobtitleController;
 use App\Http\Controllers\MaintenanceController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViaticController;
-use App\Http\Livewire\Originsites;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
-use App\Http\Livewire\ShowJobtitles;
-use App\Mail\ViaticRequestMaileable;
-use App\Models\ViaticRequest;
-use Illuminate\Contracts\Foundation\MaintenanceMode;
-use Illuminate\Support\Facades\Mail;
+use Adldap\Laravel\Facades\Adldap;
 
 /*
 |--------------------------------------------------------------------------
@@ -157,3 +146,21 @@ Route::group(['middleware' => 'guest'], function () {
 Route::get('/login', function () {
 	return view('session/login-session');
 })->name('login');
+
+
+Route::get('/ldap', function () {
+	/* $array = [];
+	foreach (Adldap::search()->users()->get() as $user) {
+		
+		array_push($array, [
+			'cn' => $user->cn,
+			'name' =>$user->name,
+			'description'=>$user->description,
+			 'samaccountname'=>$user->samaccountname,
+			'samaccounttype'=>$user->samaccounttype,
+			'useraccountcontrol'=>$user->useraccountcontrol,
+		]);
+	}
+	return $array; */
+	return Adldap::search()->users()->find('fsuarez');
+});

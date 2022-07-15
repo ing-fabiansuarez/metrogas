@@ -39,15 +39,11 @@ class LdapAttributeHandler
                 $eloquentUser->syncRoles('Rol Basico');
             }
             //Agregamos la logica para crear un jobtitle en el sistema
-            $jobtitle = Jobtitle::where('name', $eloquentUser->jobtitle_ldap)->first();
+            $jobtitle = Jobtitle::where('name', 'ilike', $eloquentUser->jobtitle_ldap)->first();
             if (isset($jobtitle)) { //determina si el cargo exite, si es asi se lo coloca si no lo crea nuevo
                 $eloquentUser->id_jobtitle = $jobtitle->id;
             } else {
-                $eloquentUser->id_jobtitle = Jobtitle::create([
-                    'name' => $eloquentUser->jobtitle_ldap,
-                    'id_boss' => 1,
-                    'level' => 3,
-                ])->id;
+                $eloquentUser->id_jobtitle = Jobtitle::where('name', 'N/D (No Definido)')->first()->id;
             }
         }
     }

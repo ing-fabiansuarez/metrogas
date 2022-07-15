@@ -146,7 +146,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Aprobar</span>
+                    <span class="nav-link-text ms-1">Flujo de trabajo</span>
                 </a>
             </li>
         </ul>

@@ -31,11 +31,12 @@ class UserController extends Controller
             $userLdap = Adldap::search()->where('samaccountname', '=', $request->username)->first();
             if (isset($userLdap)) {
 
-                $posibleJobtitle = Jobtitle::where('name', $userLdap->getDescription())->first();
+                $job = $userLdap->getDescription();
+                $posibleJobtitle = Jobtitle::where('name', 'ilike', $userLdap->getDescription())->first();
                 if (isset($posibleJobtitle)) { //determina si el cargo exite, si es asi se lo coloca si no lo crea nuevo
                     $posibleJobtitle = $posibleJobtitle;
                 } else {
-                    $posibleJobtitle = new Jobtitle();
+                    $posibleJobtitle = Jobtitle::where('name', 'N/D (No Definido)')->first();
                 }
                 return view('mtto.user.create', [
                     'userLdap' => $userLdap,

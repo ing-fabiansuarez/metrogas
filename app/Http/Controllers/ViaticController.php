@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\EStateLegalization;
 use App\Enums\EStateRequest;
 use App\Models\Legalization;
+use App\Models\User;
 use App\Models\ViaticRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -189,9 +190,26 @@ class ViaticController extends Controller
                 array_push($idsSubordinates, $user->id);
             }
         }
+        //hace la consulta traer las legalizaciones y solicitudes de los empleados subordinados
+        $visticRequestsList = ViaticRequest::where('sw_state', EStateRequest::CREATED->getId())->whereIn('request_by', $idsSubordinates)->get();
+        $legalizationsList =  Legalization::where('sw_state', EStateLegalization::SEND->getId())->whereIn('created_by', $idsSubordinates)->get();
+
+        //Aqui se verifica si hay algo por aprobar si tiene el permiso de aprobacion financiera.
+        $user = User::find(auth()->user()->id);
+        if ($user->can('aproveGeneral')) {
+            $viaticRequestAproveGeneral = ViaticRequest::where('sw_state', EStateRequest::ACCEPTED_EMPLOYEE->getId())->get();
+            $visticRequestsList = $visticRequestsList->concat($viaticRequestAproveGeneral);
+        }
+
+        //aqui se verfica si tiene permisos para la aprobacion de tesorerai y si es asi se agregan
+        if ($user->can('aproveTesoreria')) {
+            $viaticRequestAproveTesoreria = ViaticRequest::where('sw_state', EStateRequest::APROVED_GENERAL->getId())->get();
+            $visticRequestsList = $visticRequestsList->concat($viaticRequestAproveTesoreria);
+        }
+
         return view('viatic.by-aprove', [
-            'viaticRequests' => ViaticRequest::where('sw_state', EStateRequest::CREATED->getId())->whereIn('request_by', $idsSubordinates)->get(),
-            'legalizations' => Legalization::where('sw_state', EStateLegalization::SEND->getId())->whereIn('created_by', $idsSubordinates)->get(),
+            'viaticRequests' =>  $visticRequestsList,
+            'legalizations' => $legalizationsList,
         ]);
     }
 }

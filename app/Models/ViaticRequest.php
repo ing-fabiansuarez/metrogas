@@ -6,6 +6,7 @@ use App\Enums\EStateRequest;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class ViaticRequest extends Model
 {
@@ -30,18 +31,14 @@ class ViaticRequest extends Model
     public function canAproveGeneral()
     {
         //aqui va la aprobacion por parte de la direccion financiera
-        if (auth()->user()->id == 1) {
-            return true;
-        }
-        return false;
+        $user = User::find(auth()->user()->id);
+        return  $user->can('aproveGeneral');
     }
 
     public function canUploadSupports()
     {
-        if (auth()->user()->id == 1) {
-            return true;
-        }
-        return false;
+        $user = User::find(auth()->user()->id);
+        return  $user->can('aproveTesoreria');
     }
 
     public function bosses()

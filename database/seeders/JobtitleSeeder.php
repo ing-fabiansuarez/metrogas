@@ -14,7 +14,15 @@ class JobtitleSeeder extends Seeder
      */
     public function run()
     {
-        $GERENTE = Jobtitle::create(['name' => 'Gerente', 'id_boss' => 1, 'level' => 1]);
+        $NO_DEFINIDO = Jobtitle::create(['name' => 'N/D (No Definido)', 'id_boss' => null, 'level' => 1]);
+        $NO_DEFINIDO->id_boss = $NO_DEFINIDO->id;
+        $NO_DEFINIDO->save();
+        $NO_APLICA = Jobtitle::create(['name' => 'N/A (No Aplica)', 'id_boss' => null, 'level' => 1]);
+        $NO_APLICA->id_boss = $NO_APLICA->id;
+        $NO_APLICA->save();
+        $GERENTE = Jobtitle::create(['name' => 'Gerente', 'id_boss' => null, 'level' => 1]);
+        $GERENTE->id_boss = $GERENTE->id;
+        $GERENTE->save();
         $DIRECTOR_ADMINISTRATIVO_Y_FINANCIERO = Jobtitle::create(['name' => 'Director Administrativo y Financiero', 'id_boss' => $GERENTE->id, 'level' => 1]);
         $JEFE_DE_SISTEMAS = Jobtitle::create(['name' => 'Jefe de Sistemas', 'id_boss' => $DIRECTOR_ADMINISTRATIVO_Y_FINANCIERO->id, 'level' => 2]);
         $ANALISTA_DE_DESARROLLO = Jobtitle::create(['name' => 'Analista de Desarrollo', 'id_boss' => $JEFE_DE_SISTEMAS->id, 'level' => 3]);
