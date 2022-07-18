@@ -30,13 +30,15 @@ class AproveBoss extends Component
     public $totalAnticipo;
 
     public $obsCanceled;
+    public $obsRechazar;
 
 
     /** Listeners */
     protected $listeners = [
         'addOtherExpenses' => 'addOtherExpenses',
         'aproveViaticRequest' => 'aproveViaticRequest',
-        'canceledRequest'
+        'canceledRequest',
+        'rechazarRequest'
     ];
 
     /**Reglas */
@@ -201,6 +203,39 @@ class AproveBoss extends Component
         /**____________________FIN CORREOS ELECTRONICOS_________________ */
 
         $this->emit('responseCanceled', true, route('viatic.show', $this->viaticRequest->id));
+        DB::commit();
+    }
+
+    public function rechazarRequest()
+    {
+       
+        //validacion de que llegue la observacion
+        $this->validate([
+            'obsRechazar' => 'required'
+        ]);
+
+        DB::beginTransaction();
+
+        $newState = EStateRequest::BY_CREATE->getId();
+
+        //Se cambia el estado
+        $this->viaticRequest->sw_state =$newState;
+        $this->viaticRequest->save();
+        //Se guarda la observacion de la cancelación
+        $obs = new ObservationViaticModel();
+        $obs->message = "Se ANULÓ la solicitud porque... " . $this->obsCanceled;
+        $obs->create_by = auth()->user()->id;
+        $obs->viatic_request_id = $this->viaticRequest->id;
+        $obs->save();
+        //se crea el nuevo timeline
+        $this->viaticRequest->createNewTimeLine($newState);
+
+        /**CORREOS ELECTRONICOS */
+        //enviar el correo electronico de que se creo un viatico
+        $this->viaticRequest->sendEmail("Se RECHAZO por parte del jefe inmediato");
+        /**____________________FIN CORREOS ELECTRONICOS_________________ */
+
+        $this->emit('responseRezada', true, route('viatic.show', $this->viaticRequest->id));
         DB::commit();
     }
 }

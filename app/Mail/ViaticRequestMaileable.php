@@ -24,6 +24,9 @@ class ViaticRequestMaileable extends Mailable
     public function build()
     {
         switch ($this->viaticRequest->sw_state) {
+            case EStateRequest::BY_CREATE->getId():
+                return $this->view('mail.viatic.viatic-request-created', ['viaticRequest' => $this->viaticRequest]);
+                break;
             case EStateRequest::CREATED->getId():
                 return $this->view('mail.viatic.viatic-request-created', ['viaticRequest' => $this->viaticRequest]);
                 break;

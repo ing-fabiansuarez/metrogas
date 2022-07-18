@@ -53,6 +53,9 @@ class ViaticController extends Controller
             //se redirecciona segun el estado
 
             switch ($viaticRequest->sw_state) {
+                case EStateRequest::BY_CREATE->getId():
+                    return view('viatic.viatic-request.by_create', compact('viaticRequest'));
+                    break;
                 case EStateRequest::CREATED->getId():
                     return view('viatic.viatic-request.aprove_boss', compact('viaticRequest'));
                     break;

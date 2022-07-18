@@ -332,7 +332,10 @@
 
                     <button wire:click="$emit('beforeAproveViaticRequest')" name="next"
                         class="btn bg-secundary btn-sm action-button">Aprobar</button>
-                    <!-- Button trigger modal -->
+                    <button type="button" class="btn bg-warning action-button" data-bs-toggle="modal"
+                        data-bs-target="#rechazarModal">
+                        Rechazar
+                    </button>
                     <button type="button" class="btn bg-danger action-button" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">
                         Anular
@@ -372,6 +375,36 @@
                     <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button wire:click="$emit('canceledRequest')" type="button" style="color: white"
                         class="btn bg-danger">Anular</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Modal Rechazar --}}
+    <div wire:ignore.self class="modal fade" id="rechazarModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Rechazar Solicitud</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>¿Por qué se Rechazara?</label>
+                        <textarea wire:model.defer="obsRechazar" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
+                        @error('obsRechazar')
+                            <span class="text-danger text-message-validation">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button wire:click="$emit('rechazarRequest')" type="button" style="color: white"
+                        class="btn bg-warning">Rechazar Solicitud</button>
                 </div>
             </div>
         </div>
@@ -422,6 +455,22 @@
                 Swal.fire(
                     "Solicitud Cancelada!",
                     'Se Cancelo correctamente',
+                    'success'
+                )
+                window.location.replace(route);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No se pudo establecer la conexión',
+                })
+            }
+        });
+        Livewire.on('responseRezada', function(status, route) {
+            if (status) {
+                Swal.fire(
+                    "Solicitud Rechazada!",
+                    'Se rechazó correctamente',
                     'success'
                 )
                 window.location.replace(route);

@@ -3,14 +3,45 @@
 namespace App\Models;
 
 use App\Enums\EStateRequest;
+use App\Mail\ViaticRequestMaileable;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ViaticRequest extends Model
 {
     use HasFactory;
+
+    public function sendEmail($subject)
+    {
+        $correo = new ViaticRequestMaileable($this);
+        $correo->subject("Solicitud N° " . $this->id . " - " . $subject);
+        $correosJefes = [];
+        foreach ($this->user->jobtitle->boss->users()->get() as $user) {
+            array_push($correosJefes, $user->email_aux);
+        }
+        array_push($correosJefes);
+
+        Mail::to($this->user->email_aux)
+            ->cc($correosJefes)
+            ->queue($correo);
+    }
+
+    public function  createNewTimeLine($newState)
+    {
+        $newTL = new TimeLineViaticRequest();
+        $newTL->viatic_request_id = $this->id;
+        $newTL->created_by = auth()->user()->id;
+        $newTL->state_actual = $newState;
+        $newTL->save();
+    }
+
+    public function timeLine()
+    {
+        return $this->hasMany(TimeLineViaticRequest::class, 'viatic_request_id', 'id');
+    }
 
     public function supports()
     {
