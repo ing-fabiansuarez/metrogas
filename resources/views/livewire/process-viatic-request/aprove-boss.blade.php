@@ -322,6 +322,8 @@
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <x-viatic.viatic-request.observations :viaticRequest="$viaticRequest" />
+                           
                             {{-- Observacion --}}
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Observación</label>

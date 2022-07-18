@@ -35,6 +35,9 @@
                         <div style="font-size: 0.7rem" class="stats">
                             <small>{{ $obs->createBy->jobtitle->name }}</small>
                         </div>
+                        <div style="font-size: 0.7rem" class="stats">
+                            <small>{{ $obs->created_at->diffForHumans()}}</small>
+                        </div>
                     </div>
                 </div>
             </div>

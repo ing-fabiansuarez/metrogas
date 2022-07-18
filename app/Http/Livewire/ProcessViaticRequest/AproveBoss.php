@@ -182,7 +182,7 @@ class AproveBoss extends Component
         $this->viaticRequest->save();
         //Se guarda la observacion de la cancelación
         $obs = new ObservationViaticModel();
-        $obs->message = "Se ANULÓ la solicitud porque... " . $this->obsCanceled;
+        $obs->message = "Se ANULÓ por parte del jefe inmediato la solicitud porque... " . $this->obsCanceled;
         $obs->create_by = auth()->user()->id;
         $obs->viatic_request_id = $this->viaticRequest->id;
         $obs->save();
@@ -208,7 +208,7 @@ class AproveBoss extends Component
 
     public function rechazarRequest()
     {
-       
+
         //validacion de que llegue la observacion
         $this->validate([
             'obsRechazar' => 'required'
@@ -219,11 +219,11 @@ class AproveBoss extends Component
         $newState = EStateRequest::BY_CREATE->getId();
 
         //Se cambia el estado
-        $this->viaticRequest->sw_state =$newState;
+        $this->viaticRequest->sw_state = $newState;
         $this->viaticRequest->save();
         //Se guarda la observacion de la cancelación
         $obs = new ObservationViaticModel();
-        $obs->message = "Se ANULÓ la solicitud porque... " . $this->obsCanceled;
+        $obs->message = "Se RECHAZO por parte del jefe inmediato la solicitud porque... " . $this->obsRechazar;
         $obs->create_by = auth()->user()->id;
         $obs->viatic_request_id = $this->viaticRequest->id;
         $obs->save();

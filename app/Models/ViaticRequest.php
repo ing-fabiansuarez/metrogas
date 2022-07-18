@@ -84,7 +84,7 @@ class ViaticRequest extends Model
 
     public function observations()
     {
-        return $this->hasMany(ObservationViaticModel::class, 'viatic_request_id', 'id');
+        return $this->hasMany(ObservationViaticModel::class, 'viatic_request_id', 'id')->orderBy('created_at','asc');
     }
 
     public function user()
