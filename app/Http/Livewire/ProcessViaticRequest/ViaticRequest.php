@@ -104,17 +104,7 @@ class ViaticRequest extends Component
 
         /**CORREOS ELECTRONICOS */
         //enviar el correo electronico de que se creo un viatico
-        $correo = new ViaticRequestMaileable($viaticRequest);
-        $correo->subject("Nueva solicitud de Anticipo - " . $viaticRequest->getNameState());
-        $correosJefes = [];
-        foreach ($viaticRequest->user->jobtitle->boss->users()->get() as $user) {
-            array_push($correosJefes, $user->email_aux);
-        }
-        //array_push($correosJefes, 'sandra.hernandez@metrogassaesp.com');
-
-        Mail::to($viaticRequest->user->email_aux)
-            ->cc($correosJefes)
-            ->queue($correo);
+        $viaticRequest->sendEmail("Se creo una nueva solicitud de Anticipo, pediente aprobación");
         /**____________________FIN CORREOS ELECTRONICOS_________________ */
 
         //mostrar el mensaje de que se creo correctamente

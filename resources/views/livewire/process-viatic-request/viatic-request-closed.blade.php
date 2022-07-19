@@ -400,7 +400,7 @@
                                                         <a target="_blank"
                                                             href="{{ Storage::url($support->url) }}">
                                                             <i
-                                                                class="cursor-pointer fas fa-download text-secondary"></i>
+                                                                class="cursor-pointer fas fa-eye text-secondary"></i>
                                                         </a>
                                                     </td>
                                                 </tr>

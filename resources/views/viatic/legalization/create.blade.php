@@ -64,6 +64,7 @@
                                         <label for="id_solicitud" class="form-control-label">Selecciona la solicitud de
                                             anticipo</label>
                                         <select name="id_solicitud" class="form-select form-select-sm">
+                                            <option value="">{{ __('forms.select.selected') }}</option>
                                             @foreach ($viaticRequests as $request)
                                                 <option value="{{ $request->id }}">
                                                     {{ $request->id . ' - ' . $request->justification . ' - ' . $request->getNameState() }}

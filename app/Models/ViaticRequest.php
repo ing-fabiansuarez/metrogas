@@ -18,14 +18,32 @@ class ViaticRequest extends Model
     {
         $correo = new ViaticRequestMaileable($this);
         $correo->subject("Solicitud N° " . $this->id . " - " . $subject);
-        $correosJefes = [];
+        $correosCopied = [];
         foreach ($this->user->jobtitle->boss->users()->get() as $user) {
-            array_push($correosJefes, $user->email_aux);
+            array_push($correosCopied, $user->email_aux);
         }
-        array_push($correosJefes);
+        //si esta en estado aprobado que envie un correo tambien a la que tiene el perfil de direccion financiera para que apruebe
+        switch ($this->sw_state) {
+            case EStateRequest::ACCEPTED_EMPLOYEE->getId():
+                //COPIADO busca las personas que tienen el permiso de aprobar la solicitudes de anticipos para copiarlos al correo
+                foreach (User::permission('aproveGeneral')->get() as $user) {
+                    array_push($correosCopied, $user->email_aux);
+                }
+                break;
+            case EStateRequest::APROVED_GENERAL->getId():
+                //COPIADO busca las personas que tienen el permiso de aprobar la solicitudes de anticipos para copiarlos al correo
+                foreach (User::permission('aproveGeneral')->get() as $user) {
+                    array_push($correosCopied, $user->email_aux);
+                }
+                //COPIADO tesoreria
+                foreach (User::permission('aproveTesoreria')->get() as $user) {
+                    array_push($correosCopied, $user->email_aux);
+                }
+                break;
+        }
 
         Mail::to($this->user->email_aux)
-            ->cc($correosJefes)
+            ->cc($correosCopied)
             ->queue($correo);
     }
 
@@ -84,7 +102,7 @@ class ViaticRequest extends Model
 
     public function observations()
     {
-        return $this->hasMany(ObservationViaticModel::class, 'viatic_request_id', 'id')->orderBy('created_at','asc');
+        return $this->hasMany(ObservationViaticModel::class, 'viatic_request_id', 'id')->orderBy('created_at', 'asc');
     }
 
     public function user()

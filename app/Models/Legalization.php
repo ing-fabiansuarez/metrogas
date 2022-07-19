@@ -30,10 +30,8 @@ class Legalization extends Model
     public function canAproveGeneral()
     {
         //aqui va la aprobacion por parte de la direccion financiera
-        if (auth()->user()->id == 1) {
-            return true;
-        }
-        return false;
+        $user = User::find(auth()->user()->id);
+        return  $user->can('aproveGeneral');
     }
 
     public function bosses()

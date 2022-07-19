@@ -119,8 +119,15 @@ class ViaticController extends Controller
 
     public function createlegalization()
     {
+        $viaticRequestResult = [];
+        foreach (ViaticRequest::where('request_by', auth()->user()->id)->where('sw_state', EStateRequest::CLOSE->getId())->latest()->get() as $viatic) {
+            if (Legalization::where('viatic_request_id',$viatic->id)->get()->count() <= 0) {
+                array_push($viaticRequestResult, $viatic);
+            }
+        }
+
         return view('viatic.legalization.create', [
-            'viaticRequests' => ViaticRequest::where('request_by', auth()->user()->id)->where('sw_state', EStateRequest::CLOSE->getId())->latest()->get(),
+            'viaticRequests' => $viaticRequestResult,
         ]);
     }
 

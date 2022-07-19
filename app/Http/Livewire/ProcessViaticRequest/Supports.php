@@ -58,8 +58,10 @@ class Supports extends Component
 
 
             //Se cambia el estado
-            $this->viaticRequest->sw_state = EStateRequest::CLOSE->getId();
+            $newState = EStateRequest::CLOSE->getId();
+            $this->viaticRequest->sw_state = $newState;
             $this->viaticRequest->save();
+            $this->viaticRequest->createNewTimeLine($newState);
             //se guarda la observacion
             if (!empty($this->observation)) {
                 $obs = new ObservationViaticModel();
@@ -70,19 +72,7 @@ class Supports extends Component
             }
 
             /**CORREOS ELECTRONICOS */
-            //enviar el correo electronico de que se creo un viatico
-            $correo = new ViaticRequestMaileable($this->viaticRequest);
-            $correo->subject("Solicitud de Anticipo N° " . $this->viaticRequest->id . " fue COMPLETADA. - " . $this->viaticRequest->getNameState());
-            $correosJefes = [];
-            foreach ($this->viaticRequest->user->jobtitle->boss->users()->get() as $user) {
-                array_push($correosJefes, $user->email_aux);
-            }
-            array_push($correosJefes, 'sandra.hernandez@metrogassaesp.com');
-            //array_push($correosJefes, 'hugo.bonilla@metrogassaesp.com');
-
-            Mail::to($this->viaticRequest->user->email_aux)
-                ->cc($correosJefes)
-                ->queue($correo);
+            $this->viaticRequest->sendEmail("Se COMPLETO la solicitud de anticipo, pronto recibiras el pago del total del anticipo");
             /**____________________FIN CORREOS ELECTRONICOS_________________ */
 
             $this->emit('responseAprove', true, route('viatic.show', $this->viaticRequest->id));
@@ -136,14 +126,17 @@ class Supports extends Component
 
         DB::beginTransaction();
         //Se cambia el estado
-        $this->viaticRequest->sw_state = EStateRequest::CANCELED->getId();
+        $newState = EStateRequest::CANCELED->getId();
+        $this->viaticRequest->sw_state = $newState;
         $this->viaticRequest->save();
+        $this->viaticRequest->createNewTimeLine($newState);
         //Se guarda la observacion de la cancelación
         $obs = new ObservationViaticModel();
         $obs->message = "Se ANULÓ la solicitud porque... " . $this->obsCanceled;
         $obs->create_by = auth()->user()->id;
         $obs->viatic_request_id = $this->viaticRequest->id;
         $obs->save();
+        $this->viaticRequest->sendEmail("La solicitud fue ANULADA por parte de tesoreria");
         $this->emit('responseCanceled', true, route('viatic.show', $this->viaticRequest->id));
         DB::commit();
     }
@@ -168,6 +161,7 @@ class Supports extends Component
         $obs->create_by = auth()->user()->id;
         $obs->viatic_request_id = $this->viaticRequest->id;
         $obs->save();
+        $this->viaticRequest->sendEmail("La solicitud fue RECHAZADA por parte de tesoreria");
         $this->emit('responseRechazado', true, route('viatic.show', $this->viaticRequest->id));
         DB::commit();
     }

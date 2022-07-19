@@ -144,8 +144,8 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $item->id }}</p>
                                             </td>
                                             <td class="ps-4">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->user->name }}
-                                                    <br>{{ $viaticReq->user->jobtitle->name }}
+                                                <p class="text-xs font-weight-bold mb-0">{{ $item->user->name }}
+                                                    <br>{{ $item->user->jobtitle->name }}
                                                 </p>
                                             </td>
                                             <td class="ps-4">

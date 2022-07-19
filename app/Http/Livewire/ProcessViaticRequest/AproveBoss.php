@@ -117,8 +117,10 @@ class AproveBoss extends Component
         /* try { */
         DB::beginTransaction();
         //Se cambia el estado
-        $this->viaticRequest->sw_state = EStateRequest::APROVED->getId();
+        $newState =  EStateRequest::APROVED->getId();
+        $this->viaticRequest->sw_state = $newState;
         $this->viaticRequest->save();
+        $this->viaticRequest->createNewTimeLine($newState);
         //se guardan los detalles
         foreach ($this->viaticRequest->sites as $site) {
             $site->save();
@@ -146,17 +148,7 @@ class AproveBoss extends Component
 
         /**CORREOS ELECTRONICOS */
         //enviar el correo electronico de que se creo un viatico
-        $correo = new ViaticRequestMaileable($this->viaticRequest);
-        $correo->subject("Solicitud de Anticipo N° " . $this->viaticRequest->id . " fue aprobada. - " . $this->viaticRequest->getNameState());
-        $correosJefes = [];
-        foreach ($this->viaticRequest->user->jobtitle->boss->users()->get() as $user) {
-            array_push($correosJefes, $user->email_aux);
-        }
-        array_push($correosJefes, 'sandra.hernandez@metrogassaesp.com');
-
-        Mail::to($this->viaticRequest->user->email_aux)
-            ->cc($correosJefes)
-            ->queue($correo);
+        $this->viaticRequest->sendEmail("Se APROBO la solicitud por parte del jefe inmediato.");
         /**____________________FIN CORREOS ELECTRONICOS_________________ */
 
         $this->emit('responseAprove', true, route('viatic.show', $this->viaticRequest->id));
@@ -178,8 +170,10 @@ class AproveBoss extends Component
 
         DB::beginTransaction();
         //Se cambia el estado
-        $this->viaticRequest->sw_state = EStateRequest::CANCELED->getId();
+        $newState = EStateRequest::CANCELED->getId();
+        $this->viaticRequest->sw_state = $newState;
         $this->viaticRequest->save();
+        $this->viaticRequest->createNewTimeLine($newState);
         //Se guarda la observacion de la cancelación
         $obs = new ObservationViaticModel();
         $obs->message = "Se ANULÓ por parte del jefe inmediato la solicitud porque... " . $this->obsCanceled;
@@ -189,17 +183,7 @@ class AproveBoss extends Component
 
         /**CORREOS ELECTRONICOS */
         //enviar el correo electronico de que se creo un viatico
-        $correo = new ViaticRequestMaileable($this->viaticRequest);
-        $correo->subject("Solicitud de Anticipo N° " . $this->viaticRequest->id . " fue ANULADA. - " . $this->viaticRequest->getNameState());
-        $correosJefes = [];
-        foreach ($this->viaticRequest->user->jobtitle->boss->users()->get() as $user) {
-            array_push($correosJefes, $user->email_aux);
-        }
-        array_push($correosJefes, 'sandra.hernandez@metrogassaesp.com');
-
-        Mail::to($this->viaticRequest->user->email_aux)
-            ->cc($correosJefes)
-            ->queue($correo);
+        $this->viaticRequest->sendEmail("Se ANULO la solicitud de anticipo");
         /**____________________FIN CORREOS ELECTRONICOS_________________ */
 
         $this->emit('responseCanceled', true, route('viatic.show', $this->viaticRequest->id));

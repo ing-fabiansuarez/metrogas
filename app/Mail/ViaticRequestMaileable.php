@@ -42,6 +42,9 @@ class ViaticRequestMaileable extends Mailable
             case EStateRequest::CLOSE->getId():
                 return $this->view('mail.viatic.viatic-request-close', ['viaticRequest' => $this->viaticRequest]);
                 break;
+            case EStateRequest::APROVED_GENERAL->getId():
+                return $this->view('mail.viatic.viatic-request-aproved-general', ['viaticRequest' => $this->viaticRequest]);
+                break;
         }
         return "NO TIENE ESTADOS EN EL CORREO";
     }
