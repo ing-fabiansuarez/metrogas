@@ -177,7 +177,7 @@
                             <label for="exampleFormControlTextarea1">Subir Soporte</label>
                             <div class="form-group">
                                 <input wire:model.defer="soporte" class="form-control form-control-sm pt-1"
-                                    type="file" accept="image/*" />
+                                    type="file" accept="image/*,.pdf" />
                                 @error('soporte')
                                     <span class="text-danger text-message-validation">
                                         {{ $message }}

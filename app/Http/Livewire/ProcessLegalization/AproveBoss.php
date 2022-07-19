@@ -47,8 +47,7 @@ class AproveBoss extends Component
             $obs->created_by = auth()->user()->id;
             $obs->legalization_id = $this->legalization->id;
             $obs->save();
-
-
+            $this->legalization->sendEmail("Esta pendiente aprobación Dirección Financiera");
             $this->emit('responseAprove', true, route('legalization.show', $this->legalization->id));
             DB::commit();
         } catch (\Exception $e) {
@@ -76,7 +75,7 @@ class AproveBoss extends Component
             $obs->legalization_id = $this->legalization->id;
             $obs->save();
 
-
+            $this->legalization->sendEmail("Fue Anulada por parte del Jefe Inmediato");
             $this->emit('responseCanceled', true, route('legalization.show', $this->legalization->id));
             DB::commit();
         } catch (\Exception $e) {

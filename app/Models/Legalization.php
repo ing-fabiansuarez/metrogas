@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Enums\EStateLegalization;
+use App\Mail\LegalizationMailable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Legalization extends Model
 {
@@ -16,6 +18,27 @@ class Legalization extends Model
         'created_by',
         'sw_state'
     ];
+
+    public function sendEmail($subject)
+    {
+        $correo = new LegalizationMailable($this);
+        $correo->subject("Legalización N° " . $this->id . " - " . $subject);
+        $correosCopied = [];
+        foreach ($this->user->jobtitle->boss->users()->get() as $user) {
+            array_push($correosCopied, $user->email_aux);
+        }
+        switch ($this->sw_state) {
+            case EStateLegalization::APROVE_GENERAL->getId():
+                //COPIADO busca las personas que tienen el permiso de aprobar la solicitudes de anticipos para copiarlos al correo
+                foreach (User::permission('aproveGeneral')->get() as $user) {
+                    array_push($correosCopied, $user->email_aux);
+                }
+                break;
+        }
+        Mail::to($this->user->email_aux)
+            ->cc($correosCopied)
+            ->queue($correo);
+    }
 
     public function canAproveBoss()
     {

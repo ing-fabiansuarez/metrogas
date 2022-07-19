@@ -44,9 +44,9 @@
                                             value="1" autocomplete="off">
                                         <label class="btn btn-outline-primary" for="btnradio1">Solicitud de anticipo</label>
 
-                                        <input type="radio" class="btn-check" id="btnradio2" name="origen[]"
+                                        {{-- <input type="radio" class="btn-check" id="btnradio2" name="origen[]"
                                             value="2" autocomplete="off">
-                                        <label class="btn btn-outline-primary" for="btnradio2">Reintegro</label>
+                                        <label class="btn btn-outline-primary" for="btnradio2">Reintegro</label> --}}
                                     </div>
 
                                     @if (session('origen'))

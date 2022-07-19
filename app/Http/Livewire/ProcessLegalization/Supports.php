@@ -106,22 +106,10 @@ class Supports extends Component
         $this->legalization->sw_state = EStateLegalization::SEND->getId();
         $this->legalization->save();
 
-
         /**CORREOS ELECTRONICOS */
         //enviar el correo electronico de que se creo un viatico
-        $correo = new LegalizationMailable($this->legalization);
-        $correo->subject("Legalización N° " . $this->legalization->id . " fue ENVIADA. - " . $this->legalization->getNameState());
-        $correosJefes = [];
-        foreach ($this->legalization->user->jobtitle->boss->users()->get() as $user) {
-            array_push($correosJefes, $user->email_aux);
-        }
-        array_push($correosJefes, 'sandra.hernandez@metrogassaesp.com');
-
-        Mail::to($this->legalization->user->email_aux)
-            ->cc($correosJefes)
-            ->queue($correo);
+        $this->legalization->sendEmail("Pendiente aprobación jefe inmediato.");
         /**____________________FIN CORREOS ELECTRONICOS_________________ */
-
 
         $this->emit('responseSend', true, route('legalization.show', $this->legalization->id));
     }

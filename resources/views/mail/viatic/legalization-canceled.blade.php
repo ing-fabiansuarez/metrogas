@@ -32,8 +32,7 @@
 </head>
 
 <body style="color: black;font-size:0.8rem;">
-    <h1>Legalización N° {{ $legalization->id }} fue CREADA, por el trabajador {{ $legalization->user->name }}. Esta
-        pendiente por aprobación jefe inmediato.</h1>
+    <h1>Legalización N° {{ $legalization->id }} del trabajador {{ $legalization->user->name }}, fue ANULADA.</h1>
     <p>Para gestionar el proceso ingresa al siguiente enlace con sus credeciales del directorio activo.</p>
     <a href="{{ url('/') }}">Ingreso al sistema.</a>
     <br>
