@@ -59,7 +59,7 @@
                             <a target="_blank" href="{{ route('viatic.show', $legalization->viatic_request_id) }}">
                                 Solicitud Anticipo N°
                                 {{ $legalization->viatic_request_id }}</a><br>
-                            Total Anticipo: 
+                            Total Anticipo:
                             <p>$ {{ number_format($legalization->viaticRequest->getTotalViaticRequest()) }}</p>
                         @endif
                         <br>
@@ -69,6 +69,13 @@
                 </div>
             </div>
         </div>
+        {{-- Observations --}}
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-6">
+                <x-viatic.legalization.observations :legalization="$legalization" />
+            </div>
+        </div>
+        
 
         {{-- tabla soportes --}}
         <div class="row">

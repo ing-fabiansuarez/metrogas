@@ -23,6 +23,9 @@ class LegalizationMailable extends Mailable
     public function build()
     {
         switch ($this->legalization->sw_state) {
+            case EStateLegalization::CREATED->getId():
+                return $this->view('mail.viatic.legalization-created', ['legalization' => $this->legalization]);
+                break;
             case EStateLegalization::SEND->getId():
                 return $this->view('mail.viatic.legalization-send', ['legalization' => $this->legalization]);
                 break;

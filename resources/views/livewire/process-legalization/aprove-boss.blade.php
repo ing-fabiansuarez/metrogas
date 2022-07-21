@@ -162,7 +162,7 @@
                                             <a target="_blank" href="{{ Storage::url($support->url) }}">
                                                 <i class="cursor-pointer fas fa-eye text-secondary"></i>
                                             </a>
-                                         
+
                                         </td>
                                     </tr>
                                 @endforeach
@@ -175,6 +175,12 @@
             </div>
         </div>
 
+    </div>
+    {{-- Observations --}}
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-6">
+            <x-viatic.legalization.observations :legalization="$legalization" />
+        </div>
     </div>
 
     <h2 class="my-3">Total Legalización $ {{ number_format($legalization->calculateTotal()) }}</h2>
@@ -192,7 +198,9 @@
         </div>
         <button wire:click="$emit('beforeAprove')" name="next"
             class="btn bg-secundary btn-sm action-button">Aprobar</button>
-        <!-- Button trigger modal -->
+        <button wire:click="$emit('beforeRechazar')" type="button" class="btn bg-warning action-button">
+            Rechazar
+        </button>
         <button wire:click="$emit('beforeCanceled')" type="button" class="btn bg-danger action-button">
             Anular
         </button>
@@ -235,6 +243,22 @@
                 }
             })
         });
+        Livewire.on('beforeRechazar', function() {
+            Swal.fire({
+                title: 'Se Rechazará la Legalización',
+                text: '¿Esta Seguro?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si',
+                cancelButtonText: '{{ __('forms.close') }}',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emitTo('process-legalization.aprove-boss', 'rechazarLegalization');
+                }
+            })
+        });
         Livewire.on('responseAprove', function(status, route) {
             if (status) {
                 Swal.fire(
@@ -256,6 +280,22 @@
                 Swal.fire(
                     "Solicitud Cancelada!",
                     'Se Cancelo correctamente',
+                    'success'
+                )
+                window.location.replace(route);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'No se pudo establecer la conexión',
+                })
+            }
+        });
+        Livewire.on('responseRechazar', function(status, route) {
+            if (status) {
+                Swal.fire(
+                    "Solicitud Rechazada!",
+                    'Se rechazó correctamente',
                     'success'
                 )
                 window.location.replace(route);

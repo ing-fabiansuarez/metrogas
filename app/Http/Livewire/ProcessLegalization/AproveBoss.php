@@ -17,7 +17,8 @@ class AproveBoss extends Component
     /** Listeners */
     protected $listeners = [
         'aproveLegalization',
-        'canceledLegalization'
+        'canceledLegalization',
+        'rechazarLegalization'
     ];
 
 
@@ -81,6 +82,34 @@ class AproveBoss extends Component
         } catch (\Exception $e) {
             DB::rollBack();
             $this->emit('responseCanceled', false, null);
+        }
+    }
+
+    public function rechazarLegalization()
+    {
+        $this->validate([
+            'observation' => 'required'
+        ]);
+
+        try {
+            DB::beginTransaction();
+            //Se cambia el estado
+            $this->legalization->sw_state = EStateLegalization::CREATED->getId();
+            $this->legalization->save();
+            //se guarda la observacion
+
+            $obs = new ObservationLegalization();
+            $obs->message = 'Se Rechazó por parte del jefe inmediato porque... ' . $this->observation;
+            $obs->created_by = auth()->user()->id;
+            $obs->legalization_id = $this->legalization->id;
+            $obs->save();
+
+            $this->legalization->sendEmail("Fue Rechazada la Legalización por parte del Jefe Inmediato");
+            $this->emit('responseRechazar', true, route('legalization.show', $this->legalization->id));
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $this->emit('responseRechazar', false, null);
         }
     }
 }
