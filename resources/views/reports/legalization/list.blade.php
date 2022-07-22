@@ -13,19 +13,18 @@
                     <div class="card-header pb-0">
                         <div class="d-flex flex-row justify-content-between">
                             <div>
-                                <h5 class="mb-0">Anticipos</h5>
+                                <h5 class="mb-0">Legalizaciones</h5>
                             </div>
 
                         </div>
 
-                        <form action="{{ route('report.viaticrequest') }}" method="get">
+                        <form action="{{ route('report.legalization') }}" method="get">
                             <div class="row mt-2 justify-content-center">
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label for="input_object_guid" class="form-control-label">N° Solicitud</label>
+                                        <label for="input_object_guid" class="form-control-label">N° Legalización</label>
                                         <input class="form-control form-control-sm" type="number"
-                                            placeholder="N° Solicitud" name="num_solicitud"
-                                            value="{{ $request->get('num_solicitud') }}">
+                                            placeholder="N° Solicitud" name="num_solicitud">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -35,8 +34,7 @@
                                             name="solicitado_por">
                                             <option value="" selected="">-- Seleccionar --</option>
                                             @foreach ($users as $user)
-                                                <option value="{{ $user->id }}"
-                                                    @if ($user->id == $request->get('solicitado_por')) selected @endif>{{ $user->name }}
+                                                <option value="{{ $user->id }}">{{ $user->name }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -49,15 +47,14 @@
                                             name="estado">
                                             <option value="" selected>-- Seleccionar --</option>
                                             @foreach ($states as $state)
-                                                <option value="{{ $state->getId() }}"
-                                                    @if ($state->getId() == $request->get('estado')) selected @endif>
+                                                <option value="{{ $state->getId() }}">
                                                     {{ $state->getName() }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                              {{--   <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Fecha Creación:</label>
                                         <div class="input-group">
@@ -73,7 +70,7 @@
                                 </div> --}}
 
                             </div>
-                        
+
                             <div class="row justify-content-center">
                                 <div class="col-md-2">
                                     <input name="r" style="width: 100%" class="btn bg-gradient-primary btn-sm"
@@ -92,7 +89,10 @@
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            N° Solicitud
+                                            N° Legalización
+                                        </th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Anticipo
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -113,26 +113,36 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($viaticRequests as $viaticReq)
+                                    @foreach ($legalizations as $item)
                                         <tr>
                                             <td class="ps-4">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->id }}</p>
+                                                <p class="text-xs font-weight-bold mb-0">{{ $item->id }}</p>
+                                            </td>
+                                            <td class="ps-4">
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                    @if ($item->viatic_request_id == null)
+                                                        Reintegro
+                                                    @else
+                                                        {{ $item->viatic_request_id }}
+                                                    @endif
+                                                </p>
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $viaticReq->justification }}</p>
+                                                    {{ $item->justification }}</p>
                                             </td>
                                             <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->created_at }}
+                                                <p class="text-xs font-weight-bold mb-0">{{ $item->created_at }}
                                                 </p>
                                             </td>
                                             <td class="text-center">
                                                 <span
-                                                    class="badge {{ $viaticReq->stateColor() }}">{{ $viaticReq->getNameState() }}</span>
+                                                    class="badge {{ $item->stateColor() }}">{{ $item->stateText() }}</span>
+
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('viatic.show', $viaticReq) }}" class="mx-3"
-                                                    data-bs-toggle="tooltip" data-bs-original-title="Abrir Solicitud">
+                                                <a href="{{ route('legalization.show', $item) }}" class="mx-3"
+                                                    data-bs-toggle="tooltip" data-bs-original-title="Abrir Legalización">
                                                     <i class="fas fa-user-edit text-secondary"></i>
                                                 </a>
                                             </td>
@@ -140,8 +150,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $viaticRequests->links() }}
-                            @if (count($viaticRequests) < 1)
+                            @if (count($legalizations) < 1)
                                 <p class="m-3">
                                     No hay datos
                                 </p>
