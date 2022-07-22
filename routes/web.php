@@ -98,7 +98,6 @@ Route::group(['middleware' => 'auth'], function () {
 	//USUARIOS
 	Route::prefix('reportes')->middleware('can:report')->group(function () {
 		Route::get('/solicitud-anticipos', [ReportController::class, 'viaticRequest'])->name('report.viaticrequest');
-		Route::get('/solicitud-anticipos/exportar', [ReportController::class, 'exportViaticRequest'])->name('report.viaticrequest.export');
 		Route::get('/legalizaciones', [ReportController::class, 'legalization'])->name('report.legalization');
 	});
 

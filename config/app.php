@@ -161,6 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -179,7 +180,7 @@ return [
          * Inyeccion del Servicio para acceder al Directorio Activo
          */
         Adldap\Laravel\AdldapServiceProvider::class,
-    
+
     ],
 
     /*
@@ -239,6 +240,7 @@ return [
         'Adldap' => Adldap\Laravel\Facades\Adldap::class,
 
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
 
     ],

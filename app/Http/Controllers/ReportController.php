@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\EStateRequest;
+use App\Exports\ViaticRequestExport;
 use App\Models\User;
 use App\Models\ViaticRequest;
 use Illuminate\Http\Request;
@@ -33,8 +34,7 @@ class ReportController extends Controller
         $viaticRequests = $viaticRequests->paginate(10);
 
         if ($request->get('r') == "Exportar") {
-            echo "exportar escel";
-            return;
+            return (new ViaticRequestExport)->download('Solicitud_de_anticipos.xlsx');
         }
         return view('reports.viatic-request.list_request', [
             'viaticRequests' => $viaticRequests,
