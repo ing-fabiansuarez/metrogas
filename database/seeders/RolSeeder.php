@@ -29,5 +29,8 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'aproveGeneral', 'description' => 'Aprobación o Anulación general de las solicitudes de Anticipos de viaticos.'])->syncRoles([$roleDireccionFinanciera]);
         Permission::create(['name' => 'aproveTesoreria', 'description' => 'Aprobación o Anulación de Tesoreria y Soportes de las solicitudes de Anticipos de viaticos.'])->syncRoles([$roleTesoreria]);
         Permission::create(['name' => 'report', 'description' => 'Generar y ver los reportes.'])->syncRoles([$roleDireccionFinanciera]);
+
+        //permiso para poder crear una legalizacion desde un reintegro
+        Permission::create(['name' => 'legalization.reintegro', 'description' => 'Permite crear una legalización desde un reintegro.']);
     }
 }

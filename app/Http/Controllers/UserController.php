@@ -9,6 +9,8 @@ use App\Models\User;
 use Exception;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -119,12 +121,6 @@ class UserController extends Controller
                 'body' => $e->getMessage()
             ]);
         }
-
-
-
-
-
-
         $datos = request()->all();
         return response()->json($request);
     }
@@ -145,6 +141,35 @@ class UserController extends Controller
         return redirect()->route('user.roles', $user->id)->with('msg', [
             'class' => 'alert-success',
             'body' => 'Se guardo correctamente!'
+        ]);
+    }
+
+    public function subordinates()
+    {
+        $users = null;
+        foreach (Auth::user()->jobtitle->subordinates()->get() as $jobtitle) {
+            if ($users == null) {
+                $users = $jobtitle->users;
+            } else {
+                $users->concat($jobtitle->users);
+            }
+        }
+        if ($users == null) {
+            $users = array();
+        }
+        return view('mtto.user.subordinates', compact('users'));
+    }
+    public function storeSubordinates(Request $request)
+    {
+        $user = User::find($request->get('user'));
+        if ($request->get('permiso') == 'role') {
+            $user->givePermissionTo('legalization.reintegro');
+        } else {
+            $user->revokePermissionTo('legalization.reintegro');
+        }
+        return redirect()->route('user.subordinates')->with('msg',[
+            'class'=>'alert-success',
+            'body'=>'Se guardaron los cambios'
         ]);
     }
 }

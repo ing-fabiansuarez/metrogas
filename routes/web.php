@@ -78,6 +78,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/{User}', [UserController::class, 'roles'])->name('user.roles');
 		Route::post('/{User}', [UserController::class, 'storeRoles'])->name('user.storeRoles');
 	});
+	Route::get('subalternos', [UserController::class, 'subordinates'])->name('user.subordinates');
+	Route::post('subalternos', [UserController::class, 'storeSubordinates'])->name('user.storesubordinates');
 
 
 	//VIATICOS

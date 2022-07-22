@@ -122,8 +122,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('por-aprobar') ? 'active' : '' }}"
-                    href="{{ route('byAprove') }}">
+                <a class="nav-link {{ Request::is('por-aprobar') ? 'active' : '' }}" href="{{ route('byAprove') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -156,7 +155,8 @@
                         Reportes</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('reportes/solicitud-anticipos') ? 'active' : '' }}" href="{{ route('report.viaticrequest') }}">
+                    <a class="nav-link {{ Request::is('reportes/solicitud-anticipos') ? 'active' : '' }}"
+                        href="{{ route('report.viaticrequest') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i style="font-size: 1rem;"
@@ -167,7 +167,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('reportes/legalizaciones') ? 'active' : '' }}" href="{{ route('report.legalization') }}">
+                    <a class="nav-link {{ Request::is('reportes/legalizaciones') ? 'active' : '' }}"
+                        href="{{ route('report.legalization') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
@@ -194,6 +195,22 @@
                     </a>
                 </li>
             @endcan
+
+            <li class="nav-item mt-2">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
+                    Empleados</h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('subalternos') ? 'active' : '' }}" href="{{ route('user.subordinates') }}">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i style="font-size: 1rem;"
+                            class="fas fa-regular fa-user ps-2 pe-2 text-center text-dark {{ Request::is('mantenimientos') ? 'text-white' : 'text-dark' }} "
+                            aria-hidden="true"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Empleados</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>
