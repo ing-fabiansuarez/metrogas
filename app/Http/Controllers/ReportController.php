@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Enums\EStateRequest;
+use App\Models\User;
+use App\Models\ViaticRequest;
+use Illuminate\Http\Request;
+
+class ReportController extends Controller
+{
+    public function viaticRequest(Request $request)
+    {
+        $viaticRequests = ViaticRequest::latest();
+        if (!empty($request->get('num_solicitud'))) {
+            $viaticRequests->where('id', $request->get('num_solicitud'));
+        }
+        if (!empty($request->get('solicitado_por'))) {
+            $viaticRequests->where('request_by', $request->get('solicitado_por'));
+        }
+        if (!empty($request->get('estado'))) {
+            $viaticRequests->where('sw_state', $request->get('estado'));
+        }
+        if (!empty($request->get('fecha_creacion'))) {
+            $dates = explode(' - ', $request->get('fecha_creacion'));
+            $dates[0] = str_replace('/', '-', $dates[0]);
+            $dates[1] = str_replace('/', '-', $dates[1]);
+            $viaticRequests->where('created_at', '>=', $dates[0] . " 00:00:00");
+            $viaticRequests->where('created_at', '<=', $dates[1] . " 23:59:59");
+        }
+
+
+        $viaticRequests = $viaticRequests->paginate(10);
+
+        if ($request->get('r') == "Exportar") {
+            echo "exportar escel";
+            return;
+        }
+        return view('reports.viatic-request.list_request', [
+            'viaticRequests' => $viaticRequests,
+            'users' => User::all(),
+            'states' => EStateRequest::cases(),
+            'request' => $request
+        ]);
+    }
+
+    public function exportViaticRequest($filters)
+    {
+        dd($filters);
+    }
+
+    public function legalization(Request $request)
+    {
+    }
+}

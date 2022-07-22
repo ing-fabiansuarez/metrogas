@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViaticController;
 use Illuminate\Support\Facades\Route;
 use Adldap\Laravel\Facades\Adldap;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('legalizaciones/{id}', [ViaticController::class, 'showlegalization'])->name('legalization.show');
 
 	Route::get('por-aprobar', [ViaticController::class, 'byAprove'])->name('byAprove');
+
+	//USUARIOS
+	Route::prefix('reportes')->middleware('can:report')->group(function () {
+		Route::get('/solicitud-anticipos', [ReportController::class, 'viaticRequest'])->name('report.viaticrequest');
+		Route::get('/solicitud-anticipos/exportar', [ReportController::class, 'exportViaticRequest'])->name('report.viaticrequest.export');
+		Route::get('/legalizaciones', [ReportController::class, 'legalization'])->name('report.legalization');
+	});
 
 	/* 
 	Route::get('billing', function () {

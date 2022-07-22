@@ -28,5 +28,6 @@ class RolSeeder extends Seeder
         //permisos para el proceso de viaticos
         Permission::create(['name' => 'aproveGeneral', 'description' => 'Aprobación o Anulación general de las solicitudes de Anticipos de viaticos.'])->syncRoles([$roleDireccionFinanciera]);
         Permission::create(['name' => 'aproveTesoreria', 'description' => 'Aprobación o Anulación de Tesoreria y Soportes de las solicitudes de Anticipos de viaticos.'])->syncRoles([$roleTesoreria]);
+        Permission::create(['name' => 'report', 'description' => 'Generar y ver los reportes.'])->syncRoles([$roleDireccionFinanciera]);
     }
 }
