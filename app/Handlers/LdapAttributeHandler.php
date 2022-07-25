@@ -26,6 +26,7 @@ class LdapAttributeHandler
         $eloquentUser->email = $ldapUser->getUserPrincipalName();
         $eloquentUser->jobtitle_ldap = $ldapUser->getDescription();
         $eloquentUser->email_aux = $ldapUser->getEmail();
+        $eloquentUser->objectguid = $ldapUser->getAuthIdentifier();
 
         /**
          * Hay que determinar si existe el usuario para que no cambie el cargo que tiene asignado.
