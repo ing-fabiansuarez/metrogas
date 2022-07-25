@@ -106,7 +106,6 @@
                                                     data-bs-toggle="tooltip" data-bs-original-title="Asignar Roles">
                                                     <i class="fas fa-user-edit text-secondary"></i>
                                                 </a>
-
                                             </td>
                                         </tr>
                                     @endforeach
