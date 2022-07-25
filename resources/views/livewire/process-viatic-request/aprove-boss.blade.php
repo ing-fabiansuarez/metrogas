@@ -213,7 +213,7 @@
                                     </tr>
                                 @endforeach
 
-                                @foreach ($listOtherExpenses as $otherExpense)
+                                @foreach ($listOtherExpenses as $indexx => $otherExpense)
                                     <tr>
                                         <td>
                                         </td>
@@ -222,6 +222,9 @@
                                         <td class="text-center">
                                         </td>
                                         <td class="text-center">
+                                            <a wire:click="$emit('removeOtherExpense',{{ $indexx }})">
+                                                <i class="cursor-pointer fas fa-trash text-secondary text-danger"></i>
+                                            </a>
                                         </td>
                                         <td class="text-center">
                                             <span class="text-secondary text-xs">
@@ -323,7 +326,7 @@
                         </div>
                         <div class="col-md-6">
                             <x-viatic.viatic-request.observations :viaticRequest="$viaticRequest" />
-                           
+
                             {{-- Observacion --}}
                             <div class="form-group">
                                 <label for="exampleFormControlTextarea1">Observación</label>

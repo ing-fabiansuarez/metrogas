@@ -185,7 +185,7 @@
                 cancelButtonText: '{{ __('forms.close') }}',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Livewire.emitTo('process-viatic-request.viatic-request', 'removeSite', objId);
+                    Livewire.emitTo('process-viatic-request.by-create', 'removeSite', objId);
                     Swal.fire(
                         '{{ __('forms.deleted') }}',
                         '{{ __('forms.message.delete') }}',

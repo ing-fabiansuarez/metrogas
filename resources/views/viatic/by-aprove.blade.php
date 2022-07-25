@@ -56,13 +56,17 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->id }}</p>
                                             </td>
                                             <td class="ps-4">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->user->name }}
-                                                    <br>{{ $viaticReq->user->jobtitle->name }}
-                                                </p>
+                                                <a href="{{ route('viatic.show', $viaticReq) }}">
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->user->name }}
+                                                        <br>{{ $viaticReq->user->jobtitle->name }}
+                                                    </p>
+                                                </a>
                                             </td>
                                             <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $viaticReq->justification }}</p>
+                                                <a href="{{ route('viatic.show', $viaticReq) }}">
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ Str::limit($viaticReq->justification, 50) }}</p>
+                                                </a>
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->created_at }}
@@ -144,22 +148,28 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $item->id }}</p>
                                             </td>
                                             <td class="ps-4">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $item->user->name }}
-                                                    <br>{{ $item->user->jobtitle->name }}
-                                                </p>
+                                                <a href="{{ route('legalization.show', $item) }}">
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $item->user->name }}
+                                                        <br>{{ $item->user->jobtitle->name }}
+                                                    </p>
+                                                </a>
                                             </td>
-                                            <td class="ps-4">
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    @if ($item->viatic_request_id == null)
-                                                        Reintegro
-                                                    @else
-                                                        {{ $item->viatic_request_id }}
-                                                    @endif
-                                                </p>
+                                            <td class="ps-4">.
+                                                <a href="{{ route('legalization.show', $item) }}">
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        @if ($item->viatic_request_id == null)
+                                                            Reintegro
+                                                        @else
+                                                            {{ $item->viatic_request_id }}
+                                                        @endif
+                                                    </p>
+                                                </a>
                                             </td>
                                             <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $item->justification }}</p>
+                                                <a href="{{ route('legalization.show', $item) }}">
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ Str::limit($item->justification, 509) }}</p>
+                                                </a>
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $item->created_at }}

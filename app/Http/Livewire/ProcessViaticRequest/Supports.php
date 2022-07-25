@@ -148,7 +148,7 @@ class Supports extends Component
         ]);
 
         DB::beginTransaction();
-        $newState =  EStateRequest::CREATED->getId();
+        $newState =  EStateRequest::BY_CREATE->getId();
         //Se cambia el estado
         $this->viaticRequest->sw_state = $newState;
         $this->viaticRequest->save();

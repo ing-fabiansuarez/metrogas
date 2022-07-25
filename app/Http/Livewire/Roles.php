@@ -47,7 +47,8 @@ class Roles extends Component
         $keyWord = '%' . $this->keyWord . '%';
         return view('livewire.roles.view', [
             'objetsModel' => Role::latest()
-                ->orWhere('name', 'LIKE', $keyWord)
+                ->orWhere('name', 'ilike', $keyWord)
+                ->orWhere('id','ilike' ,$keyWord)
                 ->paginate($this->paginationQuantity),
             'title' => $this->title,
             'allPermissions' => Permission::all(),

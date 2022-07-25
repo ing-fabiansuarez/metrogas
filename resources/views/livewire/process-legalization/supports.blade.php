@@ -75,7 +75,7 @@
                 <x-viatic.legalization.observations :legalization="$legalization" />
             </div>
         </div>
-        
+
 
         {{-- tabla soportes --}}
         <div class="row">
@@ -91,10 +91,12 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             ID
                                         </th>
+                                        <th></th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Descripción
+                                            Total
                                         </th>
+
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Fecha Factura
@@ -111,12 +113,13 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Razon Social / Nombre
                                         </th>
-
-                                        <th
+                                        <th style="white-space: nowrap; overflow-x: auto;"
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Total
+                                            Descripción
                                         </th>
-                                        <th></th>
+
+
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -127,11 +130,20 @@
                                                     {{ $support->id }}
                                                 </span>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
+                                                <a target="_blank" href="{{ Storage::url($support->url) }}">
+                                                    <i class="cursor-pointer fas fa-eye text-secondary"></i>
+                                                </a>
+                                                <a wire:click="$emit('deleteSupport',{{ $support->id }})">
+                                                    <i style="color: red" class="cursor-pointer fas fa-trash "></i>
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
                                                 <span class="text-secondary text-xs">
-                                                    {{ $support->observation }}
+                                                    {{ number_format($support->total_factura) }}
                                                 </span>
                                             </td>
+
                                             <td class="text-center">
                                                 <span class="text-secondary text-xs">
                                                     {{ $support->date_factura }}
@@ -152,19 +164,13 @@
                                                     {{ $support->company }}
                                                 </span>
                                             </td>
-                                            <td class="text-center">
-                                                <span class="text-secondary text-xs">
-                                                    {{ number_format($support->total_factura) }}
-                                                </span>
+                                            <td style="white-space: nowrap; overflow-x: auto; width: 100px">
+                                                <p class="text-secondary text-xs">
+                                                    {{ $support->observation }}
+                                                </p>
                                             </td>
-                                            <td class="text-center">
-                                                <a target="_blank" href="{{ Storage::url($support->url) }}">
-                                                    <i class="cursor-pointer fas fa-eye text-secondary"></i>
-                                                </a>
-                                                <a wire:click="$emit('deleteSupport',{{ $support->id }})">
-                                                    <i style="color: red" class="cursor-pointer fas fa-trash "></i>
-                                                </a>
-                                            </td>
+
+
                                         </tr>
                                     @endforeach
 
@@ -277,8 +283,9 @@
                                 </span>
                             @enderror
                             <br>
-                            <button wire:click="$emit('saveSupport')" style="border: white">
+                            <button wire:click="$emit('saveSupport')">
                                 <i style="color: #b2ca01;font-size: 2rem" class="cursor-pointer fas fa-upload"></i>
+                                Subir Soporte
                             </button>
                         </div>
                     </div>

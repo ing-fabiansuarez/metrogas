@@ -121,3 +121,18 @@ body {
 .alert-danger {
     background-image: none !important;
 }
+
+.form-control::file-selector-button {
+    -webkit-margin-end: .75rem;
+    background-color: var(--color-secundary);
+    border: 0 solid;
+    border-color: inherit;
+    border-inline-end-width: 1px;
+    border-radius: 0;
+    color: #fff;
+    margin: -.5rem -.75rem;
+    margin-inline-end: .75rem;
+    padding: .5rem .75rem;
+    pointer-events: none;
+    transition: all .15s ease-in
+}

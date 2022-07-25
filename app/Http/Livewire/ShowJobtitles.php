@@ -29,8 +29,8 @@ class ShowJobtitles extends Component
 
     public function render()
     {
-        $jobtitles = Jobtitle::where('name', 'like', '%' . $this->search . '%')
-            ->orWhere('id', $this->search)
+        $jobtitles = Jobtitle::orWhere('name', 'ilike', '%' . $this->search . '%')
+            ->orWhere('id', 'ilike', $this->search)
             ->paginate($this->cantEntradas);
         return view('livewire.show-jobtitles', compact('jobtitles'));
     }

@@ -23,10 +23,10 @@
 
 
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                            <table style="width: 100%" class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        <th style="width: 6%" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             N° Solicitud
                                         </th>
                                         <th
@@ -51,11 +51,15 @@
                                     @foreach ($viaticRequests as $viaticReq)
                                         <tr>
                                             <td class="ps-4">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->id }}</p>
+                                                <a href="{{ route('viatic.show', $viaticReq) }}">
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->id }}</p>
+                                                </a>
                                             </td>
                                             <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $viaticReq->justification }}</p>
+                                                <a href="{{ route('viatic.show', $viaticReq) }}">
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ Str::limit($viaticReq->justification, 50) }}</p>
+                                                </a>
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->created_at }}

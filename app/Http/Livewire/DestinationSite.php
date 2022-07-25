@@ -45,7 +45,8 @@ class DestinationSite extends Component
         $keyWord = '%' . $this->keyWord . '%';
         return view('livewire.destination-site.view', [
             'objetsModel' => ModelsDestinationSite::latest()
-                ->orWhere('name', 'LIKE', $keyWord)
+                ->orWhere('name', 'ilike', $keyWord)
+                ->orWhere('id', 'ilike', $keyWord)
                 ->paginate($this->paginationQuantity),
             'title' => $this->title
         ]);

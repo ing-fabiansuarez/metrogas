@@ -45,7 +45,8 @@ class OtherItem extends Component
         $keyWord = '%' . $this->keyWord . '%';
         return view('livewire.other-item.view', [
             'objetsModel' => ModelsOtherItem::latest()
-                ->orWhere('name', 'LIKE', $keyWord)
+                ->orWhere('name', 'ilike', $keyWord)
+                ->orWhere('id', 'ilike', $keyWord)
                 ->paginate($this->paginationQuantity),
             'title' => $this->title
         ]);

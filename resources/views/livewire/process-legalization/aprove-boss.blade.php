@@ -92,10 +92,12 @@
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         ID
                                     </th>
+                                    <th></th>
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Descripción
+                                        Total
                                     </th>
+
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Fecha Factura
@@ -112,12 +114,12 @@
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Razon Social / Nombre
                                     </th>
-
                                     <th
                                         class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Total
+                                        Descripción
                                     </th>
-                                    <th></th>
+
+                                   
                                 </tr>
                             </thead>
                             <tbody>
@@ -128,9 +130,15 @@
                                                 {{ $support->id }}
                                             </span>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
+                                            <a target="_blank" href="{{ Storage::url($support->url) }}">
+                                                <i class="cursor-pointer fas fa-eye text-secondary"></i>
+                                            </a>
+
+                                        </td>
+                                        <td class="text-center">
                                             <span class="text-secondary text-xs">
-                                                {{ $support->observation }}
+                                                {{ number_format($support->total_factura) }}
                                             </span>
                                         </td>
                                         <td class="text-center">
@@ -153,17 +161,13 @@
                                                 {{ $support->company }}
                                             </span>
                                         </td>
-                                        <td class="text-center">
+
+                                        <td>
                                             <span class="text-secondary text-xs">
-                                                {{ number_format($support->total_factura) }}
+                                                {{ $support->observation }}
                                             </span>
                                         </td>
-                                        <td class="text-center">
-                                            <a target="_blank" href="{{ Storage::url($support->url) }}">
-                                                <i class="cursor-pointer fas fa-eye text-secondary"></i>
-                                            </a>
-
-                                        </td>
+                                       
                                     </tr>
                                 @endforeach
 

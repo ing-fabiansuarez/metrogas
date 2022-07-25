@@ -38,7 +38,8 @@ class AproveBoss extends Component
         'addOtherExpenses' => 'addOtherExpenses',
         'aproveViaticRequest' => 'aproveViaticRequest',
         'canceledRequest',
-        'rechazarRequest'
+        'rechazarRequest',
+        'removeOtherExpense'
     ];
 
     /**Reglas */
@@ -221,5 +222,12 @@ class AproveBoss extends Component
 
         $this->emit('responseRezada', true, route('viatic.show', $this->viaticRequest->id));
         DB::commit();
+    }
+
+    public function removeOtherExpense($indexArray)
+    {
+        unset($this->listOtherExpenses[$indexArray]);
+        $this->calculateTotalSites();
+        $this->calculateTotalGeneral();
     }
 }

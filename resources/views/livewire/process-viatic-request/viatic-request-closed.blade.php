@@ -340,7 +340,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <a target="_blank" href="{{ Storage::url($viaticRequest->url_aceptation) }}"
-                            style="color: white" type="button" class="btn bg-secundary btn-sm">Descargar
+                            style="color: white" type="button" class="btn bg-secundary btn-sm">Ver
                             Anticipo</a>
                     </div>
                 </div>

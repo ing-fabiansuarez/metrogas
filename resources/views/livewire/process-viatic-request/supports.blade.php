@@ -335,7 +335,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <a target="_blank" href="{{ Storage::url($viaticRequest->url_aceptation) }}"
-                                style="color: white" type="button" class="btn bg-secundary btn-sm">Descargar
+                                style="color: white" type="button" class="btn bg-secundary btn-sm">Ver
                                 Anticipo</a>
                         </div>
                     </div>
@@ -414,7 +414,7 @@
                                                             <div class="form-group">
                                                                 <input wire:model.defer="newSupportFile"
                                                                     class="form-control form-control-sm pt-1"
-                                                                    type="file" accept="image/*" />
+                                                                    type="file" accept="image/*,.pdf" />
                                                                 @error('newSupportFile')
                                                                     <span class="text-danger text-message-validation">
                                                                         {{ $message }}
@@ -435,9 +435,9 @@
                                                             @enderror
                                                         </td>
                                                         <td class="text-center">
-                                                            <button wire:click="addSupport" style="border: white">
-                                                                <i style="color: #b2ca01"
-                                                                    class="cursor-pointer fas fa-upload"></i>
+                                                            <button wire:click="addSupport" >
+                                                                <i style="color: #b2ca01;font-size: 2rem"
+                                                                    class="cursor-pointer fas fa-upload"></i> Subir
                                                             </button>
                                                         </td>
                                                     </tr>
