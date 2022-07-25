@@ -10,6 +10,7 @@ use Exception;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -43,7 +44,7 @@ class UserController extends Controller
                 return view('mtto.user.create', [
                     'userLdap' => $userLdap,
                     'posibleJobtitle' => $posibleJobtitle,
-                    'jobtitles' => Jobtitle::all()
+                    'jobtitles' => Jobtitle::orderBy('name','asc')->get()
                 ]);
             }
 
@@ -146,17 +147,18 @@ class UserController extends Controller
 
     public function subordinates()
     {
-        $users = null;
-        foreach (Auth::user()->jobtitle->subordinates()->get() as $jobtitle) {
-            if ($users == null) {
-                $users = $jobtitle->users;
-            } else {
-                $users->concat($jobtitle->users);
-            }
+        $users = [];
+
+        foreach (DB::table('users')->select('users.id')
+            ->join('jobtitles', 'users.id_jobtitle', '=', 'jobtitles.id')
+            ->where('jobtitles.id_boss', auth()->user()->jobtitle->id)
+            ->orderBy('users.id','desc')
+            ->get() as $userStdClass) {
+
+            array_push($users, User::find($userStdClass->id));
         }
-        if ($users == null) {
-            $users = array();
-        }
+
+
         return view('mtto.user.subordinates', compact('users'));
     }
     public function storeSubordinates(Request $request)
@@ -167,9 +169,9 @@ class UserController extends Controller
         } else {
             $user->revokePermissionTo('legalization.reintegro');
         }
-        return redirect()->route('user.subordinates')->with('msg',[
-            'class'=>'alert-success',
-            'body'=>'Se guardaron los cambios'
+        return redirect()->route('user.subordinates')->with('msg', [
+            'class' => 'alert-success',
+            'body' => 'Se guardaron los cambios'
         ]);
     }
 }

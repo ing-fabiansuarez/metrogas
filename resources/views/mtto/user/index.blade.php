@@ -26,7 +26,7 @@
                                 <h5 class="mb-0">Usuarios</h5>
                             </div>
                             <a href="{{ route('user.create') }}" class="btn bg-gradient-primary btn-sm mb-0"
-                                type="button">+&nbsp; Agregar Usuario</a>
+                                type="button">+&nbsp; Buscar Usuario</a>
                         </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">

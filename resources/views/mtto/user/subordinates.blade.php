@@ -79,7 +79,7 @@
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $user->jobtitle->name }}
-                                                    <br>Jefe: {{ $user->jobtitle->boss->name }}
+                                                    {{-- <br>Jefe: {{ $user->jobtitle->boss->name }} --}}
                                                 </p>
                                             </td>
 

@@ -15,7 +15,7 @@ class TypeIdentificationSeeder extends Seeder
     public function run()
     {
         TypeIdentification::create(['name' => 'Cedula de Ciudadania', 'abrev' => 'CC']);
-        TypeIdentification::create(['name' => 'Número de Identificación Tributaria', 'abrev' => 'NIT']);
+        TypeIdentification::create(['name' => 'Numero de Identificación Tributaria', 'abrev' => 'NIT']);
         TypeIdentification::create(['name' => 'Tarjeta de Identidad', 'abrev' => 'TI']);
     }
 }

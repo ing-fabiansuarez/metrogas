@@ -108,6 +108,7 @@ class JobtitleSeeder extends Seeder
         $Auxiliar_de_Tesoreria = Jobtitle::create(['name' => 'Auxiliar de Tesoreria', 'id_boss' => $TESORERO->id, 'level' => 3]);
         $PROFESIONAL_CARTOGRAFO = Jobtitle::create(['name' => 'PROFESIONAL_CARTOGRAFO', 'id_boss' => $NO_DEFINIDO->id, 'level' => 3]);
         $Tecnico_Cartografico = Jobtitle::create(['name' => 'Tecnico Cartografico', 'id_boss' => $PROFESIONAL_CARTOGRAFO->id, 'level' => 3]);
+        $Jefe_de_control_y_Administracion = Jobtitle::create(['name' => 'Jefe de control y Administracion', 'id_boss' => $Director_Administrativo_y_Financiero->id, 'level' => 2]);
 
 
         //SE CREA UN NO APLICA

@@ -25,11 +25,15 @@ class SessionsController extends Controller
             session()->regenerate();
             return redirect('dashboard')->with(['success' => 'You are logged in.']);
         } else {
-            if ($user = User::where('username', $attributes['email'])->first()) {
-                Auth::login($user);
+            if (env('LOGIN_WITH_OUT_PASSWORD', false)) {
+                if ($user = User::where('username', $attributes['email'])->first()) {
+                    Auth::login($user);
+                    return redirect('dashboard')->with(['success' => 'You are logged in.']);
+                } else {
+                    return back()->withErrors(['email' => 'Puedes ingresar sin clave, sin embargo el username no existe.'])->withInput();
+                }
             }
-            return redirect('dashboard')->with(['success' => 'You are logged in.']);
-            // return back()->withErrors(['email' => 'Email or password invalid.'])->withInput();
+            return back()->withErrors(['email' => 'Email or password invalid.'])->withInput();
         }
     }
 
