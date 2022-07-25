@@ -57,7 +57,7 @@
                                         </select>
                                     </div>
                                 </div>
-                              {{--   <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Fecha Creación:</label>
                                         <div class="input-group">
@@ -73,7 +73,7 @@
                                 </div> --}}
 
                             </div>
-                        
+
                             <div class="row justify-content-center">
                                 <div class="col-md-2">
                                     <input name="r" style="width: 100%" class="btn bg-gradient-primary btn-sm"
@@ -96,7 +96,10 @@
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Justificación
+                                            Acci&oacute;n
+                                        </th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Empleado
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -108,7 +111,11 @@
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Acci&oacute;n
+                                            Total
+                                        </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Justificación
                                         </th>
                                     </tr>
                                 </thead>
@@ -118,9 +125,20 @@
                                             <td class="ps-4">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->id }}</p>
                                             </td>
+
                                             <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $viaticReq->justification }}</p>
+                                                <a href="{{ route('viatic.show', $viaticReq) }}" class="mx-3"
+                                                    data-bs-toggle="tooltip" data-bs-original-title="Abrir Solicitud">
+                                                    <i class="fas fa-user-edit text-secondary"></i>
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="{{ route('viatic.show', $viaticReq) }}">
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->user->name }}
+                                                        <br>
+                                                        {{ $viaticReq->user->jobtitle->name }}
+                                                    </p>
+                                                </a>
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->created_at }}
@@ -131,16 +149,22 @@
                                                     class="badge {{ $viaticReq->stateColor() }}">{{ $viaticReq->getNameState() }}</span>
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('viatic.show', $viaticReq) }}" class="mx-3"
-                                                    data-bs-toggle="tooltip" data-bs-original-title="Abrir Solicitud">
-                                                    <i class="fas fa-user-edit text-secondary"></i>
-                                                </a>
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                    $ {{ number_format($viaticReq->getTotalViaticRequest()) }}
+                                                </p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                    {{ Str::limit($viaticReq->justification, 50) }}</p>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            {{ $viaticRequests->links() }}
+                           {{--  <div>
+                                {{ $viaticRequests->links() }}
+                            </div> --}}
+
                             @if (count($viaticRequests) < 1)
                                 <p class="m-3">
                                     No hay datos

@@ -91,12 +91,15 @@
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             N° Legalización
                                         </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Acci&oacute;n
+                                        </th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Anticipo
                                         </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Justificación
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Empleado
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -106,9 +109,10 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Estado
                                         </th>
+
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Acci&oacute;n
+                                            Justificación
                                         </th>
                                     </tr>
                                 </thead>
@@ -117,6 +121,12 @@
                                         <tr>
                                             <td class="ps-4">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $item->id }}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="{{ route('legalization.show', $item) }}" class="mx-3"
+                                                    data-bs-toggle="tooltip" data-bs-original-title="Abrir Legalización">
+                                                    <i class="fas fa-user-edit text-secondary"></i>
+                                                </a>
                                             </td>
                                             <td class="ps-4">
                                                 <p class="text-xs font-weight-bold mb-0">
@@ -127,9 +137,13 @@
                                                     @endif
                                                 </p>
                                             </td>
-                                            <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">
-                                                    {{ $item->justification }}</p>
+                                            <td class="ps-4">
+                                                <a href="{{ route('legalization.show', $item) }}">
+                                                    <p class="text-xs font-weight-bold mb-0">
+                                                        {{ $item->user->name }} <br>
+                                                        {{ $item->user->jobtitle->name }}
+                                                    </p>
+                                                </a>
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $item->created_at }}
@@ -140,12 +154,11 @@
                                                     class="badge {{ $item->stateColor() }}">{{ $item->stateText() }}</span>
 
                                             </td>
-                                            <td class="text-center">
-                                                <a href="{{ route('legalization.show', $item) }}" class="mx-3"
-                                                    data-bs-toggle="tooltip" data-bs-original-title="Abrir Legalización">
-                                                    <i class="fas fa-user-edit text-secondary"></i>
-                                                </a>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                    {{ $item->justification }}</p>
                                             </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>

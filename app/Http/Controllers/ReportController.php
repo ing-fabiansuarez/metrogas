@@ -34,14 +34,14 @@ class ReportController extends Controller
         }
 
 
-        $viaticRequests = $viaticRequests->paginate(10);
+        $viaticRequests = $viaticRequests->orderBy('id', 'desc')->get();
 
         if ($request->get('r') == "Exportar") {
             return (new ViaticRequestExport)->download('Solicitud_de_anticipos.xlsx');
         }
         return view('reports.viatic-request.list_request', [
             'viaticRequests' => $viaticRequests,
-            'users' => User::all(),
+            'users' => User::orderBy('name', 'desc')->get(),
             'states' => EStateRequest::cases(),
             'request' => $request
         ]);
@@ -67,7 +67,7 @@ class ReportController extends Controller
         }
 
 
-        $legalizations = $legalizations->paginate(10);
+        $legalizations = $legalizations->orderBy('id','desc')->get();
 
         if ($request->get('r') == "Exportar") {
             return (new LegalizationExport)->download('Legalizaciones.xlsx');
