@@ -32,7 +32,7 @@
 </head>
 
 <body style="color: black;font-size:0.8rem;">
-    <h1>Legalización N° {{ $legalization->id }} esta en espera de aprobación por parte de Contabilidad!.</h1>
+    <h1>Legalización N° {{ $legalization->id }} del trabajador {{ $legalization->user->name }}, fue ANULADA.</h1>
     <p>Para gestionar el proceso ingresa al siguiente enlace con sus credeciales del directorio activo.</p>
     <a href="{{ url('/') }}">Ingreso al sistema.</a>
     <br>

@@ -39,6 +39,10 @@ class ViaticRequest extends Model
                 foreach (User::permission('aproveTesoreria')->get() as $user) {
                     array_push($correosCopied, $user->email_aux);
                 }
+                //COPIADO S SECRETARIA DE GERENCIA
+                foreach (User::permission('correo.secretaria_gerencia')->get() as $user) {
+                    array_push($correosCopied, $user->email_aux);
+                }
                 break;
         }
 

@@ -57,6 +57,12 @@ class Legalization extends Model
         return  $user->can('aproveGeneral');
     }
 
+    public function canContabilidad(){
+        //determina quien de contabilidad tiene el permiso de aprobar las legalizaciones
+        $user = User::find(auth()->user()->id);
+        return  $user->can('aproveContabilidad');
+    }
+
     public function bosses()
     {
         return $this->user->jobtitle->boss->users()->get();

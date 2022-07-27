@@ -3,13 +3,11 @@
 namespace App\Http\Livewire\ProcessLegalization;
 
 use App\Enums\EStateLegalization;
-use App\Mail\LegalizationMailable;
 use App\Models\ObservationLegalization;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
-class AproveGeneral extends Component
+class AproveContabilidad extends Component
 {
     public $legalization;
 
@@ -29,7 +27,7 @@ class AproveGeneral extends Component
 
     public function render()
     {
-        return view('livewire.process-legalization.aprove-general');
+        return view('livewire.process-legalization.aprove-contabilidad');
     }
 
     public function aproveLegalization()
@@ -40,7 +38,7 @@ class AproveGeneral extends Component
         try {
             DB::beginTransaction();
             //Se cambia el estado
-            $this->legalization->sw_state = EStateLegalization::APROVE_GENERAL->getId();
+            $this->legalization->sw_state = EStateLegalization::APROVE_CONTABILIDAD->getId();
             $this->legalization->save();
 
             $obs = new ObservationLegalization();
@@ -51,7 +49,7 @@ class AproveGeneral extends Component
 
             /**CORREOS ELECTRONICOS */
             //enviar el correo electronico de que se creo un viatico
-            $this->legalization->sendEmail("La Legalización esta fue aprobada por dirección Financiera, pendiente por aprobación de contabilidad!");
+            $this->legalization->sendEmail("La Legalización esta completa, muchas gracias!");
             /**____________________FIN CORREOS ELECTRONICOS_________________ */
 
 

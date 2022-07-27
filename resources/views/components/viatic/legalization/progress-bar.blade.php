@@ -12,7 +12,10 @@
         <li style="width: {{ $width }}%;" @if ($stepsCompletes >= 4) class="active" @endif id="payment">
             <strong>Aprobación Dirección Financiera</strong>
         </li>
-        <li style="width: {{ $width }}%;" @if ($stepsCompletes >= 5) class="active" @endif id="confirm">
+        <li style="width: {{ $width }}%;" @if ($stepsCompletes >= 5) class="active" @endif id="payment">
+            <strong>Contabilidad</strong>
+        </li>
+        <li style="width: {{ $width }}%;" @if ($stepsCompletes >= 6) class="active" @endif id="confirm">
             <strong>{{ __('messages.legalization') }}</strong>
         </li>
     </ul>

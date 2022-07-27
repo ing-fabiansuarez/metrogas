@@ -10,6 +10,7 @@ enum EStateLegalization
     case APROVE_BOSS;
     case CANCELED;
     case APROVE_GENERAL;
+    case APROVE_CONTABILIDAD;
 
     public function getId(): int
     {
@@ -19,6 +20,7 @@ enum EStateLegalization
             EStateLegalization::APROVE_BOSS => 3,
             EStateLegalization::CANCELED => 4,
             EStateLegalization::APROVE_GENERAL => 5,
+            EStateLegalization::APROVE_CONTABILIDAD => 6,
         };
     }
 
@@ -29,7 +31,8 @@ enum EStateLegalization
             EStateLegalization::SEND => 'ENVIADO',
             EStateLegalization::APROVE_BOSS => 'APROBADO JEFE',
             EStateLegalization::CANCELED => 'ANULADA',
-            EStateLegalization::APROVE_GENERAL => 'COMPLETA',
+            EStateLegalization::APROVE_GENERAL => 'APROBADA POR FINANCIERA',
+            EStateLegalization::APROVE_CONTABILIDAD => 'COMPLETA',
         };
     }
 
@@ -40,7 +43,8 @@ enum EStateLegalization
             EStateLegalization::SEND => 'bg-gradient-warning',
             EStateLegalization::APROVE_BOSS => 'badge bg-gradient-light',
             EStateLegalization::CANCELED => 'bg-gradient-danger',
-            EStateLegalization::APROVE_GENERAL => 'bg-gradient-success',
+            EStateLegalization::APROVE_GENERAL => 'bg-gradient-warning',
+            EStateLegalization::APROVE_CONTABILIDAD => 'bg-gradient-success',
         };
     }
 

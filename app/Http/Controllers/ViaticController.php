@@ -121,7 +121,7 @@ class ViaticController extends Controller
     {
         $viaticRequestResult = [];
         foreach (ViaticRequest::where('request_by', auth()->user()->id)->where('sw_state', EStateRequest::CLOSE->getId())->latest()->get() as $viatic) {
-            if (Legalization::where('viatic_request_id',$viatic->id)->get()->count() <= 0) {
+            if (Legalization::where('viatic_request_id', $viatic->id)->get()->count() <= 0) {
                 array_push($viaticRequestResult, $viatic);
             }
         }
@@ -181,6 +181,9 @@ class ViaticController extends Controller
                     return view('viatic.legalization.aprove_general', compact('legalization'));
                     break;
                 case EStateLegalization::APROVE_GENERAL->getId():
+                    return view('viatic.legalization.aprove_contabilidad', compact('legalization'));
+                    break;
+                case EStateLegalization::APROVE_CONTABILIDAD->getId():
                     return view('viatic.legalization.completed', compact('legalization'));
                     break;
             }

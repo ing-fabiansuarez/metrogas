@@ -25,7 +25,7 @@ class SessionsController extends Controller
             session()->regenerate();
             return redirect('dashboard')->with(['success' => 'You are logged in.']);
         } else {
-            if (env('LOGIN_WITH_OUT_PASSWORD', false)) {
+            if (env('LOGIN_WITH_OUT_PASSWORD', false) == true) {
                 if ($user = User::where('username', $attributes['email'])->first()) {
                     Auth::login($user);
                     return redirect('dashboard')->with(['success' => 'You are logged in.']);
