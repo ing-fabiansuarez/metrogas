@@ -100,7 +100,9 @@ Route::group(['middleware' => 'auth'], function () {
 	//USUARIOS
 	Route::prefix('reportes')->middleware('can:report')->group(function () {
 		Route::get('/solicitud-anticipos', [ReportController::class, 'viaticRequest'])->name('report.viaticrequest');
+		Route::post('/solicitud-anticipos', [ReportController::class, 'exportViaticRequest'])->name('report.viaticrequest.export');
 		Route::get('/legalizaciones', [ReportController::class, 'legalization'])->name('report.legalization');
+		Route::post('/legalizaciones', [ReportController::class, 'exportLegalization'])->name('report.legalization.export');
 	});
 
 	/* 

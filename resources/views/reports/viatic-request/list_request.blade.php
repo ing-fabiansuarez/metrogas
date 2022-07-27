@@ -80,8 +80,8 @@
                                         type="submit" value="Buscar">
                                 </div>
                                 <div class="col-md-2">
-                                    <input name="r" type="submit" style="color: white; width: 100%;"
-                                        class="btn bg-secundary btn-sm" value="Exportar">
+                                    <button type="button" style="color: white; width: 100%;" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal" class="btn bg-secundary btn-sm">Exportar</button>
                                 </div>
                             </div>
                         </form>
@@ -161,7 +161,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                           {{--  <div>
+                            {{-- <div>
                                 {{ $viaticRequests->links() }}
                             </div> --}}
 
@@ -172,6 +172,67 @@
                             @endif
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Exportar -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Exportar Información</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('report.viaticrequest.export') }}" method="post">
+                        <div class="modal-body">
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="form-control-label">Desde</label>
+                                    <input class="form-control form-control-sm" type="date" name="fecha_inicial">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label">Hasta</label>
+                                    <input class="form-control form-control-sm" type="date" name="fecha_final">
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_object_guid" class="form-control-label">Solicitada por</label>
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                                        name="empleado">
+                                        <option value="" selected="">-- Seleccionar --</option>
+                                        @foreach ($users as $user)
+                                            <option value="{{ $user->id }}"
+                                                @if ($user->id == $request->get('solicitado_por')) selected @endif>{{ $user->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="input_object_guid" class="form-control-label">Estado</label>
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                                        name="estado_filtro">
+                                        <option value="" selected>-- Seleccionar --</option>
+                                        @foreach ($states as $state)
+                                            <option value="{{ $state->getId() }}"
+                                                @if ($state->getId() == $request->get('estado')) selected @endif>
+                                                {{ $state->getName() }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn bg-gradient-secondary"
+                                data-bs-dismiss="modal">Cerrar</button>
+                            @csrf
+                            <button type="submit" style="color: white" class="btn bg-secundary">Exportar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

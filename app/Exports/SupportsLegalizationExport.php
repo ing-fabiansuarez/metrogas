@@ -15,8 +15,9 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use Maatwebsite\Excel\Concerns\FromCollection;
 
-class LegalizationExport implements FromQuery, WithHeadings, WithMapping, WithColumnFormatting, ShouldAutoSize, WithTitle
+class SupportsLegalizationExport implements FromQuery, WithHeadings, ShouldAutoSize, WithTitle
 {
     use Exportable;
     public function __construct($id, $start_date, $end_date, $employ, $state)
@@ -29,19 +30,20 @@ class LegalizationExport implements FromQuery, WithHeadings, WithMapping, WithCo
     }
     public function query()
     {
-        $consulta = Legalization::query()
-            ->join('users', 'users.id', '=', 'legalizations.created_by')
+        $consulta = SupportsLegalization::query()
+            ->join('type_identifications', 'type_identifications.id', '=', 'supports_legalizations.type_identification')
+            ->join('legalizations', 'legalizations.id', '=', 'supports_legalizations.legalization_id')
             ->select([
-                'legalizations.id',
-                'legalizations.viatic_request_id',
-                'legalizations.sw_state',
-                'legalizations.created_at',
-                'users.name',
-                'users.username',
-                'users.email_aux',
-                'legalizations.justification'
-            ])->orderBy('legalizations.id', 'asc');
-
+                'supports_legalizations.legalization_id',
+                'supports_legalizations.id',
+                'supports_legalizations.date_factura',
+                'supports_legalizations.total_factura',
+                'supports_legalizations.company',
+                'type_identifications.abrev',
+                'supports_legalizations.number_identification',
+                'supports_legalizations.created_at',
+                'supports_legalizations.observation'
+            ])->orderBy('legalizations.id', 'asc');;
         if ($this->id != null) {
             $consulta->where('legalizations.id', $this->id);
         }
@@ -60,44 +62,25 @@ class LegalizationExport implements FromQuery, WithHeadings, WithMapping, WithCo
         return $consulta;
     }
 
-    //este metodo es en que se editan las filas, se debe implemtna el WithMapping y poner el metodo
-    public function map($invoice): array
-    {
-        return [
-            [
-                $invoice->id,
-                $invoice->viatic_request_id == null ? 'Reintegro' : $invoice->viatic_request_id,
-                EStateLegalization::from($invoice->sw_state)->getName(),
-                Date::dateTimeToExcel($invoice->created_at),
-                $invoice->name,
-                $invoice->username,
-                $invoice->email_aux,
-                $invoice->justification,
-            ]
-        ];
-    }
-    public function columnFormats(): array
-    {
-        return [
-            'D' => NumberFormat::FORMAT_DATE_DDMMYYYY,
-        ];
-    }
-
     public function headings(): array
     {
         return [
             'N LEGALIZACION',
-            'Reintegro/Anticipo',
-            'ESTADO',
-            'FECHA CREACION',
-            'EMPLEADO',
-            'USERNAME',
-            'EMAIL',
-            'JUSTIFICACION'
+            'ID SOPORTE',
+            'FECHA FACTURA',
+            'TOTAL FACTURA',
+            'RAZON SOCIAL / NOMBRE EMPRESA',
+            'TIPO IDENTIFICACION',
+            'NUMERO IDENTIFICACION',
+            'FECHA DE CREACION',
+            'OBSERVACION'
         ];
     }
+
+
+
     public function title(): string
     {
-        return 'LEGALIZACIONES';
+        return 'SOPORTES';
     }
 }

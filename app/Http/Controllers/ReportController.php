@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\EStateLegalization;
 use App\Enums\EStateRequest;
 use App\Exports\LegalizationExport;
+use App\Exports\StructureLegalizationExport;
 use App\Exports\ViaticRequestExport;
 use App\Models\Legalization;
 use App\Models\User;
@@ -36,15 +37,26 @@ class ReportController extends Controller
 
         $viaticRequests = $viaticRequests->orderBy('id', 'desc')->get();
 
-        if ($request->get('r') == "Exportar") {
+        /*  if ($request->get('r') == "Exportar") {
             return (new ViaticRequestExport)->download('Solicitud_de_anticipos.xlsx');
-        }
+        } */
         return view('reports.viatic-request.list_request', [
             'viaticRequests' => $viaticRequests,
             'users' => User::orderBy('name', 'desc')->get(),
             'states' => EStateRequest::cases(),
             'request' => $request
         ]);
+    }
+
+    public function exportViaticRequest(Request $request)
+    {
+        //Filtros
+        $start_date =  $request->get('fecha_inicial');
+        $end_date = $request->get('fecha_final');
+        $employ = $request->get('empleado');
+        $state = $request->get('estado_filtro');
+
+        return (new ViaticRequestExport($start_date, $end_date, $employ, $state))->download('Solicitud_de_anticipos.xlsx');
     }
     public function legalization(Request $request)
     {
@@ -65,17 +77,23 @@ class ReportController extends Controller
             $legalizations->where('created_at', '>=', $dates[0] . " 00:00:00");
             $legalizations->where('created_at', '<=', $dates[1] . " 23:59:59");
         }
-
-
-        $legalizations = $legalizations->orderBy('id','desc')->get();
-
-        if ($request->get('r') == "Exportar") {
-            return (new LegalizationExport)->download('Legalizaciones.xlsx');
-        }
+        $legalizations = $legalizations->orderBy('id', 'desc')->get();
         return view('reports.legalization.list', [
             'legalizations' => $legalizations,
             'users' => User::all(),
             'states' => EStateLegalization::cases(),
         ]);
+    }
+
+    public function exportLegalization(Request $request)
+    {
+        //Filtros
+        $id = $request->get('num_solicitud');
+        $start_date =  $request->get('fecha_inicial');
+        $end_date = $request->get('fecha_final');
+        $employ = $request->get('empleado');
+        $state = $request->get('estado_filtro');
+
+        return (new StructureLegalizationExport($id, $start_date, $end_date, $employ, $state))->download('Solicitud_de_anticipos.xlsx');
     }
 }
