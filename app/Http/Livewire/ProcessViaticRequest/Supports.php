@@ -95,7 +95,7 @@ class Supports extends Component
 
             $support = new SupportsViaticRequests();
             $support->viatic_request_id = $this->viaticRequest->id;
-            $support->url = $this->newSupportFile->store("public/solicitud-anticipo/soportes/" . $this->viaticRequest->id . "/");
+            $support->url = $this->newSupportFile->store("public/solicitud-anticipo/soportes/" . $this->viaticRequest->id);
             $support->observation = $this->newSupportObs;
             $support->created_by = auth()->user()->id;
             $support->save();

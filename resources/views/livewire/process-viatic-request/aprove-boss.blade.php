@@ -334,15 +334,17 @@
                             </div>
                         </div>
                     </div>
-
+                    <div wire:loading>
+                        Cargando...
+                    </div>
                     <button wire:click="$emit('beforeAproveViaticRequest')" name="next"
-                        class="btn bg-secundary btn-sm action-button">Aprobar</button>
+                        class="btn bg-secundary btn-sm action-button" wire:loading.attr="disabled">Aprobar</button>
                     <button type="button" class="btn bg-warning action-button" data-bs-toggle="modal"
-                        data-bs-target="#rechazarModal">
+                        data-bs-target="#rechazarModal" wire:loading.attr="disabled">
                         Rechazar
                     </button>
                     <button type="button" class="btn bg-danger action-button" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
+                        data-bs-target="#exampleModal" wire:loading.attr="disabled">
                         Anular
                     </button>
                 @endif

@@ -229,12 +229,18 @@
                     @enderror
                 </div>
 
+                <div wire:loading>
+                    Cargando...
+                </div>
+
                 <button wire:click="$emit('beforeAprove')" name="next"
-                    class="btn bg-secundary btn-sm action-button">Aprobar</button>
-                <button wire:click="$emit('beforeRechazar')" type="button" class="btn bg-warning action-button">
+                    class="btn bg-secundary btn-sm action-button" wire:loading.attr="disabled">Aprobar</button>
+                <button wire:click="$emit('beforeRechazar')" type="button" class="btn bg-warning action-button"
+                    wire:loading.attr="disabled">
                     Rechazar
                 </button>
-                <button wire:click="$emit('beforeCanceled')" type="button" class="btn bg-danger action-button">
+                <button wire:click="$emit('beforeCanceled')" type="button" class="btn bg-danger action-button"
+                    wire:loading.attr="disabled">
                     Anular
                 </button>
             @endif

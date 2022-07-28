@@ -162,9 +162,6 @@
                                                         <a target="_blank" href="{{ Storage::url($support->url) }}">
                                                             <i class="cursor-pointer fas fa-eye text-secondary"></i>
                                                         </a>
-                                                        <a wire:click="$emit('deleteSupport',{{ $support->id }})">
-                                                            <i style="color: red" class="cursor-pointer fas fa-trash "></i>
-                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach

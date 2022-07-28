@@ -155,8 +155,11 @@
                     </div>
                 </div>
             </div>
+            <div wire:loading>
+                Cargando...
+            </div>
             <button wire:click="$emit('beforeCreateViaticRequest')" type="button" name="next"
-                class="next action-button">Crear</button>
+                class="next action-button " wire:loading.attr="disabled">Crear</button>
         </div>
         {{-- <fieldset>
             <div class="form-card">

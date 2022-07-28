@@ -289,8 +289,11 @@
                             </button>
                         </div>
                     </div>
+                    <div wire:loading>
+                        Cargando...
+                    </div>
                     <button wire:click="$emit('beforeSend')" id="button_create" type="submit" name="next"
-                        class="btn next action-button">Pasar
+                        class="btn next action-button" wire:loading.attr="disabled">Pasar
                         Aprobación</button>
                 @endif
             </div>

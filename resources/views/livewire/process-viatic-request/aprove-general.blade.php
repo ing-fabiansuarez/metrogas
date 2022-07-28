@@ -43,8 +43,7 @@
 
                     {{-- justificacion --}}
                     <div class="form-group">
-                        <label
-                            for="exampleFormControlTextarea1">{{ __('forms.viatic_request.justificacion') }}</label>
+                        <label for="exampleFormControlTextarea1">{{ __('forms.viatic_request.justificacion') }}</label>
                         <textarea class="form-control form-control-sm" rows="3"
                             placeholder="{{ __('forms.viatic_request.justificacion.placeholder') }}" disabled>{{ $viaticRequest->justification }}</textarea>
                     </div>
@@ -350,16 +349,19 @@
                     </div>
                 </div>
                 @if ($viaticRequest->canAproveGeneral())
-                    <button wire:click="$emit('beforeAproveViaticRequest')" type="submit" name="next"
-                        class="btn bg-secundary btn-sm action-button">Aprobar</button>
+                    <button wire:click="$emit('beforeAproveViaticRequest')" 
+                        type="submit" name="next" class="btn bg-secundary btn-sm action-button" wire:loading.attr="disabled">Aprobar</button>
                     <button type="button" class="btn bg-warning action-button" data-bs-toggle="modal"
-                        data-bs-target="#rechazarModal">
+                        data-bs-target="#rechazarModal" wire:loading.attr="disabled">
                         Rechazar
                     </button>
                     <button type="button" class="btn bg-danger action-button" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
+                        data-bs-target="#exampleModal" wire:loading.attr="disabled">
                         Anular
                     </button>
+                    <div wire:loading>
+                        Cargando...
+                    </div>
                 @endif
                 {{-- <input type="button" name="previous" class="btn previous action-button-previous" value="Rechazar" /> --}}
             </fieldset>

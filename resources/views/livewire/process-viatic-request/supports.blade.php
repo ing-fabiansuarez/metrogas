@@ -41,8 +41,7 @@
 
                     </div>
                     <div class="form-group">
-                        <label
-                            for="exampleFormControlTextarea1">{{ __('forms.viatic_request.justificacion') }}</label>
+                        <label for="exampleFormControlTextarea1">{{ __('forms.viatic_request.justificacion') }}</label>
                         <textarea class="form-control form-control-sm" rows="3"
                             placeholder="{{ __('forms.viatic_request.justificacion.placeholder') }}" disabled>{{ $viaticRequest->justification }}</textarea>
                     </div>
@@ -435,7 +434,7 @@
                                                             @enderror
                                                         </td>
                                                         <td class="text-center">
-                                                            <button wire:click="addSupport" >
+                                                            <button wire:click="addSupport">
                                                                 <i style="color: #b2ca01;font-size: 2rem"
                                                                     class="cursor-pointer fas fa-upload"></i> Subir
                                                             </button>
@@ -461,15 +460,19 @@
 
                 @if ($viaticRequest->canUploadSupports())
                     <button wire:click="$emit('beforeClose')" type="submit" name="next"
-                        class="btn bg-secundary btn-sm action-button">Finalizar Anticipo</button>
+                        class="btn bg-secundary btn-sm action-button" wire:loading.attr="disabled">Finalizar
+                        Anticipo</button>
                     <button type="button" class="btn bg-warning action-button" data-bs-toggle="modal"
-                        data-bs-target="#rechazarModal">
+                        data-bs-target="#rechazarModal" wire:loading.attr="disabled">
                         Rechazar
                     </button>
                     <button type="button" class="btn bg-danger action-button" data-bs-toggle="modal"
-                        data-bs-target="#exampleModal">
+                        data-bs-target="#exampleModal" wire:loading.attr="disabled">
                         Anular
                     </button>
+                    <div wire:loading>
+                        Cargando...
+                    </div>
                 @endif
 
             </fieldset>

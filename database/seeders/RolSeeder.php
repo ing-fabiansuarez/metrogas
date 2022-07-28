@@ -29,7 +29,9 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'menu-mainten', 'description' => 'Permite el acceso a la configuración de la aplicación'])->syncRoles([$roleAdmin]);
 
         //permisos para el proceso de viaticos
-        Permission::create(['name' => 'aproveGeneral', 'description' => 'Aprobación o Anulación general de las solicitudes de Anticipos de viaticos.'])->syncRoles([$roleDirectorFinanciero, $roleJefeFinanciero]);
+        Permission::create(['name' => 'aproveGeneral', 'description' => 'Aprobación o Anulación general de las legalizaciones.'])->syncRoles([$roleDirectorFinanciero, $roleJefeFinanciero]);
+        Permission::create(['name' => 'aproveGeneralJefe', 'description' => 'Aprobación o Anulación general de las Solicitudes menores a un salario minimo.'])->syncRoles([$roleJefeFinanciero]);
+        Permission::create(['name' => 'aproveGeneralDirector', 'description' => 'Aprobación o Anulación general de las Solicitudes mayores a un salario minimo.'])->syncRoles([$roleDirectorFinanciero]);
         Permission::create(['name' => 'aproveTesoreria', 'description' => 'Aprobación o Anulación de Tesoreria y Soportes de las solicitudes de Anticipos de viaticos.'])->syncRoles([$roleTesoreria]);
         Permission::create(['name' => 'aproveContabilidad', 'description' => 'Aprobación o Anulación de Contabilidad de las legalizaciones.'])->syncRoles([$roleContabilidad]);
         Permission::create(['name' => 'report', 'description' => 'Generar y ver los reportes.'])->syncRoles([$roleJefeFinanciero, $roleDirectorFinanciero, $roleContabilidad, $roleTesoreria]);

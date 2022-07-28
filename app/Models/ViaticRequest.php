@@ -26,7 +26,13 @@ class ViaticRequest extends Model
         switch ($this->sw_state) {
             case EStateRequest::ACCEPTED_EMPLOYEE->getId():
                 //COPIADO busca las personas que tienen el permiso de aprobar la solicitudes de anticipos para copiarlos al correo
-                foreach (User::permission('aproveGeneral')->get() as $user) {
+                if ($this->getTotalViaticRequest() >= 1000000) {
+                    $userss = User::permission('aproveGeneralDirector')->get();
+                } else {
+                    $userss = User::permission('aproveGeneralJefe')->get();
+                }
+
+                foreach ($userss as $user) {
                     array_push($correosCopied, $user->email_aux);
                 }
                 break;
@@ -83,9 +89,13 @@ class ViaticRequest extends Model
 
     public function canAproveGeneral()
     {
-        //aqui va la aprobacion por parte de la direccion financiera
+        //Aqui se define si es mayor a un salario minimo tiene que aprobarlo el director financiero sino la jefe financiera
         $user = User::find(auth()->user()->id);
-        return  $user->can('aproveGeneral');
+        if ($this->getTotalViaticRequest() >= 1000000) {
+            return $user->can('aproveGeneralDirector');
+        } else {
+            return $user->can('aproveGeneralJefe');
+        }
     }
 
     public function canUploadSupports()
