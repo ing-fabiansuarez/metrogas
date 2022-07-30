@@ -159,7 +159,7 @@
 
                 <div class="row justify-content-center">
                     <div class="col-md-6">
-                        <x-viatic.viatic-request.observations :viaticRequest="$viaticRequest" />
+                        <x-viatic-requests.observations :viaticRequest="$viaticRequest" />
                     </div>
                 </div>
             </div>

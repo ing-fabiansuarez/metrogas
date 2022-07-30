@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\Viatic\ViaticRequest;
+namespace App\View\Components\ViaticRequests;
 
 use App\Models\ViaticRequest;
 use Illuminate\View\Component;
@@ -12,8 +12,14 @@ class Observations extends Component
     {
         $this->viaticRequest = $viaticRequest;
     }
+
+    /**
+     * Get the view / contents that represent the component.
+     *
+     * @return \Illuminate\Contracts\View\View|\Closure|string
+     */
     public function render()
     {
-        return view('components.viatic.viatic-request.observations');
+        return view('components.viatic-requests.observations');
     }
 }

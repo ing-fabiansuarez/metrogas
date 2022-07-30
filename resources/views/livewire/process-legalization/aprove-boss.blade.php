@@ -183,7 +183,7 @@
     {{-- Observations --}}
     <div class="row justify-content-center mb-4">
         <div class="col-md-6">
-            <x-viatic.legalization.observations :legalization="$legalization" />
+            <x-legalizations.observations :legalization="$legalization" />
         </div>
     </div>
 

@@ -325,7 +325,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <x-viatic.viatic-request.observations :viaticRequest="$viaticRequest" />
+                            <x-viatic-requests.observations :viaticRequest="$viaticRequest" />
 
                             {{-- Observacion --}}
                             <div class="form-group">

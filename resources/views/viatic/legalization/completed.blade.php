@@ -3,7 +3,7 @@
     <div class="card px-3 pt-4 pb-0 mt-0 mb-3">
         <div id="msform">
             <!-- progressbar -->
-            <x-viatic.legalization.progress-bar :stepsCompletes='6' />
+            <x-legalizations.progress-bar :stepsCompletes='6' />
 
             <br>
             <div>
@@ -62,8 +62,7 @@
 
                                 <br>
                                 @if ($legalization->viatic_request_id != null)
-                                    <a target="_blank"
-                                        href="{{ route('viatic.show', $legalization->viatic_request_id) }}">
+                                    <a target="_blank" href="{{ route('viatic.show', $legalization->viatic_request_id) }}">
                                         Solicitud Anticipo N°
                                         {{ $legalization->viatic_request_id }}</a><br>
                                     Total Anticipo: $
