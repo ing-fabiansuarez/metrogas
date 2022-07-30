@@ -1,11 +1,11 @@
 <?php
 
-namespace App\View\Components\viatic\viaticRequest;
+namespace App\View\Components\Viatic\ViaticRequest;
 
 use App\Models\ViaticRequest;
 use Illuminate\View\Component;
 
-class observations extends Component
+class Observations extends Component
 {
     public $viaticRequest;
     public function __construct(ViaticRequest $viaticRequest)

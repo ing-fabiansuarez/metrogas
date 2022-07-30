@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\viatic\legalization;
+namespace App\View\Components\Viatic\Legalization;
 
 use Illuminate\View\Component;
 
