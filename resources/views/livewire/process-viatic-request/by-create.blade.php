@@ -103,7 +103,7 @@
                                         @endforeach
                                         <tr>
                                             <td class="text-center">
-                                                <x-selects.sites-origin />
+                                                <x-selects-group.sites-origin />
                                                 @error('origin')
                                                     <span class="text-danger text-message-validation">
                                                         {{ $message }}
@@ -111,7 +111,7 @@
                                                 @enderror
                                             </td>
                                             <td class="text-center">
-                                                <x-selects.sites-destination />
+                                                <x-selects-group.sites-destination />
                                                 @error('destination')
                                                     <span class="text-danger text-message-validation">
                                                         {{ $message }}

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\View\Components\selects;
+namespace App\View\Components\SelectsGroup;
 
-use App\Models\OriginSite;
+use App\Models\OtherItem;
 use Illuminate\View\Component;
 
-class SitesOrigin extends Component
+class OtherItems extends Component
 {
     /**
      * Create a new component instance.
@@ -24,8 +24,6 @@ class SitesOrigin extends Component
      */
     public function render()
     {
-        return view('components.selects.sites-origin', [
-            'objects' => OriginSite::all()
-        ]);
+        return view('components.selects-group.other-items', ['items' => OtherItem::all()]);
     }
 }

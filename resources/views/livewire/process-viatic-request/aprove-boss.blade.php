@@ -320,7 +320,7 @@
                             {{-- Gestion --}}
                             <div class="form-group">
                                 <label>Gestión</label>
-                                <x-selects.other-items />
+                                <x-selects-group.other-items />
 
                             </div>
                         </div>

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\View\Components\selects;
+namespace App\View\Components\SelectsGroup;
 
-use App\Models\DestinationSite;
+use App\Models\OriginSite;
 use Illuminate\View\Component;
 
-class SitesDestination extends Component
+class SitesOrigin extends Component
 {
     /**
      * Create a new component instance.
@@ -24,8 +24,8 @@ class SitesDestination extends Component
      */
     public function render()
     {
-        return view('components.selects.sites-destination', [
-            'objects' => DestinationSite::all()
+        return view('components.selects-group.sites-origin', [
+            'objects' => OriginSite::all()
         ]);
     }
 }
