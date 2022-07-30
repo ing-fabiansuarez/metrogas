@@ -220,6 +220,16 @@ class ViaticController extends Controller
             $visticRequestsList = $visticRequestsList->concat($viaticRequestAproveTesoreria);
         }
 
+        //se aqui la consulta de legalizaciones para LAS PERSONAS QUE TIENE QUE APROBAR
+        if ($user->can('aproveGeneral')) {
+            $legalizationAproveGeneral =  Legalization::where('sw_state', EStateLegalization::APROVE_BOSS->getId())->get();
+            $legalizationsList = $legalizationsList->concat($legalizationAproveGeneral);
+        }
+        if ($user->can('aproveContabilidad')) {
+            $legalizationContabilidad =  Legalization::where('sw_state', EStateLegalization::APROVE_GENERAL->getId())->get();
+            $legalizationsList = $legalizationsList->concat($legalizationContabilidad);
+        }
+
         return view('viatic.by-aprove', [
             'viaticRequests' =>  $visticRequestsList,
             'legalizations' => $legalizationsList,
