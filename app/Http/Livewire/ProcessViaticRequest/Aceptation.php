@@ -35,7 +35,7 @@ class Aceptation extends Component
         $this->validate([
             'file_sign' => 'required|max:1024',
         ]);
-        try {
+       /*  try { */
             DB::beginTransaction();
             //se cambia de estado
             $newState = EStateRequest::ACCEPTED_EMPLOYEE->getId();
@@ -51,9 +51,9 @@ class Aceptation extends Component
 
             $this->emit('response', true, route('viatic.show', $this->viaticRequest->id));
             DB::commit();
-        } catch (\Exception $e) {
+       /*  } catch (\Exception $e) {
             DB::rollBack();
             $this->emit('response', false, null);
-        }
+        } */
     }
 }

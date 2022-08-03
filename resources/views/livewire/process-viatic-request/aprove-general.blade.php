@@ -15,6 +15,15 @@
                     role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br>
+            <div class="alert alert-success" role="alert">
+                <strong>Usuarios que pueden aprobar:</strong><br>
+                @foreach ($viaticRequest->usersCanAproveGeneral() as $user)
+                    {{ $user->name . ' (' . $user->jobtitle->name . ')' }} <br>
+                @endforeach
+                @if (count($viaticRequest->usersCanAproveGeneral()) <= 0)
+                    Aún no hay usuario con Rol de Jefe Financiero.
+                @endif
+            </div>
             <fieldset>
                 <div class="form-card">
                     <div class="row">
@@ -349,8 +358,8 @@
                     </div>
                 </div>
                 @if ($viaticRequest->canAproveGeneral())
-                    <button wire:click="$emit('beforeAproveViaticRequest')" 
-                        type="submit" name="next" class="btn bg-secundary btn-sm action-button" wire:loading.attr="disabled">Aprobar</button>
+                    <button wire:click="$emit('beforeAproveViaticRequest')" type="submit" name="next"
+                        class="btn bg-secundary btn-sm action-button" wire:loading.attr="disabled">Aprobar</button>
                     <button type="button" class="btn bg-warning action-button" data-bs-toggle="modal"
                         data-bs-target="#rechazarModal" wire:loading.attr="disabled">
                         Rechazar

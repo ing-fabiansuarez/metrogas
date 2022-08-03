@@ -20,7 +20,11 @@ class ViaticRequest extends Model
         $correo->subject("Solicitud N° " . $this->id . " - " . $subject);
         $correosCopied = [];
         foreach ($this->user->jobtitle->boss->users()->get() as $user) {
-            array_push($correosCopied, $user->email_aux);
+            if ($user->jobtitle->name != 'N/D (No Definido)') {
+                if ($user->email_aux != null) {
+                    array_push($correosCopied, $user->email_aux);
+                }
+            }
         }
         //si esta en estado aprobado que envie un correo tambien a la que tiene el perfil de direccion financiera para que apruebe
         switch ($this->sw_state) {
@@ -33,21 +37,29 @@ class ViaticRequest extends Model
                 }
 
                 foreach ($userss as $user) {
-                    array_push($correosCopied, $user->email_aux);
+                    if ($user->email_aux != null) {
+                        array_push($correosCopied, $user->email_aux);
+                    }
                 }
                 break;
             case EStateRequest::APROVED_GENERAL->getId():
                 //COPIADO busca las personas que tienen el permiso de aprobar la solicitudes de anticipos para copiarlos al correo
                 foreach (User::permission('aproveGeneral')->get() as $user) {
-                    array_push($correosCopied, $user->email_aux);
+                    if ($user->email_aux != null) {
+                        array_push($correosCopied, $user->email_aux);
+                    }
                 }
                 //COPIADO tesoreria
                 foreach (User::permission('aproveTesoreria')->get() as $user) {
-                    array_push($correosCopied, $user->email_aux);
+                    if ($user->email_aux != null) {
+                        array_push($correosCopied, $user->email_aux);
+                    }
                 }
                 //COPIADO S SECRETARIA DE GERENCIA
                 foreach (User::permission('correo.secretaria_gerencia')->get() as $user) {
-                    array_push($correosCopied, $user->email_aux);
+                    if ($user->email_aux != null) {
+                        array_push($correosCopied, $user->email_aux);
+                    }
                 }
                 break;
         }
@@ -87,6 +99,21 @@ class ViaticRequest extends Model
         return false;
     }
 
+    public function usersCanAproveGeneral()
+    {
+        $usertotal = [];
+        if ($this->getTotalViaticRequest() >= 1000000) {
+            $userss = User::permission('aproveGeneralDirector')->get();
+        } else {
+            $userss = User::permission('aproveGeneralJefe')->get();
+        }
+
+        foreach ($userss as $user) {
+            array_push($usertotal, $user);
+        }
+        return $usertotal;
+    }
+
     public function canAproveGeneral()
     {
         //Aqui se define si es mayor a un salario minimo tiene que aprobarlo el director financiero sino la jefe financiera
@@ -98,6 +125,15 @@ class ViaticRequest extends Model
         }
     }
 
+    public function usersCanUploadSupports()
+    {
+        $users = [];
+        foreach (User::permission('aproveTesoreria')->get() as $user) {
+
+            array_push($users, $user);
+        }
+        return $users;
+    }
     public function canUploadSupports()
     {
         $user = User::find(auth()->user()->id);
@@ -106,7 +142,13 @@ class ViaticRequest extends Model
 
     public function bosses()
     {
-        return $this->user->jobtitle->boss->users()->get();
+        $bosses = [];
+        foreach ($this->user->jobtitle->boss->users()->get() as $user) {
+            if ($user->jobtitle->name != 'N/D (No Definido)') {
+                array_push($bosses, $user);
+            }
+        }
+        return $bosses;
     }
 
     public function sites()

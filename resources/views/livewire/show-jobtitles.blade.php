@@ -157,8 +157,8 @@
                                     class="col-form-label">{{ __('forms.jobtitle.boss') }}</label>
                                 <select wire:model.defer="jobtitle.id_boss" class="form-select"
                                     aria-label=".form-select-sm example">
-                                    @foreach ($jobtitles as $jobtitle)
-                                        <option value="{{ $jobtitle->id }}">{{ $jobtitle->name }}</option>
+                                    @foreach ($allJobtitles as $job)
+                                        <option value="{{ $job->id }}">{{ $job->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('jobtitle.id_boss')

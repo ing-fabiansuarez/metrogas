@@ -25,13 +25,19 @@ class Legalization extends Model
         $correo->subject("Legalización N° " . $this->id . " - " . $subject);
         $correosCopied = [];
         foreach ($this->user->jobtitle->boss->users()->get() as $user) {
-            array_push($correosCopied, $user->email_aux);
+            if ($user->jobtitle->name != 'N/D (No Definido)') {
+                if ($user->email_aux != null) {
+                    array_push($correosCopied, $user->email_aux);
+                }
+            }
         }
         switch ($this->sw_state) {
             case EStateLegalization::APROVE_GENERAL->getId():
                 //COPIADO busca las personas que tienen el permiso de aprobar la solicitudes de anticipos para copiarlos al correo
                 foreach (User::permission('aproveGeneral')->get() as $user) {
-                    array_push($correosCopied, $user->email_aux);
+                    if ($user->email_aux != null) {
+                        array_push($correosCopied, $user->email_aux);
+                    }
                 }
                 break;
         }
@@ -57,7 +63,8 @@ class Legalization extends Model
         return  $user->can('aproveGeneral');
     }
 
-    public function canContabilidad(){
+    public function canContabilidad()
+    {
         //determina quien de contabilidad tiene el permiso de aprobar las legalizaciones
         $user = User::find(auth()->user()->id);
         return  $user->can('aproveContabilidad');
@@ -65,7 +72,13 @@ class Legalization extends Model
 
     public function bosses()
     {
-        return $this->user->jobtitle->boss->users()->get();
+        $bosses = [];
+        foreach ($this->user->jobtitle->boss->users()->get() as $user) {
+            if ($user->jobtitle->name != 'N/D (No Definido)') {
+                array_push($bosses, $user);
+            }
+        }
+        return $bosses;
     }
 
     public function getNameState()

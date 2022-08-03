@@ -15,6 +15,15 @@
                     role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <br>
+            <div class="alert alert-success" role="alert">
+                <strong>Usuarios que pueden aprobar:</strong><br>
+                @foreach ($viaticRequest->usersCanUploadSupports() as $user)
+                    {{ $user->name . ' (' . $user->jobtitle->name . ')' }} <br>
+                @endforeach
+                @if (count($viaticRequest->usersCanUploadSupports()) <= 0)
+                    Aún no hay usuario con Rol de Tesoreria.
+                @endif
+            </div>
             <fieldset>
                 <div class="form-card">
                     <div class="row">
