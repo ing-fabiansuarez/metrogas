@@ -32,7 +32,10 @@ class LdapAttributeHandler
          * Hay que determinar si existe el usuario para que no cambie el cargo que tiene asignado.
          */
 
-        if (!$eloquentUser->exists()) {
+        $userrr = EloquentUser::where('username', $eloquentUser->username)->first();
+        if ($userrr) {
+            echo "existe";
+        } else {
             //asignamos el rol aqui
             if ($eloquentUser->username == 'fsuarez') {
                 $eloquentUser->syncRoles('Administrador');
@@ -40,8 +43,8 @@ class LdapAttributeHandler
                 $eloquentUser->syncRoles('Rol Basico');
             }
             //Agregamos la logica para crear un jobtitle en el sistema
-            $jobtitle = Jobtitle::where('name', 'ilike', $eloquentUser->jobtitle_ldap)->first();
-            if (isset($jobtitle)) { //determina si el cargo exite, si es asi se lo coloca si no lo crea nuevo
+            $jobtitle = Jobtitle::where('name', 'ilike', $eloquentUser->jobtitle_ldap != null ? $eloquentUser->jobtitle_ldap : "")->first();
+            if ($jobtitle) { //determina si el cargo exite, si es asi se lo coloca si no lo crea nuevo
                 $eloquentUser->id_jobtitle = $jobtitle->id;
             } else {
                 $eloquentUser->id_jobtitle = Jobtitle::where('name', 'N/D (No Definido)')->first()->id;

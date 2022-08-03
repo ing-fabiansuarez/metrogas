@@ -8,6 +8,7 @@
         "php": "^7.3|^8.0",
         "adldap2/adldap2-laravel": "^6.1",
         "barryvdh/laravel-dompdf": "^1.0",
+        "doctrine/dbal": "^3.3",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.4",
         "laravel/framework": "^9.0",
