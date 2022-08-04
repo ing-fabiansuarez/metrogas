@@ -22,6 +22,8 @@
                                 class="list-group-item list-group-item-action">{{ __('sidebar.jobtitles') }}</a>
                             <a href="{{ route('typeidenfification.index') }}"
                                 class="list-group-item list-group-item-action">Tipo de Identificatión</a>
+                            <a href="{{ route('centrodecostos.index') }}"
+                                class="list-group-item list-group-item-action">Centro de Costos</a>
                         </div>
 
                     </div>
@@ -44,11 +46,10 @@
                             <a href="{{ route('destinationsite.index') }}"
                                 class="list-group-item list-group-item-action">Sitios
                                 Destino</a>
-                            <a href="{{ route('originsite.index') }}"
-                                class="list-group-item list-group-item-action">Sitios
+                            <a href="{{ route('originsite.index') }}" class="list-group-item list-group-item-action">Sitios
                                 Origen</a>
-                            <a href="{{ route('otherexpense.index') }}"
-                                class="list-group-item list-group-item-action">Otros Gastos</a>
+                            <a href="{{ route('otherexpense.index') }}" class="list-group-item list-group-item-action">Otros
+                                Gastos</a>
                             <a href="{{ route('otheritem.index') }}" class="list-group-item list-group-item-action">Items
                                 Gestión</a>
                         </div>

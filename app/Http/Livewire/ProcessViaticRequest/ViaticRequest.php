@@ -4,6 +4,7 @@ namespace App\Http\Livewire\ProcessViaticRequest;
 
 use App\Enums\EStateRequest;
 use App\Mail\ViaticRequestMaileable;
+use App\Models\CentroDeCostos;
 use App\Models\DestinationSite;
 use App\Models\OriginSite;
 use App\Models\ViaticRequest as ModelsViaticRequest;
@@ -22,6 +23,8 @@ class ViaticRequest extends Component
     public $destination;
     public $start_date;
     public $end_date;
+    public $centroDeCostos;
+    public $numeroIdentificacion;
 
     //escuchadores de eventos
     protected $listeners = [
@@ -37,7 +40,9 @@ class ViaticRequest extends Component
 
     public function render()
     {
-        return view('livewire.process-viatic-request.viatic-request');
+        return view('livewire.process-viatic-request.viatic-request', [
+            'centroDeCostosDB' => CentroDeCostos::all()
+        ]);
     }
 
     public function addSite()
@@ -78,6 +83,8 @@ class ViaticRequest extends Component
         //Justificacion
         $this->validate([
             'justification' => 'required',
+            'centroDeCostos' => 'required',
+            'numeroIdentificacion' => 'required',
         ]);
         //Comisines
         if (count($this->listSite) < 1) {
@@ -91,7 +98,10 @@ class ViaticRequest extends Component
         $viaticRequest->justification = $this->justification;
         $viaticRequest->request_by = auth()->user()->id;
         $viaticRequest->sw_state = EStateRequest::CREATED->getId();
+        $viaticRequest->centro_de_costos_id = $this->centroDeCostos;
+        $viaticRequest->num_identification = $this->numeroIdentificacion;
         $viaticRequest->save();
+
         foreach ($this->listSite as $site) {
             $newDetalle = new ViaticRequestsSitesDetalle();
             $newDetalle->id_origin_site = $site['id_origin_site'];

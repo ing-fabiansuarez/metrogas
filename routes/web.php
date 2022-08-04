@@ -60,6 +60,11 @@ Route::group(['middleware' => 'auth'], function () {
 			return view('livewire.type-identification.index');
 		})->name('typeidenfification.index');
 
+		//tipo identificacion
+		Route::get('centro-de-costos', function () {
+			return view('livewire.centro-de-costos.index');
+		})->name('centrodecostos.index');
+
 		//Mantenimineto de los roles
 		Route::get('roles', function () {
 			return view('livewire.roles.index');

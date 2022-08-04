@@ -36,6 +36,38 @@
                         </span>
                     @enderror
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Centro de costos</label>
+                            <select wire:model.defer="centroDeCostos" class="form-select form-select-sm"
+                                aria-label=".form-select-sm example">
+                                <option value="" selected>{{ __('forms.select.selected') }}
+                                </option>
+                                @foreach ($centroDeCostosDB as $centro)
+                                    <option value="{{ $centro->id }}">{{ $centro->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('centroDeCostos')
+                                <span class="text-danger text-message-validation">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Número de Cedula (Sin puntos ni caracteres especiales)</label>
+                            <input wire:model.defer="numeroIdentificacion" type="number"
+                                class="form-control form-control-sm">
+                            @error('numeroIdentificacion')
+                                <span class="text-danger text-message-validation">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
 
                 <div class="table-responsive p-0">
                     <label>{{ __('messages.information_about_comision') }}</label>

@@ -166,6 +166,11 @@ class ViaticRequest extends Model
         return $this->belongsTo(User::class, 'request_by', 'id');
     }
 
+    public function centroDeCostos()
+    {
+        return $this->belongsTo(CentroDeCostos::class, 'centro_de_costos_id', 'id');
+    }
+
     //metodo de muchos a mucho para los "otros gastos"
 
     public function otherExpenses()
