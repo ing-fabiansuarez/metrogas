@@ -86,6 +86,25 @@
                 {{ $viaticRequest->user->jobtitle->level }}
             </td>
         </tr>
+        <tr>
+            <td style="padding-left: 15px">
+                <b>Centro de Costos:</b>
+            </td>
+            <td>
+                @if ($viaticRequest->centroDeCostos != null)
+                    {{ $viaticRequest->centroDeCostos->name }}
+                @endif
+            </td>
+            <td>
+                <b>Num Identificación:</b>
+            </td>
+            <td>
+                @if ($viaticRequest->num_identification != null)
+                    {{ $viaticRequest->num_identification }}
+                @endif
+
+            </td>
+        </tr>
     </table>
     <br>
     <table style="width: 100%">
