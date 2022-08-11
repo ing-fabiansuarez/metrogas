@@ -82,7 +82,7 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $user->name }}</p>
                                             </td>
                                             <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $user->email }}</p>
+                                                <p class="text-xs font-weight-bold mb-0">{{ $user->email_aux }}</p>
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $user->jobtitle->name }}</p>
