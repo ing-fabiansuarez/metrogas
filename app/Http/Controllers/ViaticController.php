@@ -186,6 +186,9 @@ class ViaticController extends Controller
                 case EStateLegalization::APROVE_CONTABILIDAD->getId():
                     return view('viatic.legalization.completed', compact('legalization'));
                     break;
+                case EStateLegalization::CANCELED->getId():
+                    return view('viatic.legalization.canceled', compact('legalization'));
+                    break;
             }
             return;
         }
