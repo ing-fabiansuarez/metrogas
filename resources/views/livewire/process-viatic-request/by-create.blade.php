@@ -38,6 +38,39 @@
                     @enderror
                 </div>
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Centro de costos</label>
+                            <select wire:model.defer="centroDeCostos" class="form-select form-select-sm"
+                                aria-label=".form-select-sm example">
+                                <option value="" selected>{{ __('forms.select.selected') }}
+                                </option>
+                                @foreach ($centroDeCostosDB as $centro)
+                                    <option value="{{ $centro->id }}">{{ $centro->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('centroDeCostos')
+                                <span class="text-danger text-message-validation">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Número de Cedula (Sin puntos ni caracteres especiales)</label>
+                            <input wire:model.defer="numeroIdentificacion" type="number"
+                                class="form-control form-control-sm">
+                            @error('numeroIdentificacion')
+                                <span class="text-danger text-message-validation">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                </div>
+
                 {{-- comision --}}
                 <div class="table-responsive p-0">
                     <label>{{ __('messages.information_about_comision') }}</label>
@@ -157,9 +190,205 @@
                     </div>
                 </div>
 
+
+                {{-- tarifas --}}
+                <div class="table-responsive p-0">
+                    <label for="exampleFormControlTextarea1">{{ __('messages.rates') }}</label>
+
+                    <table class="table table-hover table-bordered align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.accommodation') }}
+                                </th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.feeding') }}
+                                </th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.intermunicipal_transport') }}
+                                </th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.municipal_transport') }}
+                                </th>
+                                <th style="width: 15%"
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Total
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($listTarifas as $index => $tarifa)
+                                <tr>
+                                    <td>
+                                        <span class="text-secondary text-xs">
+                                            Destino {{ $index + 1 }}
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control form-control-sm"
+                                                wire:model="listTarifas.{{ $index }}.alojamiento">
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input type="number"
+                                                wire:model="listTarifas.{{ $index }}.alimentacion"
+                                                class="form-control form-control-sm">
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control form-control-sm"
+                                                wire:model="listTarifas.{{ $index }}.trans_intermunicipal">
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control form-control-sm"
+                                                wire:model="listTarifas.{{ $index }}.trans_municipal">
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <button class="form-control form-control-sm"
+                                                disabled>{{ number_format($tarifa['total']) }}</button>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            
+                            @if ($listOtherExpenses != null)
+                                @foreach ($listOtherExpenses as $index => $otherExpense)
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td class="text-center">
+                                        </td>
+                                        <td class="text-center">
+                                        </td>
+                                        <td class="text-center">
+                                            <a wire:click="$emit('removeOtherExpense',{{ $index }})">
+                                                <i class="cursor-pointer fas fa-trash text-secondary text-danger"></i>
+                                            </a>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="text-secondary text-xs">
+                                                {{ $otherExpense['name_otro_gasto'] }}
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="input-group">
+                                                <button class="form-control form-control-sm"
+                                                    disabled>{{ number_format($otherExpense['cantidad_otro_gasto']) }}</button>
+                                                <span class="input-group-text py-0">$</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+
+                            <tr>
+                                <td>
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                    <span class="text-secondary text-xs">
+                                        TOTAL ANTICIPOS
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="input-group">
+                                        <button type="number" class="form-control form-control-sm"
+                                            disabled>{{ number_format($totalAnticipo) }}</button>
+                                        <span class="input-group-text py-0">$</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <span class="text-secondary text-xs">
+                                        OTROS GASTOS
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <select wire:model.defer="tipo_otro_gasto" class="form-select form-select-sm"
+                                        aria-label=".form-select-sm example">
+                                        <option value="" selected>{{ __('forms.select.selected') }}
+                                        </option>
+                                        @foreach ($other_expense as $other)
+                                            <option value="{{ $other->id }}">{{ $other->name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                </td>
+                                <td class="text-center">
+                                    <div class="input-group">
+                                        <input wire:model.defer="cantidad_otro_gasto" type="number"
+                                            class="form-control form-control-sm">
+                                        <span class="input-group-text py-0">$</span>
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <button wire:click="$emit('addOtherExpenses')" type="submit"
+                                        class="btn bg-gradient-primary btn-sm my-0">Agregar</button>
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    @error('tipo_otro_gasto')
+                        <span class="text-danger text-message-validation">
+                            {{ $message }}
+                        </span>
+                        <br>
+                    @enderror
+
+                    @error('cantidad_otro_gasto')
+                        <span class="text-danger text-message-validation">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
                 <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <x-viatic-requests.observations :viaticRequest="$viaticRequest" />
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{-- Gestion --}}
+                            @json($gestion)
+                            <div class="form-group">
+                                <label>Gestión</label>
+                                <x-selects-group.other-items />
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <x-viatic-requests.observations :viaticRequest="$viaticRequest" />
+                        </div>
                     </div>
                 </div>
             </div>

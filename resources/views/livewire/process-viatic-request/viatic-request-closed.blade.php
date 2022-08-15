@@ -339,8 +339,11 @@
                 {{-- descargar anticipo --}}
                 <div class="row">
                     <div class="col-md-6">
-                        <a target="_blank" href="{{ Storage::url($viaticRequest->url_aceptation) }}"
+                        {{-- <a target="_blank" href="{{ Storage::url($viaticRequest->url_aceptation) }}"
                             style="color: white" type="button" class="btn bg-secundary btn-sm">Ver
+                            Anticipo</a> --}}
+                        <a target="_blank" href="{{ route('viatic.pdf', $viaticRequest->id) }}" style="color: white"
+                            type="button" class="btn bg-secundary btn-sm">Ver
                             Anticipo</a>
                     </div>
                 </div>
@@ -397,10 +400,8 @@
                                                     </td>
 
                                                     <td class="text-center">
-                                                        <a target="_blank"
-                                                            href="{{ Storage::url($support->url) }}">
-                                                            <i
-                                                                class="cursor-pointer fas fa-eye text-secondary"></i>
+                                                        <a target="_blank" href="{{ Storage::url($support->url) }}">
+                                                            <i class="cursor-pointer fas fa-eye text-secondary"></i>
                                                         </a>
                                                     </td>
                                                 </tr>

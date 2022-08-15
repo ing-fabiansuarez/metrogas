@@ -32,15 +32,15 @@ class Aceptation extends Component
 
     public function acceptRequest()
     {
-        $this->validate([
+        /* $this->validate([
             'file_sign' => 'required|max:1024',
-        ]);
+        ]); */
        /*  try { */
             DB::beginTransaction();
             //se cambia de estado
             $newState = EStateRequest::ACCEPTED_EMPLOYEE->getId();
             $this->viaticRequest->sw_state = $newState;
-            $this->viaticRequest->url_aceptation = $this->file_sign->store('public/solicitud-anticipo/aceptacion');
+            //$this->viaticRequest->url_aceptation = $this->file_sign->store('public/solicitud-anticipo/aceptacion');
             $this->viaticRequest->save();
             $this->viaticRequest->createNewTimeLine($newState);
 

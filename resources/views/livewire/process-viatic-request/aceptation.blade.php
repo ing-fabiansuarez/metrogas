@@ -330,9 +330,9 @@
                         <div class="row mt-3">
                             <div class="col-md-8">
                                 <div class="form-group">
-                                    <label for="fileuplo">Debes subir firmado el archivo que se imprime.</label>
+                                    {{-- <label for="fileuplo">Debes subir firmado el archivo que se imprime.</label>
                                     <input wire:model.defer="file_sign" class="form-control form-control-sm"
-                                        type="file" accept=".pdf,.jpg,.png" />
+                                        type="file" accept=".pdf,.jpg,.png" /> --}}
                                     @error('file_sign')
                                         <span class="text-danger text-message-validation">
                                             {{ $message }}
@@ -345,7 +345,7 @@
                             </div>
                         </div>
                         <button type="submit" name="next"
-                            class="btn bg-secundary btn-sm action-button">Enviar</button>
+                            class="btn bg-secundary btn-sm action-button">Aprobar</button>
                         {{-- <input type="button" name="previous" class="btn previous action-button-previous" value="Rechazar" /> --}}
                     </form>
                 @endif

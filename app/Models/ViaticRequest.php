@@ -175,7 +175,7 @@ class ViaticRequest extends Model
 
     public function otherExpenses()
     {
-        return $this->belongsToMany(OtherExpense::class, 'other_expense_viatic_request', 'viatic_request_id', 'other_expense_id')->withPivot('value')->withTimestamps();
+        return $this->belongsToMany(OtherExpense::class, 'other_expense_viatic_request', 'viatic_request_id', 'other_expense_id')->withPivot('value', 'other_expense_id')->withTimestamps();
     }
 
     //muchos a muchos otros items

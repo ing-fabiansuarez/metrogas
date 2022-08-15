@@ -134,113 +134,90 @@
                     </div>
                 </div>
 
-                @if ($viaticRequest->canAproveBoss())
 
-                    {{-- tarifas --}}
-                    <div class="table-responsive p-0">
-                        <label for="exampleFormControlTextarea1">{{ __('messages.rates') }}</label>
 
-                        <table class="table table-hover table-bordered align-items-center mb-0">
-                            <thead>
+                {{-- tarifas --}}
+                <div class="table-responsive p-0">
+                    <label for="exampleFormControlTextarea1">{{ __('messages.rates') }}</label>
+
+                    <table class="table table-hover table-bordered align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.accommodation') }}
+                                </th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.feeding') }}
+                                </th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.intermunicipal_transport') }}
+                                </th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.municipal_transport') }}
+                                </th>
+                                <th style="width: 15%"
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Total
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($viaticRequest->sites as $index => $site)
                                 <tr>
-                                    <th></th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ __('messages.accommodation') }}
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ __('messages.feeding') }}
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ __('messages.intermunicipal_transport') }}
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        {{ __('messages.municipal_transport') }}
-                                    </th>
-                                    <th style="width: 15%"
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Total
-                                    </th>
+                                    <td>
+                                        <span class="text-secondary text-xs">
+                                            Destino {{ $index + 1 }}
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control form-control-sm"
+                                                wire:model="viaticRequest.sites.{{ $index }}.accommodation_value"
+                                                disabled>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control form-control-sm"
+                                                wire:model="viaticRequest.sites.{{ $index }}.feeding_value"
+                                                disabled>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control form-control-sm"
+                                                wire:model="viaticRequest.sites.{{ $index }}.intermunicipal_trans_value"
+                                                disabled>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control form-control-sm"
+                                                wire:model="viaticRequest.sites.{{ $index }}.municipal_trans_value"
+                                                disabled>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <button class="form-control form-control-sm"
+                                                disabled>{{ number_format($viaticRequest->sites[$index]->total_value) }}</button>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($viaticRequest->sites as $index => $site)
-                                    <tr>
-                                        <td>
-                                            <span class="text-secondary text-xs">
-                                                Destino {{ $index + 1 }}
-                                            </span>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="input-group">
-                                                <input type="number" class="form-control form-control-sm"
-                                                    wire:model="viaticRequest.sites.{{ $index }}.accommodation_value">
-                                                <span class="input-group-text py-0">$</span>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="input-group">
-                                                <input type="number" class="form-control form-control-sm"
-                                                    wire:model="viaticRequest.sites.{{ $index }}.feeding_value">
-                                                <span class="input-group-text py-0">$</span>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="input-group">
-                                                <input type="number" class="form-control form-control-sm"
-                                                    wire:model="viaticRequest.sites.{{ $index }}.intermunicipal_trans_value">
-                                                <span class="input-group-text py-0">$</span>
-                                            </div>
-                                        </td>
+                            @endforeach
 
-                                        <td class="text-center">
-                                            <div class="input-group">
-                                                <input type="number" class="form-control form-control-sm"
-                                                    wire:model="viaticRequest.sites.{{ $index }}.municipal_trans_value">
-                                                <span class="input-group-text py-0">$</span>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="input-group">
-                                                <button class="form-control form-control-sm"
-                                                    disabled>{{ number_format($viaticRequest->sites[$index]->total_value) }}</button>
-                                                <span class="input-group-text py-0">$</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                                @foreach ($listOtherExpenses as $indexx => $otherExpense)
-                                    <tr>
-                                        <td>
-                                        </td>
-                                        <td class="text-center">
-                                        </td>
-                                        <td class="text-center">
-                                        </td>
-                                        <td class="text-center">
-                                            <a wire:click="$emit('removeOtherExpense',{{ $indexx }})">
-                                                <i class="cursor-pointer fas fa-trash text-secondary text-danger"></i>
-                                            </a>
-                                        </td>
-                                        <td class="text-center">
-                                            <span class="text-secondary text-xs">
-                                                {{ $otherExpense['name_otro_gasto'] }}
-                                            </span>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="input-group">
-                                                <button class="form-control form-control-sm"
-                                                    disabled>{{ number_format($otherExpense['cantidad_otro_gasto']) }}</button>
-                                                <span class="input-group-text py-0">$</span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
+                            @foreach ($viaticRequest->otherExpenses as $indexx => $otherExpense)
                                 <tr>
                                     <td>
                                     </td>
@@ -249,22 +226,47 @@
                                     <td class="text-center">
                                     </td>
                                     <td class="text-center">
+
                                     </td>
                                     <td class="text-center">
                                         <span class="text-secondary text-xs">
-                                            TOTAL ANTICIPOS
+                                            {{ $otherExpense->name }}
                                         </span>
                                     </td>
                                     <td class="text-center">
                                         <div class="input-group">
-                                            <button type="number" class="form-control form-control-sm"
-                                                disabled>{{ number_format($totalAnticipo) }}</button>
+                                            <button class="form-control form-control-sm"
+                                                disabled>{{ number_format($otherExpense->pivot->value) }}</button>
                                             <span class="input-group-text py-0">$</span>
                                         </div>
                                     </td>
                                 </tr>
+                            @endforeach
 
-                                <tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                    <span class="text-secondary text-xs">
+                                        TOTAL ANTICIPOS
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="input-group">
+                                        <button type="number" class="form-control form-control-sm"
+                                            disabled>{{ number_format($viaticRequest->getTotalViaticRequest()) }}</button>
+                                        <span class="input-group-text py-0">$</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            {{-- <tr>
                                     <td class="text-center">
                                         <span class="text-secondary text-xs">
                                             OTROS GASTOS
@@ -297,46 +299,50 @@
                                     </td>
                                     <td class="text-center">
                                     </td>
-                                </tr>
-                            </tbody>
+                                </tr> --}}
+                        </tbody>
 
-                        </table>
-                        @error('tipo_otro_gasto')
-                            <span class="text-danger text-message-validation">
-                                {{ $message }}
-                            </span>
-                            <br>
-                        @enderror
+                    </table>
+                    @error('tipo_otro_gasto')
+                        <span class="text-danger text-message-validation">
+                            {{ $message }}
+                        </span>
+                        <br>
+                    @enderror
 
-                        @error('cantidad_otro_gasto')
-                            <span class="text-danger text-message-validation">
-                                {{ $message }}
-                            </span>
-                        @enderror
+                    @error('cantidad_otro_gasto')
+                        <span class="text-danger text-message-validation">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        {{-- Gestion --}}
+                        <label class="mb-2">Gestión</label>
+                        <ul class="list-group">
+                            @foreach ($viaticRequest->otherItems as $item)
+                                <li style="color: black;font-size: 0.8rem" class="list-group-item">
+                                    {{ $item->name }}</li>
+                            @endforeach
+                        </ul>
                     </div>
+                    <div class="col-md-6">
+                        <x-viatic-requests.observations :viaticRequest="$viaticRequest" />
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{-- Gestion --}}
-                            <div class="form-group">
-                                <label>Gestión</label>
-                                <x-selects-group.other-items />
-
-                            </div>
+                        {{-- Observacion --}}
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Observación</label>
+                            <textarea wire:model="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
                         </div>
-                        <div class="col-md-6">
-                            <x-viatic-requests.observations :viaticRequest="$viaticRequest" />
+                    </div>
+                </div>
+                <div wire:loading>
+                    Cargando...
+                </div>
 
-                            {{-- Observacion --}}
-                            <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Observación</label>
-                                <textarea wire:model="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div wire:loading>
-                        Cargando...
-                    </div>
+                @if ($viaticRequest->canAproveBoss())
                     <button wire:click="$emit('beforeAproveViaticRequest')" name="next"
                         class="btn bg-secundary btn-sm action-button" wire:loading.attr="disabled">Aprobar</button>
                     <button type="button" class="btn bg-warning action-button" data-bs-toggle="modal"

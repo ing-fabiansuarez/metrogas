@@ -186,6 +186,204 @@
                         </div>
                     </div>
                 </div>
+
+                {{-- tarifas --}}
+                <div class="table-responsive p-0">
+                    <label for="exampleFormControlTextarea1">{{ __('messages.rates') }}</label>
+
+                    <table class="table table-hover table-bordered align-items-center mb-0">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.accommodation') }}
+                                </th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.feeding') }}
+                                </th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.intermunicipal_transport') }}
+                                </th>
+                                <th
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    {{ __('messages.municipal_transport') }}
+                                </th>
+                                <th style="width: 15%"
+                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Total
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($listTarifas as $index => $tarifa)
+                                <tr>
+                                    <td>
+                                        <span class="text-secondary text-xs">
+                                            Destino {{ $index + 1 }}
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control form-control-sm"
+                                                wire:model="listTarifas.{{ $index }}.alojamiento">
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input type="number"
+                                                wire:model="listTarifas.{{ $index }}.alimentacion"
+                                                class="form-control form-control-sm">
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control form-control-sm"
+                                                wire:model="listTarifas.{{ $index }}.trans_intermunicipal">
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control form-control-sm"
+                                                wire:model="listTarifas.{{ $index }}.trans_municipal">
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="input-group">
+                                            <button class="form-control form-control-sm"
+                                                disabled>{{ number_format($tarifa['total']) }}</button>
+                                            <span class="input-group-text py-0">$</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                            @if ($listOtherExpenses != null)
+                                @foreach ($listOtherExpenses as $index => $otherExpense)
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td class="text-center">
+                                        </td>
+                                        <td class="text-center">
+                                        </td>
+                                        <td class="text-center">
+                                            <a wire:click="$emit('removeOtherExpense',{{ $index }})">
+                                                <i class="cursor-pointer fas fa-trash text-secondary text-danger"></i>
+                                            </a>
+                                        </td>
+                                        <td class="text-center">
+                                            <span class="text-secondary text-xs">
+                                                {{ $otherExpense['name_otro_gasto'] }}
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="input-group">
+                                                <button class="form-control form-control-sm"
+                                                    disabled>{{ number_format($otherExpense['cantidad_otro_gasto']) }}</button>
+                                                <span class="input-group-text py-0">$</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+
+                            <tr>
+                                <td>
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                    <span class="text-secondary text-xs">
+                                        TOTAL ANTICIPOS
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="input-group">
+                                        <button type="number" class="form-control form-control-sm"
+                                            disabled>{{ number_format($totalAnticipo) }}</button>
+                                        <span class="input-group-text py-0">$</span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">
+                                    <span class="text-secondary text-xs">
+                                        OTROS GASTOS
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <select wire:model.defer="tipo_otro_gasto" class="form-select form-select-sm"
+                                        aria-label=".form-select-sm example">
+                                        <option value="" selected>{{ __('forms.select.selected') }}
+                                        </option>
+                                        @foreach ($other_expense as $other)
+                                            <option value="{{ $other->id }}">{{ $other->name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                </td>
+                                <td class="text-center">
+                                    <div class="input-group">
+                                        <input wire:model.defer="cantidad_otro_gasto" type="number"
+                                            class="form-control form-control-sm">
+                                        <span class="input-group-text py-0">$</span>
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <button wire:click="$emit('addOtherExpenses')" type="submit"
+                                        class="btn bg-gradient-primary btn-sm my-0">Agregar</button>
+                                </td>
+                                <td class="text-center">
+                                </td>
+                                <td class="text-center">
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    @error('tipo_otro_gasto')
+                        <span class="text-danger text-message-validation">
+                            {{ $message }}
+                        </span>
+                        <br>
+                    @enderror
+
+                    @error('cantidad_otro_gasto')
+                        <span class="text-danger text-message-validation">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        {{-- Gestion --}}
+                        @json($gestion)
+                        <div class="form-group">
+                            <label>Gestión</label>
+                            <x-selects-group.other-items />
+
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
             <div wire:loading>
                 Cargando...
@@ -193,248 +391,24 @@
             <button wire:click="$emit('beforeCreateViaticRequest')" type="button" name="next"
                 class="next action-button " wire:loading.attr="disabled">Crear</button>
         </div>
-        {{-- <fieldset>
-            <div class="form-card">
-                <div class="row">
-                    <div class="col-7">
-                        <h2 class="fs-title">{{ __('messages.aprove_boss') }}</h2>
-                    </div>
-                    <div class="col-5">
-                        <h2 class="steps">{{ __('messages.step_2') }}</h2>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">{{ __('forms.viatic_request.justificacion') }}</label>
-                    <textarea class="form-control form-control-sm" rows="3"
-                        placeholder="{{ __('forms.viatic_request.justificacion.placeholder') }}" disabled></textarea>
-                </div>
-
-                <div class="table-responsive p-0">
-                    <label for="exampleFormControlTextarea1">{{ __('messages.information_about_comision') }}</label>
-                    <div class="card bg-gray-100">
-                        <div class="card-body p-2">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ __('forms.viatic_request.origin_site') }}
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ __('forms.viatic_request.destination_site') }}
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ __('forms.viatic_request.start_date') }}
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ __('forms.viatic_request.end_date') }}
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Destino # 1
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                <select class="form-select form-select-sm"
-                                                    aria-label=".form-select-sm example" disabled>
-                                                    <option selected>FLORIDABLANDA</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                <select class="form-select form-select-sm"
-                                                    aria-label=".form-select-sm example" disabled>
-                                                    <option selected>OCAÑA</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                <input class="form-control form-control-sm" type="date" disabled>
-                                            </div>
-                                        </td>
-
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                <input class="form-control form-control-sm" type="date" disabled>
-                                            </div>
-                                        </td>
-
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-responsive p-0">
-                    <label for="exampleFormControlTextarea1">{{ __('messages.rates') }}</label>
-                    <div class="card bg-gray-100">
-                        <div class="card-body p-2">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ __('messages.accommodation') }}
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ __('messages.feeding') }}
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ __('messages.intermunicipal_transport') }}
-                                        </th>
-                                        <th
-                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            {{ __('messages.municipal_transport') }}
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Destino # 1
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="number" class="form-control form-control-sm">
-                                                    <span class="input-group-text py-0">$</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="number" class="form-control form-control-sm">
-                                                    <span class="input-group-text py-0">$</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="number" class="form-control form-control-sm">
-                                                    <span class="input-group-text py-0">$</span>
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                        <td class="text-center">
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <input type="number" class="form-control form-control-sm">
-                                                    <span class="input-group-text py-0">$</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <input type="button" name="next" class="next action-button" value="Aprobar" />
-            <input type="button" name="previous" class="previous action-button-previous" value="Rechazar" />
-        </fieldset>
-        <fieldset>
-            <div class="form-card text-center">
-                <div class="row">
-                    <div class="col-7">
-                        <h2 class="fs-title">{{ __('messages.sign_aprove') }}</h2>
-                    </div>
-                    <div class="col-5">
-                        <h2 class="steps">Paso 3</h2>
-                    </div>
-                </div>
-                <p>En esta sección se debe imprimir el documento, firmarlo y luego subirlo para poder
-                    continuar con el proceso.</p>
-
-                <button type="button" class="btn bg-gradient-secondary">imprimir Documento</button>
-                <div class="row">
-                    <div class="col-md-3">
-
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <input type="file" class="form-control form-control-sm">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <input type="button" name="next" class="next action-button" value="Enviar" />
-            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-        </fieldset>
-        <fieldset>
-            <div class="form-card text-center">
-                <div class="row">
-                    <div class="col-7">
-                        <h2 class="fs-title">{{ __('messages.sign_aprove') }}</h2>
-                    </div>
-                    <div class="col-5">
-                        <h2 class="steps">Paso 4</h2>
-                    </div>
-                </div>
-
-
-            </div>
-
-            <input type="button" name="next" class="next action-button" value="Submit" />
-            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-        </fieldset>
-        <fieldset>
-            <div class="form-card">
-                <div class="row">
-                    <div class="col-7">
-                        <h2 class="fs-title">Finish:</h2>
-                    </div>
-                    <div class="col-5">
-                        <h2 class="steps">Paso 5</h2>
-                    </div>
-                </div>
-                <br><br>
-                <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2>
-                <br>
-                <div class="row justify-content-center">
-                    <div class="col-3">
-                        <img src="https://i.imgur.com/GwStPmg.png" class="fit-image">
-                    </div>
-                </div>
-                <br><br>
-                <div class="row justify-content-center">
-                    <div class="col-7 text-center">
-                        <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
-                    </div>
-                </div>
-            </div>
-        </fieldset> --}}
     </div>
 </div>
+@push('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endpush
 @push('js')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('livewire:load', function() {
+            $('.js-example-basic-multiple').select2();
+            $('.js-example-basic-multiple').on('change', function() {
+                alert(@this.gestion);
+                
+                //@this.set('gestion', $(this).val());
+            });
+        });
+    </script>
     <script>
         Livewire.on('deleteSiteDetalle', objId => {
             Swal.fire({
@@ -484,4 +458,5 @@
             window.location.replace(url);
         });
     </script>
+    
 @endpush

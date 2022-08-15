@@ -56,8 +56,8 @@ class AproveBoss extends Component
         $this->viaticRequest = $viaticRequest;
         $this->listOtherExpenses = array();
         // se calcula los motos vara los sitios a lo que se valla a ir
-        $this->viaticRequest->calculateAmounts();
-        $this->calculateTotalGeneral();
+        //$this->viaticRequest->calculateAmounts();
+       // $this->calculateTotalGeneral();
     }
     private function calculateTotalGeneral()
     { // con este metodo calculamos el total general del anticipo
@@ -123,21 +123,21 @@ class AproveBoss extends Component
         $this->viaticRequest->save();
         $this->viaticRequest->createNewTimeLine($newState);
         //se guardan los detalles
-        foreach ($this->viaticRequest->sites as $site) {
+        /* foreach ($this->viaticRequest->sites as $site) {
             $site->save();
-        }
+        } */
         //se guardan los otros gasto
-        foreach ($this->listOtherExpenses as $other) {
+       /*  foreach ($this->listOtherExpenses as $other) {
             $this->viaticRequest->otherExpenses()->attach([
                 $other['tipo_otro_gasto'] => ['value' => $other['cantidad_otro_gasto']]
             ]);
-        }
+        } */
         //se guardan los otros items
-        foreach ($this->gestion as $item) {
+        /* foreach ($this->gestion as $item) {
             $this->viaticRequest->otherItems()->attach([
                 $item
             ]);
-        }
+        } */
         //se guarda la observacion
         if (!empty($this->observation)) {
             $obs = new ObservationViaticModel();
