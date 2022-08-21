@@ -57,11 +57,10 @@ class ViaticRequest extends Component
     {
         $this->recalcularCifras();
 
-        $this->nameGestion=[];
-        foreach($this->gestion as $idItem){
-            array_push($this->nameGestion,OtherItem::find($idItem)->name);
+        $this->nameGestion = [];
+        foreach ($this->gestion as $idItem) {
+            array_push($this->nameGestion, OtherItem::find($idItem)->name);
         }
-       
     }
 
     public function recalcularCifras()
@@ -130,7 +129,6 @@ class ViaticRequest extends Component
             'start_date' => 'required',
             'end_date' => 'required',
         ]);
-
         //validar las fechas
         foreach ($this->listSite as $sitee) {
             if (
@@ -147,13 +145,13 @@ class ViaticRequest extends Component
                 $this->addError('comission', 'Fecha Regreso es invalida.');
                 return;
             }
-            if ($this->end_date < $this->start_date) {
-                $this->addError('comission', 'La Fecha Inicio debe ser menor que la Fecha Final.');
-                return;
-            }
+        }
+        if ($this->end_date < $this->start_date) {
+            $this->addError('comission', 'La Fecha Inicio debe ser menor que la Fecha Final.');
+            return;
         }
         //___________________________________
-        
+
         $modelDestination = DestinationSite::find($this->destination);
         $modelOrigin = OriginSite::find($this->origin);
         //aqui añade los lugares  en un array

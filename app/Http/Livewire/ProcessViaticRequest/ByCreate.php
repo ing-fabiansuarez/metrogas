@@ -214,10 +214,10 @@ class ByCreate extends Component
                 $this->addError('comission', 'Fecha Regreso es invalida.');
                 return;
             }
-            if ($this->end_date < $this->start_date) {
-                $this->addError('comission', 'La Fecha Inicio debe ser menor que la Fecha Final.');
-                return;
-            }
+        }
+        if ($this->end_date < $this->start_date) {
+            $this->addError('comission', 'La Fecha Inicio debe ser menor que la Fecha Final.');
+            return;
         }
         //___________________________________
 
