@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Adldap\Models\User as ModelsUser;
 use App\Enums\EStateLegalization;
 use App\Enums\EStateRequest;
 use App\Models\Legalization;
@@ -38,15 +39,18 @@ class ViaticController extends Controller
         $viaticRequest = ViaticRequest::find($id);
         if (isset($viaticRequest)) {
 
+            $user = User::find(auth()->user()->id);
             //valida que sea el dueño de la solicitud para poder verla
-            if ($viaticRequest->user->id != auth()->user()->id) {
+            if ($viaticRequest->user->id != $user->id) {
                 //Verifica si es uno de los jefes
                 if (!$viaticRequest->canAproveBoss()) {
                     if (!$viaticRequest->canAproveTesoreria()) {
                         if (!$viaticRequest->canAproveGeneral()) {
                             if (!$viaticRequest->canUploadSupports()) {
                                 if (!$viaticRequest->canPagar()) {
-                                    return "NO TIENE ACCESO PARA GESTIONAR ESTA SOLICITUD";
+                                    if (!$user->can('report')) {
+                                        return "NO TIENE ACCESO PARA GESTIONAR ESTA SOLICITUD";
+                                    }
                                 }
                             }
                         }
