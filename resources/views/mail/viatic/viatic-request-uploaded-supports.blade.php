@@ -32,8 +32,8 @@
 </head>
 
 <body style="color: black;font-size:0.8rem;">
-    <h1>Solicitud de anticipo N° {{ $viaticRequest->id }}. APROBADA por parte de dirección financiera. Esta pendiente por
-        aprobación de la Tesoreria y cargue de soportes por parte de tesoreria. Además, se notifica a secretaria de gerencia para encargarse de la gestión si se incluye.</h1>
+    <h1>Solicitud de anticipo N° {{ $viaticRequest->id }}. Esta pendiente por
+        aprobación del Tesorero, ya se subierón los soportes de tesoreria.</h1>
     <p>Para gestionar el proceso ingresa al siguiente enlace con sus credeciales del directorio activo.</p>
     <a href="{{ url('/') }}">Ingreso al sistema.</a>
     <br>

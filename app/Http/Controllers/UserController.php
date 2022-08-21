@@ -44,7 +44,7 @@ class UserController extends Controller
                 return view('mtto.user.create', [
                     'userLdap' => $userLdap,
                     'posibleJobtitle' => $posibleJobtitle,
-                    'jobtitles' => Jobtitle::orderBy('name','asc')->get()
+                    'jobtitles' => Jobtitle::orderBy('name', 'asc')->get()
                 ]);
             }
 
@@ -139,6 +139,11 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->roles()->sync($request->roles);
+        if ($request->get('permiso') == 'reintegro') {
+            $user->givePermissionTo('legalization.reintegro');
+        } else {
+            $user->revokePermissionTo('legalization.reintegro');
+        }
         return redirect()->route('user.roles', $user->id)->with('msg', [
             'class' => 'alert-success',
             'body' => 'Se guardo correctamente!'
@@ -152,7 +157,7 @@ class UserController extends Controller
         foreach (DB::table('users')->select('users.id')
             ->join('jobtitles', 'users.id_jobtitle', '=', 'jobtitles.id')
             ->where('jobtitles.id_boss', auth()->user()->jobtitle->id)
-            ->orderBy('users.id','desc')
+            ->orderBy('users.id', 'desc')
             ->get() as $userStdClass) {
 
             array_push($users, User::find($userStdClass->id));

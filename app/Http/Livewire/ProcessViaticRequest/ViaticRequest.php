@@ -8,6 +8,7 @@ use App\Models\CentroDeCostos;
 use App\Models\DestinationSite;
 use App\Models\OriginSite;
 use App\Models\OtherExpense;
+use App\Models\OtherItem;
 use App\Models\User;
 use App\Models\ViaticRequest as ModelsViaticRequest;
 use App\Models\ViaticRequestsSitesDetalle;
@@ -32,7 +33,7 @@ class ViaticRequest extends Component
 
     /** Otros Items */
     public $gestion = [];
-
+    public $nameGestion = [];
 
     /** Otros Gasto */
     public $listOtherExpenses;
@@ -55,6 +56,12 @@ class ViaticRequest extends Component
     public function updated($name, $value)
     {
         $this->recalcularCifras();
+
+        $this->nameGestion=[];
+        foreach($this->gestion as $idItem){
+            array_push($this->nameGestion,OtherItem::find($idItem)->name);
+        }
+       
     }
 
     public function recalcularCifras()
@@ -110,7 +117,8 @@ class ViaticRequest extends Component
     {
         return view('livewire.process-viatic-request.viatic-request', [
             'centroDeCostosDB' => CentroDeCostos::all(),
-            'other_expense' => OtherExpense::all()
+            'other_expense' => OtherExpense::all(),
+            'items' => OtherItem::all()
         ]);
     }
 

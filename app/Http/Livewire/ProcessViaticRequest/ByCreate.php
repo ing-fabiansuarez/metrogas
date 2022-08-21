@@ -7,6 +7,7 @@ use App\Models\CentroDeCostos;
 use App\Models\DestinationSite;
 use App\Models\OriginSite;
 use App\Models\OtherExpense;
+use App\Models\OtherItem;
 use App\Models\ViaticRequestsSitesDetalle;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -36,6 +37,7 @@ class ByCreate extends Component
     public $totalAnticipo;
     /** Otros Items */
     public $gestion = [];
+    public $nameGestion = [];
 
     //escuchadores de eventos
     protected $listeners = [
@@ -124,6 +126,10 @@ class ByCreate extends Component
         $this->calculateTotalSites();
         $this->calculateTotalGeneral();
         $this->recalcularCifras();
+        $this->nameGestion = [];
+        foreach ($this->gestion as $idItem) {
+            array_push($this->nameGestion, OtherItem::find($idItem)->name);
+        }
     }
 
     public function __construct()
@@ -168,6 +174,10 @@ class ByCreate extends Component
             ]);
         }
 
+        foreach ($this->viaticRequest->otherItems as $itemm) {
+            array_push($this->gestion, $itemm->id);
+            array_push($this->nameGestion, $itemm->name);
+        }
         $this->recalcularCifras();
     }
 
@@ -176,6 +186,7 @@ class ByCreate extends Component
         return view('livewire.process-viatic-request.by-create', [
             'other_expense' => OtherExpense::all(),
             'centroDeCostosDB' => CentroDeCostos::all(),
+            'items' => OtherItem::all(),
         ]);
     }
 
@@ -187,6 +198,29 @@ class ByCreate extends Component
             'start_date' => 'required',
             'end_date' => 'required',
         ]);
+        //validar las fechas
+        foreach ($this->listSite as $sitee) {
+            if (
+                $sitee['start_date'] <= $this->start_date &&
+                $sitee['end_date'] >= $this->start_date
+            ) {
+                $this->addError('comission', 'Fecha inicio es invalida.');
+                return;
+            }
+            if (
+                $sitee['start_date'] <= $this->end_date &&
+                $sitee['end_date'] >= $this->end_date
+            ) {
+                $this->addError('comission', 'Fecha Regreso es invalida.');
+                return;
+            }
+            if ($this->end_date < $this->start_date) {
+                $this->addError('comission', 'La Fecha Inicio debe ser menor que la Fecha Final.');
+                return;
+            }
+        }
+        //___________________________________
+
         $modelDestination = DestinationSite::find($this->destination);
         $modelOrigin = OriginSite::find($this->origin);
         array_push($this->listSite, [

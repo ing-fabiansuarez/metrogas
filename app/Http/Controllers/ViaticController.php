@@ -17,7 +17,7 @@ class ViaticController extends Controller
     public function index()
     {
         return view('viatic.viatic-request.list_request', [
-            'viaticRequests' => ViaticRequest::where('request_by', auth()->user()->id)->get()
+            'viaticRequests' => ViaticRequest::where('request_by', auth()->user()->id)->orderBy('id', 'desc')->get()
         ]);
     }
     public function create()
@@ -42,9 +42,13 @@ class ViaticController extends Controller
             if ($viaticRequest->user->id != auth()->user()->id) {
                 //Verifica si es uno de los jefes
                 if (!$viaticRequest->canAproveBoss()) {
-                    if (!$viaticRequest->canAproveGeneral()) {
-                        if (!$viaticRequest->canUploadSupports()) {
-                            return "NO TIENE ACCESO PARA GESTIONAR ESTA SOLICITUD";
+                    if (!$viaticRequest->canAproveTesoreria()) {
+                        if (!$viaticRequest->canAproveGeneral()) {
+                            if (!$viaticRequest->canUploadSupports()) {
+                                if (!$viaticRequest->canPagar()) {
+                                    return "NO TIENE ACCESO PARA GESTIONAR ESTA SOLICITUD";
+                                }
+                            }
                         }
                     }
                 }
@@ -74,6 +78,12 @@ class ViaticController extends Controller
                 case EStateRequest::CANCELED->getId():
                     return view('viatic.viatic-request.viatic_request_canceled', compact('viaticRequest'));
                     break;
+                case EStateRequest::UPLOADED_SUPPORTS_TESORERIA->getId():
+                    return view('viatic.viatic-request.aprove_tesoreria', compact('viaticRequest'));
+                    break;
+                case EStateRequest::APROVED_TESORERIA->getId():
+                    return view('viatic.viatic-request.pago', compact('viaticRequest'));
+                    break;
             }
 
             echo "EXITE";
@@ -87,22 +97,28 @@ class ViaticController extends Controller
     {
         $viaticRequest = ViaticRequest::find($id);
         if (isset($viaticRequest)) {
-            switch ($viaticRequest->sw_state) {
-                case EStateRequest::APROVED->getId(): //solo va imprimir si esta en estado aprobado
-
-                    $pdf = App::make('dompdf.wrapper');
-                    $pdf->loadView('pdf.viatic-request.viatic-request', compact('viaticRequest'))->setPaper('letter', 'portrait');
-                    return $pdf->stream();
-                    /* return view('pdf.viatic-request.viatic-request', compact('viaticRequest')); */
-                    break;
+            if (
+                $viaticRequest->sw_state == EStateRequest::APROVED->getId()
+                || $viaticRequest->sw_state == EStateRequest::ACCEPTED_EMPLOYEE->getId()
+                || $viaticRequest->sw_state == EStateRequest::APROVED_GENERAL->getId()
+                || $viaticRequest->sw_state == EStateRequest::UPLOADED_SUPPORTS_TESORERIA->getId()
+                || $viaticRequest->sw_state == EStateRequest::CLOSE->getId()
+                || $viaticRequest->sw_state == EStateRequest::APROVED_TESORERIA->getId()
+            ) {
+                $pdf = App::make('dompdf.wrapper');
+                $pdf->loadView('pdf.viatic-request.viatic-request', compact('viaticRequest'))->setPaper('letter', 'portrait');
+                return $pdf->stream();
+                /* return view('pdf.viatic-request.viatic-request', compact('viaticRequest')); */
+            }
+            /* switch ($viaticRequest->sw_state) {
+                case EStateRequest::APROVED->getId(): //solo va imprimir si esta en estado aprobado    
                 case EStateRequest::ACCEPTED_EMPLOYEE->getId(): //solo va imprimir si esta en estado aprobado
-
                     $pdf = App::make('dompdf.wrapper');
                     $pdf->loadView('pdf.viatic-request.viatic-request', compact('viaticRequest'));
                     return $pdf->stream();
-                    /* return view('pdf.viatic-request.viatic-request', compact('viaticRequest')); */
+                    //return view('pdf.viatic-request.viatic-request', compact('viaticRequest')); 
                     break;
-            }
+            } */
             echo "EXITE";
             return;
         }
@@ -218,11 +234,25 @@ class ViaticController extends Controller
         }
 
         //aqui se verfica si tiene permisos para la aprobacion de tesorerai y si es asi se agregan
-        if ($user->can('aproveTesoreria')) {
+        if ($user->can('uploadSupportsTesoreria')) {
             $viaticRequestAproveTesoreria = ViaticRequest::where('sw_state', EStateRequest::APROVED_GENERAL->getId())->get();
             $visticRequestsList = $visticRequestsList->concat($viaticRequestAproveTesoreria);
         }
 
+        //aqui se verfica si tiene permisos para la aprobacion de tesorerai y si es asi se agregan
+        if ($user->can('aproveTesoreria')) {
+            $viaticRequestAproveTesoreria = ViaticRequest::where('sw_state', EStateRequest::UPLOADED_SUPPORTS_TESORERIA->getId())->get();
+            $visticRequestsList = $visticRequestsList->concat($viaticRequestAproveTesoreria);
+        }
+
+        //aqui se verfica si tiene permisos para realizar los pagos de la solicitud de viaticos
+        if ($user->can('pagarViaticRequest')) {
+            $viaticRequestAproveTesoreria = ViaticRequest::where('sw_state', EStateRequest::APROVED_TESORERIA->getId())->get();
+            $visticRequestsList = $visticRequestsList->concat($viaticRequestAproveTesoreria);
+        }
+
+
+        /* LEGALIZACIONES */
         //se aqui la consulta de legalizaciones para LAS PERSONAS QUE TIENE QUE APROBAR
         if ($user->can('aproveGeneral')) {
             $legalizationAproveGeneral =  Legalization::where('sw_state', EStateLegalization::APROVE_BOSS->getId())->get();

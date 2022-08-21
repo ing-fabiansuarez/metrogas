@@ -2,18 +2,8 @@
     <div class="card px-3 pt-4 pb-0 mt-0 mb-3">
         <div id="msform">
             <!-- progressbar -->
-            <ul id="progressbar" class="px-0">
-                <li class="active" id="account"><strong>{{ __('messages.viatic_request') }}</strong> </li>
-                <li class="active" id="personal"><strong>{{ __('messages.aprove_boss') }}</strong></li>
-                <li class="active" id="payment"><strong>{{ __('messages.sign_aprove') }}</strong></li>
-                <li class="active" id="boss"><strong>{{ __('messages.general_aprove') }}</strong></li>
-                <li id="confirm"><strong>Tesoreria y Dirección Financiera</strong></li>
-                <li id="confirm"><strong>{{ __('messages.legalization') }}</strong></li>
-            </ul>
-            <div class="progress">
-                <div style="width: 66.4%" class="progress-bar progress-bar-striped progress-bar-animated"
-                    role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+            <x-viatic-requests.progress-bar :stepsCompletes='3' />
+            
             <br>
             <div class="alert alert-success" role="alert">
                 <strong>Usuarios que pueden aprobar:</strong><br>
@@ -379,7 +369,7 @@
             </fieldset>
         </div>
     </div>
-    <!-- Modal -->
+    <!-- Modales -->
     <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

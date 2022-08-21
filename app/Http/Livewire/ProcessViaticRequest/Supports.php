@@ -58,7 +58,7 @@ class Supports extends Component
 
 
             //Se cambia el estado
-            $newState = EStateRequest::CLOSE->getId();
+            $newState = EStateRequest::UPLOADED_SUPPORTS_TESORERIA->getId();
             $this->viaticRequest->sw_state = $newState;
             $this->viaticRequest->save();
             $this->viaticRequest->createNewTimeLine($newState);

@@ -2,18 +2,7 @@
     <div class="card px-3 pt-4 pb-0 mt-0 mb-3">
         <div id="msform">
             <!-- progressbar -->
-            <ul id="progressbar" class="px-0">
-                <li class="active" id="account"><strong>{{ __('messages.viatic_request') }}</strong> </li>
-                <li class="active" id="personal"><strong>{{ __('messages.aprove_boss') }}</strong></li>
-                <li id="payment"><strong>{{ __('messages.sign_aprove') }}</strong></li>
-                <li id="boss"><strong>{{ __('messages.general_aprove') }}</strong></li>
-                <li id="confirm"><strong>Tesoreria y Dirección Financiera</strong></li>
-                <li id="confirm"><strong>{{ __('messages.legalization') }}</strong></li>
-            </ul>
-            <div class="progress">
-                <div style="width: 33.2%" class="progress-bar progress-bar-striped progress-bar-animated"
-                    role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+            <x-viatic-requests.progress-bar :stepsCompletes='2' />
             <br>
 
             <div class="alert alert-success" role="alert">
@@ -46,8 +35,6 @@
                         <span style="font-size: 1rem">{{ $viaticRequest->user->name }}</span><br>
                         <span style="font-size: 0.8rem">{{ $viaticRequest->user->jobtitle->name }}</span><br>
                         <span style="font-size: 0.8rem">NIVEL {{ $viaticRequest->user->jobtitle->level }}</span>
-
-
                     </div>
 
                 </div>
@@ -330,12 +317,18 @@
                     </div>
                     <div class="col-md-6">
                         <x-viatic-requests.observations :viaticRequest="$viaticRequest" />
-
-                        {{-- Observacion --}}
-                        <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Observación</label>
-                            <textarea wire:model="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
-                        </div>
+                        @if ($viaticRequest->canAproveBoss())
+                            {{-- Observacion --}}
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Observación</label>
+                                <textarea wire:model="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
+                            </div>
+                            @error('observation')
+                            <span class="text-danger text-message-validation">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                        @endif
                     </div>
                 </div>
                 <div wire:loading>

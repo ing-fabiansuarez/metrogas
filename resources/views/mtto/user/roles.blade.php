@@ -21,8 +21,14 @@
         <div class="container-fluid py-4">
             <div class="card">
                 <div class="card-header pb-0 px-3">
-                    <h6 class="mb-0">Roles Usuario</h6>
+                    <div class="d-flex flex-row ">
+                        <h6 style="padding-right: 50px" class="mb-0">Roles Usuario</h6>
+                        <a class="btn bg-gradient-primary btn-sm mb-0" href="{{ route('roles.index') }}">Configurar
+                            Roles</a>
+                    </div>
+
                 </div>
+
                 <div class="card-body pt-4 p-3">
                     @if (session('msg'))
                         <div class="alert {{ session('msg.class') }}" role="alert">
@@ -46,6 +52,17 @@
                                     </div>
                                 @endforeach
                             </div>
+                        </div>
+                        <br><br>
+                        <div class="d-flex flex-row ">
+                            <h6 style="padding-right: 50px" class="mb-0">Permisos</h6>
+                        </div>
+                        <div class="form-check">
+                            <input name="permiso" value="reintegro" type="checkbox"
+                                @if ($user->can('legalization.reintegro')) checked @endif>
+                            <label class="form-check-label">
+                                Habilitar Reintegro
+                            </label>
                         </div>
 
 

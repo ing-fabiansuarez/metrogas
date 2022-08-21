@@ -2,18 +2,7 @@
     <div class="card px-3 pt-4 pb-0 mt-0 mb-3">
         <div id="msform">
             <!-- progressbar -->
-            <ul id="progressbar" class="px-0">
-                <li class="active" id="account"><strong>{{ __('messages.viatic_request') }}</strong> </li>
-                <li class="active" id="personal"><strong>{{ __('messages.aprove_boss') }}</strong></li>
-                <li class="active" id="payment"><strong>{{ __('messages.sign_aprove') }}</strong></li>
-                <li class="active" id="boss"><strong>{{ __('messages.general_aprove') }}</strong></li>
-                <li class="active" id="confirm"><strong>Tesoreria y Dirección Financiera</strong></li>
-                <li id="confirm"><strong>{{ __('messages.legalization') }}</strong></li>
-            </ul>
-            <div class="progress">
-                <div style="width: 83%" class="progress-bar progress-bar-striped progress-bar-animated"
-                    role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+            <x-viatic-requests.progress-bar :stepsCompletes='4' />
             <br>
             <div class="alert alert-success" role="alert">
                 <strong>Usuarios que pueden aprobar:</strong><br>
@@ -21,7 +10,7 @@
                     {{ $user->name . ' (' . $user->jobtitle->name . ')' }} <br>
                 @endforeach
                 @if (count($viaticRequest->usersCanUploadSupports()) <= 0)
-                    Aún no hay usuario con Rol de Tesoreria.
+                    Aún no hay usuario con Rol de Auxiliar Tesoreria.
                 @endif
             </div>
             <fieldset>
@@ -56,8 +45,7 @@
                     </div>
 
                     <div class="table-responsive p-0">
-                        <label
-                            for="exampleFormControlTextarea1">{{ __('messages.information_about_comision') }}</label>
+                        <label for="exampleFormControlTextarea1">{{ __('messages.information_about_comision') }}</label>
                         <div class="card bg-gray-100">
                             <div class="card-body p-2">
                                 <table class="table table-hover table-bordered align-items-center mb-0">
@@ -342,7 +330,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <a target="_blank" href="{{ Storage::url($viaticRequest->url_aceptation) }}"
+                            <a target="_blank" href="{{ route('viatic.pdf', $viaticRequest->id) }}"
                                 style="color: white" type="button" class="btn bg-secundary btn-sm">Ver
                                 Anticipo</a>
                         </div>
@@ -469,8 +457,7 @@
 
                 @if ($viaticRequest->canUploadSupports())
                     <button wire:click="$emit('beforeClose')" type="submit" name="next"
-                        class="btn bg-secundary btn-sm action-button" wire:loading.attr="disabled">Finalizar
-                        Anticipo</button>
+                        class="btn bg-secundary btn-sm action-button" wire:loading.attr="disabled">Enviar</button>
                     <button type="button" class="btn bg-warning action-button" data-bs-toggle="modal"
                         data-bs-target="#rechazarModal" wire:loading.attr="disabled">
                         Rechazar
@@ -553,7 +540,7 @@
     <script>
         Livewire.on('beforeClose', function() {
             Swal.fire({
-                title: 'Se Cerrará la solicitud',
+                title: 'Se Enviara a aprobación la solicitud',
                 text: '¿Esta Seguro?',
                 icon: 'warning',
                 showCancelButton: true,

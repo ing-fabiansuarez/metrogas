@@ -24,8 +24,8 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('/assets/css/soft-ui-dashboard.css?v=1.0.3´') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/ui-fabian.css') }}" rel="stylesheet" />
-    @stack('css')
     @livewireStyles
+    @stack('css')
 </head>
 
 <body

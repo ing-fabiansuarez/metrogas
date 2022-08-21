@@ -26,10 +26,10 @@ class ViaticRequest extends Model
                 }
             }
         }
-        //si esta en estado aprobado que envie un correo tambien a la que tiene el perfil de direccion financiera para que apruebe
+
         switch ($this->sw_state) {
             case EStateRequest::ACCEPTED_EMPLOYEE->getId():
-                //COPIADO busca las personas que tienen el permiso de aprobar la solicitudes de anticipos para copiarlos al correo
+                //aqui es donde se envia correo para la aprobacion general
                 if ($this->getTotalViaticRequest() >= 1000000) {
                     $userss = User::permission('aproveGeneralDirector')->get();
                 } else {
@@ -43,20 +43,33 @@ class ViaticRequest extends Model
                 }
                 break;
             case EStateRequest::APROVED_GENERAL->getId():
-                //COPIADO busca las personas que tienen el permiso de aprobar la solicitudes de anticipos para copiarlos al correo
-                foreach (User::permission('aproveGeneral')->get() as $user) {
+                // AQUI ES DONDE SE ENVIAR CORREO ENTRE APROBACION FINANCIERA Y SOPORTES TESORERIA
+                // ENVIA A AUXILIAR TESORERIA
+                // SECRETARIA DE GENERENCIA PARA QUE HAGA LA GESTION
+                foreach (User::permission('uploadSupportsTesoreria')->get() as $user) {
                     if ($user->email_aux != null) {
                         array_push($correosCopied, $user->email_aux);
                     }
                 }
-                //COPIADO tesoreria
+                foreach (User::permission('correo.secretaria_gerencia')->get() as $user) {
+                    if ($user->email_aux != null) {
+                        array_push($correosCopied, $user->email_aux);
+                    }
+                }
+                break;
+            case EStateRequest::UPLOADED_SUPPORTS_TESORERIA->getId():
+                // AQUI ES DONDE SE ENVIAR CORREO ENTRE SOPORTES TESORERIA Y APROBACION TESORERIA
+                // SE ENVIA CORREO AL TESORERO
                 foreach (User::permission('aproveTesoreria')->get() as $user) {
                     if ($user->email_aux != null) {
                         array_push($correosCopied, $user->email_aux);
                     }
                 }
-                //COPIADO S SECRETARIA DE GERENCIA
-                foreach (User::permission('correo.secretaria_gerencia')->get() as $user) {
+                break;
+            case EStateRequest::APROVED_TESORERIA->getId():
+                // AQUI ES DONDE SE ENVIAR CORREO ENTRE APROBACION TESORERIA Y PAGO
+                // SE ENVIA A LA PERSONA QUE TIENE PERMISO DE PAGAR, EN ESTE CASO ROL DIRECTOR FINANCIERO
+                foreach (User::permission('pagarViaticRequest')->get() as $user) {
                     if ($user->email_aux != null) {
                         array_push($correosCopied, $user->email_aux);
                     }
@@ -125,7 +138,22 @@ class ViaticRequest extends Model
         }
     }
 
-    public function usersCanUploadSupports()
+    public function usersCanPagar()
+    {
+        $users = [];
+        foreach (User::permission('pagarViaticRequest')->get() as $user) {
+
+            array_push($users, $user);
+        }
+        return $users;
+    }
+    public function canPagar()
+    {
+        $user = User::find(auth()->user()->id);
+        return  $user->can('pagarViaticRequest');
+    }
+
+    public function usersCanAproveTesoreria()
     {
         $users = [];
         foreach (User::permission('aproveTesoreria')->get() as $user) {
@@ -134,10 +162,25 @@ class ViaticRequest extends Model
         }
         return $users;
     }
-    public function canUploadSupports()
+    public function canAproveTesoreria()
     {
         $user = User::find(auth()->user()->id);
         return  $user->can('aproveTesoreria');
+    }
+
+    public function usersCanUploadSupports()
+    {
+        $users = [];
+        foreach (User::permission('uploadSupportsTesoreria')->get() as $user) {
+
+            array_push($users, $user);
+        }
+        return $users;
+    }
+    public function canUploadSupports()
+    {
+        $user = User::find(auth()->user()->id);
+        return  $user->can('uploadSupportsTesoreria');
     }
 
     public function bosses()
