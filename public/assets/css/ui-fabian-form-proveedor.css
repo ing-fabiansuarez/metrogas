@@ -1,0 +1,13 @@
+:root {
+    --color-primary: #b2ca01;
+    --color-secundary: #05418b;
+    --color-third: #009bd8;
+}
+
+.bg-background-secundary {
+    background: var(--color-secundary);
+}
+
+.bg-gradient-dark {
+    background-image: linear-gradient(310deg,#141727,#3a416f);
+}

@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViaticController;
 use Illuminate\Support\Facades\Route;
 use Adldap\Laravel\Facades\Adldap;
+use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ReportController;
 
 /*
@@ -30,8 +31,6 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('dashboard');
 
 	//MANTENIMIENTOS
-
-
 	Route::prefix('mantenimientos')->middleware('can:menu-mainten')->group(function () {
 		//Menu dle mantenimiento
 		Route::get('/', [MaintenanceController::class, 'menu'])->name('menu-mainten');
@@ -86,7 +85,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('subalternos', [UserController::class, 'subordinates'])->name('user.subordinates');
 	Route::post('subalternos', [UserController::class, 'storeSubordinates'])->name('user.storesubordinates');
 
-
 	//VIATICOS
 	//solicitud de viaticos
 	Route::get('solicitud-viaticos/create', [ViaticController::class, 'create'])->name('viatic.create');
@@ -110,34 +108,6 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/legalizaciones', [ReportController::class, 'exportLegalization'])->name('report.legalization.export');
 	});
 
-	/* 
-	Route::get('billing', function () {
-		return view('billing');
-	})->name('billing');
-
-	Route::get('profile', function () {
-		return view('profile');
-	})->name('profile');
-
-	Route::get('rtl', function () {
-		return view('rtl');
-	})->name('rtl');
-	Route::get('tables', function () {
-		return view('tables');
-	})->name('tables');
-
-	Route::get('virtual-reality', function () {
-		return view('virtual-reality');
-	})->name('virtual-reality');
-
-	Route::get('static-sign-in', function () {
-		return view('static-sign-in');
-	})->name('sign-in');
-
-	Route::get('static-sign-up', function () {
-		return view('static-sign-up');
-	})->name('sign-up');*/
-
 	Route::get('/logout', [SessionsController::class, 'destroy']);
 	/* 	Route::get('/user-profile', [InfoUserController::class, 'create']);
 	Route::post('/user-profile', [InfoUserController::class, 'store']); */
@@ -145,8 +115,6 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('sign-up');
 });
-
-
 
 Route::group(['middleware' => 'guest'], function () {
 	/* Route::get('/register', [RegisterController::class, 'create']);
@@ -164,8 +132,8 @@ Route::get('/login', function () {
 })->name('login');
 
 
-Route::get('/ldap', function () {
-	/* $array = [];
+/*Route::get('/ldap', function () {
+	 $array = [];
 	foreach (Adldap::search()->users()->get() as $user) {
 		
 		array_push($array, [
@@ -177,6 +145,11 @@ Route::get('/ldap', function () {
 			'useraccountcontrol'=>$user->useraccountcontrol,
 		]);
 	}
-	return $array; */
+	return $array; 
 	return Adldap::search()->users()->find('fsuarez');
-});
+});*/
+
+//PROVEEDORES
+Route::get('registrar-proveedor', [ProveedorController::class, 'register'])->name('proveedor.register');
+Route::get('registrar-proveedor/persona-natural', [ProveedorController::class, 'personaNatural'])->name('proveedor.register.persona-natural');
+Route::get('registrar-proveedor/persona-juridica', [ProveedorController::class, 'register'])->name('proveedor.register.persona-juridica');
