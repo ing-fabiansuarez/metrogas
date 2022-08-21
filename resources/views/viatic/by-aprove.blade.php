@@ -69,7 +69,8 @@
                                                 </a>
                                             </td>
                                             <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $viaticReq->created_at }}
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                    {{ date('d-m-Y', strtotime($viaticReq->created_at)) }}
                                                 </p>
                                             </td>
                                             <td class="text-center">
