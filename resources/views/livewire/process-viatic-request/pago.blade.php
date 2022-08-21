@@ -11,7 +11,7 @@
                     {{ $user->name . ' (' . $user->jobtitle->name . ')' }} <br>
                 @endforeach
                 @if (count($viaticRequest->usersCanPagar()) <= 0)
-                    Aún no hay usuario con Rol de Tesorero.
+                    Aún no hay usuario con Permiso de Hacer Pagos.
                 @endif
             </div>
 

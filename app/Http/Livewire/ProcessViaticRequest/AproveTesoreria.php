@@ -93,7 +93,7 @@ class AproveTesoreria extends Component
         ]);
 
         DB::beginTransaction();
-        $newState =  EStateRequest::BY_CREATE->getId();
+        $newState =  EStateRequest::APROVED_GENERAL->getId();
         //Se cambia el estado
         $this->viaticRequest->sw_state = $newState;
         $this->viaticRequest->save();

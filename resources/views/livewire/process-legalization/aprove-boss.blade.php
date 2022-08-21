@@ -209,10 +209,10 @@
             wire:loading.attr="disabled">
             Rechazar
         </button>
-        <button wire:click="$emit('beforeCanceled')" type="button" class="btn bg-danger action-button"
+        {{-- <button wire:click="$emit('beforeCanceled')" type="button" class="btn bg-danger action-button"
             wire:loading.attr="disabled">
             Anular
-        </button>
+        </button> --}}
     @endif
 </div>
 
