@@ -75,6 +75,15 @@ class ViaticRequest extends Model
                     }
                 }
                 break;
+            case EStateRequest::CLOSE->getId():
+                // AQUI ES DONDE SE ENVIAR CORREO ENTRE APROBACION pagar y final
+                // SE ENVIA A LA PERSONA QUE TIENE PERMISO de que llegue el correo de pago
+                foreach (User::permission('emailSend')->get() as $user) {
+                    if ($user->email_aux != null) {
+                        array_push($correosCopied, $user->email_aux);
+                    }
+                }
+                break;
         }
 
         Mail::to($this->user->email_aux)
