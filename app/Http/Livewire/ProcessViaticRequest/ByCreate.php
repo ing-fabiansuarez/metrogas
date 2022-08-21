@@ -8,7 +8,9 @@ use App\Models\DestinationSite;
 use App\Models\OriginSite;
 use App\Models\OtherExpense;
 use App\Models\OtherItem;
+use App\Models\User;
 use App\Models\ViaticRequestsSitesDetalle;
+use DateTime;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -232,13 +234,10 @@ class ByCreate extends Component
             'name_destination' => $modelDestination->name
         ]);
 
-        array_push($this->listTarifas, [
-            'alojamiento' => 0,
-            'alimentacion' =>  0,
-            'trans_intermunicipal' => 0,
-            'trans_municipal' => 0,
-            'total' => 0
-        ]);
+
+        //aqui calcula los valores de tarifias segun el sitio que se agrego
+        $this->calculateAmounts();
+        $this->recalcularCifras();
 
         $this->reset([
             'origin',
@@ -334,6 +333,186 @@ class ByCreate extends Component
             return response()->json(['message' => 'Error']);
         } */
     }
+
+    public function calculateAmounts()
+    {
+
+
+        //se trae el ultimo sition agregado
+        $ultimoSitio = end($this->listSite);
+
+        //calcular el numero de dias
+        $fecha1 = new DateTime($ultimoSitio['start_date']);
+        $fecha2 = new DateTime($ultimoSitio['end_date']);
+        $diff = $fecha1->diff($fecha2);
+        $num_days =  $diff->days + 1;
+
+
+        $accomo_value = 0;
+        $feed_value = 0;
+        $intermuni_value = 0;
+        $municip_value = 0;
+
+        $user = User::find(auth()->user()->id);
+
+        //verificamos a que cidudad va de acuerdo al id de destino
+        switch ($ultimoSitio['id_destination_site']) {
+                //Floridablanca
+            case 1:
+                //NIVELES
+                switch ($user->jobtitle->level) {
+                    case 1:
+                        $feed_value = 50000;
+                        break;
+                    case 2:
+                        $feed_value = 45000;
+                        break;
+                    case 3:
+                        $feed_value = 40000;
+                        break;
+                }
+
+                break;
+                //Bucaramanga
+            case 2:
+                //NIVELES
+                switch ($user->jobtitle->level) {
+                    case 1:
+                        $feed_value = 50000;
+                        break;
+                    case 2:
+                        $feed_value = 45000;
+                        break;
+                    case 3:
+                        $feed_value = 40000;
+                        break;
+                }
+                break;
+                //Bogotá
+            case 3:
+                //NIVELES
+                switch ($user->jobtitle->level) {
+                    case 1:
+                        $feed_value = 50000;
+                        break;
+                    case 2:
+                        $feed_value = 45000;
+                        break;
+                    case 3:
+                        $feed_value = 40000;
+                        break;
+                }
+                break;
+                //Cartagena
+            case 4:
+                //NIVELES
+                switch ($user->jobtitle->level) {
+                    case 1:
+                        $feed_value = 50000;
+                        break;
+                    case 2:
+                        $feed_value = 45000;
+                        break;
+                    case 3:
+                        $feed_value = 40000;
+                        break;
+                }
+                break;
+                //Barranquilla
+            case 5:
+                //NIVELES
+                switch ($user->jobtitle->level) {
+                    case 1:
+                        $feed_value = 50000;
+                        break;
+                    case 2:
+                        $feed_value = 45000;
+                        break;
+                    case 3:
+                        $feed_value = 40000;
+                        break;
+                }
+                break;
+                //Medellin
+            case 6:
+                //NIVELES
+                switch ($user->jobtitle->level) {
+                    case 1:
+                        $feed_value = 50000;
+                        break;
+                    case 2:
+                        $feed_value = 45000;
+                        break;
+                    case 3:
+                        $feed_value = 40000;
+                        break;
+                }
+                break;
+                // Ocaña
+            case 7:
+                //NIVELES
+                switch ($user->jobtitle->level) {
+                    case 1:
+                        $feed_value = 40000;
+                        $intermuni_value = 130000;
+                        break;
+                    case 2:
+                        $feed_value = 35000;
+                        $intermuni_value = 130000;
+                        break;
+                    case 3:
+                        $feed_value = 30000;
+                        $intermuni_value = 130000;
+                        break;
+                }
+                break;
+                //Rio de Oro
+            case 8:
+                //NIVELES
+                switch ($user->jobtitle->level) {
+                    case 1:
+                        $feed_value = 40000;
+                        $intermuni_value = 70000;
+                        break;
+                    case 2:
+                        $feed_value = 35000;
+                        $intermuni_value = 70000;
+                        break;
+                    case 3:
+                        $feed_value = 30000;
+                        $intermuni_value = 70000;
+                        break;
+                }
+                break;
+                //San Gil
+            case 9:
+                //NIVELES
+                switch ($user->jobtitle->level) {
+                    case 1:
+                        $feed_value = 40000;
+                        $intermuni_value = 46000;
+                        break;
+                    case 2:
+                        $feed_value = 35000;
+                        $intermuni_value = 46000;
+                        break;
+                    case 3:
+                        $feed_value = 30000;
+                        $intermuni_value = 46000;
+                        break;
+                }
+                break;
+        }
+
+        array_push($this->listTarifas, [
+            'alojamiento' => $accomo_value,
+            'alimentacion' =>  $feed_value * $num_days,
+            'trans_intermunicipal' => $intermuni_value,
+            'trans_municipal' => $municip_value,
+            'total' =>  $accomo_value + ($feed_value * $num_days) + $intermuni_value + $municip_value
+        ]);
+    }
+
     public function removeOtherExpense($indexArray)
     {
         unset($this->listOtherExpenses[$indexArray]);
