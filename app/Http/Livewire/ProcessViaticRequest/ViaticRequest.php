@@ -130,6 +130,30 @@ class ViaticRequest extends Component
             'start_date' => 'required',
             'end_date' => 'required',
         ]);
+
+        //validar las fechas
+        foreach ($this->listSite as $sitee) {
+            if (
+                $sitee['start_date'] <= $this->start_date &&
+                $sitee['end_date'] >= $this->start_date
+            ) {
+                $this->addError('comission', 'Fecha inicio es invalida.');
+                return;
+            }
+            if (
+                $sitee['start_date'] <= $this->end_date &&
+                $sitee['end_date'] >= $this->end_date
+            ) {
+                $this->addError('comission', 'Fecha Regreso es invalida.');
+                return;
+            }
+            if ($this->end_date < $this->start_date) {
+                $this->addError('comission', 'La Fecha Inicio debe ser menor que la Fecha Final.');
+                return;
+            }
+        }
+        //___________________________________
+        
         $modelDestination = DestinationSite::find($this->destination);
         $modelOrigin = OriginSite::find($this->origin);
         //aqui añade los lugares  en un array
