@@ -93,6 +93,9 @@ class ViaticController extends Controller
                 case EStateRequest::PAGO_DIRECTOR->getId():
                     return view('viatic.viatic-request.realizar-pago', compact('viaticRequest'));
                     break;
+                case EStateRequest::PAGO_REALIZADO->getId():
+                    return view('viatic.viatic-request.support-pago', compact('viaticRequest'));
+                    break;
             }
 
             echo "EXITE";
@@ -113,6 +116,8 @@ class ViaticController extends Controller
                 || $viaticRequest->sw_state == EStateRequest::UPLOADED_SUPPORTS_TESORERIA->getId()
                 || $viaticRequest->sw_state == EStateRequest::CLOSE->getId()
                 || $viaticRequest->sw_state == EStateRequest::APROVED_TESORERIA->getId()
+                || $viaticRequest->sw_state == EStateRequest::PAGO_REALIZADO->getId()
+                || $viaticRequest->sw_state == EStateRequest::PAGO_DIRECTOR->getId()
             ) {
                 $pdf = App::make('dompdf.wrapper');
                 $pdf->loadView('pdf.viatic-request.viatic-request', compact('viaticRequest'))->setPaper('letter', 'portrait');
@@ -260,6 +265,11 @@ class ViaticController extends Controller
         //aqui se verfica si tiene permisos para la aprobacion de tesorerai y si es asi se agregan
         if ($user->can('uploadSupportsTesoreria')) {
             $viaticRequestAproveTesoreria = ViaticRequest::where('sw_state', EStateRequest::APROVED_GENERAL->getId())->get();
+            $visticRequestsList = $visticRequestsList->concat($viaticRequestAproveTesoreria);
+        }
+
+        if ($user->can('uploadSupportsTesoreria')) {
+            $viaticRequestAproveTesoreria = ViaticRequest::where('sw_state', EStateRequest::PAGO_REALIZADO->getId())->get();
             $visticRequestsList = $visticRequestsList->concat($viaticRequestAproveTesoreria);
         }
 

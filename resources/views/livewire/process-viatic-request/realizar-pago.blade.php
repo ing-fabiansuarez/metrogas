@@ -19,10 +19,10 @@
                 <div class="form-card">
                     <div class="row">
                         <div class="col-7">
-                            <h2 class="fs-title">Pago</h2>
+                            <h2 class="fs-title">Realizar pago</h2>
                         </div>
                         <div class="col-5">
-                            <h2 class="steps">Paso N° 5</h2>
+                            <h2 class="steps">Paso N° 6</h2>
                         </div>
                     </div>
 

@@ -1,7 +1,7 @@
 <div class="card px-3 pt-4 pb-0 mt-0 mb-3">
     <div id="msform">
         <!-- progressbar -->
-        <x-viatic-requests.progress-bar :stepsCompletes='7' />
+        <x-viatic-requests.progress-bar :stepsCompletes='9' />
         <br>
 
         <fieldset>
