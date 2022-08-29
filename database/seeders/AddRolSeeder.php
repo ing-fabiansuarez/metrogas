@@ -27,7 +27,7 @@ class AddRolSeeder extends Seeder
         $roleReportes->givePermissionTo($permisoreporte); */
 
         $rolePlane = Role::findByName('Rol planeacion');
-        Permission::create(['name' => 'emailSend', 'description' => 'Correo electronico para Rol de planeación.'])->syncRoles([$rolePlane]);
-
+        //Permission::create(['name' => 'emailSend', 'description' => 'Correo electronico para Rol de planeación.'])->syncRoles([$rolePlane]);
+        Permission::create(['name' => 'realizarPago', 'description' => 'Realizar el flujo de realizar pago en la solicitud de viaticos.'])->syncRoles([$rolePlane]);
     }
 }

@@ -288,13 +288,39 @@
                                 Subir Soporte
                             </button>
                         </div>
+
                     </div>
+                    <div class="row mt-3">
+                        <div class="col-md-7">
+                            
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-check">
+                                <input wire:model="aceptarTerminosCondiciones" class="form-check-input"
+                                    type="checkbox" id="fcustomCheck1" required>
+                                <label class="custom-control-label" for="customCheck1">Acepto términos y condiciones
+                                    de
+                                    MetroGas SA ESP</label>
+                                @error('aceptarTerminosCondiciones')
+                                    <span class="text-danger text-message-validation">
+                                        {{ $message }}
+                                    </span>
+                                    <br>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
                     <div wire:loading>
                         Cargando...
                     </div>
                     <button wire:click="$emit('beforeSend')" id="button_create" type="submit" name="next"
                         class="btn next action-button" wire:loading.attr="disabled">Pasar
                         Aprobación</button>
+                    <button type="button" class="btn bg-warning action-button" wire:click="$emit('sendGuardado')"
+                        wire:loading.attr="disabled">
+                        Guardado Parcial
+                    </button>
                 @endif
             </div>
         </div>
@@ -304,6 +330,28 @@
 @push('js')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        Livewire.on('sendGuardado', objId => {
+            Swal.fire({
+                title: 'Se va a guardar el proceso',
+                text: 'Puedes ingresar luego y terminar el proceso',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si guadar y cerrar',
+                cancelButtonText: '{{ __('forms.close') }}',
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    // Livewire.emitTo('process-legalization.supports', 'destroySupport', objId);
+                    Swal.fire(
+                        'Guardado!',
+                        'Se guardo correctamente...',
+                        'success'
+                    )
+                }
+            })
+        });
         Livewire.on('responseUpload', function(status) {
             if (status) {
                 Swal.fire(

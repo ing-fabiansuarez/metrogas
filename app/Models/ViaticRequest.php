@@ -75,6 +75,24 @@ class ViaticRequest extends Model
                     }
                 }
                 break;
+            case EStateRequest::PAGO_DIRECTOR->getId():
+                // AQUI ES DONDE SE ENVIAR CORREO ENTRE APROBACION TESORERIA Y PAGO
+                // SE ENVIA A LA PERSONA QUE TIENE PERMISO DE PAGAR, EN ESTE CASO ROL DIRECTOR FINANCIERO
+                foreach (User::permission('realizarPago')->get() as $user) {
+                    if ($user->email_aux != null) {
+                        array_push($correosCopied, $user->email_aux);
+                    }
+                }
+                break;
+            case EStateRequest::PAGO_REALIZADO->getId():
+                // AQUI ES DONDE SE ENVIAR CORREO ENTRE APROBACION TESORERIA Y PAGO
+                // SE ENVIA A LA PERSONA QUE TIENE PERMISO DE PAGAR, EN ESTE CASO ROL DIRECTOR FINANCIERO
+                foreach (User::permission('uploadSupportsTesoreria')->get() as $user) {
+                    if ($user->email_aux != null) {
+                        array_push($correosCopied, $user->email_aux);
+                    }
+                }
+                break;
             case EStateRequest::CLOSE->getId():
                 // AQUI ES DONDE SE ENVIAR CORREO ENTRE APROBACION pagar y final
                 // SE ENVIA A LA PERSONA QUE TIENE PERMISO de que llegue el correo de pago
@@ -162,6 +180,20 @@ class ViaticRequest extends Model
         return  $user->can('pagarViaticRequest');
     }
 
+    public function usersCanRealizarPago()
+    {
+        $users = [];
+        foreach (User::permission('realizarPago')->get() as $user) {
+
+            array_push($users, $user);
+        }
+        return $users;
+    }
+    public function canRealizarPago()
+    {
+        $user = User::find(auth()->user()->id);
+        return  $user->can('realizarPago');
+    }
     public function usersCanAproveTesoreria()
     {
         $users = [];

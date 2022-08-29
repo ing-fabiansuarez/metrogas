@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 class ProgressBar extends Component
 {
     public $stepsCompletes;
-    public $totalSteps = 7;
+    public $totalSteps = 9;
     public $width;
 
 

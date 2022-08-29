@@ -2,15 +2,15 @@
     <div class="card px-3 pt-4 pb-0 mt-0 mb-3">
         <div id="msform">
             <!-- progressbar -->
-            <x-viatic-requests.progress-bar :stepsCompletes='6' />
+            <x-viatic-requests.progress-bar :stepsCompletes='7' />
             <br>
 
             <div class="alert alert-success" role="alert">
                 <strong>Usuarios que pueden hacer el pago:</strong><br>
-                @foreach ($viaticRequest->usersCanPagar() as $user)
+                @foreach ($viaticRequest->usersCanRealizarPago() as $user)
                     {{ $user->name . ' (' . $user->jobtitle->name . ')' }} <br>
                 @endforeach
-                @if (count($viaticRequest->usersCanPagar()) <= 0)
+                @if (count($viaticRequest->usersCanRealizarPago()) <= 0)
                     Aún no hay usuario con Permiso de Hacer Pagos.
                 @endif
             </div>
@@ -51,7 +51,7 @@
                         <div class="col-md-6">
                             <x-viatic-requests.observations :viaticRequest="$viaticRequest" />
                             <br>
-                            @if ($viaticRequest->canPagar())
+                            @if ($viaticRequest->canRealizarPago())
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Tu observación</label>
                                     <textarea wire:model="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
@@ -78,17 +78,17 @@
                             Anticipo</a>
                     </div>
                 </div>
-                @if ($viaticRequest->canPagar())
+                @if ($viaticRequest->canRealizarPago())
                     <button wire:click="$emit('beforeAproveViaticRequest')" type="submit" name="next"
-                        class="btn bg-secundary btn-sm action-button" wire:loading.attr="disabled">Aprobar</button>
-                    <button type="button" class="btn bg-warning action-button" data-bs-toggle="modal"
+                        class="btn bg-secundary btn-sm action-button" wire:loading.attr="disabled">Realizar Pago</button>
+                    {{-- <button type="button" class="btn bg-warning action-button" data-bs-toggle="modal"
                         data-bs-target="#rechazarModal" wire:loading.attr="disabled">
                         Rechazar
                     </button>
                     <button type="button" class="btn bg-danger action-button" data-bs-toggle="modal"
                         data-bs-target="#exampleModal" wire:loading.attr="disabled">
                         Anular
-                    </button>
+                    </button> --}}
                     <div wire:loading>
                         Cargando...
                     </div>
@@ -171,7 +171,7 @@
                 cancelButtonText: '{{ __('forms.close') }}',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Livewire.emitTo('process-viatic-request.pago', 'aproveViaticRequest');
+                    Livewire.emitTo('process-viatic-request.realizar-pago', 'aproveViaticRequest');
                 }
             })
         });

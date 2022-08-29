@@ -1,5 +1,14 @@
 <div>
     <div>
+        <div class="alert alert-success" role="alert">
+            <strong>Usuarios que pueden aprobar:</strong><br>
+            @foreach ($legalization->usersCanContabilidad() as $user)
+                {{ $user->name . ' (' . $user->jobtitle->name . ')' }} <br>
+            @endforeach
+            @if (count($legalization->usersCanContabilidad()) <= 0)
+                Aún no hay usuarios registrados que puedan autorizar.
+            @endif
+        </div>
         @if (session('msg'))
             <div class="alert {{ session('msg.class') }}" role="alert">
                 {{ session('msg.body') }}
@@ -235,7 +244,8 @@
                     <div wire:loading>
                         Cargando...
                     </div>
-                    <button wire:click="$emit('beforeRechazar')" type="button" class="btn bg-warning action-button" wire:loading.attr="disabled">
+                    <button wire:click="$emit('beforeRechazar')" type="button" class="btn bg-warning action-button"
+                        wire:loading.attr="disabled">
                         Rechazar
                     </button>
                     {{-- <button wire:click="$emit('beforeCanceled')" type="button" class="btn bg-danger action-button">

@@ -15,6 +15,8 @@ enum EStateRequest
     case CANCELED;
     case UPLOADED_SUPPORTS_TESORERIA;
     case APROVED_TESORERIA;
+    case PAGO_DIRECTOR;
+    case PAGO_REALIZADO;
 
 
     public function getId(): int
@@ -29,6 +31,8 @@ enum EStateRequest
             EStateRequest::CANCELED => 7,
             EStateRequest::UPLOADED_SUPPORTS_TESORERIA => 8,
             EStateRequest::APROVED_TESORERIA => 9,
+            EStateRequest::PAGO_DIRECTOR => 10,
+            EStateRequest::PAGO_REALIZADO => 11,
         };
     }
 
@@ -44,6 +48,8 @@ enum EStateRequest
             EStateRequest::CANCELED => 'ANULADA',
             EStateRequest::UPLOADED_SUPPORTS_TESORERIA => 'SUBIDOS LOS SOPORTES',
             EStateRequest::APROVED_TESORERIA => 'APROBADO TESORERIA',
+            EStateRequest::PAGO_DIRECTOR => 'APROBADO DIRECTOR',
+            EStateRequest::PAGO_REALIZADO => 'PAGO REALIZADO',
         };
     }
     public function getColor(): string
@@ -58,6 +64,8 @@ enum EStateRequest
             EStateRequest::CANCELED => 'bg-gradient-danger',
             EStateRequest::UPLOADED_SUPPORTS_TESORERIA => 'bg-gradient-info',
             EStateRequest::APROVED_TESORERIA => 'bg-gradient-light',
+            EStateRequest::PAGO_DIRECTOR => 'bg-gradient-info',
+            EStateRequest::PAGO_REALIZADO => 'bg-gradient-warning',
         };
     }
 
