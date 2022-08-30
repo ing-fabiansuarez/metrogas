@@ -178,6 +178,15 @@
 
     </div>
 
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <a target="_blank" href="{{ route('legalization.pdf', $legalization->id) }}" style="color: white"
+                type="button" class="btn bg-secundary btn-sm">Ver
+                Legalización</a>
+        </div>
+    </div>
+
     <h2 class="my-3">Total Legalización $ {{ number_format($legalization->calculateTotal()) }}</h2>
 
     {{-- observation --}}
@@ -348,4 +357,3 @@
         });
     </script>
 @endpush
-

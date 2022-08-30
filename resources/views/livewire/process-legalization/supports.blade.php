@@ -69,6 +69,14 @@
                 </div>
             </div>
         </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <a target="_blank" href="{{ route('legalization.pdf', $legalization->id) }}" style="color: white"
+                    type="button" class="btn bg-secundary btn-sm">Ver
+                    Legalización</a>
+            </div>
+        </div>
         {{-- Observations --}}
         <div class="row justify-content-center mb-4">
             <div class="col-md-6">
@@ -292,7 +300,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-7">
-                            
+
                         </div>
                         <div class="col-md-5">
                             <div class="form-check">

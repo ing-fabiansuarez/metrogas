@@ -99,6 +99,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('legalizaciones/create', [ViaticController::class, 'createlegalization'])->name('legalization.create');
 	Route::post('legalizaciones/create', [ViaticController::class, 'storelegalization'])->name('legalization.store');
 	Route::get('legalizaciones/{id}', [ViaticController::class, 'showlegalization'])->name('legalization.show');
+	Route::get('legalizaciones/{id}/pdf', [ViaticController::class, 'pdfLegalization'])->name('legalization.pdf');
 
 	Route::get('por-aprobar', [ViaticController::class, 'byAprove'])->name('byAprove');
 

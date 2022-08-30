@@ -140,6 +140,19 @@ class ViaticController extends Controller
         return;
     }
 
+    public function pdfLegalization($id)
+    {
+        $legalization = Legalization::find($id);
+        if (isset($legalization)) {
+
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadView('pdf.viatic-request.legalization', compact('legalization'))->setPaper('letter', 'landscape');
+            return $pdf->stream();
+        }
+        echo "NO EXISTE";
+        return;
+    }
+
     public function indexlegalization()
     {
         return view('viatic.legalization.list_legalizations', [
