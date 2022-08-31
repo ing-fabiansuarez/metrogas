@@ -38,10 +38,12 @@ class LegalizationMailable extends Mailable
             case EStateLegalization::APROVE_BOSS->getId():
                 return $this->view('mail.viatic.legalization-aproved-boss', ['legalization' => $this->legalization]);
                 break;
+            case EStateLegalization::CHECKED->getId():
+                return $this->view('mail.viatic.legalization-aproved-boss', ['legalization' => $this->legalization]);
+                break;
             case EStateLegalization::CANCELED->getId():
                 return $this->view('mail.viatic.legalization-canceled', ['legalization' => $this->legalization]);
                 break;
-           
         }
         return "NO TIENE ESTADOS EN EL CORREO";
     }

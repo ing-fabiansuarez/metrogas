@@ -40,7 +40,13 @@ class AproveBoss extends Component
         try {
             DB::beginTransaction();
             //Se cambia el estado
-            $this->legalization->sw_state = EStateLegalization::APROVE_BOSS->getId();
+            //AQUI NOS SALTAMOS LA VALIDACION SI ES MENOR DE UN SALARIO MINIMO
+            if ($this->legalization->calculateTotal() >= 1000000) {
+                $this->legalization->sw_state = EStateLegalization::APROVE_BOSS->getId();
+            } else {
+                $this->legalization->sw_state = EStateLegalization::CHECKED->getId();
+            }
+
             $this->legalization->save();
 
             $obs = new ObservationLegalization();

@@ -125,7 +125,7 @@
             </td>
             <td style="padding-left: 10px" class="con-border">
                 @if ($legalization->viaticRequest)
-                    {{ number_format($legalization->viaticRequest->getTotalViaticRequest()) }}
+                    $ {{ number_format($legalization->viaticRequest->getTotalViaticRequest()) }}
                 @else
                     Reintegro
                 @endif
@@ -165,8 +165,7 @@
             <td></td>
             <td class="con-border" style="padding-left: 10px"><b>DIFERENCIA</b></td>
             <td class="con-border" style="padding-left: 10px">$
-                {{ number_format($legalization->viaticRequest != null ? $legalization->viaticRequest->getTotalViaticRequest() : 0 - $legalization->calculateTotal()) }}
-
+                {{ number_format(($legalization->viaticRequest != null ? $legalization->viaticRequest->getTotalViaticRequest() : 0) - $legalization->calculateTotal()) }}
             </td>
         </tr>
     </table>

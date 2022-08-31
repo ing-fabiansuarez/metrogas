@@ -34,7 +34,7 @@ class Legalization extends Model
         switch ($this->sw_state) {
             case EStateLegalization::APROVE_GENERAL->getId():
                 //COPIADO busca las personas que tienen el permiso de aprobar la solicitudes de anticipos para copiarlos al correo
-                foreach (User::permission('aproveGeneral')->get() as $user) {
+                foreach (User::permission('aproveContabilidad')->get() as $user) {
                     if ($user->email_aux != null) {
                         array_push($correosCopied, $user->email_aux);
                     }
