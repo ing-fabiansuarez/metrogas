@@ -51,6 +51,12 @@ class ViaticRequestMaileable extends Mailable
             case EStateRequest::APROVED_TESORERIA->getId():
                 return $this->view('mail.viatic.viatic-request-aprove-tesoreria', ['viaticRequest' => $this->viaticRequest]);
                 break;
+            case EStateRequest::PAGO_DIRECTOR->getId():
+                return $this->view('mail.viatic.viatic-request-pago-director', ['viaticRequest' => $this->viaticRequest]);
+                break;
+            case EStateRequest::PAGO_REALIZADO->getId():
+                return $this->view('mail.viatic.viatic-request-pago-realizado', ['viaticRequest' => $this->viaticRequest]);
+                break;
         }
         return "NO TIENE ESTADOS EN EL CORREO";
     }

@@ -33,15 +33,15 @@ class LegalizationMailable extends Mailable
                 return $this->view('mail.viatic.legalization-aprove-general', ['legalization' => $this->legalization]);
                 break;
             case EStateLegalization::APROVE_CONTABILIDAD->getId():
-                return $this->view('mail.viatic.legalization-aprove-general', ['legalization' => $this->legalization]);
+                return $this->view('mail.viatic.legalization-aprove-contabilidad', ['legalization' => $this->legalization]);
                 break;
             case EStateLegalization::APROVE_BOSS->getId():
                 return $this->view('mail.viatic.legalization-aproved-boss', ['legalization' => $this->legalization]);
                 break;
-            case EStateLegalization::CANCELED->getId():
-                return $this->view('mail.viatic.legalization-canceled', ['legalization' => $this->legalization]);
+            case EStateLegalization::CHECKED->getId():
+                return $this->view('mail.viatic.legalization-aproved-boss', ['legalization' => $this->legalization]);
                 break;
-            case EStateLegalization::APROVE_CONTABILIDAD->getId():
+            case EStateLegalization::CANCELED->getId():
                 return $this->view('mail.viatic.legalization-canceled', ['legalization' => $this->legalization]);
                 break;
         }

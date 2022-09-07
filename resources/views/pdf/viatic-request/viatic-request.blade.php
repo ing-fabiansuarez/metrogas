@@ -322,10 +322,8 @@
             </td>
         </tr>
         <tr>
-            <td style="padding-left: 35px; padding-bottom: 15px; line-height: 17px">
-                <b>Firmado y aceptado desde la plataforma de viaticos</b>
-                <br>
-                {{ $viaticRequest->user->name }} <br>
+            <td style="padding-left: 35px; padding-bottom: 5px; line-height: 17px">
+                <b> {{ strtoupper($viaticRequest->user->name) }}</b> <br>
                 CC. {{ $viaticRequest->num_identification }}<br>
                 {{ $viaticRequest->user->jobtitle->name }}
             </td>

@@ -383,7 +383,20 @@
                         </div>
                     </div>
 
+                    <div class="form-check">
+                        <input wire:model="aceptarTerminosCondiciones" class="form-check-input" type="checkbox"
+                            id="fcustomCheck1" required>
+                        <label class="custom-control-label" for="customCheck1">Acepto términos y condiciones de
+                            MetroGas SA ESP</label>
+                        @error('aceptarTerminosCondiciones')
+                            <span class="text-danger text-message-validation">
+                                {{ $message }}
+                            </span>
+                            <br>
+                        @enderror
+                    </div>
                 </div>
+
                 <div wire:loading>
                     Cargando...
                 </div>

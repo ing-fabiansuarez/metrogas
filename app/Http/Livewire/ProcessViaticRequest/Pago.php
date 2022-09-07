@@ -35,7 +35,7 @@ class Pago extends Component
         try {
             DB::beginTransaction();
             //Se cambia el estado
-            $this->viaticRequest->sw_state = EStateRequest::CLOSE->getId();
+            $this->viaticRequest->sw_state = EStateRequest::PAGO_DIRECTOR->getId();
             $this->viaticRequest->save();
             //se guarda la observacion
             if (!empty($this->observation)) {
@@ -47,7 +47,7 @@ class Pago extends Component
             }
 
             //SE ENVIA UN CORREO ELECTRONICO
-            $this->viaticRequest->sendEmail("Solicitud terminada, ya se realizo el pago del anticipo.");
+            $this->viaticRequest->sendEmail("Solicitud de viatico, lista para realizar el pago.");
             $this->emit('responseAprove', true, route('viatic.show', $this->viaticRequest->id));
 
             DB::commit();

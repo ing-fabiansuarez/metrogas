@@ -20,12 +20,19 @@
             <strong>Aprobación Tesoreria</strong>
         </li>
         <li id="confirm" style="width: {{ $width }}%;" @if ($stepsCompletes >= 6) class="active" @endif>
-            <strong>Pago</strong>
+            <strong>Pago Director</strong>
         </li>
         <li id="confirm" style="width: {{ $width }}%;" @if ($stepsCompletes >= 7) class="active" @endif>
+            <strong>Realizar Pago</strong>
+        </li>
+        <li id="confirm" style="width: {{ $width }}%;" @if ($stepsCompletes >= 8) class="active" @endif>
+            <strong>Subir Evidencia Pago</strong>
+        </li>
+        <li id="confirm" style="width: {{ $width }}%;"
+            @if ($stepsCompletes >= 9) class="active" @endif>
             <strong>{{ __('messages.legalization') }}</strong>
         </li>
-        
+
     </ul>
     <div class="progress">
         <div style="width: {{ $width * $stepsCompletes }}%"

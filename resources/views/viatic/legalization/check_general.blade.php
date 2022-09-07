@@ -3,10 +3,10 @@
     <div class="card px-3 pt-4 pb-0 mt-0 mb-3">
         <div id="msform">
             <!-- progressbar -->
-            <x-legalizations.progress-bar :stepsCompletes='6' />
+            <x-legalizations.progress-bar :stepsCompletes='4' />
 
             <br>
-            <livewire:process-legalization.aprove-contabilidad :legalization="$legalization" />
+            <livewire:process-legalization.check-general :legalization="$legalization" />
 
         </div>
     </div>

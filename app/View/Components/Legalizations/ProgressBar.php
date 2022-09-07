@@ -8,7 +8,7 @@ class ProgressBar extends Component
 {
 
     public $stepsCompletes;
-    public $totalSteps = 6;
+    public $totalSteps = 7;
     public $width;
 
     /**

@@ -32,7 +32,7 @@
 </head>
 
 <body style="color: black;font-size:0.8rem;">
-    <h1>Solicitud de anticipo N° {{ $viaticRequest->id }} fue COMPLETADA.</h1>
+    <h1>Solicitud de anticipo N° {{ $viaticRequest->id }}. Se realizo el pago a su cuenta.</h1>
     <p>Para gestionar el proceso ingresa al siguiente enlace con sus credeciales del directorio activo.</p>
     <a href="{{ url('/') }}">Ingreso al sistema.</a>
     <br>

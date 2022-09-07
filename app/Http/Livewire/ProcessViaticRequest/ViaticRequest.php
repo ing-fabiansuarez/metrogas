@@ -30,6 +30,7 @@ class ViaticRequest extends Component
     public $end_date;
     public $centroDeCostos;
     public $numeroIdentificacion;
+    public $aceptarTerminosCondiciones;
 
     /** Otros Items */
     public $gestion = [];
@@ -192,6 +193,7 @@ class ViaticRequest extends Component
             'justification' => 'required',
             'centroDeCostos' => 'required',
             'numeroIdentificacion' => 'required',
+            'aceptarTerminosCondiciones' => 'required',
         ]);
         //Comisines
         if (count($this->listSite) < 1) {

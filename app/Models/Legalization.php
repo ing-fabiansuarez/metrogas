@@ -34,7 +34,7 @@ class Legalization extends Model
         switch ($this->sw_state) {
             case EStateLegalization::APROVE_GENERAL->getId():
                 //COPIADO busca las personas que tienen el permiso de aprobar la solicitudes de anticipos para copiarlos al correo
-                foreach (User::permission('aproveGeneral')->get() as $user) {
+                foreach (User::permission('aproveContabilidad')->get() as $user) {
                     if ($user->email_aux != null) {
                         array_push($correosCopied, $user->email_aux);
                     }
@@ -56,13 +56,55 @@ class Legalization extends Model
         }
         return false;
     }
+
+    public function usersCanAproveCheck()
+    {
+        $users = [];
+        foreach (User::permission('aproveGeneralJefe')->get() as $user) {
+            array_push($users, $user);
+        }
+        return $users;
+    }
+
+    public function canAproveCheck()
+    {
+        //aqui va la aprobacion por parte de la direccion financiera
+        $user = User::find(auth()->user()->id);
+        return  $user->can('aproveGeneralJefe');
+    }
+
+    public function usersCanAproveGeneral()
+    {
+        $usertotal = [];
+        if ($this->calculateTotal() >= 1000000) {
+            $userss = User::permission('aproveGeneralDirector')->get();
+        } else {
+            $userss = User::permission('aproveGeneralJefe')->get();
+        }
+
+        foreach ($userss as $user) {
+            array_push($usertotal, $user);
+        }
+        return $usertotal;
+    }
     public function canAproveGeneral()
     {
         //aqui va la aprobacion por parte de la direccion financiera
         $user = User::find(auth()->user()->id);
-        return  $user->can('aproveGeneral');
+        if ($this->calculateTotal() >= 1000000) {
+            return $user->can('aproveGeneralDirector');
+        } else {
+            return $user->can('aproveGeneralJefe');
+        }
     }
-
+    public function usersCanContabilidad()
+    {
+        $users = [];
+        foreach (User::permission('aproveContabilidad')->get() as $user) {
+            array_push($users, $user);
+        }
+        return $users;
+    }
     public function canContabilidad()
     {
         //determina quien de contabilidad tiene el permiso de aprobar las legalizaciones

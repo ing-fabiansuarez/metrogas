@@ -180,6 +180,14 @@
         </div>
 
     </div>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <a target="_blank" href="{{ route('legalization.pdf', $legalization->id) }}" style="color: white"
+                type="button" class="btn bg-secundary btn-sm">Ver
+                Legalización</a>
+        </div>
+    </div>
     {{-- Observations --}}
     <div class="row justify-content-center mb-4">
         <div class="col-md-6">
@@ -209,10 +217,10 @@
             wire:loading.attr="disabled">
             Rechazar
         </button>
-        <button wire:click="$emit('beforeCanceled')" type="button" class="btn bg-danger action-button"
+        {{-- <button wire:click="$emit('beforeCanceled')" type="button" class="btn bg-danger action-button"
             wire:loading.attr="disabled">
             Anular
-        </button>
+        </button> --}}
     @endif
 </div>
 

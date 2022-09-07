@@ -2,10 +2,10 @@
 
     <div class="alert alert-success" role="alert">
         <strong>Usuarios que pueden aprobar:</strong><br>
-        @foreach ($legalization->usersCanAproveGeneral() as $user)
+        @foreach ($legalization->usersCanAproveCheck() as $user)
             {{ $user->name . ' (' . $user->jobtitle->name . ')' }} <br>
         @endforeach
-        @if (count($legalization->usersCanAproveGeneral()) <= 0)
+        @if (count($legalization->usersCanAproveCheck()) <= 0)
             Aún no hay usuarios registrados que puedan autorizar.
         @endif
     </div>
@@ -176,7 +176,6 @@
             </div>
         </div>
 
-
     </div>
 
     <br>
@@ -238,7 +237,7 @@
                 <br>
             @endforeach
 
-            @if ($legalization->canAproveGeneral())
+            @if ($legalization->canAproveCheck())
                 <div class="form-group">
                     <label for="exampleFormControlTextarea1">Su Observación</label>
                     <textarea wire:model.defer="observation" class="form-control form-control-sm" rows="3" placeholder=""></textarea>
@@ -272,6 +271,7 @@
 </div>
 
 
+
 @push('js')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -287,23 +287,7 @@
                 cancelButtonText: '{{ __('forms.close') }}',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Livewire.emitTo('process-legalization.aprove-general', 'aproveLegalization');
-                }
-            })
-        });
-        Livewire.on('beforeCanceled', function() {
-            Swal.fire({
-                title: 'Se Anulará la Legalización',
-                text: '¿Esta Seguro?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si',
-                cancelButtonText: '{{ __('forms.close') }}',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.emitTo('process-legalization.aprove-general', 'canceledLegalization');
+                    Livewire.emitTo('process-legalization.check-general', 'aproveLegalization');
                 }
             })
         });
@@ -319,7 +303,7 @@
                 cancelButtonText: '{{ __('forms.close') }}',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Livewire.emitTo('process-legalization.aprove-general', 'rechazarLegalization');
+                    Livewire.emitTo('process-legalization.check-general', 'rechazarLegalization');
                 }
             })
         });

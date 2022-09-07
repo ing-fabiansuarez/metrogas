@@ -12,7 +12,8 @@ class SupportsViaticRequests extends Model
     protected $fillable = [
         'url',
         'observation',
-        'created_by'
+        'created_by',
+        'type_support'
     ];
 
     public function viaticRequest()

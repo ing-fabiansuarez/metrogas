@@ -3,7 +3,7 @@
     <div class="card px-3 pt-4 pb-0 mt-0 mb-3">
         <div id="msform">
             <!-- progressbar -->
-            <x-legalizations.progress-bar :stepsCompletes='6' />
+            <x-legalizations.progress-bar :stepsCompletes='7' />
 
             <br>
             <div>
@@ -173,6 +173,14 @@
                         </div>
                     </div>
 
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a target="_blank" href="{{ route('legalization.pdf', $legalization->id) }}" style="color: white"
+                            type="button" class="btn bg-secundary btn-sm">Ver
+                            Legalización</a>
+                    </div>
                 </div>
 
                 <h2 class="my-3">Total Legalización $ {{ number_format($legalization->calculateTotal()) }}</h2>

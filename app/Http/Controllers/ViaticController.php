@@ -48,8 +48,10 @@ class ViaticController extends Controller
                         if (!$viaticRequest->canAproveGeneral()) {
                             if (!$viaticRequest->canUploadSupports()) {
                                 if (!$viaticRequest->canPagar()) {
-                                    if (!$user->can('report')) {
-                                        return "NO TIENE ACCESO PARA GESTIONAR ESTA SOLICITUD";
+                                    if (!$viaticRequest->canRealizarPago()) {
+                                        if (!$user->can('report')) {
+                                            return "NO TIENE ACCESO PARA GESTIONAR ESTA SOLICITUD";
+                                        }
                                     }
                                 }
                             }
@@ -88,6 +90,12 @@ class ViaticController extends Controller
                 case EStateRequest::APROVED_TESORERIA->getId():
                     return view('viatic.viatic-request.pago', compact('viaticRequest'));
                     break;
+                case EStateRequest::PAGO_DIRECTOR->getId():
+                    return view('viatic.viatic-request.realizar-pago', compact('viaticRequest'));
+                    break;
+                case EStateRequest::PAGO_REALIZADO->getId():
+                    return view('viatic.viatic-request.support-pago', compact('viaticRequest'));
+                    break;
             }
 
             echo "EXITE";
@@ -108,6 +116,8 @@ class ViaticController extends Controller
                 || $viaticRequest->sw_state == EStateRequest::UPLOADED_SUPPORTS_TESORERIA->getId()
                 || $viaticRequest->sw_state == EStateRequest::CLOSE->getId()
                 || $viaticRequest->sw_state == EStateRequest::APROVED_TESORERIA->getId()
+                || $viaticRequest->sw_state == EStateRequest::PAGO_REALIZADO->getId()
+                || $viaticRequest->sw_state == EStateRequest::PAGO_DIRECTOR->getId()
             ) {
                 $pdf = App::make('dompdf.wrapper');
                 $pdf->loadView('pdf.viatic-request.viatic-request', compact('viaticRequest'))->setPaper('letter', 'portrait');
@@ -125,6 +135,19 @@ class ViaticController extends Controller
             } */
             echo "EXITE";
             return;
+        }
+        echo "NO EXISTE";
+        return;
+    }
+
+    public function pdfLegalization($id)
+    {
+        $legalization = Legalization::find($id);
+        if (isset($legalization)) {
+
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadView('pdf.viatic-request.legalization', compact('legalization'))->setPaper('letter', 'landscape');
+            return $pdf->stream();
         }
         echo "NO EXISTE";
         return;
@@ -198,10 +221,13 @@ class ViaticController extends Controller
                     return view('viatic.legalization.aprove_boss', compact('legalization'));
                     break;
                 case EStateLegalization::APROVE_BOSS->getId():
-                    return view('viatic.legalization.aprove_general', compact('legalization'));
+                    return view('viatic.legalization.check_general', compact('legalization'));
                     break;
                 case EStateLegalization::APROVE_GENERAL->getId():
                     return view('viatic.legalization.aprove_contabilidad', compact('legalization'));
+                    break;
+                case EStateLegalization::CHECKED->getId():
+                    return view('viatic.legalization.aprove_general', compact('legalization'));
                     break;
                 case EStateLegalization::APROVE_CONTABILIDAD->getId():
                     return view('viatic.legalization.completed', compact('legalization'));
@@ -232,14 +258,31 @@ class ViaticController extends Controller
 
         //Aqui se verifica si hay algo por aprobar si tiene el permiso de aprobacion financiera.
         $user = User::find(auth()->user()->id);
-        if ($user->can('aproveGeneral')) {
+        /*if ($user->can('aproveGeneral')) {
             $viaticRequestAproveGeneral = ViaticRequest::where('sw_state', EStateRequest::ACCEPTED_EMPLOYEE->getId())->get();
             $visticRequestsList = $visticRequestsList->concat($viaticRequestAproveGeneral);
+        } */
+
+        if ($user->can('aproveGeneralJefe') || $user->can('aproveGeneralDirector')) {
+            $viaticRequestAproveGeneral = ViaticRequest::where('sw_state', EStateRequest::ACCEPTED_EMPLOYEE->getId())->get();
+            //Se hace un filtro de las legalizaciones que esten listas por aprobacion general para que le llegue por el monto a la persona corresponde
+            $listAux = [];
+            foreach ($viaticRequestAproveGeneral as $viatic) {
+                if ($viatic->canAproveGeneral()) {
+                    array_push($listAux, $viatic);
+                }
+            }
+            $visticRequestsList = $visticRequestsList->concat($listAux);
         }
 
         //aqui se verfica si tiene permisos para la aprobacion de tesorerai y si es asi se agregan
         if ($user->can('uploadSupportsTesoreria')) {
             $viaticRequestAproveTesoreria = ViaticRequest::where('sw_state', EStateRequest::APROVED_GENERAL->getId())->get();
+            $visticRequestsList = $visticRequestsList->concat($viaticRequestAproveTesoreria);
+        }
+
+        if ($user->can('uploadSupportsTesoreria')) {
+            $viaticRequestAproveTesoreria = ViaticRequest::where('sw_state', EStateRequest::PAGO_REALIZADO->getId())->get();
             $visticRequestsList = $visticRequestsList->concat($viaticRequestAproveTesoreria);
         }
 
@@ -255,13 +298,38 @@ class ViaticController extends Controller
             $visticRequestsList = $visticRequestsList->concat($viaticRequestAproveTesoreria);
         }
 
+        if ($user->can('realizarPago')) {
+            $viaticRequestAproveTesoreria = ViaticRequest::where('sw_state', EStateRequest::PAGO_DIRECTOR->getId())->get();
+            $visticRequestsList = $visticRequestsList->concat($viaticRequestAproveTesoreria);
+        }
+
 
         /* LEGALIZACIONES */
         //se aqui la consulta de legalizaciones para LAS PERSONAS QUE TIENE QUE APROBAR
-        if ($user->can('aproveGeneral')) {
+        /* if ($user->can('aproveGeneral')) {
             $legalizationAproveGeneral =  Legalization::where('sw_state', EStateLegalization::APROVE_BOSS->getId())->get();
             $legalizationsList = $legalizationsList->concat($legalizationAproveGeneral);
+        } */
+
+        if ($user->can('aproveGeneralJefe')) {
+            $legalizationCheck =  Legalization::where('sw_state', EStateLegalization::APROVE_BOSS->getId())->get();
+            $legalizationsList = $legalizationsList->concat($legalizationCheck);
         }
+
+        if ($user->can('aproveGeneralJefe') || $user->can('aproveGeneralDirector')) {
+            $legalizationAproveGeneral =  Legalization::where('sw_state', EStateLegalization::CHECKED->getId())->get();
+            //Se hace un filtro de las legalizaciones que esten listas por aprobacion general para que le llegue por el monto a la persona corresponde
+            $listAux = [];
+            foreach ($legalizationAproveGeneral as $legalization) {
+                if ($legalization->canAproveGeneral()) {
+                    array_push($listAux, $legalization);
+                }
+            }
+            $legalizationsList = $legalizationsList->concat($listAux);
+        }
+
+
+
         if ($user->can('aproveContabilidad')) {
             $legalizationContabilidad =  Legalization::where('sw_state', EStateLegalization::APROVE_GENERAL->getId())->get();
             $legalizationsList = $legalizationsList->concat($legalizationContabilidad);

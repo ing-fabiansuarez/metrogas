@@ -462,10 +462,10 @@
                         data-bs-target="#rechazarModal" wire:loading.attr="disabled">
                         Rechazar
                     </button>
-                    <button type="button" class="btn bg-danger action-button" data-bs-toggle="modal"
+                    {{-- <button type="button" class="btn bg-danger action-button" data-bs-toggle="modal"
                         data-bs-target="#exampleModal" wire:loading.attr="disabled">
                         Anular
-                    </button>
+                    </button> --}} 
                     <div wire:loading>
                         Cargando...
                     </div>

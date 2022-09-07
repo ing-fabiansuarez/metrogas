@@ -26,6 +26,7 @@ class Supports extends Component
     public $numeroIdentificacion;
     public $descripcion;
     public $nombreEmpresa;
+    public $aceptarTerminosCondiciones;
 
     public $totalLegalization;
 
@@ -103,6 +104,10 @@ class Supports extends Component
 
     public function sendSupports()
     {
+        $this->validate([
+            'aceptarTerminosCondiciones' => 'accepted:true',
+        ]);
+
         $this->legalization->sw_state = EStateLegalization::SEND->getId();
         $this->legalization->save();
 
