@@ -10,7 +10,12 @@ class ProveedorController extends Controller
     {
         return view('proveedores.register');
     }
-    public function personaNatural(){
+    public function personaNatural()
+    {
         return view('proveedores.persona_natural');
+    }
+    public function formularioLleno()
+    {
+        return view('proveedores.finalizado');
     }
 }

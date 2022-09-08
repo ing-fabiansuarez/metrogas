@@ -50,110 +50,110 @@ class FormPersonaNatural extends Component
 
 
     protected $rules = [
-        'personaNatural.nombres' => '',
-        'personaNatural.apellidos' => '',
-        'personaNatural.genero' => '',
-        'personaNatural.tipo_identificacion' => '',
-        'personaNatural.num_identificacion' => '',
-        'personaNatural.lugar_expedicion' => '',
-        'personaNatural.fecha_expedicion' => '',
-        'personaNatural.estado_civil' => '',
-        'personaNatural.nivel_educativo' => '',
-        'personaNatural.personas_a_cargo' => '',
-        'personaNatural.num_personas_a_cargo' => '',
-        'personaNatural.tipo_vivieda' => '',
-        'personaNatural.zona_de_ubicacion' => '',
-        'personaNatural.fecha_nacimiento' => '',
-        'personaNatural.ciudad_nacimiento' => '',
-        'personaNatural.departamento_nacimiento' => '',
-        'personaNatural.direccion_domicilio' => '',
-        'personaNatural.ciudad_domicilio' => '',
-        'personaNatural.departamento_domicilio' => '',
-        'personaNatural.correo_electronico' => '',
-        'personaNatural.celular' => '',
-        'personaNatural.telefono' => '',
-        'personaNatural.ocupacion' => '',
-        'personaNatural.codigo_actividad_CIIU_principal' => '',
-        'personaNatural.detalle_actividad_economica' => '',
+        'personaNatural.nombres' => 'required',
+        'personaNatural.apellidos' => 'required',
+        'personaNatural.genero' => 'required',
+        'personaNatural.tipo_identificacion' => 'required',
+        'personaNatural.num_identificacion' => 'required',
+        'personaNatural.lugar_expedicion' => 'required',
+        'personaNatural.fecha_expedicion' => 'required',
+        'personaNatural.estado_civil' => 'required',
+        'personaNatural.nivel_educativo' => 'required',
+        'personaNatural.personas_a_cargo' => 'required',
+        'personaNatural.num_personas_a_cargo' => 'required',
+        'personaNatural.tipo_vivieda' => 'required',
+        'personaNatural.zona_de_ubicacion' => 'required',
+        'personaNatural.fecha_nacimiento' => 'required',
+        'personaNatural.ciudad_nacimiento' => 'required',
+        'personaNatural.departamento_nacimiento' => 'required',
+        'personaNatural.direccion_domicilio' => 'required',
+        'personaNatural.ciudad_domicilio' => 'required',
+        'personaNatural.departamento_domicilio' => 'required',
+        'personaNatural.correo_electronico' => 'required',
+        'personaNatural.celular' => 'required',
+        'personaNatural.telefono' => 'required',
+        'personaNatural.ocupacion' => 'required',
+        'personaNatural.codigo_actividad_CIIU_principal' => 'required',
+        'personaNatural.detalle_actividad_economica' => 'required',
 
-        'personaNatural.gran_contribuyente' => '',
-        'personaNatural.autorretenedor' => '',
-        'personaNatural.responsable_iva' => '',
-        'personaNatural.maneja_dinero_o_publicamente_expuesto' => '',
+        'personaNatural.gran_contribuyente' => 'required',
+        'personaNatural.autorretenedor' => 'required',
+        'personaNatural.responsable_iva' => 'required',
+        'personaNatural.maneja_dinero_o_publicamente_expuesto' => 'required',
 
-        'personaNatural.nombre_empresa' => '',
-        'personaNatural.tipo_empresa' => '',
-        'personaNatural.cargo_empresa' => '',
-        'personaNatural.direccion_empresa' => '',
-        'personaNatural.ciudad_empresa' => '',
-        'personaNatural.barrio_empresa' => '',
-        'personaNatural.telefono_empresa' => '',
+        'personaNatural.nombre_empresa' => 'required',
+        'personaNatural.tipo_empresa' => 'required',
+        'personaNatural.cargo_empresa' => 'required',
+        'personaNatural.direccion_empresa' => 'required',
+        'personaNatural.ciudad_empresa' => 'required',
+        'personaNatural.barrio_empresa' => 'required',
+        'personaNatural.telefono_empresa' => 'required',
 
-        'personaNatural.nombre_contacto' => '',
-        'personaNatural.cargo_contacto' => '',
-        'personaNatural.telefono_contacto' => '',
-        'personaNatural.email_contacto' => '',
+        'personaNatural.nombre_contacto' => 'required',
+        'personaNatural.cargo_contacto' => 'required',
+        'personaNatural.telefono_contacto' => 'required',
+        'personaNatural.email_contacto' => 'required',
 
-        'personaNatural.administra_recursos_publicos' => '',
-        'personaNatural.persona_expuesta_politicamente_extranjera' => '',
-        'personaNatural.persona_expuesta_politicamente_orga_internacionales' => '',
-        'personaNatural.tiene_relacionados_cercanos_expuestos_politicamente' => '',
-
-
-        'personaNatural.total_ingresos_mensuales' => '',
-        'personaNatural.total_egresos_mensuales' => '',
-        'personaNatural.otros_ingresos_mensuales' => '',
-        'personaNatural.otros_egresos_mensuales' => '',
-        'personaNatural.total_activos' => '',
-        'personaNatural.total_pasivos' => '',
-        'personaNatural.es_declarante_de_renta' => '',
+        'personaNatural.administra_recursos_publicos' => 'required',
+        'personaNatural.persona_expuesta_politicamente_extranjera' => 'required',
+        'personaNatural.persona_expuesta_politicamente_orga_internacionales' => 'required',
+        'personaNatural.tiene_relacionados_cercanos_expuestos_politicamente' => 'required',
 
 
-        'personaNatural.oi_realizar_opera_internacionales' => '',
-        'personaNatural.oi_posee_cuentas_en_moneda_extranjera' => '',
-        'personaNatural.oi_nombre_entidad_financiera' => '',
-        'personaNatural.oi_ciudad_o_pais' => '',
-        'personaNatural.oi_monto_promedio_mesual' => '',
-        'personaNatural.oi_moneda' => '',
-        'personaNatural.oi_importaciones' => '',
-        'personaNatural.oi_exportaciones' => '',
-        'personaNatural.oi_inversiones' => '',
-        'personaNatural.oi_prestamos_m_e' => '',
-
-        'personaNatural.fe_factura_electronicamente' => '',
-        'personaNatural.fe_desde_cuando' => '',
-
-        'personaNatural.do_declaro_que_el_origen' => '',
-        'personaNatural.do_declaro_provienen_de' => '',
-        'personaNatural.do_declaro_recursos_recibidos' => '',
-
-        'personaNatural.ref_p_nombre' => '',
-        'personaNatural.ref_p_direccion' => '',
-        'personaNatural.ref_p_telefono' => '',
-        'personaNatural.ref_p_parentesco' => '',
-        'personaNatural.ref_p_ciudad' => '',
-
-        'personaNatural.ref_f_nombre' => '',
-        'personaNatural.ref_f_direccion' => '',
-        'personaNatural.ref_f_telefono' => '',
-        'personaNatural.ref_f_parentesco' => '',
-        'personaNatural.ref_f_ciudad' => '',
-
-        'personaNatural.terminos_y_condiciones' => '',
+        'personaNatural.total_ingresos_mensuales' => 'required',
+        'personaNatural.total_egresos_mensuales' => 'required',
+        'personaNatural.otros_ingresos_mensuales' => 'required',
+        'personaNatural.otros_egresos_mensuales' => 'required',
+        'personaNatural.total_activos' => 'required',
+        'personaNatural.total_pasivos' => 'required',
+        'personaNatural.es_declarante_de_renta' => 'required',
 
 
-        'support_formato_viculacion_persona_natural' => '',
-        'support_clausula_cumplimiento_codigo_etica' => '',
-        'support_cedula_ciudadania' => '',
-        'support_cedula_extranjeria' => '',
-        'support_rut' => '',
-        'support_camara_de_comercio' => '',
-        'support_declaracion_de_renta_o_certificacion_no_declarante' => '',
-        'support_certificacion_bancaria' => '',
-        'support_certificado_experiencia_u_hoja_de_vida' => '',
-        'support_certificado_profesional' => '',
-        'support_referencias_comerciales' => '',
-        'support_afiliacion_seguridad_social' => '',
+        'personaNatural.oi_realizar_opera_internacionales' => 'required',
+        'personaNatural.oi_posee_cuentas_en_moneda_extranjera' => 'required',
+        'personaNatural.oi_nombre_entidad_financiera' => 'required',
+        'personaNatural.oi_ciudad_o_pais' => 'required',
+        'personaNatural.oi_monto_promedio_mesual' => 'required',
+        'personaNatural.oi_moneda' => 'required',
+        'personaNatural.oi_importaciones' => 'required',
+        'personaNatural.oi_exportaciones' => 'required',
+        'personaNatural.oi_inversiones' => 'required',
+        'personaNatural.oi_prestamos_m_e' => 'required',
+
+        'personaNatural.fe_factura_electronicamente' => 'required',
+        'personaNatural.fe_desde_cuando' => 'required',
+
+        'personaNatural.do_declaro_que_el_origen' => 'required',
+        'personaNatural.do_declaro_provienen_de' => 'required',
+        'personaNatural.do_declaro_recursos_recibidos' => 'required',
+
+        'personaNatural.ref_p_nombre' => 'required',
+        'personaNatural.ref_p_direccion' => 'required',
+        'personaNatural.ref_p_telefono' => 'required',
+        'personaNatural.ref_p_parentesco' => 'required',
+        'personaNatural.ref_p_ciudad' => 'required',
+
+        'personaNatural.ref_f_nombre' => 'required',
+        'personaNatural.ref_f_direccion' => 'required',
+        'personaNatural.ref_f_telefono' => 'required',
+        'personaNatural.ref_f_parentesco' => 'required',
+        'personaNatural.ref_f_ciudad' => 'required',
+
+        'personaNatural.terminos_y_condiciones' => 'required',
+
+
+        'support_formato_viculacion_persona_natural' => 'required',
+        'support_clausula_cumplimiento_codigo_etica' => 'required',
+        'support_cedula_ciudadania' => 'required',
+        'support_cedula_extranjeria' => 'required',
+        'support_rut' => 'required',
+        'support_camara_de_comercio' => 'required',
+        'support_declaracion_de_renta_o_certificacion_no_declarante' => 'required',
+        'support_certificacion_bancaria' => 'required',
+        'support_certificado_experiencia_u_hoja_de_vida' => 'required',
+        'support_certificado_profesional' => 'required',
+        'support_referencias_comerciales' => 'required',
+        'support_afiliacion_seguridad_social' => 'required',
 
     ];
 
@@ -233,7 +233,7 @@ class FormPersonaNatural extends Component
 
         foreach ($this->listPersonasExpuestasPoliticamente as $item) {
             $nueva = new FormPersonasExpuestasPoliticamentePN();
-            $nueva->form_persona_natural_id=$this->personaNatural->id;
+            $nueva->form_persona_natural_id = $this->personaNatural->id;
             $nueva->nombre = $item['nombre'];
             $nueva->grado_de_parentezco = $item['grado_de_parentezco'];
             $nueva->tipo_de_identificacion = $item['tipo_de_identificacion'];
@@ -244,6 +244,8 @@ class FormPersonaNatural extends Component
             $nueva->fecha_desvinculacion = $item['fecha_desvinculacion'];
             $nueva->save();
         }
+
+        return redirect()->route('proveedor.register.finalizado');
     }
 
 

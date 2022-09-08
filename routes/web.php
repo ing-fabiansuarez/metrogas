@@ -154,3 +154,4 @@ Route::get('/login', function () {
 Route::get('registrar-proveedor', [ProveedorController::class, 'register'])->name('proveedor.register');
 Route::get('registrar-proveedor/persona-natural', [ProveedorController::class, 'personaNatural'])->name('proveedor.register.persona-natural');
 Route::get('registrar-proveedor/persona-juridica', [ProveedorController::class, 'register'])->name('proveedor.register.persona-juridica');
+Route::get('registrar-proveedor/finalizado', [ProveedorController::class, 'formularioLleno'])->name('proveedor.register.finalizado');
