@@ -201,7 +201,8 @@
                     Empleados</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('subalternos') ? 'active' : '' }}" href="{{ route('user.subordinates') }}">
+                <a class="nav-link {{ Request::is('subalternos') ? 'active' : '' }}"
+                    href="{{ route('user.subordinates') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1rem;"
@@ -211,6 +212,40 @@
                     <span class="nav-link-text ms-1">Empleados</span>
                 </a>
             </li>
+
+            @can('gestionarFormularioProveedores')
+                <li class="nav-item mt-2">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
+                        Proveedores</h6>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('form-proveedores/persona-natural') ? 'active' : '' }}"
+                        href="{{ route('proveedores.admin.persona-natural') }}">
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i style="font-size: 1rem;"
+                                class="fas fa-regular fa-user ps-2 pe-2 text-center text-dark {{ Request::is('form-proveedores/persona-natural') ? 'text-white' : 'text-dark' }} "
+                                aria-hidden="true"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Form Persona Natural</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('') ? 'active' : '' }}"
+                        {{-- href="{{ route('user.subordinates') }}" --}}>
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i style="font-size: 1rem;"
+                                class="fas fa-regular fa-user ps-2 pe-2 text-center text-dark {{ Request::is('') ? 'text-white' : 'text-dark' }} "
+                                aria-hidden="true"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Form Persona Juridica</span>
+                    </a>
+                </li>
+            @endcan
+
         </ul>
     </div>
 </aside>

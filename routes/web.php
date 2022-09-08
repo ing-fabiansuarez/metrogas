@@ -109,6 +109,10 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/legalizaciones', [ReportController::class, 'exportLegalization'])->name('report.legalization.export');
 	});
 
+	Route::prefix('form-proveedores')->middleware('can:gestionarFormularioProveedores')->group(function () {
+		Route::get('/persona-natural', [ProveedorController::class, 'indexPersonaNatural'])->name('proveedores.admin.persona-natural');
+	});
+
 	Route::get('/logout', [SessionsController::class, 'destroy']);
 	/* 	Route::get('/user-profile', [InfoUserController::class, 'create']);
 	Route::post('/user-profile', [InfoUserController::class, 'store']); */
