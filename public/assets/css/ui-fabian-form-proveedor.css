@@ -6,8 +6,13 @@
 
 .bg-background-secundary {
     background: var(--color-secundary);
+    color: white;
 }
 
 .bg-gradient-dark {
     background-image: linear-gradient(310deg,#141727,#3a416f);
+}
+.error{
+    color: red;
+    font-size: 0.7rem;
 }
