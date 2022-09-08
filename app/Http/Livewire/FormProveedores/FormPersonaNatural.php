@@ -13,11 +13,29 @@ use App\Enums\EZonaUbicacion;
 use App\Models\FormPersonaNatural as ModelsFormPersonaNatural;
 use App\Models\TypeIdentification;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class FormPersonaNatural extends Component
 {
 
+    use WithFileUploads;
+
     public ModelsFormPersonaNatural $personaNatural;
+
+    public $support_formato_viculacion_persona_natural;
+    public $support_clausula_cumplimiento_codigo_etica;
+    public $support_cedula_ciudadania;
+    public $support_cedula_extranjeria;
+    public $support_rut;
+    public $support_camara_de_comercio;
+    public $support_declaracion_de_renta_o_certificacion_no_declarante;
+    public $support_certificacion_bancaria;
+    public $support_certificado_experiencia_u_hoja_de_vida;
+    public $support_certificado_profesional;
+    public $support_referencias_comerciales;
+    public $support_afiliacion_seguridad_social;
+
+
 
     protected $rules = [
         'personaNatural.nombres' => 'required',
@@ -108,8 +126,22 @@ class FormPersonaNatural extends Component
         'personaNatural.ref_f_telefono' => 'required',
         'personaNatural.ref_f_parentesco' => 'required',
         'personaNatural.ref_f_ciudad' => 'required',
-        
+
         'personaNatural.terminos_y_condiciones' => 'required',
+
+
+        'support_formato_viculacion_persona_natural' => 'required',
+        'support_clausula_cumplimiento_codigo_etica' => 'required',
+        'support_cedula_ciudadania' => 'required',
+        'support_cedula_extranjeria' => 'required',
+        'support_rut' => 'required',
+        'support_camara_de_comercio' => 'required',
+        'support_declaracion_de_renta_o_certificacion_no_declarante' => 'required',
+        'support_certificacion_bancaria' => 'required',
+        'support_certificado_experiencia_u_hoja_de_vida' => 'required',
+        'support_certificado_profesional' => 'required',
+        'support_referencias_comerciales' => 'required',
+        'support_afiliacion_seguridad_social' => 'required',
 
     ];
 
@@ -136,6 +168,48 @@ class FormPersonaNatural extends Component
     public function save()
     {
         $this->validate();
+
+        $this->personaNatural->save();
+
+        //urls soportes
+        if (!empty($this->support_formato_viculacion_persona_natural)) {
+            $this->personaNatural->support_formato_viculacion_persona_natural = $this->support_formato_viculacion_persona_natural->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_formato_viculacion_persona_natural/");
+        }
+        if (!empty($this->support_clausula_cumplimiento_codigo_etica)) {
+            $this->personaNatural->support_clausula_cumplimiento_codigo_etica = $this->support_clausula_cumplimiento_codigo_etica->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_clausula_cumplimiento_codigo_etica/");
+        }
+        if (!empty($this->support_cedula_ciudadania)) {
+            $this->personaNatural->support_cedula_ciudadania = $this->support_cedula_ciudadania->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_cedula_ciudadania/");
+        }
+        if (!empty($this->support_cedula_extranjeria)) {
+            $this->personaNatural->support_cedula_extranjeria = $this->support_cedula_extranjeria->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_cedula_extranjeria/");
+        }
+        if (!empty($this->support_rut)) {
+            $this->personaNatural->support_rut = $this->support_rut->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_rut/");
+        }
+        if (!empty($this->support_camara_de_comercio)) {
+            $this->personaNatural->support_camara_de_comercio = $this->support_camara_de_comercio->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_camara_de_comercio/");
+        }
+        if (!empty($this->support_declaracion_de_renta_o_certificacion_no_declarante)) {
+            $this->personaNatural->support_declaracion_de_renta_o_certificacion_no_declarante = $this->support_declaracion_de_renta_o_certificacion_no_declarante->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_declaracion_de_renta_o_certificacion_no_declarante/");
+        }
+        if (!empty($this->support_certificacion_bancaria)) {
+            $this->personaNatural->support_certificacion_bancaria = $this->support_certificacion_bancaria->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_certificacion_bancaria/");
+        }
+        if (!empty($this->support_certificado_experiencia_u_hoja_de_vida)) {
+            $this->personaNatural->support_certificado_experiencia_u_hoja_de_vida = $this->support_certificado_experiencia_u_hoja_de_vida->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_certificado_experiencia_u_hoja_de_vida/");
+        }
+        if (!empty($this->support_certificado_profesional)) {
+            $this->personaNatural->support_certificado_profesional = $this->support_certificado_profesional->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_certificado_profesional/");
+        }
+        if (!empty($this->support_referencias_comerciales)) {
+            $this->personaNatural->support_referencias_comerciales = $this->support_referencias_comerciales->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_referencias_comerciales/");
+        }
+        if (!empty($this->support_afiliacion_seguridad_social)) {
+            $this->personaNatural->support_afiliacion_seguridad_social = $this->support_afiliacion_seguridad_social->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_afiliacion_seguridad_social/");
+        }
+
+
         $this->personaNatural->save();
     }
 }

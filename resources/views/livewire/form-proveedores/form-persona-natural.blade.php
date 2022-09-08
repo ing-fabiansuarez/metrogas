@@ -1286,6 +1286,364 @@
                                 </div>
                             </div>
 
+
+
+                            <div class="col-12 mt-4">
+                                <div class="card mb-4">
+                                    <div class="card-header pb-0">
+                                        <h6>Soportes</h6>
+                                    </div>
+                                    <div class="card-body px-0 pt-0 pb-2">
+                                        <div class="table-responsive p-0">
+                                            <table class="table align-items-center justify-content-center mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                            Documento</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                            Observación</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                            Subir</th>
+
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Formato de Vinculación
+                                                                        Persona Natural</h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Diligenciar y
+                                                                Firmar </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_formato_viculacion_persona_natural"
+                                                                    class="form-control form-control-sm "
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_formato_viculacion_persona_natural')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Cláusula de cumplimiento
+                                                                        del código de ética
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Diligenciar y
+                                                                Firmar
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_clausula_cumplimiento_codigo_etica"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_clausula_cumplimiento_codigo_etica')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Fotocopia de la cédula de
+                                                                        ciudadanía para colombianos y extranjeros
+                                                                        nacionalizados (mayores de 18 años).
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">150%
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_cedula_ciudadania"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_cedula_ciudadania')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Fotocopia de la cédula de
+                                                                        extranjería para extranjeros no nacionalizados
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">150%
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_cedula_extranjeria"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_cedula_extranjeria')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Registro único tributario
+                                                                        (RUT)
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Vigente
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_rut"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_rut')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Cámara de comercio (cuando
+                                                                        aplique)
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">No mayor a 30 días
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_camara_de_comercio"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_camara_de_comercio')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Declaración de Renta o
+                                                                        Certificado de No Declarante (cuando aplique)
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Año inmediatamente
+                                                                anterior
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_declaracion_de_renta_o_certificacion_no_declarante"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_declaracion_de_renta_o_certificacion_no_declarante')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Certificación Bancaria
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">No mayor a 30 días
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_certificacion_bancaria"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_certificacion_bancaria')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Certificado de Experiencia
+                                                                        / Hoja de Vida
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Vigente
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_certificado_experiencia_u_hoja_de_vida"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_certificado_experiencia_u_hoja_de_vida')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Certificado profesional
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Vigente
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_certificado_profesional"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_certificado_profesional')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Referencias comerciales
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">No mayor a 30 días
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_referencias_comerciales"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_referencias_comerciales')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Afiliación seguridad
+                                                                        social
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Vigente
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_afiliacion_seguridad_social"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_afiliacion_seguridad_social')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
                             <div class="col-12 mt-4">
                                 <div class="card z-index-0 mt-3">
                                     <div class="card-header pb-0 px-3">
