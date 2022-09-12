@@ -22,6 +22,7 @@ class FormPersonaNatural extends Component
     use WithFileUploads;
 
     public ModelsFormPersonaNatural $personaNatural;
+    public $solo_lectura;
 
     //SOPORTES
     public $support_formato_viculacion_persona_natural;
@@ -162,10 +163,26 @@ class FormPersonaNatural extends Component
         'deleteItemListPersonasExpuestasPoliticamente'
     ];
 
-    public function mount()
+    public function mount($solo_lectura = false, ModelsFormPersonaNatural $personaNatural = new ModelsFormPersonaNatural())
     {
-        $this->personaNatural = new ModelsFormPersonaNatural();
+        $this->personaNatural = $personaNatural;
         $this->listPersonasExpuestasPoliticamente = [];
+        $this->solo_lectura = $solo_lectura;
+        if ($this->personaNatural != null) {
+            foreach ($this->personaNatural->personasPoliticamenteExpuestas as $persona) {
+                $persona;
+                array_push($this->listPersonasExpuestasPoliticamente, [
+                    'nombre' => $persona->nombre,
+                    'grado_de_parentezco' => $persona->grado_de_parentezco,
+                    'tipo_de_identificacion' => $persona->tipo_de_identificacion,
+                    'numero_de_identificacion' => $persona->numero_de_identificacion,
+                    'entidad' => $persona->entidad,
+                    'cargo' => $persona->cargo,
+                    'fecha_vinculacion' => $persona->fecha_vinculacion,
+                    'fecha_desvinculacion' => $persona->fecha_desvinculacion,
+                ]);
+            }
+        }
     }
 
     public function render()

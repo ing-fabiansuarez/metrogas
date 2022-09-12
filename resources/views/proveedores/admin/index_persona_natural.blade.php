@@ -18,7 +18,7 @@
 
                         </div>
 
-                        <form {{-- action="{{ route('report.legalization') }}" --}}method="get">
+                        <form action="{{ route('proveedores.admin.persona-natural') }}" method="get">
                             <div class="row mt-2 justify-content-center">
                                 <div class="col-md-2">
                                     <div class="form-group">
@@ -27,48 +27,6 @@
                                             placeholder="N° Solicitud" name="num_solicitud">
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="input_object_guid" class="form-control-label">Solicitada por</label>
-                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-                                            name="solicitado_por">
-                                            <option value="" selected="">-- Seleccionar --</option>
-                                            @foreach ($users as $user)
-                                                <option value="{{ $user->id }}">{{ $user->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="input_object_guid" class="form-control-label">Estado</label>
-                                        <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-                                            name="estado">
-                                            <option value="" selected>-- Seleccionar --</option>
-                                            @foreach ($states as $state)
-                                                <option value="{{ $state->getId() }}">
-                                                    {{ $state->getName() }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div> --}}
-                                {{-- <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Fecha Creación:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="far fa-calendar-alt"></i>
-                                                </span>
-                                            </div>
-                                            <input name="fecha_creacion" type="text"
-                                                class="form-control form-control-sm float-right" id="reservation">
-                                        </div>
-                                    </div>
-                                </div> --}}
-
                             </div>
 
                             <div class="row justify-content-center">
@@ -120,20 +78,27 @@
                                     @foreach ($respuestasForm as $item)
                                         <tr>
                                             <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $item->id }}</p>
+                                                <a href="{{ route('proveedores.admin.persona-natural.ver', $item->id) }}">
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $item->id }}</p>
+                                                </a>
                                             </td>
                                             <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $item->nombres }}</p>
+                                                <a href="{{ route('proveedores.admin.persona-natural.ver', $item->id) }}">
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $item->nombres }}</p>
+                                                </a>
                                             </td>
                                             <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $item->apellidos }}</p>
+                                                <a href="{{ route('proveedores.admin.persona-natural.ver', $item->id) }}">
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $item->apellidos }}</p>
+                                                </a>
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $item->tipo_identificacion }}
                                                 </p>
                                             </td>
                                             <td class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">{{ $item->num_identificacion }}</p>
+                                                <p class="text-xs font-weight-bold mb-0">{{ $item->num_identificacion }}
+                                                </p>
                                             </td>
                                             <td class="text-center">
                                                 <p class="text-xs font-weight-bold mb-0">{{ $item->lugar_expedicion }}</p>
@@ -169,16 +134,16 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('report.legalization.export') }}" method="post">
+                    <form action="{{ route('proveedores.admin.persona-natural.exportar') }}" method="post">
                         <div class="modal-body">
 
                             <div class="form-group">
                                 <div class="form-group">
-                                    <label for="input_object_guid" class="form-control-label">N° Legalización</label>
+                                    <label for="input_object_guid" class="form-control-label">ID Formulario</label>
                                     <input class="form-control form-control-sm" type="number" placeholder="N° Solicitud"
                                         name="num_solicitud">
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label class="form-control-label">Desde</label>
                                     <input class="form-control form-control-sm" type="date" name="fecha_inicial">
                                 </div>
@@ -191,10 +156,10 @@
                                     <select class="form-select form-select-sm" aria-label=".form-select-sm example"
                                         name="empleado">
                                         <option value="" selected="">-- Seleccionar --</option>
-                                        {{-- @foreach ($users as $user)
+                                         @foreach ($users as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}
                                             </option>
-                                        @endforeach --}}
+                                        @endforeach 
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -202,19 +167,18 @@
                                     <select class="form-select form-select-sm" aria-label=".form-select-sm example"
                                         name="estado_filtro">
                                         <option value="" selected>-- Seleccionar --</option>
-                                        {{-- @foreach ($states as $state)
+                                        @foreach ($states as $state)
                                             <option value="{{ $state->getId() }}">
                                                 {{ $state->getName() }}
                                             </option>
-                                        @endforeach --}}
+                                        @endforeach 
                                     </select>
-                                </div>
+                                </div> --}}
                             </div>
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn bg-gradient-secondary"
-                                data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
                             @csrf
                             <button type="submit" style="color: white" class="btn bg-secundary">Exportar</button>
                         </div>

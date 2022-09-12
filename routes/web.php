@@ -111,6 +111,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::prefix('form-proveedores')->middleware('can:gestionarFormularioProveedores')->group(function () {
 		Route::get('/persona-natural', [ProveedorController::class, 'indexPersonaNatural'])->name('proveedores.admin.persona-natural');
+		Route::get('/persona-natural/{id}', [ProveedorController::class, 'verFormPersonaNatutal'])->name('proveedores.admin.persona-natural.ver');
+		Route::post('/persona-natural', [ProveedorController::class, 'exportarFormPersonaNatural'])->name('proveedores.admin.persona-natural.exportar');
 	});
 
 	Route::get('/logout', [SessionsController::class, 'destroy']);
@@ -159,3 +161,4 @@ Route::get('registrar-proveedor', [ProveedorController::class, 'register'])->nam
 Route::get('registrar-proveedor/persona-natural', [ProveedorController::class, 'personaNatural'])->name('proveedor.register.persona-natural');
 Route::get('registrar-proveedor/persona-juridica', [ProveedorController::class, 'register'])->name('proveedor.register.persona-juridica');
 Route::get('registrar-proveedor/finalizado', [ProveedorController::class, 'formularioLleno'])->name('proveedor.register.finalizado');
+
