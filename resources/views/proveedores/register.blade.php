@@ -28,7 +28,7 @@
                                     <a href="{{ route('proveedor.register.persona-natural') }}">
                                         <div class="card card-background move-on-hover mt-3">
                                             <div class="full-background"
-                                                style="background-image: url('https://harryplotter.co/wp-content/uploads/2022/07/IMG_3989-scaled.jpg')">
+                                                style="background-image: url({{ url('../assets/img/persona_juridica.jpg') }})">
                                             </div>
                                             <div class="card-body pt-9">
                                                 <h4 class="text-white">Persona Natural</h4>
@@ -41,7 +41,7 @@
                                     <a href="{{ route('proveedor.register.persona-juridica') }}">
                                         <div class="card card-background move-on-hover mt-3">
                                             <div class="full-background"
-                                                style="background-image: url('https://harryplotter.co/wp-content/uploads/2022/07/rawpixel-799380-unsplash.jpg')">
+                                                style="background-image: url('https://prueba.metrogasesp.com/wp-content/uploads/2022/07/rawpixel-799380-unsplash.jpg')">
                                             </div>
                                             <div class="card-body pt-9">
                                                 <h4 class="text-white">Persona Juridica</h4>

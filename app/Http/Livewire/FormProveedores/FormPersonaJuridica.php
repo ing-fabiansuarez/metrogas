@@ -138,7 +138,6 @@ class FormPersonaJuridica extends Component
 
         $this->personaJuridica->save();
 
-
         return redirect()->route('proveedor.register.finalizado');
     }
 }

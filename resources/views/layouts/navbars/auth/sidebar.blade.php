@@ -220,12 +220,12 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('form-proveedores/persona-natural') ? 'active' : '' }}"
+                    <a class="nav-link {{ Request::is('form-proveedores/persona-natural*') ? 'active' : '' }}"
                         href="{{ route('proveedores.admin.persona-natural') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i style="font-size: 1rem;"
-                                class="fas fa-regular fa-user ps-2 pe-2 text-center text-dark {{ Request::is('form-proveedores/persona-natural') ? 'text-white' : 'text-dark' }} "
+                                class="fas fa-regular fa-user ps-2 pe-2 text-center text-dark {{ Request::is('form-proveedores/persona-natural*') ? 'text-white' : 'text-dark' }} "
                                 aria-hidden="true"></i>
                         </div>
                         <span class="nav-link-text ms-1">Form Persona Natural</span>
@@ -233,12 +233,12 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ Request::is('') ? 'active' : '' }}"
-                        {{-- href="{{ route('user.subordinates') }}" --}}>
+                    <a class="nav-link {{ Request::is('form-proveedores/persona-juridica*') ? 'active' : '' }}"
+                        href="{{ route('proveedores.admin.persona-juridica') }}">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i style="font-size: 1rem;"
-                                class="fas fa-regular fa-user ps-2 pe-2 text-center text-dark {{ Request::is('') ? 'text-white' : 'text-dark' }} "
+                                class="fas fa-regular fa-user ps-2 pe-2 text-center text-dark {{ Request::is('form-proveedores/persona-juridica*') ? 'text-white' : 'text-dark' }} "
                                 aria-hidden="true"></i>
                         </div>
                         <span class="nav-link-text ms-1">Form Persona Juridica</span>

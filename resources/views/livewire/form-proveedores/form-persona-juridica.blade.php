@@ -11,7 +11,7 @@
                                 Juridica</b></p>
                         @if ($solo_lectura)
                             <p>
-                                <b style="color: white">ID Formulario: {{ $personaJuridca->id }}</b>
+                                <b style="color: white">ID Formulario: {{ $personaJuridica->id }}</b>
                             </p>
                         @endif
                     </div>
@@ -599,7 +599,7 @@
 
                                     <p style="font-size: 0.7rem">
                                         <b>
-                                            En caso que los relacionadossean jurídicas favor relacionar sus
+                                            En caso que los relacionados sean jurídicas favor relacionar sus
                                             composiciones hasta el beneficiario final.
                                         </b>
                                     </p>
@@ -1697,36 +1697,7 @@
                         </div>
 
 
-                        <div class="card z-index-0 mt-3">
-                            <div class="card-header pb-0 px-3">
-                                <h6 class="mb-0">Información del Solicitante</h6>
-                            </div>
-                            <div class="card-body pt-3 p-3">
-
-
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label class="form-control-label">Gran contribuyente</label>
-                                            <select wire:model="personaJuridica.gran_contribuyente"
-                                                class="form-select form-select-sm"
-                                                @if ($solo_lectura) disabled @endif>
-                                                <option value="">--Seleccione--</option>
-                                                @foreach ($Esino as $item)
-                                                    <option value="{{ $item->getId() }}">{{ $item->getName() }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <span class="error">
-                                                @error('personaJuridica.gran_contribuyente')
-                                                    {{ $message }}
-                                                @enderror
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                     
 
                         @if (!$solo_lectura)
                             <div class="col-12 my-4">
