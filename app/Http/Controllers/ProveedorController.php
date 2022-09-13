@@ -46,4 +46,9 @@ class ProveedorController extends Controller
         $id =  $request->get('num_solicitud');
         return (new FormPersonaNaturalExport($id))->download('Formularios Personas Natural.xlsx');
     }
+
+    public function personaJuridica()
+    {
+        return view('proveedores.persona_juridica');
+    }
 }
