@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('correo_electronico_notificacion')->nullable();
             $table->string('celular')->nullable();
             $table->string('telefono_fijo')->nullable();
-          
+
 
             $table->string('gran_contribuyente')->nullable();
             $table->string('autorretenedor')->nullable();
@@ -34,11 +34,11 @@ return new class extends Migration
             $table->string('rst')->nullable();
             $table->string('codigo_ciiu_actividad_principal')->nullable();
             $table->string('descripcion_actividad__ciiu')->nullable();
-          
+
 
             $table->string('esta_obligada')->nullable();
             $table->string('tiene_implementado_un_sistema_de_administracion_de_riesgo_de_lavado_de_activos')->nullable();
-           
+
 
 
             $table->string('rl_nombre')->nullable();
@@ -51,13 +51,13 @@ return new class extends Migration
             $table->string('rl_persona_expuesta_pliticamente_extrajera')->nullable();
             $table->string('rl_persona_expuesta_politicamente_de_organizaciones_internacionales')->nullable();
             $table->string('rl_tiene_relecionados_cercanos_expuestos_politicamente')->nullable();
-           
+
 
             $table->string('bf_administra_recursos_publicos_o_es_pep')->nullable();
             $table->string('bf_persona_expuesta_pliticamente_extrajera')->nullable();
             $table->string('bf_persona_expuesta_politicamente_de_organizaciones_internacionales')->nullable();
             $table->string('bf_tiene_relecionados_cercanos_expuestos_politicamente')->nullable();
-          
+
 
             $table->string('if_total_ingresos')->nullable();
             $table->string('if_total_egresos')->nullable();
@@ -79,7 +79,7 @@ return new class extends Migration
             $table->string('oi_exportaciones')->nullable();
             $table->string('oi_inversiones')->nullable();
             $table->string('oi_prestamos_m_e')->nullable();
-           
+
 
             $table->string('fe_factura_electronica')->nullable();
             $table->string('fe_fecha_desde_que_factura')->nullable();
@@ -89,17 +89,17 @@ return new class extends Migration
             $table->string('fe_recepcion_nombre')->nullable();
             $table->string('fe_recepcion_cargo')->nullable();
             $table->string('fe_recepcion_correo_electronico')->nullable();
-           
+
             $table->string('do_declaro_origen_de_fondos')->nullable();
             $table->string('do_declaro_que_posee_la_entidad')->nullable();
             $table->string('do_declaro_que_los_recursos_recibidos_por_las')->nullable();
-          
+
             $table->string('rc_nombre_del_establecimiento')->nullable();
             $table->string('rc_nombre_del_contacto')->nullable();
             $table->string('rc_direccion')->nullable();
             $table->string('rc_ciudad')->nullable();
             $table->string('rc_telefono')->nullable();
-          
+
 
             $table->string('cer_asi_las_cosas')->nullable();
             $table->string('cer_entidad')->nullable();
@@ -115,7 +115,22 @@ return new class extends Migration
             $table->string('cer_direccion')->nullable();
 
             $table->string('terminos_y_condiciones')->nullable();
-            
+
+            $table->string('support_clausula_cumplimiento_codigo')->nullable();
+            $table->string('support_camara_de_comercio')->nullable();
+            $table->string('support_documento_representante_legal')->nullable();
+            $table->string('support_certificacion_bancaria')->nullable();
+            $table->string('support_rut')->nullable();
+            $table->string('support_estados_financieros_compartivos')->nullable();
+            $table->string('support_declaracion_de_renta')->nullable();
+            $table->string('support_certificado_implementacion_sg_sst')->nullable();
+            $table->string('support_certificado_implementacion_bioseguridad')->nullable();
+            $table->string('support_certificado_experiencia_contractual')->nullable();
+            $table->string('support_certificados_tecnicas_categoria')->nullable();
+            $table->string('support_referencia_comercial')->nullable();
+            $table->string('support_carta_autorizacion_fondos_rl')->nullable();
+            $table->string('support_certificacion_de_normativa_riesgos')->nullable();
+
 
             $table->timestamps();
         });

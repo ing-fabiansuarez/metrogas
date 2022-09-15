@@ -188,7 +188,7 @@
 
                         <div class="card z-index-0 mt-3">
                             <div class="card-header pb-0 px-3">
-                                <h6 class="mb-0">Información del Solicitante</h6>
+                                <h6 class="mb-0">Información Tributaria</h6>
                             </div>
                             <div class="card-body pt-3 p-3">
 
@@ -580,6 +580,226 @@
                                         artículo 261 del Código de Comercio."
                                     </p>
 
+
+                                    <div class="table-responsive p-0">
+                                        <table class="table align-items-center justify-content-center mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder">
+                                                        Nombres y apellidos completos</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Grado de Parentezco</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Tipo identificación</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Número de identificación</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Entidad en la cual se desempeña como PEP</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Cargo</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Fecha de vinculación</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Fecha de desvinculación</th>
+                                                    <th>
+
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($listPersonasExpuestasPoliticamenteRL as $index => $item)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">
+                                                                        {{ $item['nombre'] }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['grado_de_parentezco'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['tipo_de_identificacion'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['numero_de_identificacion'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['entidad'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['cargo'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['fecha_vinculacion'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['fecha_desvinculacion'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            @if (!$solo_lectura)
+                                                                <a wire:click="$emit('deleteItemListPersonasExpuestasPoliticamenteRL',{{ $index }})"
+                                                                    style="color: red" class="btn btn-sm my-0">
+                                                                    Eliminar</a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                @if (!$solo_lectura)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="text" wire:model.defer="nombreRL"
+                                                                        placeholder="Nombres y apellidos completos">
+                                                                    @error('nombreRL')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="text"
+                                                                        wire:model.defer="grado_de_parentezcoRL"
+                                                                        placeholder="Grado de Parentezco">
+                                                                    @error('grado_de_parentezcoRL')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <select class="form-select form-select-sm"
+                                                                        aria-label=".form-select-sm example"
+                                                                        wire:model.defer="tipo_de_identificacionRL">
+                                                                        <option value="" selected>
+                                                                            --Tipo Identificación--
+                                                                        </option>
+                                                                        @foreach ($tipoIdentificaciones as $object)
+                                                                            <option value="{{ $object->id }}">
+                                                                                {{ $object->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    @error('tipo_de_identificacionRL')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="number"
+                                                                        wire:model.defer="numero_de_identificacionRL"
+                                                                        placeholder="Número de Identificación">
+
+                                                                    @error('numero_de_identificacionRL')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="text" wire:model.defer="entidadRL"
+                                                                        placeholder="Entidad">
+                                                                    @error('entidadRL')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="text" wire:model.defer="cargoRL"
+                                                                        placeholder="Cargo">
+                                                                    @error('cargoRL')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="date"
+                                                                        wire:model.defer="fecha_vinculacionRL">
+                                                                    @error('fecha_vinculacionRL')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="date"
+                                                                        wire:model.defer="fecha_desvinculacionRL">
+                                                                    @error('fecha_desvinculacionRL')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <a wire:click="$emit('addPersonaExpuestaPoliticamenteRL')"
+                                                                class="btn bg-gradient-primary btn-sm mt-0">
+                                                                Agregar</a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -594,15 +814,155 @@
                             </div>
                             <div class="card-body pt-3 p-3">
 
-
                                 <div class="row">
-
                                     <p style="font-size: 0.7rem">
                                         <b>
                                             En caso que los relacionados sean jurídicas favor relacionar sus
                                             composiciones hasta el beneficiario final.
                                         </b>
                                     </p>
+
+                                    <div class="table-responsive p-0">
+                                        <table class="table align-items-center justify-content-center mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder">
+                                                        RAZÓN SOCIAL O NOMBRE COMPLETO DE LA PERSONA</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Tipo identificación</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Número de identificación</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        % Participación Capital Social </th>
+                                                    <th>
+
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($listBeneficiariosFinales as $index => $item)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">
+                                                                        {{ $item['bf_razon_social'] }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['bf_tipo_identificacion'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['bf_numero_identificacion'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['bf_participacion_capital'] }}</span>
+                                                        </td>
+
+                                                        <td>
+                                                            @if (!$solo_lectura)
+                                                                <a wire:click="$emit('deleteListBeneficiariosFinales',{{ $index }})"
+                                                                    style="color: red" class="btn btn-sm my-0">
+                                                                    Eliminar</a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                @if (!$solo_lectura)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="text"
+                                                                        wire:model.defer="bf_razon_social"
+                                                                        placeholder="Nombres y apellidos completos">
+                                                                    @error('bf_razon_social')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <select class="form-select form-select-sm"
+                                                                        aria-label=".form-select-sm example"
+                                                                        wire:model.defer="bf_tipo_identificacion">
+                                                                        <option value="" selected>
+                                                                            --Tipo Identificación--
+                                                                        </option>
+                                                                        @foreach ($tipoIdentificaciones as $object)
+                                                                            <option value="{{ $object->id }}">
+                                                                                {{ $object->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    @error('bf_tipo_identificacion')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="number"
+                                                                        wire:model.defer="bf_numero_identificacion"
+                                                                        placeholder="Número de Identificación">
+
+                                                                    @error('bf_numero_identificacion')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="text"
+                                                                        wire:model.defer="bf_participacion_capital"
+                                                                        placeholder="%">
+                                                                    @error('bf_participacion_capital')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+
+
+
+                                                        <td>
+                                                            <a wire:click="$emit('addListBeneficiariosFinales')"
+                                                                class="btn bg-gradient-primary btn-sm mt-0">
+                                                                Agregar</a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+
+                                            </tbody>
+                                        </table>
+                                    </div>
 
 
                                 </div>
@@ -741,6 +1101,226 @@
                                         artículo 261 del Código de Comercio."
                                     </p>
 
+
+
+                                    <div class="table-responsive p-0">
+                                        <table class="table align-items-center justify-content-center mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder">
+                                                        Nombres y apellidos completos</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Grado de Parentezco</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Tipo identificación</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Número de identificación</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Entidad en la cual se desempeña como PEP</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Cargo</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Fecha de vinculación</th>
+                                                    <th
+                                                        class="text-uppercase text-secondary text-xxs font-weight-bolder ps-2">
+                                                        Fecha de desvinculación</th>
+                                                    <th>
+
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($listPersonasExpuestasPoliticamenteBF as $index => $item)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">
+                                                                        {{ $item['nombre'] }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['grado_de_parentezco'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['tipo_de_identificacion'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['numero_de_identificacion'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['entidad'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['cargo'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['fecha_vinculacion'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                class="text-xs font-weight-bold">{{ $item['fecha_desvinculacion'] }}</span>
+                                                        </td>
+                                                        <td>
+                                                            @if (!$solo_lectura)
+                                                                <a wire:click="$emit('deleteItemListPersonasExpuestasPoliticamenteBF',{{ $index }})"
+                                                                    style="color: red" class="btn btn-sm my-0">
+                                                                    Eliminar</a>
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                @if (!$solo_lectura)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="text" wire:model.defer="nombreBF"
+                                                                        placeholder="Nombres y apellidos completos">
+                                                                    @error('nombreBF')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="text"
+                                                                        wire:model.defer="grado_de_parentezcoBF"
+                                                                        placeholder="Grado de Parentezco">
+                                                                    @error('grado_de_parentezcoBF')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <select class="form-select form-select-sm"
+                                                                        aria-label=".form-select-sm example"
+                                                                        wire:model.defer="tipo_de_identificacionBF">
+                                                                        <option value="" selected>
+                                                                            --Tipo Identificación--
+                                                                        </option>
+                                                                        @foreach ($tipoIdentificaciones as $object)
+                                                                            <option value="{{ $object->id }}">
+                                                                                {{ $object->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                    @error('tipo_de_identificacionBF')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="number"
+                                                                        wire:model.defer="numero_de_identificacionBF"
+                                                                        placeholder="Número de Identificación">
+
+                                                                    @error('numero_de_identificacionBF')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="text" wire:model.defer="entidadBF"
+                                                                        placeholder="Entidad">
+                                                                    @error('entidadBF')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="text" wire:model.defer="cargoBF"
+                                                                        placeholder="Cargo">
+                                                                    @error('cargoBF')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="date"
+                                                                        wire:model.defer="fecha_vinculacionBF">
+                                                                    @error('fecha_vinculacionBF')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <span class="text-xs font-weight-bold">
+                                                                <div class="form-group">
+                                                                    <input class="form-control form-control-sm"
+                                                                        type="date"
+                                                                        wire:model.defer="fecha_desvinculacionBF">
+                                                                    @error('fecha_desvinculacionBF')
+                                                                        <span class="text-danger text-message-validation">
+                                                                            {{ $message }}
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <a wire:click="$emit('addPersonaExpuestaPoliticamenteBF')"
+                                                                class="btn bg-gradient-primary btn-sm mt-0">
+                                                                Agregar</a>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                 </div>
                             </div>
@@ -1697,7 +2277,460 @@
                         </div>
 
 
-                     
+                        @if (!$solo_lectura)
+                            <div class="col-12 mt-4">
+                                <div class="card mb-4">
+                                    <div class="card-header pb-0">
+                                        <h6>Soportes</h6>
+                                    </div>
+                                    <div class="card-body px-0 pt-0 pb-2">
+                                        <div class="table-responsive p-0">
+                                            <table class="table align-items-center justify-content-center mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                            Documento</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                            Observación</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                            Subir</th>
+
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Cláusula de cumplimiento
+                                                                        del código de ética
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Diligenciar y
+                                                                Firmar </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input
+                                                                    wire:model.defer="support_clausula_cumplimiento_codigo"
+                                                                    class="form-control form-control-sm "
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_clausula_cumplimiento_codigo')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Cámara de Comercio
+
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">No Mayor a 30 días
+
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_camara_de_comercio"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_camara_de_comercio')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Fotocopia del documento
+                                                                        del Representante Legal
+
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">150%
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input
+                                                                    wire:model.defer="support_documento_representante_legal"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_documento_representante_legal')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Certificación Bancaria
+
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">No Mayor a 30 días
+
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input
+                                                                    wire:model.defer="support_certificacion_bancaria"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_certificacion_bancaria')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Registro único tributario
+                                                                        (RUT)
+
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Vigente
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_rut"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_rut')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Estados Financieros
+                                                                        Comparativos y Notas
+
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">2 años
+                                                                inmediatamente anteriores
+
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input
+                                                                    wire:model.defer="support_estados_financieros_compartivos"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_estados_financieros_compartivos')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Declaración de Renta
+
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Año
+                                                                inmediatamente
+                                                                anterior
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_declaracion_de_renta"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_declaracion_de_renta')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Certificado de
+                                                                        implementación del SG-SST ( Si aplica)
+
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Vigente
+
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input
+                                                                    wire:model.defer="support_certificado_implementacion_sg_sst"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_certificado_implementacion_sg_sst')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Certificado de
+                                                                        implementación Protocolos de Bioseguridad ( Si
+                                                                        aplica)
+
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Vigente
+
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input
+                                                                    wire:model.defer="support_certificado_implementacion_bioseguridad"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_certificado_implementacion_bioseguridad')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Certificado de Experiencia
+                                                                        contractual ( Si aplica)
+
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Vigente
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input
+                                                                    wire:model.defer="support_certificado_experiencia_contractual"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_certificado_experiencia_contractual')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Certificaciones técnicas
+                                                                        según categoría (Licencia, ISO, OHSAS, ONAC,
+                                                                        INVIMA) ( Si aplica)
+
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Vigente
+                                                                Según aplique
+
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input
+                                                                    wire:model.defer="support_certificados_tecnicas_categoria"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_certificados_tecnicas_categoria')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Referencia Comercial ( Si
+                                                                        aplica)
+
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">No Mayor a 30
+                                                                días
+
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input wire:model.defer="support_referencia_comercial"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_referencia_comercial')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">Carta de autorización de
+                                                                        consignación de fondos firmada por el
+                                                                        Representante legal
+
+
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Vigente
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input
+                                                                    wire:model.defer="support_carta_autorizacion_fondos_rl"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_carta_autorizacion_fondos_rl')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-sm">En caso de estar
+                                                                        regulada, certificación de cumplir con normativa
+                                                                        de riesgos de LA/FT
+
+
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-sm font-weight-bold mb-0">Vigente
+
+
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <input
+                                                                    wire:model.defer="support_certificacion_de_normativa_riesgos"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_certificacion_de_normativa_riesgos')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+
 
                         @if (!$solo_lectura)
                             <div class="col-12 my-4">
@@ -1710,7 +2743,8 @@
                                             <div class="col-md-12">
                                                 <div class="form-check">
                                                     <input wire:model="personaJuridica.terminos_y_condiciones"
-                                                        class="form-check-input" type="checkbox" id="fcustomCheck1"
+                                                        class="form-check-input" type="checkbox"
+                                                        id="fcustomCheck1"
                                                         @if ($solo_lectura) disabled @endif>
                                                     <label class="custom-control-label" for="customCheck1">Acepto
                                                         términos y condiciones
