@@ -170,7 +170,6 @@ class FormPersonaNatural extends Component
         $this->solo_lectura = $solo_lectura;
         if ($this->personaNatural != null) {
             foreach ($this->personaNatural->personasPoliticamenteExpuestas as $persona) {
-                $persona;
                 array_push($this->listPersonasExpuestasPoliticamente, [
                     'nombre' => $persona->nombre,
                     'grado_de_parentezco' => $persona->grado_de_parentezco,

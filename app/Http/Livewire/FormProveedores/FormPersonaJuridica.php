@@ -215,6 +215,46 @@ class FormPersonaJuridica extends Component
         $this->listPersonasExpuestasPoliticamenteRL = [];
         $this->listPersonasExpuestasPoliticamenteBF = [];
         $this->listBeneficiariosFinales = [];
+
+        if ($this->personaJuridica != null) {
+            foreach ($this->personaJuridica->personasPoliticamenteExpuestas as $persona) {
+                if ($persona->categoria == 1) {
+                    array_push($this->listPersonasExpuestasPoliticamenteRL, [
+                        'nombre' => $persona->nombre,
+                        'grado_de_parentezco' => $persona->grado_de_parentezco,
+                        'tipo_de_identificacion' => $persona->tipo_de_identificacion,
+                        'numero_de_identificacion' => $persona->numero_de_identificacion,
+                        'entidad' => $persona->entidad,
+                        'cargo' => $persona->cargo,
+                        'fecha_vinculacion' => $persona->fecha_vinculacion,
+                        'fecha_desvinculacion' => $persona->fecha_desvinculacion,
+                    ]);
+                } else if ($persona->categoria == 2) {
+                    array_push($this->listPersonasExpuestasPoliticamenteBF, [
+                        'nombre' => $persona->nombre,
+                        'grado_de_parentezco' => $persona->grado_de_parentezco,
+                        'tipo_de_identificacion' => $persona->tipo_de_identificacion,
+                        'numero_de_identificacion' => $persona->numero_de_identificacion,
+                        'entidad' => $persona->entidad,
+                        'cargo' => $persona->cargo,
+                        'fecha_vinculacion' => $persona->fecha_vinculacion,
+                        'fecha_desvinculacion' => $persona->fecha_desvinculacion,
+                    ]);
+                }
+            }
+
+            foreach ($this->personaJuridica->beneficiariosFinales as $item) {
+               
+                    array_push($this->listBeneficiariosFinales, [
+                        'bf_razon_social' => $item->razon_social,
+                        'bf_tipo_identificacion' => $item->tipo_identificacion,
+                        'bf_numero_identificacion' => $item->num_identificacion,
+                        'bf_participacion_capital' => $item->porcentaje_participacion,
+                        
+                    ]);
+                
+            }
+        }
     }
 
     public function save()
@@ -304,7 +344,7 @@ class FormPersonaJuridica extends Component
             $nueva->save();
         }
 
-        
+
         //guardar las politicas politicamente expuestas.
 
         foreach ($this->listBeneficiariosFinales as $item) {
@@ -313,7 +353,7 @@ class FormPersonaJuridica extends Component
             $nueva->razon_social = $item['bf_razon_social'];
             $nueva->tipo_identificacion = $item['bf_tipo_identificacion'];
             $nueva->num_identificacion = $item['bf_numero_identificacion'];
-            $nueva->porcentaje_participacion = $item['bf_participacion_capital'];   
+            $nueva->porcentaje_participacion = $item['bf_participacion_capital'];
             $nueva->save();
         }
 

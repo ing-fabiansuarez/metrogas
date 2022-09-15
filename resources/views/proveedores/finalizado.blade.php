@@ -24,8 +24,7 @@
                         </div>
                         <div class="px-xl-12 px-sm-12 px-3 mb-3">
                             <div class="usr-name">
-                                <span><img src="http://metrogas.test/assets/img/logo.png" alt="admin-profile"
-                                        class="img-fluid">
+                                <span><img src="{{ url('/assets/img/logo.png') }}" alt="admin-profile" class="img-fluid">
                                 </span>
                             </div>
 
