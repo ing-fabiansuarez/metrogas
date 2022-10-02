@@ -169,6 +169,11 @@ class FormPersonaJuridica extends Component
 
         'personaJuridica.terminos_y_condiciones' => 'required',
 
+        'personaJuridica.nombre_quien_diligencia' => 'required',
+        'personaJuridica.cedula_quien_diligencia' => 'required',
+        'personaJuridica.celular_quien_diligencia' => 'required',
+        'personaJuridica.cargo_quien_diligencia' => 'required',
+
 
         'support_clausula_cumplimiento_codigo' => '',
         'support_camara_de_comercio' => 'required',

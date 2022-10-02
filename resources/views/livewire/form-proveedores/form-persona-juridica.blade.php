@@ -2923,6 +2923,81 @@
 
 
 
+                        <div class="card z-index-0 mt-3">
+                            <div class="card-header pb-0 px-3">
+                                <h6 class="mb-0">Información de quien diligencia</h6>
+                            </div>
+                            <div class="card-body pt-3 p-3">
+
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Nombre</label>
+                                            <input wire:model="personaJuridica.nombre_quien_diligencia"
+                                                class="form-control form-control-sm" type="text"
+                                                @if ($solo_lectura) disabled @endif>
+                                            <span class="error">
+                                                @error('personaJuridica.nombre_quien_diligencia')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Cedula</label>
+                                            <input wire:model="personaJuridica.cedula_quien_diligencia"
+                                                class="form-control form-control-sm" type="text"
+                                                @if ($solo_lectura) disabled @endif>
+                                            <span class="error">
+                                                @error('personaJuridica.cedula_quien_diligencia')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Celular o Teléfono</label>
+                                            <input wire:model="personaJuridica.celular_quien_diligencia"
+                                                class="form-control form-control-sm" type="text"
+                                                @if ($solo_lectura) disabled @endif>
+                                            <span class="error">
+                                                @error('personaJuridica.celular_quien_diligencia')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Cargo</label>
+                                            <input wire:model="personaJuridica.cargo_quien_diligencia"
+                                                class="form-control form-control-sm" type="text"
+                                                @if ($solo_lectura) disabled @endif>
+                                            <span class="error">
+                                                @error('personaJuridica.cargo_quien_diligencia')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+
+                                   
+                                   
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
 
                         @if (!$solo_lectura)
                             <div class="col-12 my-4">
