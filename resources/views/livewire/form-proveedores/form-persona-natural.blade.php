@@ -2179,9 +2179,11 @@
                                                             id="fcustomCheck1"
                                                             @if ($solo_lectura) disabled @endif>
                                                         <label class="custom-control-label" for="customCheck1">Acepto
-                                                            términos y condiciones
-                                                            de
-                                                            MetroGas SA ESP</label>
+                                                            <a target="__blank"
+                                                                href="{{ asset('storage/terminos_y_condiciones.pdf') }}">términos
+                                                                y condiciones
+                                                                de
+                                                                MetroGas SA ESP</a> </label>
                                                         @error('personaNatural.terminos_y_condiciones')
                                                             <span class="text-danger text-message-validation">
                                                                 {{ $message }}
