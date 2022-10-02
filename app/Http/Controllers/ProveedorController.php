@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FormPersonaJuridicaBrutoExport;
 use App\Exports\FormPersonaJuridicaExport;
+use App\Exports\FormPersonaNaturalBrutoExport;
 use App\Exports\FormPersonaNaturalExport;
 use App\Models\FormPersonaJuridica;
 use App\Models\FormPersonaNatural;
@@ -46,7 +48,14 @@ class ProveedorController extends Controller
     public function exportarFormPersonaNatural(Request $request)
     {
         $id =  $request->get('num_solicitud');
-        return (new FormPersonaNaturalExport($id))->download('Formularios Personas Natural.xlsx');
+        $tipo = $request->get('r');
+
+        if ($tipo == "normal") {
+            return (new FormPersonaNaturalExport($id))->download('Formularios Personas Natural.xlsx');
+        } else if ($tipo == "bruto") {
+            return (new FormPersonaNaturalBrutoExport($id))->download('Formularios Personas Natural En Bruto.xlsx');
+        }
+        
     }
 
     public function personaJuridica()
@@ -78,6 +87,12 @@ class ProveedorController extends Controller
     public function exportarFormPersonaJuridica(Request $request)
     {
         $id =  $request->get('num_solicitud');
-        return (new FormPersonaJuridicaExport($id))->download('Formularios Personas Juridica.xlsx');
+        $tipo = $request->get('r');
+
+        if ($tipo == "normal") {
+            return (new FormPersonaJuridicaExport($id))->download('Formularios Personas Juridica.xlsx');
+        } else if ($tipo == "bruto") {
+            return (new FormPersonaJuridicaBrutoExport($id))->download('Formularios Personas Juridica En Bruto.xlsx');
+        }
     }
 }

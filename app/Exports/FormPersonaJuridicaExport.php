@@ -2,13 +2,16 @@
 
 namespace App\Exports;
 
+use App\Enums\ESiNo;
 use App\Models\FormPersonaJuridica;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class FormPersonaJuridicaExport implements FromQuery, WithHeadings
+class FormPersonaJuridicaExport implements FromQuery, WithHeadings, ShouldAutoSize, WithMapping
 {
     use Exportable;
 
@@ -23,7 +26,7 @@ class FormPersonaJuridicaExport implements FromQuery, WithHeadings
             /* ->join('users', 'users.id', '=', 'viatic_requests.request_by')
             ->join('jobtitles', 'users.id_jobtitle', '=', 'jobtitles.id') */
             ->select([
-                'form_persona_juridicas.id',
+                '*',
             ]);
         /* if ($this->start_date != null) {
             $consulta->where('viatic_requests.created_at', '>=', $this->start_date);
@@ -40,6 +43,80 @@ class FormPersonaJuridicaExport implements FromQuery, WithHeadings
         return $consulta;
     }
 
+    public function map($invoice): array
+    {
+        return [
+            $invoice->id,
+            '',
+            '',
+            '',
+            $invoice->nit . '-' . $invoice->digito_verificador,
+            $invoice->razon_social,
+            '',
+            'NIT',
+            '',
+            '',
+            $invoice->telefono_fijo,
+            $invoice->celular,
+            $invoice->correo_electronico_notificacion,
+            $invoice->direccion_principal,
+            '',
+            '',
+            $invoice->codigo_ciiu_actividad_principal,
+            '',
+            '',
+            '',
+            '',
+            ESiNo::from($invoice->gran_contribuyente)->getName(),
+            ESiNo::from($invoice->autorretenedor)->getName(),
+            ESiNo::from($invoice->responsable_iva)->getName(),
+            $invoice->rl_nombre . " " .  $invoice->rl_apellido,
+            $invoice->rl_tipo_documento,
+            $invoice->rl_num_docuemnto,
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            $invoice->if_total_ingresos,
+            $invoice->if_total_egresos,
+            $invoice->if_otros_ingresos,
+            $invoice->if_otros_egresos,
+            $invoice->if_total_activos,
+            $invoice->if_total_pasivos,
+            '',
+            ESiNo::from($invoice->if_declarante_de_renta)->getName(),
+            $invoice->if_mes_corte_informacion_financiera . "/" . $invoice->if_ano_corte_informacion_financiera,
+            $invoice->rc_nombre_del_establecimiento . " - " . $invoice->rc_nombre_del_contacto,
+            $invoice->rc_direccion,
+            $invoice->rc_ciudad,
+            $invoice->rc_telefono,
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+        ];
+    }
 
     public function headings(): array
     {

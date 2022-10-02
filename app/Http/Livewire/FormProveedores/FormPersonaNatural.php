@@ -181,6 +181,19 @@ class FormPersonaNatural extends Component
                     'fecha_desvinculacion' => $persona->fecha_desvinculacion,
                 ]);
             }
+
+            $this->support_formato_viculacion_persona_natural = $this->personaNatural->support_formato_viculacion_persona_natural;
+            $this->support_clausula_cumplimiento_codigo_etica = $this->personaNatural->support_clausula_cumplimiento_codigo_etica;
+            $this->support_cedula_ciudadania = $this->personaNatural->support_cedula_ciudadania;
+            $this->support_cedula_extranjeria = $this->personaNatural->support_cedula_extranjeria;
+            $this->support_rut = $this->personaNatural->support_rut;
+            $this->support_camara_de_comercio = $this->personaNatural->support_camara_de_comercio;
+            $this->support_declaracion_de_renta_o_certificacion_no_declarante = $this->personaNatural->support_declaracion_de_renta_o_certificacion_no_declarante;
+            $this->support_certificacion_bancaria = $this->personaNatural->support_certificacion_bancaria;
+            $this->support_certificado_experiencia_u_hoja_de_vida = $this->personaNatural->support_certificado_experiencia_u_hoja_de_vida;
+            $this->support_certificado_profesional = $this->personaNatural->support_certificado_profesional;
+            $this->support_referencias_comerciales = $this->personaNatural->support_referencias_comerciales;
+            $this->support_afiliacion_seguridad_social = $this->personaNatural->support_afiliacion_seguridad_social;
         }
     }
 
@@ -207,40 +220,40 @@ class FormPersonaNatural extends Component
 
         //urls soportes
         if (!empty($this->support_formato_viculacion_persona_natural)) {
-            $this->personaNatural->support_formato_viculacion_persona_natural = $this->support_formato_viculacion_persona_natural->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_formato_viculacion_persona_natural/");
+            $this->personaNatural->support_formato_viculacion_persona_natural = $this->support_formato_viculacion_persona_natural->store("public/form-proveedores/soportes/persona-natural/" . $this->personaNatural->id . "/support_formato_viculacion_persona_natural/");
         }
         if (!empty($this->support_clausula_cumplimiento_codigo_etica)) {
-            $this->personaNatural->support_clausula_cumplimiento_codigo_etica = $this->support_clausula_cumplimiento_codigo_etica->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_clausula_cumplimiento_codigo_etica/");
+            $this->personaNatural->support_clausula_cumplimiento_codigo_etica = $this->support_clausula_cumplimiento_codigo_etica->store("public/form-proveedores/soportes/persona-natural/" . $this->personaNatural->id . "/support_clausula_cumplimiento_codigo_etica/");
         }
         if (!empty($this->support_cedula_ciudadania)) {
-            $this->personaNatural->support_cedula_ciudadania = $this->support_cedula_ciudadania->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_cedula_ciudadania/");
+            $this->personaNatural->support_cedula_ciudadania = $this->support_cedula_ciudadania->store("public/form-proveedores/soportes/persona-natural/" . $this->personaNatural->id . "/support_cedula_ciudadania/");
         }
         if (!empty($this->support_cedula_extranjeria)) {
-            $this->personaNatural->support_cedula_extranjeria = $this->support_cedula_extranjeria->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_cedula_extranjeria/");
+            $this->personaNatural->support_cedula_extranjeria = $this->support_cedula_extranjeria->store("public/form-proveedores/soportes/persona-natural/" . $this->personaNatural->id . "/support_cedula_extranjeria/");
         }
         if (!empty($this->support_rut)) {
-            $this->personaNatural->support_rut = $this->support_rut->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_rut/");
+            $this->personaNatural->support_rut = $this->support_rut->store("public/form-proveedores/soportes/persona-natural/" . $this->personaNatural->id . "/support_rut/");
         }
         if (!empty($this->support_camara_de_comercio)) {
-            $this->personaNatural->support_camara_de_comercio = $this->support_camara_de_comercio->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_camara_de_comercio/");
+            $this->personaNatural->support_camara_de_comercio = $this->support_camara_de_comercio->store("public/form-proveedores/soportes/persona-natural/" . $this->personaNatural->id . "/support_camara_de_comercio/");
         }
         if (!empty($this->support_declaracion_de_renta_o_certificacion_no_declarante)) {
-            $this->personaNatural->support_declaracion_de_renta_o_certificacion_no_declarante = $this->support_declaracion_de_renta_o_certificacion_no_declarante->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_declaracion_de_renta_o_certificacion_no_declarante/");
+            $this->personaNatural->support_declaracion_de_renta_o_certificacion_no_declarante = $this->support_declaracion_de_renta_o_certificacion_no_declarante->store("public/form-proveedores/soportes/persona-natural/" . $this->personaNatural->id . "/support_declaracion_de_renta_o_certificacion_no_declarante/");
         }
         if (!empty($this->support_certificacion_bancaria)) {
-            $this->personaNatural->support_certificacion_bancaria = $this->support_certificacion_bancaria->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_certificacion_bancaria/");
+            $this->personaNatural->support_certificacion_bancaria = $this->support_certificacion_bancaria->store("public/form-proveedores/soportes/persona-natural/" . $this->personaNatural->id . "/support_certificacion_bancaria/");
         }
         if (!empty($this->support_certificado_experiencia_u_hoja_de_vida)) {
-            $this->personaNatural->support_certificado_experiencia_u_hoja_de_vida = $this->support_certificado_experiencia_u_hoja_de_vida->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_certificado_experiencia_u_hoja_de_vida/");
+            $this->personaNatural->support_certificado_experiencia_u_hoja_de_vida = $this->support_certificado_experiencia_u_hoja_de_vida->store("public/form-proveedores/soportes/persona-natural/" . $this->personaNatural->id . "/support_certificado_experiencia_u_hoja_de_vida/");
         }
         if (!empty($this->support_certificado_profesional)) {
-            $this->personaNatural->support_certificado_profesional = $this->support_certificado_profesional->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_certificado_profesional/");
+            $this->personaNatural->support_certificado_profesional = $this->support_certificado_profesional->store("public/form-proveedores/soportes/persona-natural/" . $this->personaNatural->id . "/support_certificado_profesional/");
         }
         if (!empty($this->support_referencias_comerciales)) {
-            $this->personaNatural->support_referencias_comerciales = $this->support_referencias_comerciales->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_referencias_comerciales/");
+            $this->personaNatural->support_referencias_comerciales = $this->support_referencias_comerciales->store("public/form-proveedores/soportes/persona-natural/" . $this->personaNatural->id . "/support_referencias_comerciales/");
         }
         if (!empty($this->support_afiliacion_seguridad_social)) {
-            $this->personaNatural->support_afiliacion_seguridad_social = $this->support_afiliacion_seguridad_social->store("public/form-proveedores/soportes/" . $this->personaNatural->id . "/support_afiliacion_seguridad_social/");
+            $this->personaNatural->support_afiliacion_seguridad_social = $this->support_afiliacion_seguridad_social->store("public/form-proveedores/soportes/persona-natural/" . $this->personaNatural->id . "/support_afiliacion_seguridad_social/");
         }
 
         $this->personaNatural->save();

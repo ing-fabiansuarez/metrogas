@@ -180,7 +180,8 @@
                         <div class="modal-footer">
                             <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
                             @csrf
-                            <button type="submit" style="color: white" class="btn bg-secundary">Exportar</button>
+                            <button type="submit" name="r" value="bruto"  style="color: white" class="btn bg-secundary">Exportar En Bruto</button>
+                            <button type="submit" name="r" value="normal" style="color: white" class="btn bg-secundary">Exportar</button>
                         </div>
                     </form>
                 </div>

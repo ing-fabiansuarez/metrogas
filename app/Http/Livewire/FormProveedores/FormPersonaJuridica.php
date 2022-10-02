@@ -69,9 +69,6 @@ class FormPersonaJuridica extends Component
     public $support_certificacion_de_normativa_riesgos;
 
 
-
-
-
     protected $rules = [
         'personaJuridica.razon_social' => 'required',
         'personaJuridica.nit' => 'required',
@@ -146,7 +143,7 @@ class FormPersonaJuridica extends Component
 
         'personaJuridica.do_declaro_origen_de_fondos' => 'required',
         'personaJuridica.do_declaro_que_posee_la_entidad' => 'required',
-        'personaJuridica.do_declaro_que_los_recursos_recibidos_por_las' => 'required',
+        //'personaJuridica.do_declaro_que_los_recursos_recibidos_por_las' => '',
 
 
 
@@ -173,7 +170,7 @@ class FormPersonaJuridica extends Component
         'personaJuridica.terminos_y_condiciones' => 'required',
 
 
-        'support_clausula_cumplimiento_codigo' => 'required',
+        'support_clausula_cumplimiento_codigo' => '',
         'support_camara_de_comercio' => 'required',
         'support_documento_representante_legal' => 'required',
         'support_certificacion_bancaria' => 'required',
@@ -181,13 +178,130 @@ class FormPersonaJuridica extends Component
         'support_estados_financieros_compartivos' => 'required',
         'support_declaracion_de_renta' => 'required',
         'support_certificado_implementacion_sg_sst' => 'required',
-        'support_certificado_implementacion_bioseguridad' => 'required',
-        'support_certificado_experiencia_contractual' => 'required',
-        'support_certificados_tecnicas_categoria' => 'required',
-        'support_referencia_comercial' => 'required',
-        'support_carta_autorizacion_fondos_rl' => 'required',
-        'support_certificacion_de_normativa_riesgos' => 'required',
+        'support_certificado_implementacion_bioseguridad' => '',
+        'support_certificado_experiencia_contractual' => '',
+        'support_certificados_tecnicas_categoria' => '',
+        'support_referencia_comercial' => '',
+        'support_carta_autorizacion_fondos_rl' => '',
+        'support_certificacion_de_normativa_riesgos' => '',
     ];
+
+    /* protected $rules = [
+        'personaJuridica.razon_social' => 'required',
+        'personaJuridica.nit' => '',
+        'personaJuridica.digito_verificador' => '',
+
+
+        'personaJuridica.sigla' => '',
+        'personaJuridica.direccion_principal' => '',
+        'personaJuridica.tipo_empresa' => '',
+        'personaJuridica.pagina_web' => '',
+        'personaJuridica.correo_electronico_notificacion' => '',
+        'personaJuridica.celular' => '',
+        'personaJuridica.telefono_fijo' => '',
+
+        'personaJuridica.gran_contribuyente' => '',
+        'personaJuridica.autorretenedor' => '',
+        'personaJuridica.responsable_iva' => '',
+        'personaJuridica.rst' => '',
+        'personaJuridica.codigo_ciiu_actividad_principal' => '',
+        'personaJuridica.descripcion_actividad__ciiu' => '',
+
+        'personaJuridica.esta_obligada' => '',
+        'personaJuridica.tiene_implementado_un_sistema_de_administracion_de_riesgo_de_lavado_de_activos' => '',
+
+        'personaJuridica.rl_nombre' => '',
+        'personaJuridica.rl_apellido' => '',
+        'personaJuridica.rl_tipo_documento' => '',
+        'personaJuridica.rl_num_docuemnto' => '',
+        'personaJuridica.rl_fecha_expedicion' => '',
+        'personaJuridica.rl_ciudad_expedicion' => '',
+        'personaJuridica.rl_administra_recursos_publicos_o_es_pep' => '',
+        'personaJuridica.rl_persona_expuesta_pliticamente_extrajera' => '',
+        'personaJuridica.rl_persona_expuesta_politicamente_de_organizaciones_internacionales' => '',
+        'personaJuridica.rl_tiene_relecionados_cercanos_expuestos_politicamente' => '',
+
+
+        'personaJuridica.bf_administra_recursos_publicos_o_es_pep' => '',
+        'personaJuridica.bf_persona_expuesta_pliticamente_extrajera' => '',
+        'personaJuridica.bf_persona_expuesta_politicamente_de_organizaciones_internacionales' => '',
+        'personaJuridica.bf_tiene_relecionados_cercanos_expuestos_politicamente' => '',
+
+        'personaJuridica.if_total_ingresos' => '',
+        'personaJuridica.if_total_egresos' => '',
+        'personaJuridica.if_otros_ingresos' => '',
+        'personaJuridica.if_otros_egresos' => '',
+        'personaJuridica.if_total_activos' => '',
+        'personaJuridica.if_total_pasivos' => '',
+        'personaJuridica.if_mes_corte_informacion_financiera' => '',
+        'personaJuridica.if_ano_corte_informacion_financiera' => '',
+        'personaJuridica.if_declarante_de_renta' => '',
+        'personaJuridica.oi_realiza_op_internacionales' => '',
+        'personaJuridica.oi_posee_cuentas_en_moneda_extranjera' => '',
+        'personaJuridica.oi_nombre_de_entidad_financiera' => '',
+        'personaJuridica.oi_ciudad' => '',
+        'personaJuridica.oi_pais' => '',
+        'personaJuridica.oi_monto_promedio_mensual' => '',
+        'personaJuridica.oi_moneda' => '',
+        'personaJuridica.oi_importaciones' => '',
+        'personaJuridica.oi_exportaciones' => '',
+        'personaJuridica.oi_inversiones' => '',
+        'personaJuridica.oi_prestamos_m_e' => '',
+
+        'personaJuridica.fe_factura_electronica' => '',
+        'personaJuridica.fe_fecha_desde_que_factura' => '',
+        'personaJuridica.fe_envio_nombre' => '',
+        'personaJuridica.fe_envio_cargo' => '',
+        'personaJuridica.fe_envio_correo_electronico' => '',
+        'personaJuridica.fe_recepcion_nombre' => '',
+        'personaJuridica.fe_recepcion_cargo' => '',
+        'personaJuridica.fe_recepcion_correo_electronico' => '',
+
+
+        'personaJuridica.do_declaro_origen_de_fondos' => '',
+        'personaJuridica.do_declaro_que_posee_la_entidad' => '',
+        //'personaJuridica.do_declaro_que_los_recursos_recibidos_por_las' => '',
+
+
+
+        'personaJuridica.rc_nombre_del_establecimiento' => '',
+        'personaJuridica.rc_nombre_del_contacto' => '',
+        'personaJuridica.rc_direccion' => '',
+        'personaJuridica.rc_ciudad' => '',
+        'personaJuridica.rc_telefono' => '',
+
+
+        'personaJuridica.cer_asi_las_cosas' => '',
+        'personaJuridica.cer_entidad' => '',
+        'personaJuridica.cer_obligada_laftpadm' => '',
+        'personaJuridica.cer_cumple_nomrmas' => '',
+        'personaJuridica.cer_cuenta_con_adecuadas_pliticas' => '',
+        'personaJuridica.cer_ha_estado_involucrada' => '',
+        'personaJuridica.cer_ha_sido_sancionada' => '',
+        'personaJuridica.cer_nombres' => '',
+        'personaJuridica.cer_apellidos' => '',
+        'personaJuridica.cer_telefono' => '',
+        'personaJuridica.cer_correo_electronico' => '',
+        'personaJuridica.cer_direccion' => '',
+
+        'personaJuridica.terminos_y_condiciones' => '',
+
+
+        'support_clausula_cumplimiento_codigo' => '',
+        'support_camara_de_comercio' => 'required',
+        'support_documento_representante_legal' => 'required',
+        'support_certificacion_bancaria' => 'required',
+        'support_rut' => 'required',
+        'support_estados_financieros_compartivos' => 'required',
+        'support_declaracion_de_renta' => 'required',
+        'support_certificado_implementacion_sg_sst' => 'required',
+        'support_certificado_implementacion_bioseguridad' => '',
+        'support_certificado_experiencia_contractual' => '',
+        'support_certificados_tecnicas_categoria' => '',
+        'support_referencia_comercial' => '',
+        'support_carta_autorizacion_fondos_rl' => '',
+        'support_certificacion_de_normativa_riesgos' => '',
+    ]; */
 
     protected $listeners = [
         'addPersonaExpuestaPoliticamenteRL',
@@ -244,16 +358,31 @@ class FormPersonaJuridica extends Component
             }
 
             foreach ($this->personaJuridica->beneficiariosFinales as $item) {
-               
-                    array_push($this->listBeneficiariosFinales, [
-                        'bf_razon_social' => $item->razon_social,
-                        'bf_tipo_identificacion' => $item->tipo_identificacion,
-                        'bf_numero_identificacion' => $item->num_identificacion,
-                        'bf_participacion_capital' => $item->porcentaje_participacion,
-                        
-                    ]);
-                
+
+                array_push($this->listBeneficiariosFinales, [
+                    'bf_razon_social' => $item->razon_social,
+                    'bf_tipo_identificacion' => $item->tipo_identificacion,
+                    'bf_numero_identificacion' => $item->num_identificacion,
+                    'bf_participacion_capital' => $item->porcentaje_participacion,
+
+                ]);
             }
+
+            //Cargar los soportes
+            $this->support_clausula_cumplimiento_codigo = $this->personaJuridica->support_clausula_cumplimiento_codigo;
+            $this->support_camara_de_comercio = $this->personaJuridica->support_camara_de_comercio;
+            $this->support_documento_representante_legal = $this->personaJuridica->support_documento_representante_legal;
+            $this->support_certificacion_bancaria = $this->personaJuridica->support_certificacion_bancaria;
+            $this->support_rut = $this->personaJuridica->support_rut;
+            $this->support_estados_financieros_compartivos = $this->personaJuridica->support_estados_financieros_compartivos;
+            $this->support_declaracion_de_renta = $this->personaJuridica->support_declaracion_de_renta;
+            $this->support_certificado_implementacion_sg_sst = $this->personaJuridica->support_certificado_implementacion_sg_sst;
+            $this->support_certificado_implementacion_bioseguridad = $this->personaJuridica->support_certificado_implementacion_bioseguridad;
+            $this->support_certificado_experiencia_contractual = $this->personaJuridica->support_certificado_experiencia_contractual;
+            $this->support_certificados_tecnicas_categoria = $this->personaJuridica->support_certificados_tecnicas_categoria;
+            $this->support_referencia_comercial = $this->personaJuridica->support_referencia_comercial;
+            $this->support_carta_autorizacion_fondos_rl = $this->personaJuridica->support_carta_autorizacion_fondos_rl;
+            $this->support_certificacion_de_normativa_riesgos = $this->personaJuridica->support_certificacion_de_normativa_riesgos;
         }
     }
 
@@ -265,47 +394,47 @@ class FormPersonaJuridica extends Component
 
         //guardar los soportes
 
-        if (!empty($this->personaJuridica->support_clausula_cumplimiento_codigo)) {
-            $this->personaJuridica->support_clausula_cumplimiento_codigo = $this->support_clausula_cumplimiento_codigo->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_clausula_cumplimiento_codigo/");
+        if (!empty($this->support_clausula_cumplimiento_codigo)) {
+            $this->personaJuridica->support_clausula_cumplimiento_codigo = $this->support_clausula_cumplimiento_codigo->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_clausula_cumplimiento_codigo/");
         }
-        if (!empty($this->personaJuridica->support_camara_de_comercio)) {
-            $this->personaJuridica->support_camara_de_comercio = $this->support_camara_de_comercio->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_camara_de_comercio/");
+        if (!empty($this->support_camara_de_comercio)) {
+            $this->personaJuridica->support_camara_de_comercio = $this->support_camara_de_comercio->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_camara_de_comercio/");
         }
-        if (!empty($this->personaJuridica->support_documento_representante_legal)) {
-            $this->personaJuridica->support_documento_representante_legal = $this->support_documento_representante_legal->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_documento_representante_legal/");
+        if (!empty($this->support_documento_representante_legal)) {
+            $this->personaJuridica->support_documento_representante_legal = $this->support_documento_representante_legal->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_documento_representante_legal/");
         }
-        if (!empty($this->personaJuridica->support_certificacion_bancaria)) {
-            $this->personaJuridica->support_certificacion_bancaria = $this->support_certificacion_bancaria->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_certificacion_bancaria/");
+        if (!empty($this->support_certificacion_bancaria)) {
+            $this->personaJuridica->support_certificacion_bancaria = $this->support_certificacion_bancaria->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_certificacion_bancaria/");
         }
-        if (!empty($this->personaJuridica->support_rut)) {
-            $this->personaJuridica->support_rut = $this->support_rut->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_rut/");
+        if (!empty($this->support_rut)) {
+            $this->personaJuridica->support_rut = $this->support_rut->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_rut/");
         }
-        if (!empty($this->personaJuridica->support_estados_financieros_compartivos)) {
-            $this->personaJuridica->support_estados_financieros_compartivos = $this->support_estados_financieros_compartivos->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_estados_financieros_compartivos/");
+        if (!empty($this->support_estados_financieros_compartivos)) {
+            $this->personaJuridica->support_estados_financieros_compartivos = $this->support_estados_financieros_compartivos->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_estados_financieros_compartivos/");
         }
-        if (!empty($this->personaJuridica->support_declaracion_de_renta)) {
-            $this->personaJuridica->support_declaracion_de_renta = $this->support_declaracion_de_renta->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_declaracion_de_renta/");
+        if (!empty($this->support_declaracion_de_renta)) {
+            $this->personaJuridica->support_declaracion_de_renta = $this->support_declaracion_de_renta->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_declaracion_de_renta/");
         }
-        if (!empty($this->personaJuridica->support_certificado_implementacion_sg_sst)) {
-            $this->personaJuridica->support_certificado_implementacion_sg_sst = $this->support_certificado_implementacion_sg_sst->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_certificado_implementacion_sg_sst/");
+        if (!empty($this->support_certificado_implementacion_sg_sst)) {
+            $this->personaJuridica->support_certificado_implementacion_sg_sst = $this->support_certificado_implementacion_sg_sst->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_certificado_implementacion_sg_sst/");
         }
-        if (!empty($this->personaJuridica->support_certificado_implementacion_bioseguridad)) {
-            $this->personaJuridica->support_certificado_implementacion_bioseguridad = $this->support_certificado_implementacion_bioseguridad->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_certificado_implementacion_bioseguridad/");
+        if (!empty($this->support_certificado_implementacion_bioseguridad)) {
+            $this->personaJuridica->support_certificado_implementacion_bioseguridad = $this->support_certificado_implementacion_bioseguridad->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_certificado_implementacion_bioseguridad/");
         }
-        if (!empty($this->personaJuridica->support_certificado_experiencia_contractual)) {
-            $this->personaJuridica->support_certificado_experiencia_contractual = $this->support_certificado_experiencia_contractual->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_certificado_experiencia_contractual/");
+        if (!empty($this->support_certificado_experiencia_contractual)) {
+            $this->personaJuridica->support_certificado_experiencia_contractual = $this->support_certificado_experiencia_contractual->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_certificado_experiencia_contractual/");
         }
-        if (!empty($this->personaJuridica->support_certificados_tecnicas_categoria)) {
-            $this->personaJuridica->support_certificados_tecnicas_categoria = $this->support_certificados_tecnicas_categoria->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_certificados_tecnicas_categoria/");
+        if (!empty($this->support_certificados_tecnicas_categoria)) {
+            $this->personaJuridica->support_certificados_tecnicas_categoria = $this->support_certificados_tecnicas_categoria->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_certificados_tecnicas_categoria/");
         }
-        if (!empty($this->personaJuridica->support_referencia_comercial)) {
-            $this->personaJuridica->support_referencia_comercial = $this->support_referencia_comercial->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_referencia_comercial/");
+        if (!empty($this->support_referencia_comercial)) {
+            $this->personaJuridica->support_referencia_comercial = $this->support_referencia_comercial->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_referencia_comercial/");
         }
-        if (!empty($this->personaJuridica->support_carta_autorizacion_fondos_rl)) {
-            $this->personaJuridica->support_carta_autorizacion_fondos_rl = $this->support_carta_autorizacion_fondos_rl->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_carta_autorizacion_fondos_rl/");
+        if (!empty($this->support_carta_autorizacion_fondos_rl)) {
+            $this->personaJuridica->support_carta_autorizacion_fondos_rl = $this->support_carta_autorizacion_fondos_rl->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_carta_autorizacion_fondos_rl/");
         }
-        if (!empty($this->personaJuridica->support_certificacion_de_normativa_riesgos)) {
-            $this->personaJuridica->support_certificacion_de_normativa_riesgos = $this->support_certificacion_de_normativa_riesgos->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridia . "/support_certificacion_de_normativa_riesgos/");
+        if (!empty($this->support_certificacion_de_normativa_riesgos)) {
+            $this->personaJuridica->support_certificacion_de_normativa_riesgos = $this->support_certificacion_de_normativa_riesgos->store("public/form-proveedores/soportes/persona-juridica/" . $this->personaJuridica->id . "/support_certificacion_de_normativa_riesgos/");
         }
         $this->personaJuridica->save();
 

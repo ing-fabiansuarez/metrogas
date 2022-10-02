@@ -1628,46 +1628,48 @@
                                 </div>
                             </div>
 
-                            @if (!$solo_lectura)
-                                <div class="col-12 mt-4">
-                                    <div class="card mb-4">
-                                        <div class="card-header pb-0">
-                                            <h6>Soportes</h6>
-                                        </div>
-                                        <div class="card-body px-0 pt-0 pb-2">
-                                            <div class="table-responsive p-0">
-                                                <table class="table align-items-center justify-content-center mb-0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th
-                                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                                Documento</th>
-                                                            <th
-                                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                                Observación</th>
-                                                            <th
-                                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                                Subir</th>
 
-                                                            <th></th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex px-2">
-                                                                    <div class="my-auto">
-                                                                        <h6 class="mb-0 text-sm">Formato de Vinculación
-                                                                            Persona Natural</h6>
-                                                                    </div>
+                            <div class="col-12 mt-4">
+                                <div class="card mb-4">
+                                    <div class="card-header pb-0">
+                                        <h6>Soportes</h6>
+                                    </div>
+                                    <div class="card-body px-0 pt-0 pb-2">
+                                        <div class="table-responsive p-0">
+                                            <table class="table align-items-center justify-content-center mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                            Documento</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                            Observación</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                            Subir</th>
+
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-xs">Formato de Vinculación
+                                                                        Persona Natural</h6>
                                                                 </div>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-sm font-weight-bold mb-0">Diligenciar y
-                                                                    Firmar </p>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-group">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">Diligenciar y
+                                                                Firmar </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+
+                                                                @if (!$solo_lectura)
                                                                     <input
                                                                         wire:model.defer="support_formato_viculacion_persona_natural"
                                                                         class="form-control form-control-sm "
@@ -1677,27 +1679,40 @@
                                                                             {{ $message }}
                                                                         </span>
                                                                     @enderror
+                                                                @else
+                                                                    @if ($support_formato_viculacion_persona_natural)
+                                                                        <a target="_blank"
+                                                                            href="{{ Storage::url($support_formato_viculacion_persona_natural) }}">
+                                                                            <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        No subido
+                                                                    @endif
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-xs">Cláusula de
+                                                                        cumplimiento
+                                                                        del código de ética
+                                                                    </h6>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex px-2">
-                                                                    <div class="my-auto">
-                                                                        <h6 class="mb-0 text-sm">Cláusula de
-                                                                            cumplimiento
-                                                                            del código de ética
-                                                                        </h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-sm font-weight-bold mb-0">Diligenciar y
-                                                                    Firmar
-                                                                </p>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-group">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">Diligenciar y
+                                                                Firmar
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+
+                                                                @if (!$solo_lectura)
                                                                     <input
                                                                         wire:model.defer="support_clausula_cumplimiento_codigo_etica"
                                                                         class="form-control form-control-sm pt-1"
@@ -1707,27 +1722,40 @@
                                                                             {{ $message }}
                                                                         </span>
                                                                     @enderror
+                                                                @else
+                                                                    @if ($support_clausula_cumplimiento_codigo_etica)
+                                                                        <a target="_blank"
+                                                                            href="{{ Storage::url($support_clausula_cumplimiento_codigo_etica) }}">
+                                                                            <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        No subido
+                                                                    @endif
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-xs">Fotocopia de la cédula
+                                                                        de
+                                                                        ciudadanía para colombianos y extranjeros
+                                                                        nacionalizados (mayores de 18 años).
+                                                                    </h6>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex px-2">
-                                                                    <div class="my-auto">
-                                                                        <h6 class="mb-0 text-sm">Fotocopia de la cédula
-                                                                            de
-                                                                            ciudadanía para colombianos y extranjeros
-                                                                            nacionalizados (mayores de 18 años).
-                                                                        </h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-sm font-weight-bold mb-0">150%
-                                                                </p>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-group">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">150%
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+
+                                                                @if (!$solo_lectura)
                                                                     <input wire:model.defer="support_cedula_ciudadania"
                                                                         class="form-control form-control-sm pt-1"
                                                                         type="file" accept="image/*,.pdf" />
@@ -1736,27 +1764,40 @@
                                                                             {{ $message }}
                                                                         </span>
                                                                     @enderror
+                                                                @else
+                                                                    @if ($support_cedula_ciudadania)
+                                                                        <a target="_blank"
+                                                                            href="{{ Storage::url($support_cedula_ciudadania) }}">
+                                                                            <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        No subido
+                                                                    @endif
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-xs">Fotocopia de la cédula
+                                                                        de
+                                                                        extranjería para extranjeros no
+                                                                        nacionalizados
+                                                                    </h6>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex px-2">
-                                                                    <div class="my-auto">
-                                                                        <h6 class="mb-0 text-sm">Fotocopia de la cédula
-                                                                            de
-                                                                            extranjería para extranjeros no
-                                                                            nacionalizados
-                                                                        </h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-sm font-weight-bold mb-0">150%
-                                                                </p>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-group">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">150%
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+
+                                                                @if (!$solo_lectura)
                                                                     <input
                                                                         wire:model.defer="support_cedula_extranjeria"
                                                                         class="form-control form-control-sm pt-1"
@@ -1766,26 +1807,39 @@
                                                                             {{ $message }}
                                                                         </span>
                                                                     @enderror
+                                                                @else
+                                                                    @if ($support_cedula_extranjeria)
+                                                                        <a target="_blank"
+                                                                            href="{{ Storage::url($support_cedula_extranjeria) }}">
+                                                                            <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        No subido
+                                                                    @endif
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-xs">Registro único
+                                                                        tributario
+                                                                        (RUT)
+                                                                    </h6>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex px-2">
-                                                                    <div class="my-auto">
-                                                                        <h6 class="mb-0 text-sm">Registro único
-                                                                            tributario
-                                                                            (RUT)
-                                                                        </h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-sm font-weight-bold mb-0">Vigente
-                                                                </p>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-group">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">Vigente
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+
+                                                                @if (!$solo_lectura)
                                                                     <input wire:model.defer="support_rut"
                                                                         class="form-control form-control-sm pt-1"
                                                                         type="file" accept="image/*,.pdf" />
@@ -1794,27 +1848,40 @@
                                                                             {{ $message }}
                                                                         </span>
                                                                     @enderror
+                                                                @else
+                                                                    @if ($support_rut)
+                                                                        <a target="_blank"
+                                                                            href="{{ Storage::url($support_rut) }}">
+                                                                            <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        No subido
+                                                                    @endif
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-xs">Cámara de comercio
+                                                                        (cuando
+                                                                        aplique)
+                                                                    </h6>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex px-2">
-                                                                    <div class="my-auto">
-                                                                        <h6 class="mb-0 text-sm">Cámara de comercio
-                                                                            (cuando
-                                                                            aplique)
-                                                                        </h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-sm font-weight-bold mb-0">No mayor a 30
-                                                                    días
-                                                                </p>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-group">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">No mayor a 30
+                                                                días
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+
+                                                                @if (!$solo_lectura)
                                                                     <input
                                                                         wire:model.defer="support_camara_de_comercio"
                                                                         class="form-control form-control-sm pt-1"
@@ -1824,28 +1891,41 @@
                                                                             {{ $message }}
                                                                         </span>
                                                                     @enderror
+                                                                @else
+                                                                    @if ($support_camara_de_comercio)
+                                                                        <a target="_blank"
+                                                                            href="{{ Storage::url($support_camara_de_comercio) }}">
+                                                                            <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        No subido
+                                                                    @endif
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-xs">Declaración de Renta o
+                                                                        Certificado de No Declarante (cuando
+                                                                        aplique)
+                                                                    </h6>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex px-2">
-                                                                    <div class="my-auto">
-                                                                        <h6 class="mb-0 text-sm">Declaración de Renta o
-                                                                            Certificado de No Declarante (cuando
-                                                                            aplique)
-                                                                        </h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-sm font-weight-bold mb-0">Año
-                                                                    inmediatamente
-                                                                    anterior
-                                                                </p>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-group">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">Año
+                                                                inmediatamente
+                                                                anterior
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+
+                                                                @if (!$solo_lectura)
                                                                     <input
                                                                         wire:model.defer="support_declaracion_de_renta_o_certificacion_no_declarante"
                                                                         class="form-control form-control-sm pt-1"
@@ -1855,25 +1935,38 @@
                                                                             {{ $message }}
                                                                         </span>
                                                                     @enderror
+                                                                @else
+                                                                    @if ($support_declaracion_de_renta_o_certificacion_no_declarante)
+                                                                        <a target="_blank"
+                                                                            href="{{ Storage::url($support_declaracion_de_renta_o_certificacion_no_declarante) }}">
+                                                                            <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        No subido
+                                                                    @endif
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-xs">Certificación Bancaria
+                                                                    </h6>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex px-2">
-                                                                    <div class="my-auto">
-                                                                        <h6 class="mb-0 text-sm">Certificación Bancaria
-                                                                        </h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-sm font-weight-bold mb-0">No mayor a 30
-                                                                    días
-                                                                </p>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-group">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">No mayor a 30
+                                                                días
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+
+                                                                @if (!$solo_lectura)
                                                                     <input
                                                                         wire:model.defer="support_certificacion_bancaria"
                                                                         class="form-control form-control-sm pt-1"
@@ -1883,26 +1976,39 @@
                                                                             {{ $message }}
                                                                         </span>
                                                                     @enderror
+                                                                @else
+                                                                    @if ($support_certificacion_bancaria)
+                                                                        <a target="_blank"
+                                                                            href="{{ Storage::url($support_certificacion_bancaria) }}">
+                                                                            <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        No subido
+                                                                    @endif
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-xs">Certificado de
+                                                                        Experiencia
+                                                                        / Hoja de Vida
+                                                                    </h6>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex px-2">
-                                                                    <div class="my-auto">
-                                                                        <h6 class="mb-0 text-sm">Certificado de
-                                                                            Experiencia
-                                                                            / Hoja de Vida
-                                                                        </h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-sm font-weight-bold mb-0">Vigente
-                                                                </p>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-group">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">Vigente
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+
+                                                                @if (!$solo_lectura)
                                                                     <input
                                                                         wire:model.defer="support_certificado_experiencia_u_hoja_de_vida"
                                                                         class="form-control form-control-sm pt-1"
@@ -1912,25 +2018,38 @@
                                                                             {{ $message }}
                                                                         </span>
                                                                     @enderror
+                                                                @else
+                                                                    @if ($support_certificado_experiencia_u_hoja_de_vida)
+                                                                        <a target="_blank"
+                                                                            href="{{ Storage::url($support_certificado_experiencia_u_hoja_de_vida) }}">
+                                                                            <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        No subido
+                                                                    @endif
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-xs">Certificado
+                                                                        profesional
+                                                                    </h6>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex px-2">
-                                                                    <div class="my-auto">
-                                                                        <h6 class="mb-0 text-sm">Certificado
-                                                                            profesional
-                                                                        </h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-sm font-weight-bold mb-0">Vigente
-                                                                </p>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-group">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">Vigente
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+
+                                                                @if (!$solo_lectura)
                                                                     <input
                                                                         wire:model.defer="support_certificado_profesional"
                                                                         class="form-control form-control-sm pt-1"
@@ -1940,26 +2059,39 @@
                                                                             {{ $message }}
                                                                         </span>
                                                                     @enderror
+                                                                @else
+                                                                    @if ($support_certificado_profesional)
+                                                                        <a target="_blank"
+                                                                            href="{{ Storage::url($support_certificado_profesional) }}">
+                                                                            <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        No subido
+                                                                    @endif
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-xs">Referencias
+                                                                        comerciales
+                                                                    </h6>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex px-2">
-                                                                    <div class="my-auto">
-                                                                        <h6 class="mb-0 text-sm">Referencias
-                                                                            comerciales
-                                                                        </h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-sm font-weight-bold mb-0">No mayor a 30
-                                                                    días
-                                                                </p>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-group">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">No mayor a 30
+                                                                días
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+
+                                                                @if (!$solo_lectura)
                                                                     <input
                                                                         wire:model.defer="support_referencias_comerciales"
                                                                         class="form-control form-control-sm pt-1"
@@ -1969,25 +2101,39 @@
                                                                             {{ $message }}
                                                                         </span>
                                                                     @enderror
+                                                                @else
+                                                                    @if ($support_referencias_comerciales)
+                                                                        <a target="_blank"
+                                                                            href="{{ Storage::url($support_referencias_comerciales) }}">
+                                                                            <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        No subido
+                                                                    @endif
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex px-2">
+                                                                <div class="my-auto">
+                                                                    <h6 class="mb-0 text-xs">Afiliación seguridad
+                                                                        social
+                                                                    </h6>
                                                                 </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex px-2">
-                                                                    <div class="my-auto">
-                                                                        <h6 class="mb-0 text-sm">Afiliación seguridad
-                                                                            social
-                                                                        </h6>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <p class="text-sm font-weight-bold mb-0">Vigente
-                                                                </p>
-                                                            </td>
-                                                            <td>
-                                                                <div class="form-group">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <p class="text-xs font-weight-bold mb-0">Vigente
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <div class="form-group">
+
+
+                                                                @if (!$solo_lectura)
                                                                     <input
                                                                         wire:model.defer="support_afiliacion_seguridad_social"
                                                                         class="form-control form-control-sm pt-1"
@@ -1997,16 +2143,27 @@
                                                                             {{ $message }}
                                                                         </span>
                                                                     @enderror
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                                @else
+                                                                    @if ($support_afiliacion_seguridad_social)
+                                                                        <a target="_blank"
+                                                                            href="{{ Storage::url($support_afiliacion_seguridad_social) }}">
+                                                                            <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                                aria-hidden="true"></i>
+                                                                        </a>
+                                                                    @else
+                                                                        No subido
+                                                                    @endif
+                                                                @endif
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
-                            @endif
+                            </div>
+
                             @if (!$solo_lectura)
                                 <div class="col-12 my-4">
                                     <div class="card z-index-0 mt-3">
