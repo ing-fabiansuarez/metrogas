@@ -126,7 +126,7 @@ class FormPersonaNatural extends Component
 
         'personaNatural.do_declaro_que_el_origen' => 'required',
         'personaNatural.do_declaro_provienen_de' => 'required',
-        'personaNatural.do_declaro_recursos_recibidos' => 'required',
+        'personaNatural.do_declaro_recursos_recibidos' => '',
 
         'personaNatural.ref_p_nombre' => 'required',
         'personaNatural.ref_p_direccion' => 'required',
@@ -143,18 +143,18 @@ class FormPersonaNatural extends Component
         'personaNatural.terminos_y_condiciones' => 'required',
 
 
-        'support_formato_viculacion_persona_natural' => 'required',
-        'support_clausula_cumplimiento_codigo_etica' => 'required',
+        'support_formato_viculacion_persona_natural' => '',
+        'support_clausula_cumplimiento_codigo_etica' => '',
         'support_cedula_ciudadania' => 'required',
         'support_cedula_extranjeria' => 'required',
         'support_rut' => 'required',
-        'support_camara_de_comercio' => 'required',
-        'support_declaracion_de_renta_o_certificacion_no_declarante' => 'required',
+        'support_camara_de_comercio' => '',
+        'support_declaracion_de_renta_o_certificacion_no_declarante' => '',
         'support_certificacion_bancaria' => 'required',
         'support_certificado_experiencia_u_hoja_de_vida' => 'required',
-        'support_certificado_profesional' => 'required',
-        'support_referencias_comerciales' => 'required',
-        'support_afiliacion_seguridad_social' => 'required',
+        'support_certificado_profesional' => '',
+        'support_referencias_comerciales' => '',
+        'support_afiliacion_seguridad_social' => '',
 
     ];
 

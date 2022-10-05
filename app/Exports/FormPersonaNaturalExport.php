@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Enums\EGenero;
+use App\Enums\ESiNo;
 use App\Models\FormPersonaNatural;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -69,6 +70,9 @@ class FormPersonaNaturalExport implements FromQuery, WithHeadings, WithMapping, 
             $invoice->ocupacion != null ? $invoice->ocupacion : "",
             $invoice->cargo_empresa != null ? $invoice->cargo_empresa : "",
             '',
+            ESiNo::from($invoice->gran_contribuyente)->getName(),
+            ESiNo::from($invoice->autorretenedor)->getName(),
+            ESiNo::from($invoice->responsable_iva)->getName(),
             '',
             '',
             '',
@@ -84,17 +88,14 @@ class FormPersonaNaturalExport implements FromQuery, WithHeadings, WithMapping, 
             '',
             '',
             '',
+            $invoice->total_ingresos_mensuales,
+            $invoice->total_egresos_mensuales,
+            $invoice->otros_ingresos_mensuales,
+            $invoice->otros_egresos_mensuales,
+            $invoice->total_activos,
+            $invoice->total_pasivos,
             '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
-            '',
+            ESiNo::from($invoice->es_declarante_de_renta)->getName(),
             '',
             '',
             '',

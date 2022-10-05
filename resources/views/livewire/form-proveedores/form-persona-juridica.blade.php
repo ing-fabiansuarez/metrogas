@@ -2577,8 +2577,7 @@
                                                         <p class="text-xs font-weight-bold mb-0">Año
                                                             inmediatamente
                                                             anterior
-                                                            <br>
-                                                            * Obligatorio
+                                                          
                                                         </p>
                                                     </td>
                                                     <td>
@@ -2620,8 +2619,7 @@
                                                     </td>
                                                     <td>
                                                         <p class="text-xs font-weight-bold mb-0">Vigente
-                                                            <br>
-                                                            * Obligatorio
+                                                            
                                                         </p>
                                                     </td>
                                                     <td>
@@ -3014,7 +3012,7 @@
                                                         id="fcustomCheck1"
                                                         @if ($solo_lectura) disabled @endif>
                                                     <label class="custom-control-label" for="customCheck1">Acepto
-                                                        <a target="__blank"
+                                                        <a style="color:red" target="__blank"
                                                             href="{{ asset('storage/terminos_y_condiciones.pdf') }}">términos
                                                             y condiciones
                                                             de

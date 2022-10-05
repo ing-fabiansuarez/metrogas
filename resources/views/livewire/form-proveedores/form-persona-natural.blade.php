@@ -1439,14 +1439,14 @@
                                                         S.A. no serán destinados a ninguna actividad ilícita de las
                                                         contempladas en el código penal colombiano o cualquier norma que
                                                         lo modifique o adicione:</label>
-                                                    <input wire:model="personaNatural.do_declaro_recursos_recibidos"
+                                                   {{--  <input wire:model="personaNatural.do_declaro_recursos_recibidos"
                                                         class="form-control form-control-sm" type="text"
                                                         @if ($solo_lectura) disabled @endif>
                                                     <span class="error">
                                                         @error('personaNatural.do_declaro_recursos_recibidos')
                                                             {{ $message }}
                                                         @enderror
-                                                    </span>
+                                                    </span> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -1653,7 +1653,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    {{-- <tr>
                                                         <td>
                                                             <div class="d-flex px-2">
                                                                 <div class="my-auto">
@@ -1692,7 +1692,7 @@
                                                                 @endif
                                                             </div>
                                                         </td>
-                                                    </tr>
+                                                    </tr> --}}
                                                     <tr>
                                                         <td>
                                                             <div class="d-flex px-2">
@@ -2179,7 +2179,7 @@
                                                             id="fcustomCheck1"
                                                             @if ($solo_lectura) disabled @endif>
                                                         <label class="custom-control-label" for="customCheck1">Acepto
-                                                            <a target="__blank"
+                                                            <a style="color: red" target="__blank"
                                                                 href="{{ asset('storage/terminos_y_condiciones.pdf') }}">términos
                                                                 y condiciones
                                                                 de
