@@ -10,8 +10,9 @@ use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithTitle;
 
-class FormPersonaJuridicaExport implements FromQuery, WithHeadings, ShouldAutoSize, WithMapping
+class FormPersonaJuridicaExport implements FromQuery, WithHeadings, ShouldAutoSize, WithMapping, WithTitle
 {
     use Exportable;
 
@@ -191,5 +192,9 @@ class FormPersonaJuridicaExport implements FromQuery, WithHeadings, ShouldAutoSi
             'ACTA DE COMPROMISO Y CUMPLIMIENTO DEL CÓDIGO DE ÉTICA',
             'DECLARACIÓN DE INDEPENDENCIA',
         ];
+    }
+    public function title(): string
+    {
+        return 'FORMULARIOS';
     }
 }

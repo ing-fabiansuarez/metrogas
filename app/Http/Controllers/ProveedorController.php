@@ -6,6 +6,8 @@ use App\Exports\FormPersonaJuridicaBrutoExport;
 use App\Exports\FormPersonaJuridicaExport;
 use App\Exports\FormPersonaNaturalBrutoExport;
 use App\Exports\FormPersonaNaturalExport;
+use App\Exports\StructureFormPersonaJuridicaBrutoExport;
+use App\Exports\StructureFormPersonaJuridicaExport;
 use App\Models\FormPersonaJuridica;
 use App\Models\FormPersonaNatural;
 use Illuminate\Http\Request;
@@ -90,9 +92,9 @@ class ProveedorController extends Controller
         $tipo = $request->get('r');
 
         if ($tipo == "normal") {
-            return (new FormPersonaJuridicaExport($id))->download('Formularios Personas Juridica.xlsx');
+            return (new StructureFormPersonaJuridicaExport($id))->download('Formularios Personas Juridica.xlsx');
         } else if ($tipo == "bruto") {
-            return (new FormPersonaJuridicaBrutoExport($id))->download('Formularios Personas Juridica En Bruto.xlsx');
+            return (new StructureFormPersonaJuridicaBrutoExport($id))->download('Formularios Personas Juridica En Bruto.xlsx');
         }
     }
 }
