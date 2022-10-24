@@ -69,6 +69,11 @@ Route::group(['middleware' => 'auth'], function () {
 			return view('livewire.roles.index');
 		})->name('roles.index');
 
+		//Centro Preoperacioneles
+		Route::get('datos-preoperacioneles-moto', function () {
+			return view('livewire.datos-preoperacional-motos.index');
+		})->name('datospreoperacionelesmotos.index');
+
 		//CARGOS
 		Route::get('cargos', [JobtitleController::class, 'index'])->name('jobtitle.index');
 	});

@@ -57,6 +57,27 @@
                     </div>
                 </div>
             </div>
+            <br>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-datos">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#datos_preoperacioneles_configuration" aria-expanded="false"
+                            aria-controls="datos_preoperacioneles_configuration">
+                            Ajustes Datos Preoperacionales
+                        </button>
+                    </h2>
+                    <div id="datos_preoperacioneles_configuration" class="accordion-collapse collapse" aria-labelledby="flush-datos"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="list-group ps-5 pe-3">
+
+                            <a href="{{ route('datospreoperacionelesmotos.index') }}"
+                                class="list-group-item list-group-item-action">Datos Preoperacionales De Motos</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

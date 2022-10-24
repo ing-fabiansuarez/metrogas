@@ -19,3 +19,8 @@ Ingeniero de Sistemas
 
 
 ===================================================================================================================================================
+## Instrucciones para un CRUD en el sistema del panel
+
+1. crear un nueva tabla
+* Crear el modelo, la migracion y los campos de la tabla.
+* 
