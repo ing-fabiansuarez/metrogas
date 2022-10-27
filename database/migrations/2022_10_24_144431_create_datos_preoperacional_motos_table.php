@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('datos_preoperacional_motos', function (Blueprint $table) {
+        Schema::create('datos_preoperacionals', function (Blueprint $table) {
             $table->id();
             $table->string('cedula');
             $table->string('nombre_completo');
@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('area');
             $table->string('placa_vehiculo');
             $table->integer('modelo');
+            $table->string('cargo');
+            $table->tinyInteger('tipo_vehiculo');
             $table->timestamps();
         });
     }
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('datos_preoperacional_motos');
+        Schema::dropIfExists('datos_preoperacionals');
     }
 };

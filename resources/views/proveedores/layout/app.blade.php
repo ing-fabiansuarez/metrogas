@@ -22,7 +22,7 @@
         class="navbar navbar-expand-lg position-absolute top-0 z-index-3 my-3 w-100 shadow-none  navbar-transparent mt-4">
         <div class="container-fluid container">
             <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 text-white">
-                Registro de proveedores
+                Registro
             </a>
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"

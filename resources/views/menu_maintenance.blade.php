@@ -72,7 +72,7 @@
                         <div class="list-group ps-5 pe-3">
 
                             <a href="{{ route('datospreoperacionelesmotos.index') }}"
-                                class="list-group-item list-group-item-action">Datos Preoperacionales De Motos</a>
+                                class="list-group-item list-group-item-action">Datos Preoperacionales</a>
 
                         </div>
                     </div>

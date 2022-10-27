@@ -79,6 +79,30 @@
                                 </span>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Cargo</label>
+                            <input wire:model.defer="cargo" type="text" class="form-control">
+                            @error('cargo')
+                                <span class="text-danger text-message-validation">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label class="col-form-label">Tipo Vehiculo</label>
+                            <select wire:model="tipo_vehiculo" class="form-select">
+                                <option value="">--Seleccione--</option>
+                                @foreach ($ETiposVehiculos as $item)
+                                    <option value="{{ $item->getId() }}">{{ $item->getName() }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('tipo_vehiculo')
+                                <span class="text-danger text-message-validation">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn bg-gradient-secondary"

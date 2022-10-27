@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DatosPreoperacionalMotos extends Model
+class DatosPreoperacional extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -15,6 +15,8 @@ class DatosPreoperacionalMotos extends Model
         'lugar_trabajo',
         'area',
         'placa_vehiculo',
-        'modelo'
+        'modelo',
+        'cargo',
+        'tipo_vehiculo'
     ];
 }

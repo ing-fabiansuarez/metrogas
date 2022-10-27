@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViaticController;
 use Illuminate\Support\Facades\Route;
 use Adldap\Laravel\Facades\Adldap;
+use App\Http\Controllers\DatosPreoperacionalesController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ReportController;
 
@@ -170,3 +171,8 @@ Route::get('registrar-proveedor', [ProveedorController::class, 'register'])->nam
 Route::get('registrar-proveedor/persona-natural', [ProveedorController::class, 'personaNatural'])->name('proveedor.register.persona-natural');
 Route::get('registrar-proveedor/persona-juridica', [ProveedorController::class, 'personaJuridica'])->name('proveedor.register.persona-juridica');
 Route::get('registrar-proveedor/finalizado', [ProveedorController::class, 'formularioLleno'])->name('proveedor.register.finalizado');
+
+
+//DATOS PREOPERACIONALES MOTOS
+Route::get('datos-preoperacionales', [DatosPreoperacionalesController::class, 'index'])->name('datospreoperacionales.index');
+Route::post('datos-preoperacionales', [DatosPreoperacionalesController::class, 'responseForm'])->name('datospreoperacionales.responseForm');
