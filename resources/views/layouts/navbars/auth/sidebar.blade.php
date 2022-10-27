@@ -246,6 +246,39 @@
                 </li>
             @endcan
 
+            @can('gestionarFormularioDatosPreoperacionales')
+                <li class="nav-item mt-2">
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">
+                        Datos Preoperacionales</h6>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('') ? 'active' : '' }}"
+                        href="{{ route('admin.preoperacional') }}">
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i style="font-size: 1rem;"
+                                class="fas fa-regular fa-user ps-2 pe-2 text-center text-dark {{ Request::is('') ? 'text-white' : 'text-dark' }} "
+                                aria-hidden="true"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Form Motos</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ Request::is('') ? 'active' : '' }}"
+                        href="{{ route('proveedores.admin.persona-juridica') }}">
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i style="font-size: 1rem;"
+                                class="fas fa-regular fa-user ps-2 pe-2 text-center text-dark {{ Request::is('') ? 'text-white' : 'text-dark' }} "
+                                aria-hidden="true"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Form Carros</span>
+                    </a>
+                </li>
+            @endcan
+
         </ul>
     </div>
 </aside>

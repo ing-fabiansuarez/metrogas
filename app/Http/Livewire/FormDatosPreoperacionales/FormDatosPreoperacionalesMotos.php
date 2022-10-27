@@ -85,22 +85,25 @@ class FormDatosPreoperacionalesMotos extends Component
         ]);
     }
 
-    public function mount($solo_lectura = false, DatosPreoperacional $datosPreoperacional = new DatosPreoperacional())
+    public function mount($solo_lectura = false, DatosPreoperacional $datosPreoperacional = new DatosPreoperacional(), FormDatosPreoperacionalesMotosModel $formulario = new FormDatosPreoperacionalesMotosModel())
     {
         $this->solo_lectura = $solo_lectura;
 
 
         //aqui se le agregan los datos al modelo
-        $this->model = new FormDatosPreoperacionalesMotosModel();
-        $this->model->cedula = $datosPreoperacional->cedula;
-        $this->model->nombre_completo = $datosPreoperacional->nombre_completo;
-        $this->model->correo = $datosPreoperacional->correo;
-        $this->model->lugar_trabajo = $datosPreoperacional->lugar_trabajo;
-        $this->model->area = $datosPreoperacional->area;
-        $this->model->placa_vehiculo = $datosPreoperacional->placa_vehiculo;
-        $this->model->modelo = $datosPreoperacional->modelo;
-        $this->model->cargo = $datosPreoperacional->cargo;
-        $this->model->tipo_vehiculo = $datosPreoperacional->tipo_vehiculo;
+
+        $this->model = $formulario;
+
+
+        $this->model->cedula = $datosPreoperacional->cedula == null ? $this->model->cedula : $datosPreoperacional->cedula;
+        $this->model->nombre_completo = $datosPreoperacional->nombre_completo == null ? $this->model->nombre_completo : $datosPreoperacional->nombre_completo;
+        $this->model->correo = $datosPreoperacional->correo == null ? $this->model->correo : $datosPreoperacional->correo;
+        $this->model->lugar_trabajo = $datosPreoperacional->lugar_trabajo == null ? $this->model->lugar_trabajo : $datosPreoperacional->lugar_trabajo;
+        $this->model->area = $datosPreoperacional->area == null ? $this->model->area : $datosPreoperacional->area;
+        $this->model->placa_vehiculo = $datosPreoperacional->placa_vehiculo == null ? $this->model->placa_vehiculo : $datosPreoperacional->placa_vehiculo;
+        $this->model->modelo = $datosPreoperacional->modelo == null ? $this->model->modelo : $datosPreoperacional->modelo;
+        $this->model->cargo = $datosPreoperacional->cargo == null ? $this->model->cargo : $datosPreoperacional->cargo;
+        $this->model->tipo_vehiculo = $datosPreoperacional->tipo_vehiculo == null ? $this->model->tipo_vehiculo : $datosPreoperacional->tipo_vehiculo;
     }
 
 

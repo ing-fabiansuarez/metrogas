@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\ETipoVehiculo;
 use App\Models\DatosPreoperacional;
+use App\Models\FormDatosPreoperacionalesMotosModel;
 use Illuminate\Http\Request;
 
 class DatosPreoperacionalesController extends Controller
@@ -34,5 +35,29 @@ class DatosPreoperacionalesController extends Controller
         } else {
             return redirect()->back()->withErrors(['msg-error' => 'No existe un vehículo registrado a ese número de cedula.']);
         }
+    }
+
+    public function indexFormMotos(Request $request)
+    {
+        $respuestasForm = FormDatosPreoperacionalesMotosModel::latest();
+
+        if (!empty($request->get('num_solicitud'))) {
+            $respuestasForm->where('id', $request->get('num_solicitud'));
+        }
+
+        return view('datos-preoperacionales.admin.index_moto', [
+            'respuestasForm' => $respuestasForm->orderBy('id', 'desc')->get(),
+        ]);
+    }
+
+    public function verFormMotos(FormDatosPreoperacionalesMotosModel $id)
+    {
+        return view('datos-preoperacionales.admin.ver_moto', [
+            'formulario' => $id
+        ]);
+    }
+
+    public function exportarFormMotos()
+    {
     }
 }

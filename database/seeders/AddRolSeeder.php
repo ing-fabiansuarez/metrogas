@@ -30,8 +30,10 @@ class AddRolSeeder extends Seeder
         //Permission::create(['name' => 'emailSend', 'description' => 'Correo electronico para Rol de planeación.'])->syncRoles([$rolePlane]);
         //Permission::create(['name' => 'realizarPago', 'description' => 'Realizar el flujo de realizar pago en la solicitud de viaticos.'])->syncRoles([$rolePlane]);
 
-        $roleDirecControlInterno = Role::create(['name' => 'Rol Director Control Interno']);
-        Permission::create(['name' => 'gestionarFormularioProveedores', 'description' => 'Permite gestionar los formularios que estan en la pag web para el registro de proveedores.'])->syncRoles([$roleDirecControlInterno]);
+        //$roleDirecControlInterno = Role::create(['name' => 'Rol Director Control Interno']);
+        //Permission::create(['name' => 'gestionarFormularioProveedores', 'description' => 'Permite gestionar los formularios que estan en la pag web para el registro de proveedores.'])->syncRoles([$roleDirecControlInterno]);
 
+        $roleDirecControlInterno = Role::create(['name' => 'Rol Datos Preoperacionales']);
+        Permission::create(['name' => 'gestionarFormularioDatosPreoperacionales', 'description' => 'Permite gestionar los formularios de los datos preoperacionales tanto de motos como carros.'])->syncRoles([$roleDirecControlInterno]);
     }
 }

@@ -125,6 +125,12 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/persona-juridica', [ProveedorController::class, 'exportarFormPersonaJuridica'])->name('proveedores.admin.persona-juridica.exportar');
 	});
 
+	Route::prefix('form-datos-preoperacionales')->middleware('can:gestionarFormularioDatosPreoperacionales')->group(function () {
+		Route::get('/moto', [DatosPreoperacionalesController::class, 'indexFormMotos'])->name('admin.preoperacional');
+		Route::get('/moto/{id}', [DatosPreoperacionalesController::class, 'verFormMotos'])->name('admin.preoperacional.ver');
+		Route::post('/moto', [DatosPreoperacionalesController::class, 'exportarFormMotos'])->name('admin.preoperacional.exportar');
+	});
+
 	Route::get('/logout', [SessionsController::class, 'destroy']);
 	/* 	Route::get('/user-profile', [InfoUserController::class, 'create']);
 	Route::post('/user-profile', [InfoUserController::class, 'store']); */

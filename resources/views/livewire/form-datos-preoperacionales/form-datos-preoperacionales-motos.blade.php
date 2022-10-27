@@ -11,7 +11,7 @@
                                 PREOPERACIONAL DE MOTOCICLETAS Y/O DESPLAZAMIENTO </b></p>
                         @if ($solo_lectura)
                             <p>
-                                <b style="color: white">ID Formulario: {{ $personaJuridica->id }}</b>
+                                <b style="color: white">ID Formulario:</b>
                             </p>
                         @endif
                     </div>
@@ -944,9 +944,16 @@
                                                     <label class="form-control-label">Fotografía del tacómetro (con
                                                         fecha y hora)
                                                     </label>
-                                                    <input wire:model.defer="fotografia_tacometro"
-                                                        class="form-control form-control-sm " type="file"
-                                                        accept="image/*,.pdf" />
+                                                    @if ($solo_lectura)
+                                                        <a target="_blank"
+                                                            href="{{ Storage::url($model->fotografia_tacometro) }}"
+                                                            class="btn btn-sm btn-round mb-0 me-1 bg-secundary">Ver</a>
+                                                    @else
+                                                        <input wire:model.defer="fotografia_tacometro"
+                                                            class="form-control form-control-sm " type="file"
+                                                            accept="image/*,.pdf" />
+                                                    @endif
+
                                                     @error('fotografia_tacometro')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
@@ -960,9 +967,15 @@
                                                     <label class="form-control-label">Fotografía de mantenimiento (cada
                                                         vez que se realice)
                                                     </label>
-                                                    <input wire:model.defer="fotografia_mantenimiento"
-                                                        class="form-control form-control-sm " type="file"
-                                                        accept="image/*,.pdf" />
+                                                    @if ($solo_lectura)
+                                                        <a target="_blank"
+                                                            href="{{ Storage::url($model->fotografia_mantenimiento) }}"
+                                                            class="btn btn-sm btn-round mb-0 me-1 bg-secundary">Ver</a>
+                                                    @else
+                                                        <input wire:model.defer="fotografia_mantenimiento"
+                                                            class="form-control form-control-sm " type="file"
+                                                            accept="image/*,.pdf" />
+                                                    @endif
                                                     @error('fotografia_mantenimiento')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
@@ -1001,7 +1014,7 @@
                             </div>
                         </div>
 
-                  
+
 
                         @if (!$solo_lectura)
                             <div class="row mt-4 justify-content-center">
