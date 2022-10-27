@@ -3,24 +3,24 @@
 namespace App\Enums;
 
 
-enum ETipoVehiculo
+enum EBuenoMalo
 {
-    case MOTO;
-    case CARRO;
+    case BUENO;
+    case MALO;
 
     public function getId(): int
     {
         return match ($this) {
-            ETipoVehiculo::MOTO => 1,
-            ETipoVehiculo::CARRO => 2,
+            EBuenoMalo::BUENO => 1,
+            EBuenoMalo::MALO => 2,
         };
     }
 
     public function getName(): string
     {
         return match ($this) {
-            ETipoVehiculo::MOTO => 'MOTOCICLETA',
-            ETipoVehiculo::CARRO => 'CARRO',
+            EBuenoMalo::BUENO => 'BUENO',
+            EBuenoMalo::MALO => 'MALO',
         };
     }
 

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('area');
             $table->string('placa_vehiculo');
             $table->integer('modelo');
-            $table->integer('cargo');
+            $table->string('cargo');
             $table->integer('kilometraje_inicio_jornada');
 
             $table->tinyInteger('niveles_aceite');
@@ -64,8 +64,10 @@ return new class extends Migration
 
             $table->string('observacion');
 
-            $table->string('fotografia_tacometro');
-            $table->string('fotografia_mantenimiento');
+            $table->string('fotografia_tacometro')->nullable();
+            $table->string('fotografia_mantenimiento')->nullable();
+
+            $table->tinyInteger('tipo_vehiculo');
 
             $table->tinyInteger('ha_diligenciado_ud_mismo');
             $table->timestamps();
