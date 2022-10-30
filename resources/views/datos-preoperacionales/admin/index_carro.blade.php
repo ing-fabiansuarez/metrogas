@@ -13,12 +13,12 @@
                     <div class="card-header pb-0">
                         <div class="d-flex flex-row justify-content-between">
                             <div>
-                                <h5 class="mb-0">Formulario Motos </h5>
+                                <h5 class="mb-0">Formulario Carros</h5>
                             </div>
 
                         </div>
 
-                        <form action="{{ route('admin.preoperacional') }}" method="get">
+                        <form action="{{ route('admin.preoperacional.carros') }}" method="get">
                             @csrf
                             <div class="row mt-2 justify-content-center">
                                 <div class="col-md-2">
@@ -79,17 +79,17 @@
                                     @foreach ($respuestasForm as $item)
                                         <tr>
                                             <td class="text-center">
-                                                <a href="{{ route('admin.preoperacional.ver', $item->id) }}">
+                                                <a href="{{ route('admin.preoperacional.carros.ver', $item->id) }}">
                                                     <p class="text-xs font-weight-bold mb-0">{{ $item->id }}</p>
                                                 </a>
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('admin.preoperacional.ver', $item->id) }}">
+                                                <a href="{{ route('admin.preoperacional.carros.ver', $item->id) }}">
                                                     <p class="text-xs font-weight-bold mb-0">{{ $item->cedula }}</p>
                                                 </a>
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('admin.preoperacional.ver', $item->id) }}">
+                                                <a href="{{ route('admin.preoperacional.carros.ver', $item->id) }}">
                                                     <p class="text-xs font-weight-bold mb-0">{{ $item->nombre_completo }}
                                                     </p>
                                                 </a>
@@ -136,11 +136,11 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('admin.preoperacional.exportar') }}" method="post">
+                    <form action="{{ route('admin.preoperacional.carros.exportar') }}" method="post">
                         <div class="modal-body">
 
                             <div class="form-group">
-                                {{-- <div class="form-group">
+                                {{--  <div class="form-group">
                                     <label for="input_object_guid" class="form-control-label">ID Formulario</label>
                                     <input class="form-control form-control-sm" type="number" placeholder="N° Solicitud"
                                         name="num_solicitud">

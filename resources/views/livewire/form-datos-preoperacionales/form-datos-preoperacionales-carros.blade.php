@@ -7,8 +7,8 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-5 text-center mx-auto">
                         <br>
-                        <p style="font-size: 1.3rem" class="text-lead text-white"><b>F-HSEQ-07 V_7 LISTA DE CHEQUEO
-                                PREOPERACIONAL DE MOTOCICLETAS Y/O DESPLAZAMIENTO </b></p>
+                        <p style="font-size: 1.3rem" class="text-lead text-white"><b>LISTA DE CHEQUEO PREOPERACIONAL DE
+                                CARROS DIARIOS Y/O DESPLAZAMIENTO F-HSEQ-07 V_7 </b></p>
                         @if ($solo_lectura)
                             <p>
                                 <b style="color: white">ID Formulario:</b>
@@ -148,6 +148,8 @@
 
 
 
+
+
                         <div class="card z-index-0 mt-3">
                             <div class="card-header pb-0 px-3">
                                 <h6 class="mb-0">Información Vehiculo</h6>
@@ -194,6 +196,8 @@
                             </div>
                         </div>
 
+
+
                         <div class="row justify-content-center">
                             <div class="col-md-8">
                                 <div class="card z-index-0 mt-3">
@@ -204,8 +208,9 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">1. Luz Delantera</label>
-                                                    <select wire:model="model.luz_delantera"
+                                                    <label class="form-control-label">1. Luces retroceso y
+                                                        parqueo</label>
+                                                    <select wire:model="model.luces_retroceso_parqueo"
                                                         class="form-select form-select-sm"
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
@@ -215,7 +220,7 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    @error('model.luz_delantera')
+                                                    @error('model.luces_retroceso_parqueo')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
                                                         </span>
@@ -224,9 +229,8 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">2. Direccionales
-                                                        Delanteros</label>
-                                                    <select wire:model="model.direccionales_delantera"
+                                                    <label class="form-control-label">2. Luces altas y bajas</label>
+                                                    <select wire:model="model.luces_altas_bajas"
                                                         class="form-select form-select-sm"
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
@@ -236,7 +240,7 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    @error('model.direccionales_delantera')
+                                                    @error('model.luces_altas_bajas')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
                                                         </span>
@@ -245,7 +249,29 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">3. Direccionales Traseros</label>
+                                                    <label class="form-control-label">3. Direccionales delanteras,
+                                                        parqueo y giro</label>
+                                                    <select wire:model="model.direccionales_delanteras"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($EBuenoMalo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.direccionales_delanteras')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">4. Direccionales traseras,
+                                                        parqueo y giro</label>
                                                     <select wire:model="model.direccionales_traseras"
                                                         class="form-select form-select-sm"
                                                         @if ($solo_lectura) disabled @endif>
@@ -263,25 +289,6 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">4. Stop</label>
-                                                    <select wire:model="model.stop" class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($EBuenoMalo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.stop')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
 
 
                                         </div>
@@ -290,6 +297,172 @@
                                 </div>
                             </div>
                         </div>
+
+
+
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card z-index-0 mt-3">
+                                    <div class="card-header pb-0 px-3">
+                                        <h6 class="mb-0">Sistema de Advertencia </h6>
+                                    </div>
+                                    <div class="card-body pt-3 p-3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">5.Pito o Bocina</label>
+                                                    <select wire:model="model.pito_bocina"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($EBuenoMalo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.pito_bocina')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card z-index-0 mt-3">
+                                    <div class="card-header pb-0 px-3">
+                                        <h6 class="mb-0">Cabina </h6>
+                                    </div>
+                                    <div class="card-body pt-3 p-3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">7. Espejos central y
+                                                        laterales</label>
+                                                    <select wire:model="model.espejos_centrales_laterales"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($EBuenoMalo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.espejos_centrales_laterales')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">8. Puertas de Acceso al
+                                                        Vehículo</label>
+                                                    <select wire:model="model.puertas_acceso_vehiculo"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($EBuenoMalo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.puertas_acceso_vehiculo')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">9. El Vidrio frontal</label>
+                                                    <select wire:model="model.vidrio_frontal"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($EBuenoMalo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.vidrio_frontal')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">10. Vidrios laterales y
+                                                        trasero</label>
+                                                    <select wire:model="model.vidrios_laterales_trasero"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($EBuenoMalo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.vidrios_laterales_trasero')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">11. Indicadores(hidráulico,
+                                                        velocímetro, temperatura, combustible) son funcionales</label>
+                                                    <select wire:model="model.indicadores"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($EBuenoMalo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.indicadores')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
 
                         <div class="row justify-content-center">
                             <div class="col-md-8">
@@ -301,9 +474,9 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">5. La Llanta delantera tiene
-                                                        labrado y presión adecuada</label>
-                                                    <select wire:model="model.presion_labrado_llanta_delantera"
+                                                    <label class="form-control-label">12. Todas las ruedas tienen sus
+                                                        espárragos completos</label>
+                                                    <select wire:model="model.llantas_esparragos"
                                                         class="form-select form-select-sm"
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
@@ -313,7 +486,7 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    @error('model.presion_labrado_llanta_delantera')
+                                                    @error('model.llantas_esparragos')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
                                                         </span>
@@ -323,9 +496,9 @@
 
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">6. La Llanta trasera tiene
-                                                        labrado y presión adecuada</label>
-                                                    <select wire:model="model.presion_labrado_llanta_trasera"
+                                                    <label class="form-control-label">13. Están en buen estado sin
+                                                        cortaduras profundas, ni abultamientos</label>
+                                                    <select wire:model="model.rudas_buen_estado"
                                                         class="form-select form-select-sm"
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
@@ -335,7 +508,7 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    @error('model.presion_labrado_llanta_trasera')
+                                                    @error('model.rudas_buen_estado')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
                                                         </span>
@@ -345,9 +518,10 @@
 
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">7. El Rin Delantero está en
-                                                        buenas condiciones</label>
-                                                    <select wire:model="model.rin_delantero"
+                                                    <label class="form-control-label">14. La llanta de repuesto y
+                                                        equipo para cambio de llantas existen y están en buen
+                                                        estado</label>
+                                                    <select wire:model="model.llanta_repuesto"
                                                         class="form-select form-select-sm"
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
@@ -357,7 +531,7 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    @error('model.rin_delantero')
+                                                    @error('model.llanta_repuesto')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
                                                         </span>
@@ -367,9 +541,9 @@
 
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">8. Rin Trasero está en buenas
-                                                        condiciones</label>
-                                                    <select wire:model="model.rin_trasero"
+                                                    <label class="form-control-label">15. Presión de inflado de las
+                                                        llantas es adecuada(Revisión visual)</label>
+                                                    <select wire:model="model.presion"
                                                         class="form-select form-select-sm"
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
@@ -379,7 +553,337 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    @error('model.rin_trasero')
+                                                    @error('model.presion')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card z-index-0 mt-3">
+                                    <div class="card-header pb-0 px-3">
+                                        <h6 class="mb-0">Condiciones mecánicas </h6>
+                                    </div>
+                                    <div class="card-body pt-3 p-3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">16. Caja de cambios</label>
+                                                    <select wire:model="model.caja_cambios"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($EBuenoMalo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.caja_cambios')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">17. Los pedales (acelerador,
+                                                        freno, cloche)</label>
+                                                    <select wire:model="model.pedales"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($EBuenoMalo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.pedales')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">18. Latas y pintura</label>
+                                                    <select wire:model="model.latas_pintura"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($EBuenoMalo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.latas_pintura')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">19. Freno de emergencia</label>
+                                                    <select wire:model="model.freno_emergencia"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($EBuenoMalo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.freno_emergencia')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">20. Buen nivel de fluidos,
+                                                        hidráulico, refrigerante, dirección, frenos y agua
+                                                        batería</label>
+                                                    <select wire:model="model.nivel_fluidos"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($EBuenoMalo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.nivel_fluidos')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <div class="card z-index-0 mt-3">
+                                    <div class="card-header pb-0 px-3">
+                                        <h6 class="mb-0">Equipo de prevención y seguridad (Kit carretera) Articulo 30
+                                            Código Nacional de Tránsito </h6>
+                                    </div>
+                                    <div class="card-body pt-3 p-3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">21. Conos reflectivos</label>
+                                                    <select wire:model="model.conos_reflectivos"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($ESiNo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.conos_reflectivos')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">22. Gato con capacidad para
+                                                        elevar el vehículo.</label>
+                                                    <select wire:model="model.gato" class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($ESiNo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.gato')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">23. Linterna</label>
+                                                    <select wire:model="model.linterna"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($ESiNo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.linterna')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">24. Cruceta</label>
+                                                    <select wire:model="model.cruceta"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($ESiNo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.cruceta')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">25. Dos señales de carretera en
+                                                        forma de triángulo en material reflectivo y provistas de
+                                                        soportes para ser colocadas en forma vertical o lámparas de
+                                                        señal de luz amarilla intermitentes o de destello</label>
+                                                    <select wire:model="model.senales"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($ESiNo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.senales')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">26. Dos tacos para bloquear el
+                                                        vehículo.</label>
+                                                    <select wire:model="model.tacos"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($ESiNo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.tacos')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">27. La Caja de herramienta básica
+                                                        como mínimo contiene: Alicate, destornilladores, llave de
+                                                        expansión y llaves fijas</label>
+                                                    <select wire:model="model.caja_herramienta"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($ESiNo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.caja_herramienta')
+                                                        <span class="text-danger text-message-validation">
+                                                            {{ $message }}
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="form-control-label">28. Llanta de repuesto</label>
+                                                    <select wire:model="model.llantas_repuesto"
+                                                        class="form-select form-select-sm"
+                                                        @if ($solo_lectura) disabled @endif>
+                                                        <option value="">--Seleccione--</option>
+                                                        @foreach ($ESiNo as $item)
+                                                            <option value="{{ $item->getId() }}">
+                                                                {{ $item->getName() }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('model.llantas_repuesto')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
                                                         </span>
@@ -398,15 +902,15 @@
                             <div class="col-md-8">
                                 <div class="card z-index-0 mt-3">
                                     <div class="card-header pb-0 px-3">
-                                        <h6 class="mb-0">Varios</h6>
+                                        <h6 class="mb-0">Vigencia de los siguientes elementos</h6>
                                     </div>
                                     <div class="card-body pt-3 p-3">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">10. Los testigos del Tacómetro
-                                                        son funcionales</label>
-                                                    <select wire:model="model.testigos_tacometros"
+                                                    <label class="form-control-label">29. Extintor vigente y en buen
+                                                        estado</label>
+                                                    <select wire:model="model.extintor"
                                                         class="form-select form-select-sm"
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
@@ -416,28 +920,7 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    @error('model.testigos_tacometros')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">11. El Tanque de Gasolina tiene
-                                                        fugas o abolladuras</label>
-                                                    <select wire:model="model.tanque_gasolina"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.tanque_gasolina')
+                                                    @error('model.extintor')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
                                                         </span>
@@ -445,11 +928,12 @@
                                                 </div>
                                             </div>
 
+
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">12. El Cojín es ergonómico y se
-                                                        encuentra en buen estado</label>
-                                                    <select wire:model="model.cojin_argonomico"
+                                                    <label class="form-control-label">30. Botiquín con todos los
+                                                        elementos vigentes y en buen estado</label>
+                                                    <select wire:model="model.botiquin"
                                                         class="form-select form-select-sm"
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
@@ -459,347 +943,14 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    @error('model.cojin_argonomico')
+                                                    @error('model.botiquin')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
                                                         </span>
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">13. Tiene la Placa en un lugar
-                                                        visible</label>
-                                                    <select wire:model="model.placa_visible"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.placa_visible')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">14. La moto está aseada</label>
-                                                    <select wire:model="model.moto_aseada"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.moto_aseada')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">15. Los comandos del acelerador
-                                                        están en buen estado</label>
-                                                    <select wire:model="model.comandos_acelerador_buen_estado"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.comandos_acelerador_buen_estado')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">16. Tiene buena holgura y
-                                                        funciona el Freno Delantero</label>
-                                                    <select wire:model="model.freno_delantero"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.freno_delantero')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">17. Tiene buena holgura y
-                                                        funciona el Freno Trasero</label>
-                                                    <select wire:model="model.freno_trasero"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.freno_trasero')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">18. La Relación está en buenas
-                                                        condiciones Revisar: Tensión y estado de piñones"</label>
-                                                    <select wire:model="model.relacion"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.relacion')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">19. La Suspensión está en buen
-                                                        estado</label>
-                                                    <select wire:model="model.suspencion"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.suspencion')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">20. Buen nivel de fluidos
-                                                        Revisar: Nivel de aceite y liquido de frenos</label>
-                                                    <select wire:model="model.niveles_fluidos"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.niveles_fluidos')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">21. Dirección (Ajuste del
-                                                        sistema)</label>
-                                                    <select wire:model="model.direccion"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.direccion')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">22. El Pito es de moto y está en
-                                                        buenas condiciones</label>
-                                                    <select wire:model="model.pito" class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.pito')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">23. Los Espejos Retrovisores
-                                                        están en buen estado</label>
-                                                    <select wire:model="model.espejos_retrovisores"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.espejos_retrovisores')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">24. Se dispone de Casco
-                                                        Certificado con visera</label>
-                                                    <select wire:model="model.casco_certificado"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.casco_certificado')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">25. Se dispone de Chaleco o
-                                                        uniforme reflectivo</label>
-                                                    <select wire:model="model.chaleco"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.chaleco')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">26. Se dispone de Coderas y
-                                                        rodilleras para moto</label>
-                                                    <select wire:model="model.coderas_rodilleras"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.coderas_rodilleras')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">27. Se dispone de Guantes de
-                                                        moto</label>
-                                                    <select wire:model="model.guantes"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.guantes')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label class="form-control-label">28. Esta en buen estado el
-                                                        reposapies</label>
-                                                    <select wire:model="model.reposapies"
-                                                        class="form-select form-select-sm"
-                                                        @if ($solo_lectura) disabled @endif>
-                                                        <option value="">--Seleccione--</option>
-                                                        @foreach ($ESiNo as $item)
-                                                            <option value="{{ $item->getId() }}">
-                                                                {{ $item->getName() }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('model.reposapies')
-                                                        <span class="text-danger text-message-validation">
-                                                            {{ $message }}
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
+
 
                                         </div>
 
@@ -816,10 +967,9 @@
                                     </div>
                                     <div class="card-body pt-3 p-3">
                                         <div class="row">
-
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">26. SOAT</label>
+                                                    <label class="form-control-label">31. SOAT</label>
                                                     <select wire:model="model.soat" class="form-select form-select-sm"
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
@@ -839,7 +989,7 @@
 
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">27. RTM (revisión técnico
+                                                    <label class="form-control-label">32. RTM (revisión técnico
                                                         mecánica)</label>
                                                     <select wire:model="model.rtm" class="form-select form-select-sm"
                                                         @if ($solo_lectura) disabled @endif>
@@ -860,9 +1010,9 @@
 
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">28. Licencia de
+                                                    <label class="form-control-label">33. Licencia de
                                                         conducción</label>
-                                                    <select wire:model="model.licencia_de_conduccion"
+                                                    <select wire:model="model.licencia_conduccion"
                                                         class="form-select form-select-sm"
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
@@ -872,7 +1022,7 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    @error('model.licencia_de_conduccion')
+                                                    @error('model.licencia_conduccion')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
                                                         </span>
@@ -882,8 +1032,8 @@
 
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">29. Tarjeta de propiedad</label>
-                                                    <select wire:model="model.tarjeta_de_propiedad"
+                                                    <label class="form-control-label">34. Tarjeta de propiedad</label>
+                                                    <select wire:model="model.tarjeta_propuedad"
                                                         class="form-select form-select-sm"
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
@@ -893,7 +1043,7 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
-                                                    @error('model.tarjeta_de_propiedad')
+                                                    @error('model.tarjeta_propuedad')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
                                                         </span>
@@ -902,13 +1052,14 @@
                                             </div>
 
 
-
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+
 
 
 
@@ -941,24 +1092,24 @@
 
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label">Fotografía del tacómetro (con
+                                                    <label class="form-control-label">Fotografía del vehículo (con
                                                         fecha y hora)
                                                     </label>
                                                     @if ($solo_lectura)
-                                                        @if ($model->fotografia_tacometro)
+                                                        @if ($model->fotografia_vehiculo)
                                                             <a target="_blank"
-                                                                href="{{ Storage::url($model->fotografia_tacometro) }}"
+                                                                href="{{ Storage::url($model->fotografia_vehiculo) }}"
                                                                 class="btn btn-sm btn-round mb-0 me-1 bg-secundary">Ver</a>
                                                         @else
                                                             No Subido
                                                         @endif
                                                     @else
-                                                        <input wire:model.defer="fotografia_tacometro"
+                                                        <input wire:model.defer="fotografia_vehiculos"
                                                             class="form-control form-control-sm " type="file"
                                                             accept="image/*" />
                                                     @endif
 
-                                                    @error('fotografia_tacometro')
+                                                    @error('fotografia_vehiculos')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
                                                         </span>
@@ -1021,6 +1172,16 @@
                                 </div>
                             </div>
                         </div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <p><strong>Opps Something went wrong</strong></p>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
 
 

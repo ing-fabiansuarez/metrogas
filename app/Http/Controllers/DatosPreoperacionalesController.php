@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ETipoVehiculo;
+use App\Exports\FormDatosPreoperacionalesCarrosExport;
+use App\Exports\FormDatosPreoperacionalesMotosExport;
 use App\Models\DatosPreoperacional;
+use App\Models\FormDatosPreoperacionalesCarrosModel;
 use App\Models\FormDatosPreoperacionalesMotosModel;
 use Illuminate\Http\Request;
 
@@ -29,7 +32,9 @@ class DatosPreoperacionalesController extends Controller
                     ]);
                     break;
                 case ETipoVehiculo::CARRO->getId():
-                    return "CARRO";
+                    return view('datos-preoperacionales.form-carros', [
+                        'datosPreoperacional' => $datosPreoperacional
+                    ]);
                     break;
             }
         } else {
@@ -59,5 +64,31 @@ class DatosPreoperacionalesController extends Controller
 
     public function exportarFormMotos()
     {
+        return (new FormDatosPreoperacionalesMotosExport())->download('Formularios Motos.xlsx');
+    }
+
+    public function indexFormCarros(Request $request)
+    {
+        $respuestasForm = FormDatosPreoperacionalesCarrosModel::latest();
+
+        if (!empty($request->get('num_solicitud'))) {
+            $respuestasForm->where('id', $request->get('num_solicitud'));
+        }
+
+        return view('datos-preoperacionales.admin.index_carro', [
+            'respuestasForm' => $respuestasForm->orderBy('id', 'desc')->get(),
+        ]);
+    }
+
+    public function verFormCarros(FormDatosPreoperacionalesCarrosModel $id)
+    {
+        return view('datos-preoperacionales.admin.ver_carros', [
+            'formulario' => $id
+        ]);
+    }
+
+    public function exportarFormCarros()
+    {
+        return (new FormDatosPreoperacionalesCarrosExport())->download('Formularios Carros.xlsx');
     }
 }
