@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             //UserSeeder::class,
             //SitesSeeder::class,
             //TypeIdentificationSeeder::class
-            AddRolSeeder::class
+            //AddRolSeeder::class
+            DatosPreoperacionalesSeeder::class
         ]);
     }
 }
