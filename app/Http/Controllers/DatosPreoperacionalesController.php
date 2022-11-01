@@ -91,4 +91,9 @@ class DatosPreoperacionalesController extends Controller
     {
         return (new FormDatosPreoperacionalesCarrosExport())->download('Formularios Carros.xlsx');
     }
+
+    public function finalizado()
+    {
+        return view('datos-preoperacionales.finalizado');
+    }
 }

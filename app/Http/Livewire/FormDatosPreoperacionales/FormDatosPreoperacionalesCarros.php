@@ -138,6 +138,6 @@ class FormDatosPreoperacionalesCarros extends Component
         }
         $this->model->save();
 
-        return redirect()->route('proveedor.register.finalizado');
+        return redirect()->route('datospreoperacionales.finalizado');
     }
 }

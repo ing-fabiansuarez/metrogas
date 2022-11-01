@@ -185,3 +185,4 @@ Route::get('registrar-proveedor/finalizado', [ProveedorController::class, 'formu
 //DATOS PREOPERACIONALES MOTOS
 Route::get('datos-preoperacionales', [DatosPreoperacionalesController::class, 'index'])->name('datospreoperacionales.index');
 Route::post('datos-preoperacionales', [DatosPreoperacionalesController::class, 'responseForm'])->name('datospreoperacionales.responseForm');
+Route::get('datos-preoperacionales/finalizado', [DatosPreoperacionalesController::class, 'finalizado'])->name('datospreoperacionales.finalizado');
