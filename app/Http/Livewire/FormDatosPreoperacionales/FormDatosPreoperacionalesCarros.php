@@ -99,6 +99,12 @@ class FormDatosPreoperacionalesCarros extends Component
 
         $this->model = $formulario;
 
+        if ($datosPreoperacional->cedula != null && $datosPreoperacional->placa_vehiculo != null) {
+            if ($modeloPre = FormDatosPreoperacionalesCarrosModel::where('cedula', $datosPreoperacional->cedula)->where('placa_vehiculo', $datosPreoperacional->placa_vehiculo)->orderBy('id', 'desc')->first()) {
+                $this->model = $modeloPre;
+            }
+        }
+
         $this->model->cedula = $datosPreoperacional->cedula == null ? $this->model->cedula : $datosPreoperacional->cedula;
         $this->model->nombre_completo = $datosPreoperacional->nombre_completo == null ? $this->model->nombre_completo : $datosPreoperacional->nombre_completo;
         $this->model->correo = $datosPreoperacional->correo == null ? $this->model->correo : $datosPreoperacional->correo;
