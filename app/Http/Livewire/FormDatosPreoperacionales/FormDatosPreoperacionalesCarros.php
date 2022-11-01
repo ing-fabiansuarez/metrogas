@@ -87,7 +87,7 @@ class FormDatosPreoperacionalesCarros extends Component
 
         'model.ha_diligenciado_ud_mismo' => 'required',
 
-        'fotografia_vehiculos' => 'required',
+       
 
     ];
 
