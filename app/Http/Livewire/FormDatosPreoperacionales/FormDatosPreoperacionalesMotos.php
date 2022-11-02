@@ -70,7 +70,7 @@ class FormDatosPreoperacionalesMotos extends Component
 
         'model.observacion' => 'required',
         'model.ha_diligenciado_ud_mismo' => 'required',
-        'fotografia_tacometro' => 'required',
+        'fotografia_tacometro' =>  'image|required'
 
     ];
 
