@@ -954,7 +954,7 @@
                                                         @endif
                                                     @else
                                                         <input wire:model.defer="fotografia_tacometro"
-                                                            class="form-control form-control-sm " type="file"
+                                                             type="file"
                                                             accept="image/*" />
                                                     @endif
 
