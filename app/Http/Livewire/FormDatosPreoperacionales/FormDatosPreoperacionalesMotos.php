@@ -13,6 +13,7 @@ use Livewire\WithFileUploads;
 class FormDatosPreoperacionalesMotos extends Component
 {
     use WithFileUploads;
+
     public $solo_lectura;
 
     public $model;
@@ -68,11 +69,8 @@ class FormDatosPreoperacionalesMotos extends Component
         'model.tarjeta_de_propiedad' => 'required',
 
         'model.observacion' => 'required',
-
-
-
         'model.ha_diligenciado_ud_mismo' => 'required',
-       
+        'fotografia_tacometro' => 'required',
 
     ];
 

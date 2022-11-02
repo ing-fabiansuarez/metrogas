@@ -5,15 +5,18 @@ namespace App\Exports;
 use App\Enums\EBuenoMalo;
 use App\Enums\ESiNo;
 use App\Models\FormDatosPreoperacionalesMotosModel;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 
-class FormDatosPreoperacionalesMotosExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMapping
+class FormDatosPreoperacionalesMotosExport implements FromQuery, ShouldAutoSize, WithHeadings, WithMapping, WithColumnFormatting
 {
     use Exportable;
 
@@ -45,6 +48,7 @@ class FormDatosPreoperacionalesMotosExport implements FromQuery, ShouldAutoSize,
     {
         return [
             'ID',
+            'Fecha',
             'Correo Electronico',
             'Centro Operativo',
             'Nombres Completos',
@@ -93,11 +97,19 @@ class FormDatosPreoperacionalesMotosExport implements FromQuery, ShouldAutoSize,
         ];
     }
 
+    public function columnFormats(): array
+    {
+        return [
+            'B' => NumberFormat::FORMAT_DATE_DDMMYYYY,
+        ];
+    }
+
     public function map($invoice): array
     {
 
         return [
             $invoice->id,
+            Date::dateTimeToExcel($invoice->created_at),
             $invoice->correo,
             $invoice->lugar_trabajo,
             $invoice->nombre_completo,
