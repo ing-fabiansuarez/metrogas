@@ -953,9 +953,9 @@
                                                             No Subido
                                                         @endif
                                                     @else
-                                                        <input wire:model.defer="fotografia_tacometro"
+                                                        <input wire:model="fotografia_tacometro"
                                                              type="file"
-                                                            accept="image/*" />
+                                                           />
                                                     @endif
 
                                                     @error('fotografia_tacometro')
@@ -980,7 +980,7 @@
                                                             No Subido
                                                         @endif
                                                     @else
-                                                        <input wire:model.defer="fotografia_mantenimiento"
+                                                        <input wire:model="fotografia_mantenimiento"
                                                             class="form-control form-control-sm " type="file"
                                                             accept="image/*" />
                                                     @endif
