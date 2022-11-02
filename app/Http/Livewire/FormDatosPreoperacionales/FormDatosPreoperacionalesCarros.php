@@ -86,7 +86,8 @@ class FormDatosPreoperacionalesCarros extends Component
         'model.observacion' => 'required',
 
         'model.ha_diligenciado_ud_mismo' => 'required',
-        'fotografia_vehiculos' => 'image|required'
+        'fotografia_vehiculos' => 'image|required',
+        'fotografia_mantenimiento' => 'image',
 
     ];
 

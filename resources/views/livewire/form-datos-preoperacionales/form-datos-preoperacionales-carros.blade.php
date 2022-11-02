@@ -1104,9 +1104,8 @@
                                                             No Subido
                                                         @endif
                                                     @else
-                                                        <input wire:model.defer="fotografia_vehiculos"
-                                                            class="form-control form-control-sm " type="file"
-                                                            accept="image/*" />
+                                                        <input wire:model="fotografia_vehiculos"
+                                                            class="form-control form-control-sm " type="file" />
                                                     @endif
 
                                                     @error('fotografia_vehiculos')
@@ -1131,9 +1130,8 @@
                                                             No Subido
                                                         @endif
                                                     @else
-                                                        <input wire:model.defer="fotografia_mantenimiento"
-                                                            class="form-control form-control-sm " type="file"
-                                                            accept="image/*" />
+                                                        <input wire:model="fotografia_mantenimiento"
+                                                            class="form-control form-control-sm " type="file" />
                                                     @endif
                                                     @error('fotografia_mantenimiento')
                                                         <span class="text-danger text-message-validation">

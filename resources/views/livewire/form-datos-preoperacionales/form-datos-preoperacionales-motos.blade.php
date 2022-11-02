@@ -954,8 +954,7 @@
                                                         @endif
                                                     @else
                                                         <input wire:model="fotografia_tacometro"
-                                                             type="file"
-                                                           />
+                                                            class="form-control form-control-sm" type="file" />
                                                     @endif
 
                                                     @error('fotografia_tacometro')
@@ -981,8 +980,7 @@
                                                         @endif
                                                     @else
                                                         <input wire:model="fotografia_mantenimiento"
-                                                            class="form-control form-control-sm " type="file"
-                                                             />
+                                                            class="form-control form-control-sm" type="file" />
                                                     @endif
                                                     @error('fotografia_mantenimiento')
                                                         <span class="text-danger text-message-validation">
