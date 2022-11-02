@@ -982,7 +982,7 @@
                                                     @else
                                                         <input wire:model="fotografia_mantenimiento"
                                                             class="form-control form-control-sm " type="file"
-                                                            accept="image/*" />
+                                                             />
                                                     @endif
                                                     @error('fotografia_mantenimiento')
                                                         <span class="text-danger text-message-validation">
