@@ -70,7 +70,7 @@ class FormDatosPreoperacionalesMotos extends Component
 
         'model.observacion' => 'required',
         'model.ha_diligenciado_ud_mismo' => 'required',
-        'photo' => 'image'
+        'photo' => 'image|required'
 
     ];
 
@@ -122,8 +122,8 @@ class FormDatosPreoperacionalesMotos extends Component
         $this->validate();
         $this->model->save();
 
-        if (!empty($this->fotografia_tacometro)) {
-            $this->model->fotografia_tacometro = $this->fotografia_tacometro->store("public/form-datos-preoperacionales/soportes/" . $this->model->id);
+        if (!empty($this->photo)) {
+            $this->model->fotografia_tacometro = $this->photo->store("public/form-datos-preoperacionales/soportes/" . $this->model->id);
         }
         if (!empty($this->fotografia_mantenimiento)) {
             $this->model->fotografia_mantenimiento = $this->fotografia_mantenimiento->store("public/form-datos-preoperacionales/soportes/" . $this->model->id);
