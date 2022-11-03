@@ -945,9 +945,9 @@
                                                         fecha y hora)
                                                     </label>
                                                     @if ($solo_lectura)
-                                                        @if ($model->photo)
+                                                        @if ($model->fotografia_tacometro)
                                                             <a target="_blank"
-                                                                href="{{ Storage::url($model->photo) }}"
+                                                                href="{{ Storage::url($model->fotografia_tacometro) }}"
                                                                 class="btn btn-sm btn-round mb-0 me-1 bg-secundary">Ver</a>
                                                         @else
                                                             No Subido
