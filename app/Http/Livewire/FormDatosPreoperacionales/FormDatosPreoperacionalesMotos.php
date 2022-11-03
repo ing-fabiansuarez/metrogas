@@ -17,8 +17,8 @@ class FormDatosPreoperacionalesMotos extends Component
     public $solo_lectura;
 
     public $model;
-    public $fotografia_tacometro;
-    public $fotografia_mantenimiento;
+    public $photo;
+    public $fotografiaMantenimiento;
 
     protected $rules = [
         'model.cedula' => 'required',
@@ -70,10 +70,16 @@ class FormDatosPreoperacionalesMotos extends Component
 
         'model.observacion' => 'required',
         'model.ha_diligenciado_ud_mismo' => 'required',
-        'fotografia_tacometro' => 'image|required',
-       
+        'photo' => 'image'
 
     ];
+
+    public function updated($photo)
+    {
+        $this->validateOnly(
+            $photo
+        );
+    }
 
     public function render()
     {

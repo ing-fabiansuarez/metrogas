@@ -945,19 +945,26 @@
                                                         fecha y hora)
                                                     </label>
                                                     @if ($solo_lectura)
-                                                        @if ($model->fotografia_tacometro)
+                                                        @if ($model->photo)
                                                             <a target="_blank"
-                                                                href="{{ Storage::url($model->fotografia_tacometro) }}"
+                                                                href="{{ Storage::url($model->photo) }}"
                                                                 class="btn btn-sm btn-round mb-0 me-1 bg-secundary">Ver</a>
                                                         @else
                                                             No Subido
                                                         @endif
                                                     @else
-                                                        <input wire:model="fotografia_tacometro"
-                                                            class="form-control form-control-sm" type="file" />
+                                                        <br>
+                                                        @if ($photo)
+                                                            {{-- Preview Foto:
+                                                             <img class="img-thumbnail"
+                                                                src="{{ $photo->temporaryUrl() }}"> --}}
+                                                        @endif
+                                                        <input type="file" wire:model="photo" />
+
+                                                        <div wire:loading wire:target="photo">Cargado imagen...</div>
                                                     @endif
 
-                                                    @error('fotografia_tacometro')
+                                                    @error('photo')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
                                                         </span>
@@ -979,8 +986,8 @@
                                                             No Subido
                                                         @endif
                                                     @else
-                                                        <input wire:model="fotografia_mantenimiento"
-                                                            class="form-control form-control-sm" type="file" />
+                                                        <br>
+                                                        <input type="file" wire:model="fotografia_mantenimiento" />
                                                     @endif
                                                     @error('fotografia_mantenimiento')
                                                         <span class="text-danger text-message-validation">
