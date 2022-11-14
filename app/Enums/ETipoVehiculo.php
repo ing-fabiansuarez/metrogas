@@ -32,4 +32,14 @@ enum ETipoVehiculo
             }
         }
     }
+
+    public static function exist($id)
+    {
+        foreach (self::cases() as $caso) {
+            if ($caso->getId() == $id) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

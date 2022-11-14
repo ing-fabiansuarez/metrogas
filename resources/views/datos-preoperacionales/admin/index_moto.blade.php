@@ -39,6 +39,10 @@
                                     <button type="button" style="color: white; width: 100%;" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal" class="btn bg-secundary btn-sm">Exportar</button>
                                 </div>
+                                <div class="col-md-2">
+                                    <a href="{{ route('admin.preoperacional.verificar',$tipo_form) }}" style="width: 100%"
+                                        class="btn bg-gradient-primary btn-sm">Verficar</a>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -48,7 +52,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Id Formulario
+                                            Id For
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -73,6 +77,7 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Placa
                                         </th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -109,7 +114,6 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $item->placa_vehiculo }}
                                                 </p>
                                             </td>
-
 
                                         </tr>
                                     @endforeach

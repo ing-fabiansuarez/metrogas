@@ -132,6 +132,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/carro', [DatosPreoperacionalesController::class, 'indexFormCarros'])->name('admin.preoperacional.carros');
 		Route::get('/carro/{id}', [DatosPreoperacionalesController::class, 'verFormCarros'])->name('admin.preoperacional.carros.ver');
 		Route::post('/carro', [DatosPreoperacionalesController::class, 'exportarFormCarros'])->name('admin.preoperacional.carros.exportar');
+		Route::get('/verficacion/{type}', [DatosPreoperacionalesController::class, 'verficarForm'])->name('admin.preoperacional.verificar');
+		Route::post('/verficacion/{type}', [DatosPreoperacionalesController::class, 'sendEmails'])->name('admin.preoperacional.emails');
 	});
 
 	Route::get('/logout', [SessionsController::class, 'destroy']);
