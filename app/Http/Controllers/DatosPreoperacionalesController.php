@@ -65,9 +65,15 @@ class DatosPreoperacionalesController extends Controller
         ]);
     }
 
-    public function exportarFormMotos()
+    public function exportarFormMotos(Request $request)
     {
-        return (new FormDatosPreoperacionalesMotosExport())->download('Formularios Motos.xlsx');
+        //filtros
+        $num_solicitud = $request->get('num_solicitud');
+        $start_date =  $request->get('fecha_inicial');
+        $end_date = $request->get('fecha_final');
+        $placa_vehiculo = $request->get('placa_vehiculo');
+        $cedula = $request->get('cedula');
+        return (new FormDatosPreoperacionalesMotosExport($num_solicitud, $start_date, $end_date, $placa_vehiculo, $cedula))->download('Formularios Motos.xlsx');
     }
 
     public function indexFormCarros(Request $request)
