@@ -11,6 +11,7 @@ use App\Exports\StructureFormPersonaJuridicaExport;
 use App\Models\FormPersonaJuridica;
 use App\Models\FormPersonaNatural;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class ProveedorController extends Controller
 {
@@ -57,7 +58,6 @@ class ProveedorController extends Controller
         } else if ($tipo == "bruto") {
             return (new FormPersonaNaturalBrutoExport($id))->download('Formularios Personas Natural En Bruto.xlsx');
         }
-        
     }
 
     public function personaJuridica()

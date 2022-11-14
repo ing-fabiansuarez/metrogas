@@ -11,6 +11,8 @@ use Adldap\Laravel\Facades\Adldap;
 use App\Http\Controllers\DatosPreoperacionalesController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\ReportController;
+use App\Models\FormPersonaJuridica;
+use App\Models\FormPersonaNatural;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,6 +125,16 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/persona-juridica', [ProveedorController::class, 'indexPersonaJuridica'])->name('proveedores.admin.persona-juridica');
 		Route::get('/persona-juridica/{id}', [ProveedorController::class, 'verFormPersonajuridica'])->name('proveedores.admin.persona-juridica.ver');
 		Route::post('/persona-juridica', [ProveedorController::class, 'exportarFormPersonaJuridica'])->name('proveedores.admin.persona-juridica.exportar');
+		Route::get('/persona-juridica-imprimir/{id}', function (FormPersonaJuridica $id) {
+			return view('proveedores.admin.pdf_persona_juridica', [
+				'personaJuridica' => $id
+			]);
+		})->name('proveedores.admin.persona-juridica.imprimir');
+		Route::get('/persona-natural-imprimir/{id}', function (FormPersonaNatural $id) {
+			return view('proveedores.admin.pdf_persona_natural', [
+				'personaNatural' => $id
+			]);
+		})->name('proveedores.admin.persona-natural.imprimir');
 	});
 
 	Route::prefix('form-datos-preoperacionales')->middleware('can:gestionarFormularioDatosPreoperacionales')->group(function () {
