@@ -19,8 +19,13 @@ class FormDatosPreoperacionalesCarrosExport implements FromQuery, ShouldAutoSize
 {
     use Exportable;
 
-    public function __construct()
+    public function __construct($num_solicitud, $start_date, $end_date, $placa_vehiculo, $cedula)
     {
+        $this->num_solicitud = $num_solicitud;
+        $this->start_date = $start_date;
+        $this->end_date = $end_date;
+        $this->placa_vehiculo = $placa_vehiculo;
+        $this->cedula = $cedula;
     }
     public function columnFormats(): array
     {
@@ -35,18 +40,21 @@ class FormDatosPreoperacionalesCarrosExport implements FromQuery, ShouldAutoSize
             ->select([
                 '*'
             ]);
-        /* if ($this->start_date != null) {
-            $consulta->where('viatic_requests.created_at', '>=', $this->start_date);
+        if ($this->num_solicitud != null) {
+            $consulta->where('form_datos_preoperacionales_carros_models.id', $this->num_solicitud);
+        }
+        if ($this->start_date != null) {
+            $consulta->whereDate('form_datos_preoperacionales_carros_models.created_at', '>=', $this->start_date);
         }
         if ($this->end_date != null) {
-            $consulta->where('viatic_requests.created_at', '<=', $this->end_date);
+            $consulta->whereDate('form_datos_preoperacionales_carros_models.created_at', '<=', $this->end_date);
         }
-        if ($this->employ != null) {
-            $consulta->where('viatic_requests.request_by', $this->employ);
+        if ($this->placa_vehiculo != null) {
+            $consulta->where('form_datos_preoperacionales_carros_models.placa_vehiculo', $this->placa_vehiculo);
         }
-        if ($this->state != null) {
-            $consulta->where('viatic_requests.sw_state', $this->state);
-        } */
+        if ($this->cedula != null) {
+            $consulta->where('form_datos_preoperacionales_carros_models.cedula', $this->cedula);
+        }
         return $consulta;
     }
 
