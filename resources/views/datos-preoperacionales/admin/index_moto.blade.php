@@ -39,6 +39,10 @@
                                     <button type="button" style="color: white; width: 100%;" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal" class="btn bg-secundary btn-sm">Exportar</button>
                                 </div>
+                                <div class="col-md-2">
+                                    <a href="{{ route('admin.preoperacional.verificar', $tipo_form) }}" style="width: 100%"
+                                        class="btn bg-gradient-primary btn-sm">Verficar</a>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -48,7 +52,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Id Formulario
+                                            Id For
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -73,6 +77,7 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Placa
                                         </th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -110,7 +115,6 @@
                                                 </p>
                                             </td>
 
-
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -138,14 +142,13 @@
                     </div>
                     <form action="{{ route('admin.preoperacional.exportar') }}" method="post">
                         <div class="modal-body">
-
                             <div class="form-group">
-                                {{-- <div class="form-group">
+                                <div class="form-group">
                                     <label for="input_object_guid" class="form-control-label">ID Formulario</label>
                                     <input class="form-control form-control-sm" type="number" placeholder="N° Solicitud"
                                         name="num_solicitud">
-                                </div> --}}
-                                {{-- <div class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label class="form-control-label">Desde</label>
                                     <input class="form-control form-control-sm" type="date" name="fecha_inicial">
                                 </div>
@@ -154,33 +157,18 @@
                                     <input class="form-control form-control-sm" type="date" name="fecha_final">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_object_guid" class="form-control-label">Solicitada por</label>
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-                                        name="empleado">
-                                        <option value="" selected="">-- Seleccionar --</option>
-                                         @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->name }}
-                                            </option>
-                                        @endforeach 
-                                    </select>
+                                    <label for="input_object_guid" class="form-control-label">Placa</label>
+                                    <input class="form-control form-control-sm" type="text" name="placa_vehiculo">
                                 </div>
                                 <div class="form-group">
-                                    <label for="input_object_guid" class="form-control-label">Estado</label>
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example"
-                                        name="estado_filtro">
-                                        <option value="" selected>-- Seleccionar --</option>
-                                        @foreach ($states as $state)
-                                            <option value="{{ $state->getId() }}">
-                                                {{ $state->getName() }}
-                                            </option>
-                                        @endforeach 
-                                    </select>
-                                </div> --}}
+                                    <label for="input_object_guid" class="form-control-label">Cedula</label>
+                                    <input class="form-control form-control-sm" type="text" name="cedula">
+                                </div>
                             </div>
-
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn bg-gradient-secondary"
+                                data-bs-dismiss="modal">Cerrar</button>
                             @csrf
                             <button type="submit" name="r" value="normal" style="color: white"
                                 class="btn bg-secundary">Exportar</button>

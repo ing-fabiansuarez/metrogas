@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ETipoVehiculo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,4 +20,21 @@ class DatosPreoperacional extends Model
         'cargo',
         'tipo_vehiculo'
     ];
+
+    public function verficarSiLlenoFormulario($date)
+    {
+        if ($this->tipo_vehiculo == ETipoVehiculo::MOTO->getId()) {
+            if (count(FormDatosPreoperacionalesMotosModel::whereDate('created_at', $date)->where('cedula', $this->cedula)->where('placa_vehiculo', $this->placa_vehiculo)->get()) > 0) {
+                return True;
+            } else {
+                return False;
+            }
+        } else if ($this->tipo_vehiculo == ETipoVehiculo::CARRO->getId()) {
+            if (count(FormDatosPreoperacionalesCarrosModel::whereDate('created_at', $date)->where('cedula', $this->cedula)->where('placa_vehiculo', $this->placa_vehiculo)->get()) > 0) {
+                return True;
+            } else {
+                return False;
+            }
+        }
+    }
 }
