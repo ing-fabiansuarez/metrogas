@@ -136,9 +136,9 @@ class FormPersonaJuridica extends Component
         'personaJuridica.fe_envio_nombre' => 'required',
         'personaJuridica.fe_envio_cargo' => 'required',
         'personaJuridica.fe_envio_correo_electronico' => 'required',
-        'personaJuridica.fe_recepcion_nombre' => 'required',
-        'personaJuridica.fe_recepcion_cargo' => 'required',
-        'personaJuridica.fe_recepcion_correo_electronico' => 'required',
+        //'personaJuridica.fe_recepcion_nombre' => 'required',
+        //'personaJuridica.fe_recepcion_cargo' => 'required',
+        //'personaJuridica.fe_recepcion_correo_electronico' => 'required',
 
 
         'personaJuridica.do_declaro_origen_de_fondos' => 'required',
@@ -174,6 +174,9 @@ class FormPersonaJuridica extends Component
         'personaJuridica.celular_quien_diligencia' => 'required',
         'personaJuridica.cargo_quien_diligencia' => 'required',
 
+        'personaJuridica.forma_juridica' => 'required',
+        'personaJuridica.ciudad_infor_solicitante' => 'required',
+
 
         'support_clausula_cumplimiento_codigo' => '',
         'support_camara_de_comercio' => 'required',
@@ -189,6 +192,11 @@ class FormPersonaJuridica extends Component
         'support_referencia_comercial' => '',
         'support_carta_autorizacion_fondos_rl' => '',
         'support_certificacion_de_normativa_riesgos' => '',
+
+
+
+
+
     ];
 
     /* protected $rules = [

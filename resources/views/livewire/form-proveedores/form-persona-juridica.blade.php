@@ -104,6 +104,20 @@
 
                                     <div class="col-md-3">
                                         <div class="form-group">
+                                            <label class="form-control-label">Ciudad</label>
+                                            <input wire:model="personaJuridica.ciudad_infor_solicitante"
+                                                class="form-control form-control-sm" type="text"
+                                                @if ($solo_lectura) disabled @endif>
+                                            <span class="error">
+                                                @error('personaJuridica.ciudad_infor_solicitante')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
                                             <label class="form-control-label">Tipo Empresa</label>
                                             <select wire:model="personaJuridica.tipo_empresa"
                                                 class="form-select form-select-sm"
@@ -121,6 +135,21 @@
                                             </span>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Forma Juridica</label>
+                                            <input wire:model="personaJuridica.forma_juridica"
+                                                class="form-control form-control-sm" type="text"
+                                                @if ($solo_lectura) disabled @endif>
+                                            <span class="error">
+                                                @error('personaJuridica.forma_juridica')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                    </div>
+
 
 
                                     <div class="col-md-3">
@@ -1806,7 +1835,7 @@
                                     </div>
 
 
-                                    <p style="font-size: 0.7rem">
+                                    {{--  <p style="font-size: 0.7rem">
                                         <b>
                                             Datos recepción Factura Digital/Factura Electrónica
                                         </b>
@@ -1854,7 +1883,7 @@
                                                 @enderror
                                             </span>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
 
@@ -2521,8 +2550,8 @@
                                                     <td>
                                                         <div class="d-flex px-2">
                                                             <div class="my-auto">
-                                                                <h6 class="mb-0 text-xs">Estados Financieros
-                                                                    Comparativos y Notas
+                                                                <h6 class="mb-0 text-xs">Estados Financieros comparados
+                                                                    - resumidos - sin notas
 
                                                                 </h6>
                                                             </div>
@@ -2577,7 +2606,7 @@
                                                         <p class="text-xs font-weight-bold mb-0">Año
                                                             inmediatamente
                                                             anterior
-                                                          
+
                                                         </p>
                                                     </td>
                                                     <td>
@@ -2619,7 +2648,7 @@
                                                     </td>
                                                     <td>
                                                         <p class="text-xs font-weight-bold mb-0">Vigente
-                                                            
+
                                                         </p>
                                                     </td>
                                                     <td>
@@ -2987,8 +3016,8 @@
 
 
 
-                                   
-                                   
+
+
 
                                 </div>
 

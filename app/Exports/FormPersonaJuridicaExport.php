@@ -77,6 +77,12 @@ class FormPersonaJuridicaExport implements FromQuery, WithHeadings, ShouldAutoSi
             '',
             '',
             '',
+
+            ESiNo::from($invoice->rl_administra_recursos_publicos_o_es_pep)->getName(),
+            ESiNo::from($invoice->rl_persona_expuesta_pliticamente_extrajera)->getName(),
+            ESiNo::from($invoice->rl_persona_expuesta_politicamente_de_organizaciones_internacionales)->getName(),
+            ESiNo::from($invoice->rl_tiene_relecionados_cercanos_expuestos_politicamente)->getName(),
+
             '',
             '',
             '',
@@ -152,6 +158,12 @@ class FormPersonaJuridicaExport implements FromQuery, WithHeadings, ShouldAutoSi
             'DIRECCIÓN DE DOMICILIO DEL REPRESENTANTE LEGAL',
             'CIUDAD DE DOMICILIO DEL REPRESENTANTE LEGAL',
             'TELÉFONO DEL REPRESENTANTE LEGAL',
+
+            'a. ¿Administra recursos públicos o es Persona Expuesta Políticamente (PEP)?',
+            'b. ¿Es Persona Expuesta Políticamente Extranjera?',
+            'c. ¿Es Persona Expuesta Politicamente de organizaciones internacionales?',
+            'd. ¿Tiene relacionados (familiares o asociados) cercanos Expuestos Políticamente?',
+
             'PEP',
             'BENEFICIARIO FINAL',
             'TIPO DE DOCUMENTACIÓN BENEFICIARIO FINAL ',
@@ -191,6 +203,7 @@ class FormPersonaJuridicaExport implements FromQuery, WithHeadings, ShouldAutoSi
             'PUNTAJE EVALUACIÓN DE DESEMPEÑO',
             'ACTA DE COMPROMISO Y CUMPLIMIENTO DEL CÓDIGO DE ÉTICA',
             'DECLARACIÓN DE INDEPENDENCIA',
+            '',
         ];
     }
     public function title(): string

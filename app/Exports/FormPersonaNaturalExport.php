@@ -118,6 +118,10 @@ class FormPersonaNaturalExport implements FromQuery, WithHeadings, WithMapping, 
             '',
             '',
             '',
+            ESiNo::from($invoice->administra_recursos_publicos)->getName(),
+            ESiNo::from($invoice->persona_expuesta_politicamente_extranjera)->getName(),
+            ESiNo::from($invoice->persona_expuesta_politicamente_orga_internacionales)->getName(),
+            ESiNo::from($invoice->tiene_relacionados_cercanos_expuestos_politicamente)->getName(),
         ];
     }
 
@@ -194,6 +198,10 @@ class FormPersonaNaturalExport implements FromQuery, WithHeadings, WithMapping, 
             'PUNTAJE EVALUACIÓN DE DESEMPEÑO',
             'ACTA DE COMPROMISO Y CUMPLIMIENTO DEL CÓDIGO DE ÉTICA',
             'DECLARACIÓN DE INDEPENDENCIA',
+            'a. ¿Administra recursos públicos o es Persona Expuesta Políticamente (PEP)?',
+            'b. ¿Es Persona Expuesta Políticamente Extranjera?',
+            'c. ¿Es Persona Expuesta Politicamente de organizaciones internacionales?',
+            'd. ¿Tiene relacionados (familiares o asociados) cercanos Expuestos Políticamente?'
         ];
     }
 }
