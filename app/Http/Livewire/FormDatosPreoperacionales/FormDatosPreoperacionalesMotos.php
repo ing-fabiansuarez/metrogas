@@ -124,10 +124,10 @@ class FormDatosPreoperacionalesMotos extends Component
         $this->model->save();
 
         if (!empty($this->photo)) {
-            $this->model->fotografia_tacometro = $this->photo->store("public/form-datos-preoperacionales/soportes/" . $this->model->id);
+            $this->model->fotografia_tacometro = $this->photo->store("public/form-datos-preoperacionales/soportes/" . $this->model->placa_vehiculo);
         }
         if (!empty($this->fotografia_mantenimiento)) {
-            $this->model->fotografia_mantenimiento = $this->fotografia_mantenimiento->store("public/form-datos-preoperacionales/soportes/" . $this->model->id);
+            $this->model->fotografia_mantenimiento = $this->fotografia_mantenimiento->store("public/form-datos-preoperacionales/soportes/" . $this->model->placa_vehiculo);
         }
         $this->model->save();
 

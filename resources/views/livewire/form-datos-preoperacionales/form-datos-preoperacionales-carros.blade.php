@@ -21,7 +21,7 @@
         <div class="container">
             <div class="row mt-lg-n10 mt-md-n11 mt-n10">
                 <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
-                    <form wire:submit.prevent="save">
+                    <form wire:submit.prevent="save" enctype="multipart/form-data">
 
 
 

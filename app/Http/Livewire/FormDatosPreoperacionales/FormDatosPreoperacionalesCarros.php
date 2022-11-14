@@ -132,10 +132,10 @@ class FormDatosPreoperacionalesCarros extends Component
         $this->model->save();
 
         if (!empty($this->fotografia_vehiculos)) {
-            $this->model->fotografia_vehiculos = $this->fotografia_vehiculos->store("public/form-datos-preoperacionales/soportes-carros/" . $this->model->id);
+            $this->model->fotografia_vehiculos = $this->fotografia_vehiculos->store("public/form-datos-preoperacionales/soportes-carros/" . $this->model->placa_vehiculo);
         }
         if (!empty($this->fotografia_mantenimiento)) {
-            $this->model->fotografia_mantenimiento = $this->fotografia_mantenimiento->store("public/form-datos-preoperacionales/soportes-carros/" . $this->model->id);
+            $this->model->fotografia_mantenimiento = $this->fotografia_mantenimiento->store("public/form-datos-preoperacionales/soportes-carros/" . $this->model->placa_vehiculo);
         }
         $this->model->save();
 
