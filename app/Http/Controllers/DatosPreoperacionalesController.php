@@ -80,6 +80,7 @@ class DatosPreoperacionalesController extends Controller
 
         return view('datos-preoperacionales.admin.index_carro', [
             'respuestasForm' => $respuestasForm->orderBy('id', 'desc')->get(),
+            'tipo_form' => ETipoVehiculo::CARRO->getId()
         ]);
     }
 
@@ -112,6 +113,13 @@ class DatosPreoperacionalesController extends Controller
         //con este metodo se traen los correo para ponerlos en el textarea de la vista para enviar los correo
         $emailsArray = array();
         if ($type == ETipoVehiculo::MOTO->getId()) {
+            foreach ($objetsModel as $datoPreoperacional) {
+                if (!$datoPreoperacional->verficarSiLlenoFormulario(date('Y-m-d'))) {
+                    array_push($emailsArray, $datoPreoperacional->correo);
+                }
+            }
+        } else
+        if ($type == ETipoVehiculo::CARRO->getId()) {
             foreach ($objetsModel as $datoPreoperacional) {
                 if (!$datoPreoperacional->verficarSiLlenoFormulario(date('Y-m-d'))) {
                     array_push($emailsArray, $datoPreoperacional->correo);

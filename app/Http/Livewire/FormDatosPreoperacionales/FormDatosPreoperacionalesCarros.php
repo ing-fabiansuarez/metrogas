@@ -87,7 +87,7 @@ class FormDatosPreoperacionalesCarros extends Component
 
         'model.ha_diligenciado_ud_mismo' => 'required',
         'fotografia_vehiculos' => 'image|required',
-       
+
 
     ];
 
@@ -102,6 +102,7 @@ class FormDatosPreoperacionalesCarros extends Component
         if ($datosPreoperacional->cedula != null && $datosPreoperacional->placa_vehiculo != null) {
             if ($modeloPre = FormDatosPreoperacionalesCarrosModel::where('cedula', $datosPreoperacional->cedula)->where('placa_vehiculo', $datosPreoperacional->placa_vehiculo)->orderBy('id', 'desc')->first()) {
                 $this->model = $modeloPre;
+                $this->model->id = null;
             }
         }
 

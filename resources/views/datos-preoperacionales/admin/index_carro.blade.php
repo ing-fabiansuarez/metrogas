@@ -39,6 +39,10 @@
                                     <button type="button" style="color: white; width: 100%;" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal" class="btn bg-secundary btn-sm">Exportar</button>
                                 </div>
+                                <div class="col-md-2">
+                                    <a href="{{ route('admin.preoperacional.verificar', $tipo_form) }}" style="width: 100%"
+                                        class="btn bg-gradient-primary btn-sm">Verficar</a>
+                                </div>
                             </div>
                         </form>
                     </div>

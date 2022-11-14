@@ -29,8 +29,12 @@ class DatosPreoperacional extends Model
             } else {
                 return False;
             }
+        } else if ($this->tipo_vehiculo == ETipoVehiculo::CARRO->getId()) {
+            if (count(FormDatosPreoperacionalesCarrosModel::whereDate('created_at', $date)->where('cedula', $this->cedula)->where('placa_vehiculo', $this->placa_vehiculo)->get()) > 0) {
+                return True;
+            } else {
+                return False;
+            }
         }
     }
-
-    
 }
