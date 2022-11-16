@@ -45,7 +45,7 @@
 
                                                         <input accept="image/*" type="file" name="myarchivo" />
 
-                                                        @error('photo')
+                                                        @error('myarchivo')
                                                             <span class="text-danger text-message-validation">
                                                                 {{ $message }}
                                                             </span>

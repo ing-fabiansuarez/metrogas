@@ -21,6 +21,9 @@ class PruebasController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'myarchivo' => 'required|image|max:2048'
+        ]);
         if ($request->hasFile('myarchivo')) {
             $file =  $request->file('myarchivo');
             $destinationPath = "storage/private/pruebas/";
