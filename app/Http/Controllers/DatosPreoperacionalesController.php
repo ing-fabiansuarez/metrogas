@@ -51,6 +51,9 @@ class DatosPreoperacionalesController extends Controller
         if (!empty($request->get('num_solicitud'))) {
             $respuestasForm->where('id', $request->get('num_solicitud'));
         }
+        if (!empty($request->get('placa_vehiculo'))) {
+            $respuestasForm->where('placa_vehiculo', $request->get('placa_vehiculo'));
+        }
 
         return view('datos-preoperacionales.admin.index_moto', [
             'respuestasForm' => $respuestasForm->orderBy('id', 'desc')->get(),

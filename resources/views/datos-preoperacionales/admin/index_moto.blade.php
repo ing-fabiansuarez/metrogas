@@ -23,9 +23,9 @@
                             <div class="row mt-2 justify-content-center">
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label for="input_object_guid" class="form-control-label">Id Formulario</label>
-                                        <input class="form-control form-control-sm" type="number"
-                                            placeholder="N° Solicitud" name="num_solicitud">
+                                        <label for="input_object_guid" class="form-control-label">Placa</label>
+                                        <input class="form-control form-control-sm" type="text"
+                                            placeholder="Placa" name="placa_vehiculo">
                                     </div>
                                 </div>
                             </div>
