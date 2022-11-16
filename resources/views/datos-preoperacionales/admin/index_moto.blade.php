@@ -22,8 +22,8 @@
                             @csrf
                             <div class="row mt-2 justify-content-center">
                                 <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label for="input_object_guid" class="form-control-label">Placa</label>
+                                    <div class="form-group text-center">
+                                        <label style="width: 100%" for="input_object_guid" class="form-control-label text-center">Digite Placa</label>
                                         <input class="form-control form-control-sm" type="text"
                                             placeholder="Placa" name="placa_vehiculo">
                                     </div>
