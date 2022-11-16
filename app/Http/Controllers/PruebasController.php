@@ -12,6 +12,12 @@ class PruebasController extends Controller
             'solo_lectura' => false
         ]);
     }
+    public function uploadFile2()
+    {
+        return view('pruebas.form-motos-2', [
+            'solo_lectura' => false
+        ]);
+    }
 
     public function store(Request $request)
     {

@@ -207,3 +207,4 @@ Route::get('datos-preoperacionales/finalizado', [DatosPreoperacionalesController
 //pruebas
 Route::get('prueba', [PruebasController::class, 'uploadFile'])->name('prueba');
 Route::post('prueba', [PruebasController::class, 'store'])->name('sendprueba');
+Route::get('prueba2', [PruebasController::class, 'uploadFile2'])->name('prueba2');
