@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Route;
 use Adldap\Laravel\Facades\Adldap;
 use App\Http\Controllers\DatosPreoperacionalesController;
 use App\Http\Controllers\ProveedorController;
+use App\Http\Controllers\PruebasController;
 use App\Http\Controllers\ReportController;
+use App\Http\Livewire\Pruebas;
 use App\Models\FormPersonaJuridica;
 use App\Models\FormPersonaNatural;
 
@@ -200,3 +202,8 @@ Route::get('registrar-proveedor/finalizado', [ProveedorController::class, 'formu
 Route::get('datos-preoperacionales', [DatosPreoperacionalesController::class, 'index'])->name('datospreoperacionales.index');
 Route::post('datos-preoperacionales', [DatosPreoperacionalesController::class, 'responseForm'])->name('datospreoperacionales.responseForm');
 Route::get('datos-preoperacionales/finalizado', [DatosPreoperacionalesController::class, 'finalizado'])->name('datospreoperacionales.finalizado');
+
+
+//pruebas
+Route::get('prueba', [PruebasController::class, 'uploadFile'])->name('prueba');
+Route::post('prueba', [PruebasController::class, 'store'])->name('sendprueba');
