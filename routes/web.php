@@ -13,6 +13,8 @@ use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\PruebasController;
 use App\Http\Controllers\ReportController;
 use App\Http\Livewire\Pruebas;
+use App\Models\FormDatosPreoperacionalesCarrosModel;
+use App\Models\FormDatosPreoperacionalesMotosModel;
 use App\Models\FormPersonaJuridica;
 use App\Models\FormPersonaNatural;
 
@@ -148,6 +150,16 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/carro', [DatosPreoperacionalesController::class, 'exportarFormCarros'])->name('admin.preoperacional.carros.exportar');
 		Route::get('/verficacion/{type}', [DatosPreoperacionalesController::class, 'verficarForm'])->name('admin.preoperacional.verificar');
 		Route::post('/verficacion/{type}', [DatosPreoperacionalesController::class, 'sendEmails'])->name('admin.preoperacional.emails');
+		Route::get('/moto-imprimir/{id}', function (FormDatosPreoperacionalesMotosModel $id) {
+			return view('datos-preoperacionales.admin.pdf-form-motos', [
+				'formulario' => $id
+			]);
+		})->name('admin.preoperacional.moto.imprimir');
+		Route::get('/carro-imprimir/{id}', function (FormDatosPreoperacionalesCarrosModel $id) {
+			return view('datos-preoperacionales.admin.pdf-form-carros', [
+				'formulario' => $id
+			]);
+		})->name('admin.preoperacional.carro.imprimir');
 	});
 
 	Route::get('/logout', [SessionsController::class, 'destroy']);

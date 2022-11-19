@@ -13,6 +13,9 @@
                             <p>
                                 <b style="color: white">ID Formulario:</b>
                             </p>
+                            <p>
+                                <b style="color: white">Fecha Creación: {{ $model->created_at }}</b>
+                            </p>
                         @endif
                     </div>
                 </div>
