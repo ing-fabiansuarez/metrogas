@@ -7,8 +7,8 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-5 text-center mx-auto">
                         <br>
-                        <p style="font-size: 1.3rem" class="text-lead text-white"><b>F-HSEQ-07 V_7 LISTA DE CHEQUEO
-                                PREOPERACIONAL DE MOTOCICLETAS Y/O DESPLAZAMIENTO </b></p>
+                        <p style="font-size: 1.3rem" class="text-lead text-white"><b>F-HSEQ-07 LISTA DE CHEQUEO
+                                PREOPERACIONAL DE MOTOCICLETAS Y/O DESPLAZAMIENTO V_7</b></p>
                         @if ($solo_lectura)
                             <p>
                                 <b style="color: white">ID Formulario:</b>
@@ -22,15 +22,11 @@
             <div class="row mt-lg-n10 mt-md-n11 mt-n10">
                 <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
                     <form wire:submit.prevent="save" enctype="multipart/form-data">
-
-
-
                         <div class="card z-index-0 mt-3">
                             <div class="card-header pb-0 px-3">
                                 <h6 class="mb-0">Información del Solicitante</h6>
                             </div>
                             <div class="card-body pt-3 p-3">
-
 
                                 <div class="row">
 

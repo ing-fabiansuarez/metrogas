@@ -23,11 +23,29 @@
                             <div class="row mt-2 justify-content-center">
                                 <div class="col-md-2">
                                     <div class="form-group text-center">
-                                        <label style="width: 100%" for="input_object_guid" class="form-control-label text-center">Digite Placa</label>
-                                        <input class="form-control form-control-sm" type="text"
-                                            placeholder="Placa" name="placa_vehiculo">
+                                        <label style="width: 100%" for="input_object_guid"
+                                            class="form-control-label text-center">Digite Placa</label>
+                                        <input class="form-control form-control-sm" type="text" placeholder="Placa"
+                                            name="placa_vehiculo" value="{{ $inputs['placa_vehiculo'] }}">
                                     </div>
                                 </div>
+                                <div class="col-md-5">
+
+                                    <div class="form-group">
+                                        <label>Fecha de Creación</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-clock"></i></span>
+                                            </div>
+                                            <input name="fecha_creacion" type="text"
+                                                class="form-control form-control-sm float-right" id="reservationtime"
+                                                value="{{ $inputs['fecha_creacion'] }}">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
                             </div>
 
                             <div class="row justify-content-center">
@@ -52,7 +70,10 @@
                                 <thead>
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Id For
+                                            Id
+                                        </th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Fecha y hora
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -86,6 +107,11 @@
                                             <td class="text-center">
                                                 <a href="{{ route('admin.preoperacional.ver', $item->id) }}">
                                                     <p class="text-xs font-weight-bold mb-0">{{ $item->id }}</p>
+                                                </a>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="{{ route('admin.preoperacional.ver', $item->id) }}">
+                                                    <p class="text-xs font-weight-bold mb-0">{{ $item->created_at }}</p>
                                                 </a>
                                             </td>
                                             <td class="text-center">
@@ -180,27 +206,32 @@
     </div>
 @endsection
 @push('css')
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
 @endpush
 @push('js')
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="{{ asset('assets/plugins/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
     <script>
         $(function() {
-            $('#reservation').daterangepicker({
+            $('#reservationtime').daterangepicker({
+                timePicker: true,
                 autoUpdateInput: false,
                 locale: {
-                    cancelLabel: 'Clear',
-                    format: 'YYYY/MM/DD'
+                    format: 'DD-MM-YYYY HH:mm',
+                    cancelLabel: 'Cancelar'
                 }
             })
-            $('#reservation').on('apply.daterangepicker', function(ev, picker) {
-                $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format(
-                    'YYYY/MM/DD'));
+
+            $('#reservationtime').on('apply.daterangepicker', function(ev, picker) {
+                $(this).val(picker.startDate.format('DD-MM-YYYY HH:mm') + ' - ' + picker.endDate.format(
+                    'DD-MM-YYYY HH:mm'));
             });
 
-            $('#reservation').on('cancel.daterangepicker', function(ev, picker) {
+            $('#reservationtime').on('cancel.daterangepicker', function(ev, picker) {
                 $(this).val('');
             });
         })

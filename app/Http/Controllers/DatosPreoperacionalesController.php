@@ -48,16 +48,32 @@ class DatosPreoperacionalesController extends Controller
     {
         $respuestasForm = FormDatosPreoperacionalesMotosModel::latest();
 
+        $placa_vehiculo = "";
+        $fecha_creacion = "";
+
         if (!empty($request->get('num_solicitud'))) {
             $respuestasForm->where('id', $request->get('num_solicitud'));
         }
         if (!empty($request->get('placa_vehiculo'))) {
             $respuestasForm->where('placa_vehiculo', $request->get('placa_vehiculo'));
+            $placa_vehiculo = $request->get('placa_vehiculo');
         }
+        if (!empty($request->get('fecha_creacion'))) {
+            $dates = explode(' - ', $request->get('fecha_creacion'));
+            $respuestasForm->whereBetween('created_at', [$dates[0], $dates[1]]);
+            //dd($respuestasForm);
+            $fecha_creacion = $request->get('fecha_creacion');
+        }
+
+
 
         return view('datos-preoperacionales.admin.index_moto', [
             'respuestasForm' => $respuestasForm->orderBy('id', 'desc')->get(),
-            'tipo_form' => ETipoVehiculo::MOTO->getId()
+            'tipo_form' => ETipoVehiculo::MOTO->getId(),
+            'inputs' => [
+                'placa_vehiculo' => $placa_vehiculo,
+                'fecha_creacion' => $fecha_creacion
+            ]
         ]);
     }
 
@@ -83,13 +99,31 @@ class DatosPreoperacionalesController extends Controller
     {
         $respuestasForm = FormDatosPreoperacionalesCarrosModel::latest();
 
+        $placa_vehiculo = "";
+        $fecha_creacion = "";
+
+
         if (!empty($request->get('num_solicitud'))) {
             $respuestasForm->where('id', $request->get('num_solicitud'));
+        }
+        if (!empty($request->get('placa_vehiculo'))) {
+            $respuestasForm->where('placa_vehiculo', $request->get('placa_vehiculo'));
+            $placa_vehiculo = $request->get('placa_vehiculo');
+        }
+        if (!empty($request->get('fecha_creacion'))) {
+            $dates = explode(' - ', $request->get('fecha_creacion'));
+            $respuestasForm->whereBetween('created_at', [$dates[0], $dates[1]]);
+            //dd($respuestasForm);
+            $fecha_creacion = $request->get('fecha_creacion');
         }
 
         return view('datos-preoperacionales.admin.index_carro', [
             'respuestasForm' => $respuestasForm->orderBy('id', 'desc')->get(),
-            'tipo_form' => ETipoVehiculo::CARRO->getId()
+            'tipo_form' => ETipoVehiculo::CARRO->getId(),
+            'inputs' => [
+                'placa_vehiculo' => $placa_vehiculo,
+                'fecha_creacion' => $fecha_creacion
+            ]
         ]);
     }
 
