@@ -104,17 +104,16 @@ class FormDatosPreoperacionalesMotos extends Component
                 $this->model = $modeloPre;
                 $this->model->id = null;
             }
-        } else {
-            $this->model->cedula = $datosPreoperacional->cedula == null ? $this->model->cedula : $datosPreoperacional->cedula;
-            $this->model->nombre_completo = $datosPreoperacional->nombre_completo == null ? $this->model->nombre_completo : $datosPreoperacional->nombre_completo;
-            $this->model->correo = $datosPreoperacional->correo == null ? $this->model->correo : $datosPreoperacional->correo;
-            $this->model->lugar_trabajo = $datosPreoperacional->lugar_trabajo == null ? $this->model->lugar_trabajo : $datosPreoperacional->lugar_trabajo;
-            $this->model->area = $datosPreoperacional->area == null ? $this->model->area : $datosPreoperacional->area;
-            $this->model->placa_vehiculo = $datosPreoperacional->placa_vehiculo == null ? $this->model->placa_vehiculo : $datosPreoperacional->placa_vehiculo;
-            $this->model->modelo = $datosPreoperacional->modelo == null ? $this->model->modelo : $datosPreoperacional->modelo;
-            $this->model->cargo = $datosPreoperacional->cargo == null ? $this->model->cargo : $datosPreoperacional->cargo;
-            $this->model->tipo_vehiculo = $datosPreoperacional->tipo_vehiculo == null ? $this->model->tipo_vehiculo : $datosPreoperacional->tipo_vehiculo;
         }
+        $this->model->cedula = $datosPreoperacional->cedula == null ? $this->model->cedula : $datosPreoperacional->cedula;
+        $this->model->nombre_completo = $datosPreoperacional->nombre_completo == null ? $this->model->nombre_completo : $datosPreoperacional->nombre_completo;
+        $this->model->correo = $datosPreoperacional->correo == null ? $this->model->correo : $datosPreoperacional->correo;
+        $this->model->lugar_trabajo = $datosPreoperacional->lugar_trabajo == null ? $this->model->lugar_trabajo : $datosPreoperacional->lugar_trabajo;
+        $this->model->area = $datosPreoperacional->area == null ? $this->model->area : $datosPreoperacional->area;
+        $this->model->placa_vehiculo = $datosPreoperacional->placa_vehiculo == null ? $this->model->placa_vehiculo : $datosPreoperacional->placa_vehiculo;
+        $this->model->modelo = $datosPreoperacional->modelo == null ? $this->model->modelo : $datosPreoperacional->modelo;
+        $this->model->cargo = $datosPreoperacional->cargo == null ? $this->model->cargo : $datosPreoperacional->cargo;
+        $this->model->tipo_vehiculo = $datosPreoperacional->tipo_vehiculo == null ? $this->model->tipo_vehiculo : $datosPreoperacional->tipo_vehiculo;
     }
 
 
@@ -124,10 +123,10 @@ class FormDatosPreoperacionalesMotos extends Component
         $this->model->save();
 
         if (!empty($this->photo)) {
-            $this->model->fotografia_tacometro = $this->photo->store("public/form-datos-preoperacionales/soportes/" . $this->model->placa_vehiculo);
+            $this->model->fotografia_tacometro = $this->photo->store("public/form-datos-preoperacionales/soportes-motos/" . date("Y-m-d") . "/" . $this->model->placa_vehiculo);
         }
         if (!empty($this->fotografia_mantenimiento)) {
-            $this->model->fotografia_mantenimiento = $this->fotografia_mantenimiento->store("public/form-datos-preoperacionales/soportes/" . $this->model->placa_vehiculo);
+            $this->model->fotografia_mantenimiento = $this->fotografia_mantenimiento->store("public/form-datos-preoperacionales/soportes-motos/" . date("Y-m-d") . "/" . $this->model->placa_vehiculo);
         }
         $this->model->save();
 
