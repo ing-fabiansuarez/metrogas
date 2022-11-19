@@ -253,6 +253,19 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link {{ Request::is('form-datos-preoperacionales/datos-preoperacioneles-moto*') ? 'active' : '' }}"
+                        href="{{ route('admin.preoperacional.configuracion') }}">
+                        <div
+                            class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                            <i style="font-size: 1rem;"
+                                class="fas fa-regular fa-user ps-2 pe-2 text-center text-dark {{ Request::is('form-datos-preoperacionales/moto*') ? 'text-white' : 'text-dark' }} "
+                                aria-hidden="true"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Configuración</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link {{ Request::is('form-datos-preoperacionales/moto*') ? 'active' : '' }}"
                         href="{{ route('admin.preoperacional') }}">
                         <div

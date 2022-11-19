@@ -160,6 +160,11 @@ Route::group(['middleware' => 'auth'], function () {
 				'formulario' => $id
 			]);
 		})->name('admin.preoperacional.carro.imprimir');
+
+		//Centro Preoperacioneles
+		Route::get('datos-preoperacioneles-moto', function () {
+			return view('livewire.datos-preoperacional-motos.index');
+		})->name('admin.preoperacional.configuracion');
 	});
 
 	Route::get('/logout', [SessionsController::class, 'destroy']);
