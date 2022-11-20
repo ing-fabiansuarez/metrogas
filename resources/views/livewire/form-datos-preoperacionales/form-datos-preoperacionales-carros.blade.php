@@ -1107,7 +1107,7 @@
                                                             No Subido
                                                         @endif
                                                     @else
-                                                        <input wire:model="fotografia_vehiculos"
+                                                        <input wire:model="fotografia_vehiculos" accept="image/*"
                                                             class="form-control form-control-sm " type="file" />
                                                     @endif
 
@@ -1133,7 +1133,7 @@
                                                             No Subido
                                                         @endif
                                                     @else
-                                                        <input wire:model="fotografia_mantenimiento"
+                                                        <input wire:model="fotografia_mantenimiento" accept="image/*"
                                                             class="form-control form-control-sm " type="file" />
                                                     @endif
                                                     @error('fotografia_mantenimiento')

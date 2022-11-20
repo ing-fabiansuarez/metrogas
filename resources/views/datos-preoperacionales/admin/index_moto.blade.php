@@ -61,6 +61,11 @@
                                     <a href="{{ route('admin.preoperacional.verificar', $tipo_form) }}" style="width: 100%"
                                         class="btn bg-gradient-primary btn-sm">Verficar</a>
                                 </div>
+
+                                <div class="col-md-2">
+                                    <button type="button" style="color: white; width: 100%;" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal1" class="btn bg-secundary btn-sm">Descargar</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -198,6 +203,37 @@
                             @csrf
                             <button type="submit" name="r" value="normal" style="color: white"
                                 class="btn bg-secundary">Exportar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Descargar Imagenes</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{{ route('datospreoperacionales.descargar') }}" method="get">
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="form-control-label">Fecha</label>
+                                    <input class="form-control form-control-sm" type="date" name="date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn bg-gradient-secondary"
+                                data-bs-dismiss="modal">Cerrar</button>
+                            @csrf
+                            <input type="hidden" name="type" value="{{ $tipo_form }}">
+                            <button type="submit" style="color: white" class="btn bg-secundary">Exportar</button>
                         </div>
                     </form>
                 </div>

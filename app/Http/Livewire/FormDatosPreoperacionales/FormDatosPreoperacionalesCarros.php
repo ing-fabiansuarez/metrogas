@@ -131,10 +131,12 @@ class FormDatosPreoperacionalesCarros extends Component
         $this->model->save();
 
         if (!empty($this->fotografia_vehiculos)) {
-            $this->model->fotografia_vehiculos = $this->fotografia_vehiculos->store("public/form-datos-preoperacionales/soportes-carros/" . date("Y-m-d") . "/" . $this->model->placa_vehiculo);
+            $extension = pathinfo($this->fotografia_vehiculos->getFileName(), PATHINFO_EXTENSION);
+            $this->model->fotografia_vehiculos = $this->fotografia_vehiculos->storeAs("public/form-datos-preoperacionales/soportes-carros/" . date("Y-m-d"),  $this->model->placa_vehiculo . " - 1 - " . time() . "." . $extension);
         }
         if (!empty($this->fotografia_mantenimiento)) {
-            $this->model->fotografia_mantenimiento = $this->fotografia_mantenimiento->store("public/form-datos-preoperacionales/soportes-carros/" . date("Y-m-d") . "/" . $this->model->placa_vehiculo);
+            $extension = pathinfo($this->fotografia_mantenimiento->getFileName(), PATHINFO_EXTENSION);
+            $this->model->fotografia_mantenimiento = $this->fotografia_mantenimiento->storeAs("public/form-datos-preoperacionales/soportes-carros/" . date("Y-m-d"),  $this->model->placa_vehiculo . " - 2 - " . time() . "." . $extension);
         }
         $this->model->save();
 

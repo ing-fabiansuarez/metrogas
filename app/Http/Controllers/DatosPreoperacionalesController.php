@@ -11,6 +11,9 @@ use App\Models\FormDatosPreoperacionalesCarrosModel;
 use App\Models\FormDatosPreoperacionalesMotosModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use ZipArchive;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class DatosPreoperacionalesController extends Controller
 {
@@ -210,5 +213,70 @@ class DatosPreoperacionalesController extends Controller
         } else {
             return redirect()->route('admin.preoperacional.verificar', $type)->with(['errors' => ['Debe haber por lo menos un correo valido para enviar información.']]);
         }
+    }
+
+    public function downloadZip(Request $request)
+    {
+        $date = $request->get('date');
+        $type = $request->get('type');
+
+        $path = "";
+        switch ($type) {
+            case ETipoVehiculo::CARRO->getId():
+                $path = "/form-datos-preoperacionales/soportes-carros/" . $date;
+                break;
+            case ETipoVehiculo::MOTO->getId():
+                $path = "/form-datos-preoperacionales/soportes-motos/" . $date;
+                break;
+
+            default:
+                return "NO EXITE EL TIPO ENVIADO";
+                break;
+        }
+
+        if (!is_dir(public_path(Storage::url($path)))) {
+            return "NO HAY IMAGENES ESTE DIA";
+        }
+
+        $zip = new ZipArchive;
+        $fileName = 'datos-preoperacionales.zip';
+
+        if (file_exists($fileName)) {
+            unlink($fileName);
+        }
+        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
+
+            $files = File::files(public_path(Storage::url($path)));
+            foreach ($files as $key => $value) {
+                echo $value . '<br/>';
+                $file = basename($value);
+                $zip->addFile($value, $file);
+            }
+
+            $zip->close();
+        }
+
+        return response()->download(public_path($fileName));
+
+        /* $path = "/public/form-datos-preoperacionales/soportes-carros/";
+        $pathsDirectories = Storage::allDirectories($path);
+        dd($pathsDirectories);
+
+        $zip = new ZipArchive;
+        $fileName = 'Example.zip';
+
+        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
+
+            foreach ($pathsDirectories as $pathDirectory) {
+                $files = File::files(public_path(Storage::url($pathDirectory)));
+                foreach ($files as $key => $value) {
+
+                    echo $value . '<br/>';
+                    $file = basename($value);
+                    $zip->addFile($value, $file);
+                }
+            }
+            $zip->close();
+        } */
     }
 }

@@ -958,7 +958,7 @@
                                                              <img class="img-thumbnail"
                                                                 src="{{ $photo->temporaryUrl() }}"> --}}
                                                         @endif
-                                                        <input type="file" wire:model="photo" />
+                                                        <input accept="image/*" type="file" wire:model="photo" />
 
                                                         <div wire:loading wire:target="photo">Cargado imagen...</div>
                                                     @endif
@@ -986,7 +986,8 @@
                                                         @endif
                                                     @else
                                                         <br>
-                                                        <input type="file" wire:model="fotografia_mantenimiento" />
+                                                        <input accept="image/*" type="file"
+                                                            wire:model="fotografia_mantenimiento" />
                                                     @endif
                                                     @error('fotografia_mantenimiento')
                                                         <span class="text-danger text-message-validation">

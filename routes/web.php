@@ -18,7 +18,6 @@ use App\Models\FormDatosPreoperacionalesMotosModel;
 use App\Models\FormPersonaJuridica;
 use App\Models\FormPersonaNatural;
 use Illuminate\Support\Facades\Storage;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -220,6 +219,7 @@ Route::get('registrar-proveedor/finalizado', [ProveedorController::class, 'formu
 Route::get('datos-preoperacionales', [DatosPreoperacionalesController::class, 'index'])->name('datospreoperacionales.index');
 Route::post('datos-preoperacionales', [DatosPreoperacionalesController::class, 'responseForm'])->name('datospreoperacionales.responseForm');
 Route::get('datos-preoperacionales/finalizado', [DatosPreoperacionalesController::class, 'finalizado'])->name('datospreoperacionales.finalizado');
+Route::get('/datos-preoperacionales/descargar', [DatosPreoperacionalesController::class, 'downloadZip'])->name('datospreoperacionales.descargar');
 
 
 //pruebas
@@ -228,10 +228,3 @@ Route::post('prueba', [PruebasController::class, 'store'])->name('sendprueba');
 Route::get('prueba2', [PruebasController::class, 'uploadFile2'])->name('prueba2');
 
 
-Route::get('/descargar', function () {
-	$directory = "public/form-datos-preoperacionales/soportes-carros";
-	$files = Storage::allFiles($directory);
-	
-	//dd($files);
-	return response()->file($files);
-});

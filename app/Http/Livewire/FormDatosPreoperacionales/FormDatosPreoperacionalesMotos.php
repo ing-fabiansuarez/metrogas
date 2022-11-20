@@ -18,7 +18,7 @@ class FormDatosPreoperacionalesMotos extends Component
 
     public $model;
     public $photo;
-    public $fotografiaMantenimiento;
+    public $fotografia_mantenimiento;
 
     protected $rules = [
         'model.cedula' => 'required',
@@ -123,10 +123,12 @@ class FormDatosPreoperacionalesMotos extends Component
         $this->model->save();
 
         if (!empty($this->photo)) {
-            $this->model->fotografia_tacometro = $this->photo->store("public/form-datos-preoperacionales/soportes-motos/" . date("Y-m-d") . "/" . $this->model->placa_vehiculo);
+            $extension = pathinfo($this->photo->getFileName(), PATHINFO_EXTENSION);
+            $this->model->fotografia_tacometro = $this->photo->storeAs("public/form-datos-preoperacionales/soportes-motos/" . date("Y-m-d"), $this->model->placa_vehiculo . " - 1 - " . time() . "." . $extension);
         }
         if (!empty($this->fotografia_mantenimiento)) {
-            $this->model->fotografia_mantenimiento = $this->fotografia_mantenimiento->store("public/form-datos-preoperacionales/soportes-motos/" . date("Y-m-d") . "/" . $this->model->placa_vehiculo);
+            $extension = pathinfo($this->fotografia_mantenimiento->getFileName(), PATHINFO_EXTENSION);
+            $this->model->fotografia_mantenimiento = $this->fotografia_mantenimiento->storeAs("public/form-datos-preoperacionales/soportes-motos/" . date("Y-m-d"), $this->model->placa_vehiculo . " - 2 - " . time() . "." . $extension);
         }
         $this->model->save();
 
