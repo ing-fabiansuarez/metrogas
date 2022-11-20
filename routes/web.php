@@ -228,3 +228,10 @@ Route::post('prueba', [PruebasController::class, 'store'])->name('sendprueba');
 Route::get('prueba2', [PruebasController::class, 'uploadFile2'])->name('prueba2');
 
 
+Route::get(
+	'tiempo',
+	function () {
+		$hoy = date("Y-m-d H:i:s");
+		return $hoy;
+	}
+);
