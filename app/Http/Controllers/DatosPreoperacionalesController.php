@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Enums\EActivoInactivo;
+use App\Enums\EBuenoMalo;
+use App\Enums\ENivelAceite;
+use App\Enums\ESiNo;
 use App\Enums\ETipoVehiculo;
 use App\Exports\FormDatosPreoperacionalesCarrosExport;
 use App\Exports\FormDatosPreoperacionalesMotosExport;
@@ -11,10 +14,12 @@ use App\Models\DatosPreoperacional;
 use App\Models\FormDatosPreoperacionalesCarrosModel;
 use App\Models\FormDatosPreoperacionalesMotosModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Mail;
 use ZipArchive;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\Paginator;
 
 class DatosPreoperacionalesController extends Controller
 {
@@ -74,9 +79,9 @@ class DatosPreoperacionalesController extends Controller
         }
 
 
-
+        Paginator::useBootstrap();
         return view('datos-preoperacionales.admin.index_moto', [
-            'respuestasForm' => $respuestasForm->orderBy('id', 'desc')->get(),
+            'respuestasForm' => $respuestasForm->orderBy('id', 'desc')->paginate(10),
             'tipo_form' => ETipoVehiculo::MOTO->getId(),
             'inputs' => [
                 'placa_vehiculo' => $placa_vehiculo,
@@ -290,5 +295,28 @@ class DatosPreoperacionalesController extends Controller
         if (file_exists($filetopath)) {
             return response()->download($filetopath, $zipFileName, $headers);
         }
+    }
+
+    public function generarPdfFormMotos(FormDatosPreoperacionalesMotosModel $id)
+    {
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('datos-preoperacionales.admin.pdf-dompdf-form-motos',  [
+            'object' => $id,
+            'solo_lectura' => true,
+            'ENivelAceite' => ENivelAceite::cases(),
+            'EBuenoMalo' => EBuenoMalo::cases(),
+            'ESiNo' => ESiNo::cases()
+        ]);
+
+        $pdf->render();
+        return $pdf->download($id->nombre_completo . ".pdf");
+
+        /*  return view('datos-preoperacionales.admin.pdf-dompdf-form-motos',  [
+            'object' => $id,
+            'solo_lectura' => true,
+            'ENivelAceite' => ENivelAceite::cases(),
+            'EBuenoMalo' => EBuenoMalo::cases(),
+            'ESiNo' => ESiNo::cases()
+        ]); */
     }
 }

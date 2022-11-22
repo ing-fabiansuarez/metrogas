@@ -8,6 +8,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ViaticController;
 use Illuminate\Support\Facades\Route;
 use Adldap\Laravel\Facades\Adldap;
+use App\Enums\EBuenoMalo;
+use App\Enums\ENivelAceite;
+use App\Enums\ESiNo;
 use App\Http\Controllers\DatosPreoperacionalesController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\PruebasController;
@@ -18,6 +21,7 @@ use App\Models\FormDatosPreoperacionalesMotosModel;
 use App\Models\FormPersonaJuridica;
 use App\Models\FormPersonaNatural;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\App;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -152,9 +156,13 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('/verficacion/{type}', [DatosPreoperacionalesController::class, 'sendEmails'])->name('admin.preoperacional.emails');
 		Route::get('/moto-imprimir/{id}', function (FormDatosPreoperacionalesMotosModel $id) {
 			return view('datos-preoperacionales.admin.pdf-form-motos', [
-				'formulario' => $id
+				'formulario' => $id,
 			]);
 		})->name('admin.preoperacional.moto.imprimir');
+
+
+		Route::get('/moto-imprimir-pdf/{id}', [DatosPreoperacionalesController::class, 'generarPdfFormMotos'])->name('admin.preoperacional.moto.imprimir.descargar');
+
 		Route::get('/carro-imprimir/{id}', function (FormDatosPreoperacionalesCarrosModel $id) {
 			return view('datos-preoperacionales.admin.pdf-form-carros', [
 				'formulario' => $id

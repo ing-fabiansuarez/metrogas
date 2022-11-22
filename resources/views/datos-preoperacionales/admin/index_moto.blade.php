@@ -103,6 +103,11 @@
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Placa
                                         </th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+
+                                        </th>
+
 
                                     </tr>
                                 </thead>
@@ -145,11 +150,22 @@
                                                 <p class="text-xs font-weight-bold mb-0">{{ $item->placa_vehiculo }}
                                                 </p>
                                             </td>
+                                            <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">
+                                                    <a href="{{ route('admin.preoperacional.moto.imprimir.descargar',$item) }}"
+                                                        class="mx-2">
+                                                        <i class="fas fa-download text-secondary"></i>
+                                                    </a>
+                                                </p>
+                                            </td>
 
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div>
+                                {{ $respuestasForm->links() }}
+                            </div>
                             @if (count($respuestasForm) < 1)
                                 <p class="m-3">
                                     No hay datos
