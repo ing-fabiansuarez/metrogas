@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\EActivoInactivo;
 use App\Enums\ETipoVehiculo;
 use App\Exports\FormDatosPreoperacionalesCarrosExport;
 use App\Exports\FormDatosPreoperacionalesMotosExport;
@@ -30,20 +31,24 @@ class DatosPreoperacionalesController extends Controller
         ]);
         //realizamos las consultas a los datos preoperacionales para verificar si existe
         if ($datosPreoperacional = DatosPreoperacional::where('cedula', $request->cedula)->where('placa_vehiculo', $request->placa)->first()) {
-            switch ($datosPreoperacional->tipo_vehiculo) {
-                case ETipoVehiculo::MOTO->getId():
-                    return view('datos-preoperacionales.form-motos', [
-                        'datosPreoperacional' => $datosPreoperacional
-                    ]);
-                    break;
-                case ETipoVehiculo::CARRO->getId():
-                    return view('datos-preoperacionales.form-carros', [
-                        'datosPreoperacional' => $datosPreoperacional
-                    ]);
-                    break;
+            if ($datosPreoperacional->active == EActivoInactivo::ACTIVO->getId()) {
+                switch ($datosPreoperacional->tipo_vehiculo) {
+                    case ETipoVehiculo::MOTO->getId():
+                        return view('datos-preoperacionales.form-motos', [
+                            'datosPreoperacional' => $datosPreoperacional
+                        ]);
+                        break;
+                    case ETipoVehiculo::CARRO->getId():
+                        return view('datos-preoperacionales.form-carros', [
+                            'datosPreoperacional' => $datosPreoperacional
+                        ]);
+                        break;
+                }
+            } else {
+                return redirect()->back()->withErrors(['msg-error' => 'Se encuentra Inactivo, comuníquese con el administrador.'])->withInput();
             }
         } else {
-            return redirect()->back()->withErrors(['msg-error' => 'No existe un vehículo registrado a ese número de cedula.']);
+            return redirect()->back()->withErrors(['msg-error' => 'No existe un vehículo registrado a ese número de cedula.'])->withInput();
         }
     }
 
@@ -166,23 +171,28 @@ class DatosPreoperacionalesController extends Controller
         $emailsArray = array();
         if ($type == ETipoVehiculo::MOTO->getId()) {
             foreach ($objetsModel as $datoPreoperacional) {
-                if (!$datoPreoperacional->verficarSiLlenoFormulario(date('Y-m-d'))) {
-                    array_push($emailsArray, $datoPreoperacional->correo);
+                if ($datoPreoperacional->active == EActivoInactivo::ACTIVO->getId()) {
+                    if (!$datoPreoperacional->verficarSiLlenoFormulario(date('Y-m-d'))) {
+                        array_push($emailsArray, $datoPreoperacional->correo);
+                    }
                 }
             }
         } else
         if ($type == ETipoVehiculo::CARRO->getId()) {
             foreach ($objetsModel as $datoPreoperacional) {
-                if (!$datoPreoperacional->verficarSiLlenoFormulario(date('Y-m-d'))) {
-                    array_push($emailsArray, $datoPreoperacional->correo);
+                if ($datoPreoperacional->active == EActivoInactivo::ACTIVO->getId()) {
+                    if (!$datoPreoperacional->verficarSiLlenoFormulario(date('Y-m-d'))) {
+                        array_push($emailsArray, $datoPreoperacional->correo);
+                    }
                 }
             }
         }
         //dd($emailsArray);
-
         return view('datos-preoperacionales.admin.verificar', [
             'objetsModel' => $objetsModel,
-            'emailsArray' => $emailsArray
+            'emailsArray' => $emailsArray,
+            'EActivo' => EActivoInactivo::ACTIVO->getId(),
+            'EInactivo' => EActivoInactivo::INACTIVO->getId()
         ]);
     }
 

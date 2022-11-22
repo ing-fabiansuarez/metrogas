@@ -44,6 +44,9 @@
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 {{ __('forms.created_at') }}
                             </th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                Estado
+                            </th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                 {{ __('forms.action') }}
                             </th>
@@ -90,8 +93,24 @@
                                         {{ $object->created_at }}
                                     </span>
                                 </td>
+                                <td class="ps-4">
+                                    @if ($object->active == $EActivo)
+                                        <span class="badge badge-sm bg-gradient-success">Activo</span>
+                                    @elseif ($object->active == $EInactivo)
+                                        <span class="badge badge-sm bg-gradient-danger">Inactivo</span>
+                                    @endif
+                                </td>
+
                                 <td class="text-center">
-                                    <a href="#" class="mx-3" data-bs-toggle="modal"
+                                    <a href="#" class="mx-2" wire:click="changeState({{ $object }})">
+                                        @if ($object->active == $EActivo)
+                                            <i class="fas fa-check text-secondary"></i>
+                                        @elseif ($object->active == $EInactivo)
+                                            <i class="fas fa-check text-secondary"></i>
+                                        @endif
+
+                                    </a>
+                                    <a href="#" class="mx-2" data-bs-toggle="modal"
                                         wire:click="edit({{ $object }})" data-bs-target="#modal_edit"
                                         data-bs-original-title="Edit">
                                         <i class="fas fa-user-edit text-secondary"></i>

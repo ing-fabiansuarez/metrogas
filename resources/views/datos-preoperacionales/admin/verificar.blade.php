@@ -66,7 +66,9 @@
                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                     Placa
                                 </th>
-
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    Estado
+                                </th>
 
                             </tr>
                         </thead>
@@ -113,6 +115,15 @@
                                             {{ $object->placa_vehiculo }}
                                         </span>
                                     </td>
+                                    <td class="text-center">
+                                        <span class="text-secondary text-xs font-weight-bold">
+                                            @if ($object->active == $EActivo)
+                                                <span class="badge badge-sm bg-gradient-success">Activo</span>
+                                            @elseif ($object->active == $EInactivo)
+                                                <span class="badge badge-sm bg-gradient-danger">Inactivo</span>
+                                            @endif
+                                        </span>
+                                    </td>
 
 
                                 </tr>
@@ -144,6 +155,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Correos Electrónicos</label>
+                                <p>* Solo aparecen los correos de quienes estan activos</p>
                                 @csrf
                                 <textarea class="form-control" name="emails" rows="3">
 @foreach ($emailsArray as $email)

@@ -162,7 +162,7 @@ Route::group(['middleware' => 'auth'], function () {
 		})->name('admin.preoperacional.carro.imprimir');
 
 		//Centro Preoperacioneles
-		Route::get('datos-preoperacioneles-moto', function () {
+		Route::get('datos-preoperacioneles', function () {
 			return view('livewire.datos-preoperacional-motos.index');
 		})->name('admin.preoperacional.configuracion');
 	});

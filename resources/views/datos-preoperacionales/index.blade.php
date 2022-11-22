@@ -33,7 +33,7 @@
                                 method="POST">
                                 <div class="mb-3">
                                     @csrf
-                                    <input name="cedula" type="text" class="form-control"
+                                    <input name="cedula" type="text" class="form-control" value="{{ old('cedula') }}"
                                         placeholder="Número de Cedula">
                                     @error('cedula')
                                         <span class="text-danger text-message-validation">
@@ -43,7 +43,8 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
-                                    <input name="placa" type="text" class="form-control" placeholder="Placa">
+                                    <input name="placa" type="text" class="form-control" placeholder="Placa"
+                                        value="{{ old('placa') }}">
                                     @error('placa')
                                         <span class="text-danger text-message-validation">
                                             {{ $message }}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Enums\EActivoInactivo;
 use App\Enums\ETipoVehiculo;
 use App\Models\DatosPreoperacional as ModelsDatosPreoperacional;
 use Livewire\Component;
@@ -64,9 +65,12 @@ class DatosPreoperacionalMotos extends Component
             'objetsModel' => ModelsDatosPreoperacional::latest()
                 ->orWhere('nombre_completo', 'ilike', $keyWord)
                 ->orWhere('cedula', 'ilike', $keyWord)
+                ->orderBy('id','desc')
                 ->paginate($this->paginationQuantity),
             'title' => $this->title,
-            'ETiposVehiculos' => ETipoVehiculo::cases()
+            'ETiposVehiculos' => ETipoVehiculo::cases(),
+            'EActivo' => EActivoInactivo::ACTIVO->getId(),
+            'EInactivo' => EActivoInactivo::INACTIVO->getId()
         ]);
     }
 
@@ -117,6 +121,19 @@ class DatosPreoperacionalMotos extends Component
     public function edit(ModelsDatosPreoperacional $object)
     {
         $this->model = $object;
+    }
+
+    public function changeState(ModelsDatosPreoperacional $object)
+    {
+        switch ($object->active) {
+            case EActivoInactivo::ACTIVO->getId():
+                $object->active = EActivoInactivo::INACTIVO->getId();
+                break;
+            case EActivoInactivo::INACTIVO->getId():
+                $object->active = EActivoInactivo::ACTIVO->getId();
+                break;
+        }
+        $object->save();
     }
 
     public function update()
