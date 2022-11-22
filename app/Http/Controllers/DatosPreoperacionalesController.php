@@ -227,66 +227,68 @@ class DatosPreoperacionalesController extends Controller
 
     public function downloadZip(Request $request)
     {
+
         $date = $request->get('date');
         $type = $request->get('type');
 
         $path = "";
         switch ($type) {
             case ETipoVehiculo::CARRO->getId():
-                $path = "/form-datos-preoperacionales/soportes-carros/" . $date;
+                $path = "\public\\form-datos-preoperacionales\soportes-carros\\" . $date;
                 break;
             case ETipoVehiculo::MOTO->getId():
-                $path = "/form-datos-preoperacionales/soportes-motos/" . $date;
+                $path = "\public\\form-datos-preoperacionales\soportes-motos\\" . $date;
                 break;
 
             default:
                 return "NO EXITE EL TIPO ENVIADO";
                 break;
         }
+        // dd(str_replace("\\", "/", storage_path("app") . $path));
 
-        if (!is_dir(public_path(Storage::url($path)))) {
+        if (!is_dir(str_replace("\\", "/", storage_path("app") . $path))) {
             return "NO HAY IMAGENES ESTE DIA";
         }
 
+
+        // Define Dir Folder
+        $public_dir = public_path();
+        // Zip File Name
+        $zipFileName = 'Preoperacionales.zip';
+        // Create ZipArchive Obj
         $zip = new ZipArchive;
-        $fileName = 'datos-preoperacionales.zip';
 
-        if (file_exists($fileName)) {
-            unlink($fileName);
-        }
-        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
 
-            $files = File::files(public_path(Storage::url($path)));
-            foreach ($files as $key => $value) {
-                echo $value . '<br/>';
-                $file = basename($value);
-                $zip->addFile($value, $file);
-            }
-
-            $zip->close();
+        if (file_exists($zipFileName)) {
+            unlink($zipFileName);
         }
 
-        return response()->download(public_path($fileName));
+        if ($zip->open($public_dir . '/' . $zipFileName, ZipArchive::CREATE) === TRUE) {
 
-        /* $path = "/public/form-datos-preoperacionales/soportes-carros/";
-        $pathsDirectories = Storage::allDirectories($path);
-        dd($pathsDirectories);
+            $files = Storage::allFiles($path);
 
-        $zip = new ZipArchive;
-        $fileName = 'Example.zip';
 
-        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE) {
+            foreach ($files as $file) {
 
-            foreach ($pathsDirectories as $pathDirectory) {
-                $files = File::files(public_path(Storage::url($pathDirectory)));
-                foreach ($files as $key => $value) {
-
-                    echo $value . '<br/>';
-                    $file = basename($value);
-                    $zip->addFile($value, $file);
-                }
+                $ruta = storage_path("app\\") . $file;
+                // dd($ruta);
+                $nombre = basename($ruta);
+                // Add File in ZipArchive
+                $zip->addFile($ruta, $nombre);
             }
+
+
+            // Close ZipArchive     
             $zip->close();
-        } */
+        }
+        // Set Header
+        $headers = array(
+            'Content-Type' => 'application/octet-stream',
+        );
+        $filetopath = $public_dir . '/' . $zipFileName;
+        // Create Download Response
+        if (file_exists($filetopath)) {
+            return response()->download($filetopath, $zipFileName, $headers);
+        }
     }
 }
