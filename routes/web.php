@@ -155,9 +155,20 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/verficacion/{type}', [DatosPreoperacionalesController::class, 'verficarForm'])->name('admin.preoperacional.verificar');
 		Route::post('/verficacion/{type}', [DatosPreoperacionalesController::class, 'sendEmails'])->name('admin.preoperacional.emails');
 		Route::get('/moto-imprimir/{id}', function (FormDatosPreoperacionalesMotosModel $id) {
-			return view('datos-preoperacionales.admin.pdf-form-motos', [
-				'formulario' => $id,
+			$pdf = App::make('dompdf.wrapper');
+			$pdf->setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('datos-preoperacionales.admin.pdf-dompdf-form-motos',  [
+				'object' => $id,
+				'solo_lectura' => true,
+				'ENivelAceite' => ENivelAceite::cases(),
+				'EBuenoMalo' => EBuenoMalo::cases(),
+				'ESiNo' => ESiNo::cases()
 			]);
+
+			$pdf->render();
+			return $pdf->stream($id->nombre_completo . ".pdf");
+			/* return view('datos-preoperacionales.admin.pdf-form-motos', [
+				'formulario' => $id,
+			]); */
 		})->name('admin.preoperacional.moto.imprimir');
 
 
