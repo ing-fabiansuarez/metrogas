@@ -271,7 +271,7 @@ class DatosPreoperacionalesController extends Controller
             foreach ($files as $file) {
 
                 $ruta = storage_path("app\\") . $file;
-                // dd($ruta);
+                 dd($ruta);
                 $nombre = basename($ruta);
                 // Add File in ZipArchive
                 $zip->addFile($ruta, $nombre);
