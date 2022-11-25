@@ -146,7 +146,8 @@ Route::group(['middleware' => 'auth'], function () {
 	});
 
 	Route::prefix('form-datos-preoperacionales')->middleware('can:gestionarFormularioDatosPreoperacionales')->group(function () {
-		Route::get('/moto', [DatosPreoperacionalesController::class, 'indexFormMotos'])->name('admin.preoperacional');
+		Route::get('/moto1', [DatosPreoperacionalesController::class, 'indexFormMotos']);
+		Route::get('/moto', [DatosPreoperacionalesController::class, 'indexFormMotosTable'])->name('admin.preoperacional');
 		Route::get('/moto/{id}', [DatosPreoperacionalesController::class, 'verFormMotos'])->name('admin.preoperacional.ver');
 		Route::post('/moto', [DatosPreoperacionalesController::class, 'exportarFormMotos'])->name('admin.preoperacional.exportar');
 		Route::get('/carro', [DatosPreoperacionalesController::class, 'indexFormCarros'])->name('admin.preoperacional.carros');

@@ -90,6 +90,13 @@ class DatosPreoperacionalesController extends Controller
         ]);
     }
 
+    public function indexFormMotosTable()
+    {
+        return view('datos-preoperacionales.admin.view_datatable_form_motos', [
+            'tipo_form' => ETipoVehiculo::MOTO->getId(),
+        ]);
+    }
+
     public function verFormMotos(FormDatosPreoperacionalesMotosModel $id)
     {
         return view('datos-preoperacionales.admin.ver_moto', [
