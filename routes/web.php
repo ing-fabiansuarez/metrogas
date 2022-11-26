@@ -150,7 +150,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/moto', [DatosPreoperacionalesController::class, 'indexFormMotosTable'])->name('admin.preoperacional');
 		Route::get('/moto/{id}', [DatosPreoperacionalesController::class, 'verFormMotos'])->name('admin.preoperacional.ver');
 		Route::post('/moto', [DatosPreoperacionalesController::class, 'exportarFormMotos'])->name('admin.preoperacional.exportar');
-		Route::get('/carro', [DatosPreoperacionalesController::class, 'indexFormCarros'])->name('admin.preoperacional.carros');
+		Route::get('/carro1', [DatosPreoperacionalesController::class, 'indexFormCarros'])->name('admin.preoperacional.carros');
+		Route::get('/carro', [DatosPreoperacionalesController::class, 'indexFormCarrosTable'])->name('admin.preoperacional.carros');
 		Route::get('/carro/{id}', [DatosPreoperacionalesController::class, 'verFormCarros'])->name('admin.preoperacional.carros.ver');
 		Route::post('/carro', [DatosPreoperacionalesController::class, 'exportarFormCarros'])->name('admin.preoperacional.carros.exportar');
 		Route::get('/verficacion/{type}', [DatosPreoperacionalesController::class, 'verficarForm'])->name('admin.preoperacional.verificar');
@@ -174,11 +175,26 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 		Route::get('/moto-imprimir-pdf/{id}', [DatosPreoperacionalesController::class, 'generarPdfFormMotos'])->name('admin.preoperacional.moto.imprimir.descargar');
+		Route::get('/carro-imprimir-pdf/{id}', [DatosPreoperacionalesController::class, 'generarPdfFormCarros'])->name('admin.preoperacional.carro.imprimir.descargar');
 
 		Route::get('/carro-imprimir/{id}', function (FormDatosPreoperacionalesCarrosModel $id) {
-			return view('datos-preoperacionales.admin.pdf-form-carros', [
-				'formulario' => $id
+			$pdf = App::make('dompdf.wrapper');
+			$pdf->setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('datos-preoperacionales.admin.pdf-dompdf-form-carros',  [
+				'object' => $id,
+				'solo_lectura' => true,
+				'ENivelAceite' => ENivelAceite::cases(),
+				'EBuenoMalo' => EBuenoMalo::cases(),
+				'ESiNo' => ESiNo::cases()
 			]);
+
+			$pdf->render();
+			return $pdf->stream($id->nombre_completo . ".pdf");
+			/* return view('datos-preoperacionales.admin.pdf-dompdf-form-carros', [
+				'object' => $id,
+				'ENivelAceite' => ENivelAceite::cases(),
+				'EBuenoMalo' => EBuenoMalo::cases(),
+				'ESiNo' => ESiNo::cases()
+			]); */
 		})->name('admin.preoperacional.carro.imprimir');
 
 		//Centro Preoperacioneles

@@ -96,6 +96,12 @@ class DatosPreoperacionalesController extends Controller
             'tipo_form' => ETipoVehiculo::MOTO->getId(),
         ]);
     }
+    public function indexFormCarrosTable()
+    {
+        return view('datos-preoperacionales.admin.view_datatable_form_carros', [
+            'tipo_form' => ETipoVehiculo::CARRO->getId(),
+        ]);
+    }
 
     public function verFormMotos(FormDatosPreoperacionalesMotosModel $id)
     {
@@ -308,6 +314,29 @@ class DatosPreoperacionalesController extends Controller
     {
         $pdf = App::make('dompdf.wrapper');
         $pdf->setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('datos-preoperacionales.admin.pdf-dompdf-form-motos',  [
+            'object' => $id,
+            'solo_lectura' => true,
+            'ENivelAceite' => ENivelAceite::cases(),
+            'EBuenoMalo' => EBuenoMalo::cases(),
+            'ESiNo' => ESiNo::cases()
+        ]);
+
+        $pdf->render();
+        return $pdf->download($id->nombre_completo . ".pdf");
+
+        /*  return view('datos-preoperacionales.admin.pdf-dompdf-form-motos',  [
+            'object' => $id,
+            'solo_lectura' => true,
+            'ENivelAceite' => ENivelAceite::cases(),
+            'EBuenoMalo' => EBuenoMalo::cases(),
+            'ESiNo' => ESiNo::cases()
+        ]); */
+    }
+
+    public function generarPdfFormCarros(FormDatosPreoperacionalesCarrosModel $id)
+    {
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('datos-preoperacionales.admin.pdf-dompdf-form-carros',  [
             'object' => $id,
             'solo_lectura' => true,
             'ENivelAceite' => ENivelAceite::cases(),

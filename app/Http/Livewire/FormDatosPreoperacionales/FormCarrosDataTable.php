@@ -4,22 +4,20 @@ namespace App\Http\Livewire\FormDatosPreoperacionales;
 
 use App\Enums\EBuenoMalo;
 use App\Enums\ENivelAceite;
-use App\Enums\ESiNo;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\FormDatosPreoperacionalesMotosModel;
-use Doctrine\DBAL\Types\DateTimeTzType;
+use App\Enums\ESiNo;
+use App\Models\FormDatosPreoperacionalesCarrosModel;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateTimeFilter;
 use ZipArchive;
 
-class FormMotosDataTable extends DataTableComponent
+class FormCarrosDataTable  extends DataTableComponent
 {
-    protected $model = FormDatosPreoperacionalesMotosModel::class;
+    protected $model = FormDatosPreoperacionalesCarrosModel::class;
 
     public array $bulkActions = [
         'downloadSelected' => 'Descargar PDF',
@@ -32,9 +30,10 @@ class FormMotosDataTable extends DataTableComponent
         Storage::disk('public')->makeDirectory('pdf-tmp');
 
         foreach ($this->getSelected() as $id) {
-            $item = FormDatosPreoperacionalesMotosModel::find($id);
+            $item = FormDatosPreoperacionalesCarrosModel::find($id);
+
             $pdf = App::make('dompdf.wrapper');
-            $pdf->setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('datos-preoperacionales.admin.pdf-dompdf-form-motos',  [
+            $pdf->setOptions(['defaultFont' => 'sans-serif', 'isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('datos-preoperacionales.admin.pdf-dompdf-form-carros',  [
                 'object' => $item,
                 'solo_lectura' => true,
                 'ENivelAceite' => ENivelAceite::cases(),
@@ -89,9 +88,10 @@ class FormMotosDataTable extends DataTableComponent
     }
     public function configure(): void
     {
-        $this->setPrimaryKey('id')->setTableRowUrl(function ($row) {
-            return route('admin.preoperacional.ver', $row);
-        });
+        $this->setPrimaryKey('id')
+            ->setTableRowUrl(function ($row) {
+                return route('admin.preoperacional.carros.ver', $row);
+            });
     }
 
     public function columns(): array
@@ -124,7 +124,7 @@ class FormMotosDataTable extends DataTableComponent
             Column::make('')
                 ->label(
                     function ($row, Column $column) {
-                        $route =  route('admin.preoperacional.moto.imprimir.descargar', $row);
+                        $route =  route('admin.preoperacional.carro.imprimir.descargar', $row);
                         echo '<a href="' . $route . '" class="mx-2"><i class="fas fa-download text-secondary"></i></a>';
                     }
                 )
