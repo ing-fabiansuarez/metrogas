@@ -7,12 +7,14 @@
     <title>
         Registro Proveedores
     </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" type="text/css"
         media="all" />
-    <link id="pagestyle" href="{{ asset('/assets/css/soft-ui-dashboard.css?v=1.0.3') }}" rel="stylesheet" type="text/css"
-        media="all" />
+    <link id="pagestyle" href="{{ asset('/assets/css/soft-ui-dashboard.css?v=1.0.3') }}" rel="stylesheet"
+        type="text/css" media="all" />
     <link href="{{ asset('assets/css/ui-fabian-form-proveedor.css') }}" rel="stylesheet" type="text/css"
         media="all" />
+
     @livewireStyles
 </head>
 
@@ -68,6 +70,8 @@
     </footer> --}}
 
     @livewireScripts
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/perfect-scrollbar.min.js') }}"></script>

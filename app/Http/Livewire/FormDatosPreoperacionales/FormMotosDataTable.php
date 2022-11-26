@@ -91,7 +91,7 @@ class FormMotosDataTable extends DataTableComponent
     {
         $this->setPrimaryKey('id')->setTableRowUrl(function ($row) {
             return route('admin.preoperacional.ver', $row);
-        });
+        })->setDefaultSort('id', 'desc');
     }
 
     public function columns(): array

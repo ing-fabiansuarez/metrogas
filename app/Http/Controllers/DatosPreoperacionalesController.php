@@ -7,6 +7,7 @@ use App\Enums\EBuenoMalo;
 use App\Enums\ENivelAceite;
 use App\Enums\ESiNo;
 use App\Enums\ETipoVehiculo;
+use App\Enums\ETipoVivienda;
 use App\Exports\FormDatosPreoperacionalesCarrosExport;
 use App\Exports\FormDatosPreoperacionalesMotosExport;
 use App\Mail\DatosPreoperacionalNoFillMailable;
@@ -25,35 +26,59 @@ class DatosPreoperacionalesController extends Controller
 {
     public function index()
     {
-        return view('datos-preoperacionales.index');
+        return view('datos-preoperacionales.index', [
+            'ETipoVehiculo_CARRO' => ETipoVehiculo::CARRO->getId(),
+            'ETipoVehiculo_MOTO' => ETipoVehiculo::MOTO->getId(),
+        ]);
     }
 
     public function responseForm(Request $request)
     {
+
         $request->validate([
-            'cedula' => 'required',
-            'placa' => 'required'
+            'type' => 'required'
         ]);
-        //realizamos las consultas a los datos preoperacionales para verificar si existe
-        if ($datosPreoperacional = DatosPreoperacional::where('cedula', $request->cedula)->where('placa_vehiculo', $request->placa)->first()) {
-            if ($datosPreoperacional->active == EActivoInactivo::ACTIVO->getId()) {
-                switch ($datosPreoperacional->tipo_vehiculo) {
-                    case ETipoVehiculo::MOTO->getId():
-                        return view('datos-preoperacionales.form-motos', [
-                            'datosPreoperacional' => $datosPreoperacional
-                        ]);
-                        break;
-                    case ETipoVehiculo::CARRO->getId():
+
+        switch ($request->type) {
+            case ETipoVehiculo::MOTO->getId():
+                $request->validate([
+                    'cedula' => 'required',
+                    'placa' => 'required'
+                ]);
+
+                //realizamos las consultas a los datos preoperacionales para verificar si existe
+                if ($datosPreoperacional = DatosPreoperacional::where('cedula', $request->cedula)->where('placa_vehiculo', $request->placa)->first()) {
+                    if ($datosPreoperacional->active == EActivoInactivo::ACTIVO->getId()) {
+                        switch ($datosPreoperacional->tipo_vehiculo) {
+                            case ETipoVehiculo::MOTO->getId():
+                                return view('datos-preoperacionales.form-motos', [
+                                    'datosPreoperacional' => $datosPreoperacional
+                                ]);
+                                break;
+                                /* case ETipoVehiculo::CARRO->getId():
                         return view('datos-preoperacionales.form-carros', [
                             'datosPreoperacional' => $datosPreoperacional
                         ]);
-                        break;
+                        break; */
+                            default:
+                                return redirect()->back()->withErrors(['msg-error' => 'No hay registros en datos preoperacionales.'])->withInput();
+                                break;
+                        }
+                    } else {
+                        return redirect()->back()->withErrors(['msg-error' => 'Se encuentra Inactivo, comuníquese con el administrador.'])->withInput();
+                    }
+                } else {
+                    return redirect()->back()->withErrors(['msg-error' => 'No existe un vehículo registrado a ese número de cedula.'])->withInput();
                 }
-            } else {
-                return redirect()->back()->withErrors(['msg-error' => 'Se encuentra Inactivo, comuníquese con el administrador.'])->withInput();
-            }
-        } else {
-            return redirect()->back()->withErrors(['msg-error' => 'No existe un vehículo registrado a ese número de cedula.'])->withInput();
+                break;
+            case ETipoVehiculo::CARRO->getId():
+                $request->validate([
+                    'placa' => 'required'
+                ]);
+                return view('datos-preoperacionales.form-carros', [
+                    'placa' => $request->placa
+                ]);
+                break;
         }
     }
 

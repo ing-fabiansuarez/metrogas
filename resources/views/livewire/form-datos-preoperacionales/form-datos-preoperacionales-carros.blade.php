@@ -1099,19 +1099,19 @@
                                                         fecha y hora)
                                                     </label>
                                                     @if ($solo_lectura)
-                                                        @if ($model->fotografia_vehiculo)
+                                                        @if ($model->fotografia_vehiculos)
                                                             <a target="_blank"
-                                                                href="{{ Storage::url($model->fotografia_vehiculo) }}"
+                                                                href="{{ Storage::url($model->fotografia_vehiculos) }}"
                                                                 class="btn btn-sm btn-round mb-0 me-1 bg-secundary">Ver</a>
                                                         @else
                                                             No Subido
                                                         @endif
                                                     @else
-                                                        <input wire:model="fotografia_vehiculo" accept="image/*"
+                                                        <input wire:model="fotografia_vehiculos" accept="image/*"
                                                             class="form-control form-control-sm " type="file" />
                                                     @endif
 
-                                                    @error('fotografia_vehiculo')
+                                                    @error('fotografia_vehiculos')
                                                         <span class="text-danger text-message-validation">
                                                             {{ $message }}
                                                         </span>
@@ -1189,9 +1189,14 @@
                         @if (!$solo_lectura)
                             <div class="row mt-4 justify-content-center">
                                 <div class="col-6">
-                                    <button type="submit"
-                                        class="btn btn-sm btn-round mb-0 me-1 bg-background-secundary">Guardar y
-                                        enviar</button>
+                                    <div wire:loading>
+                                        Esta Cargando...
+                                    </div>
+                                    <div wire:loading.remove>
+                                        <button type="submit"
+                                            class="btn btn-sm btn-round mb-0 me-1 bg-background-secundary">Guardar y
+                                            enviar</button>
+                                    </div>
                                 </div>
                             </div>
                         @endif
