@@ -1173,7 +1173,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($errors->any())
+                        {{-- @if ($errors->any())
                             <div class="alert alert-danger">
                                 <p><strong>Opps Something went wrong</strong></p>
                                 <ul>
@@ -1182,7 +1182,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif
+                        @endif --}}
 
 
 

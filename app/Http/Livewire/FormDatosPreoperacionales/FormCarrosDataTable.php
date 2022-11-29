@@ -40,7 +40,7 @@ class FormCarrosDataTable  extends DataTableComponent
                 'EBuenoMalo' => EBuenoMalo::cases(),
                 'ESiNo' => ESiNo::cases()
             ]);
-            $pdf->save('storage/pdf-tmp/' . $item->id . '.pdf');
+            $pdf->save('storage/pdf-tmp/' . $item->placa_vehiculo . '-' . time() . '.pdf');
         }
 
         //combierto en zip para descargarr lo que ya guarde
@@ -92,7 +92,10 @@ class FormCarrosDataTable  extends DataTableComponent
             ->setTableRowUrl(function ($row) {
                 return route('admin.preoperacional.carros.ver', $row);
             })
-            ->setDefaultSort('id', 'desc');
+            ->setDefaultSort('id', 'desc')
+            ->setConfigurableAreas([
+                'toolbar-right-start' => 'util.loader',
+            ]);
     }
 
     public function columns(): array

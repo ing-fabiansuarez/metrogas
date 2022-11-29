@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="row justify-content-center">
-                               {{--  <div class="col-md-2">
+                                {{--  <div class="col-md-2">
                                     <input name="r" style="width: 100%" class="btn bg-gradient-primary btn-sm"
                                         type="submit" value="Buscar">
                                 </div> --}}
@@ -72,6 +72,8 @@
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="p-3" style="font-size: 0.8rem !important">
+                            
+
                             <livewire:form-datos-preoperacionales.form-motos-data-table theme="bootstrap-5" />
 
                             {{--  <table class="table align-items-center mb-0">

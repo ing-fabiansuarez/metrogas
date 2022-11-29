@@ -26,6 +26,7 @@ class FormMotosDataTable extends DataTableComponent
     ];
     public function downloadSelected()
     {
+
         //elimino los archivos que estan en el pdf-temp
         Storage::disk('public')->deleteDirectory('pdf-tmp');
         //genero y guardo los pdf en el disco del servidor
@@ -41,7 +42,7 @@ class FormMotosDataTable extends DataTableComponent
                 'EBuenoMalo' => EBuenoMalo::cases(),
                 'ESiNo' => ESiNo::cases()
             ]);
-            $pdf->save('storage/pdf-tmp/' . $item->id . '.pdf');
+            $pdf->save('storage/pdf-tmp/' . $item->placa_vehiculo . '-' . time() . '.pdf');
         }
 
         //combierto en zip para descargarr lo que ya guarde
@@ -91,7 +92,10 @@ class FormMotosDataTable extends DataTableComponent
     {
         $this->setPrimaryKey('id')->setTableRowUrl(function ($row) {
             return route('admin.preoperacional.ver', $row);
-        })->setDefaultSort('id', 'desc');
+        })->setDefaultSort('id', 'desc')
+            ->setConfigurableAreas([
+                'toolbar-right-start' => 'util.loader',
+            ]);
     }
 
     public function columns(): array
