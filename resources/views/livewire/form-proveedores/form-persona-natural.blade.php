@@ -23,7 +23,35 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 mx-auto">
                     <form wire:submit.prevent="save">
 
+                        <div class="card z-index-0 mt-3">
+                            <div class="card-header pb-0 px-3">
+                                <h6 class="mb-0">Empresa para la cual desea hacer el registro: </h6>
+                            </div>
+                            <div class="card-body pt-3 p-3">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Empresa</label>
+                                            <select wire:model="personaNatural.empresa_id"
+                                                class="form-select form-select-sm"
+                                                @if ($solo_lectura) disabled @endif>
+                                                <option value="">--Seleccione--</option>
+                                                @foreach ($empresas as $empresa)
+                                                    <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                            <span class="error">
+                                                @error('personaNatural.empresa_id')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
 
+
+                            </div>
+                        </div>
 
                         <div class="card z-index-0 mt-3">
                             <div class="card-header pb-0 px-3">
@@ -68,7 +96,8 @@
                                                 @if ($solo_lectura) disabled @endif>
                                                 <option value="">--Seleccione--</option>
                                                 @foreach ($generos as $gen)
-                                                    <option value="{{ $gen->getId() }}">{{ $gen->getName() }}</option>
+                                                    <option value="{{ $gen->getId() }}">{{ $gen->getName() }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             <span class="error">
@@ -717,7 +746,8 @@
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
                                                         @foreach ($Esino as $gen)
-                                                            <option value="{{ $gen->getId() }}">{{ $gen->getName() }}
+                                                            <option value="{{ $gen->getId() }}">
+                                                                {{ $gen->getName() }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -738,7 +768,8 @@
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
                                                         @foreach ($Esino as $gen)
-                                                            <option value="{{ $gen->getId() }}">{{ $gen->getName() }}
+                                                            <option value="{{ $gen->getId() }}">
+                                                                {{ $gen->getName() }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -760,7 +791,8 @@
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
                                                         @foreach ($Esino as $gen)
-                                                            <option value="{{ $gen->getId() }}">{{ $gen->getName() }}
+                                                            <option value="{{ $gen->getId() }}">
+                                                                {{ $gen->getName() }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -783,7 +815,8 @@
                                                         @if ($solo_lectura) disabled @endif>
                                                         <option value="">--Seleccione--</option>
                                                         @foreach ($Esino as $gen)
-                                                            <option value="{{ $gen->getId() }}">{{ $gen->getName() }}
+                                                            <option value="{{ $gen->getId() }}">
+                                                                {{ $gen->getName() }}
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -1439,7 +1472,7 @@
                                                         S.A. no serán destinados a ninguna actividad ilícita de las
                                                         contempladas en el código penal colombiano o cualquier norma que
                                                         lo modifique o adicione:</label>
-                                                   {{--  <input wire:model="personaNatural.do_declaro_recursos_recibidos"
+                                                    {{--  <input wire:model="personaNatural.do_declaro_recursos_recibidos"
                                                         class="form-control form-control-sm" type="text"
                                                         @if ($solo_lectura) disabled @endif>
                                                     <span class="error">

@@ -22,9 +22,9 @@
                             <a href="https://metrogasesp.com/" target="_blank"
                                 class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Ir pagina web</a>
                         </div>
-                        <div class="px-xl-12 px-sm-12 px-3 mb-3">
+                        <div class="px-xl-6 px-sm-6 px-3 mb-3">
                             <div class="usr-name">
-                                <span><img src="{{ url('/assets/img/logo.png') }}" alt="admin-profile" class="img-fluid">
+                                <span><img src="{{ url('/assets/img/logos/logos_invercolsa.png') }}" alt="Logo invercolsa" class="img-fluid">
                                 </span>
                             </div>
 

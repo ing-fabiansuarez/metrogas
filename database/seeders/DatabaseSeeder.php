@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Empresa;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
             TypeIdentificationSeeder::class,
             AddRolSeeder::class,
             DatosPreoperacionalesSeeder::class */
+            EmpresasSeeder::class,
 
             /* UserSeeder::class, */
         ]);
