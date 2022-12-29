@@ -33,4 +33,7 @@ https://www.creative-tim.com/product/soft-ui-dashboard
 1. Ejecutar 'composer install'
 2. Crear base de datos en Postgres con el nombre 'metrogas_db'
 3. Descomente del archivo los seeder que desea inicializar DatabaseSeeder.php 
-3. Ejecutar 'php artisan migrate --seeder'
+4. Ejecutar 'php artisan storage:link'
+5. Ejecutar 'php artisan migrate --seeder'
+6. Conectarse a la VPN de Metrogas gas para poder establecer conexion con el directorio Activo
+7. Ejecutar 'php artisan adldap:import fsuarez' porque esta programado de que ese usuario se importe con el rol de administrador, el respto de usuario se importaran con el rol basico o Ejecutaor 'php artisan user:import'
