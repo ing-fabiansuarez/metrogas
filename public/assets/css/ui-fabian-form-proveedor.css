@@ -10,7 +10,7 @@
 }
 
 .bg-gradient-dark {
-    background-image: linear-gradient(310deg, #141727, #3a416f);
+    background-image: linear-gradient(310deg, #1417279c, #3a416f);
 }
 .error {
     color: red;

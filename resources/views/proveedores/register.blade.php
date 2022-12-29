@@ -3,7 +3,7 @@
 @section('content')
     <section class="min-vh-100">
         <div class="page-header align-items-start min-vh-50 pt-5 pb-10 m-3 border-radius-lg bg-background-secundary"
-            style="background-image: url('../assets/img/curved-images/curved14.jpg');">
+            style="background-image: url({{ url('/') }}/assets/img/logos/logos_invercolsa.png);background-size: cover;">
             <span class="mask bg-gradient-dark opacity-6"></span>
             <div class="container">
                 <div class="row justify-content-center">
