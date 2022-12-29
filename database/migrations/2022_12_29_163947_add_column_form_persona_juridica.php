@@ -13,10 +13,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('form_persona_juridicas', function (Blueprint $table) {
-            $table
-                ->foreignId('empresa_id')
-                ->constrained('empresas')
-                ->nullable();
+            $table->bigInteger('empresa_id')->nullable();
         });
     }
 
