@@ -16,7 +16,7 @@ class AddRolSeeder extends Seeder
      */
     public function run()
     {
-        /*  $roleAuxTesoreria = Role::create(['name' => 'Rol Auxiliar Tesoreria']);
+        $roleAuxTesoreria = Role::create(['name' => 'Rol Auxiliar Tesoreria']);
         Permission::create(['name' => 'uploadSupportsTesoreria', 'description' => 'Subir soportes de tesoreria en la solicitud de anticipos.'])->syncRoles([$roleAuxTesoreria]);
 
         $roleDirecFinanciero = Role::findByName('Rol Director Financiero');
@@ -24,14 +24,15 @@ class AddRolSeeder extends Seeder
 
         $roleReportes = Role::create(['name' => 'Rol Reportes']);
         $permisoreporte = Permission::findByName('report');
-        $roleReportes->givePermissionTo($permisoreporte); */
+        $roleReportes->givePermissionTo($permisoreporte); 
 
-        //$rolePlane = Role::findByName('Rol planeacion');
-        //Permission::create(['name' => 'emailSend', 'description' => 'Correo electronico para Rol de planeación.'])->syncRoles([$rolePlane]);
-        //Permission::create(['name' => 'realizarPago', 'description' => 'Realizar el flujo de realizar pago en la solicitud de viaticos.'])->syncRoles([$rolePlane]);
+        $rolePlane = Role::create(['name' => 'Rol planeacion']);
+        $rolePlane = Role::findByName('Rol planeacion');
+        Permission::create(['name' => 'emailSend', 'description' => 'Correo electronico para Rol de planeación.'])->syncRoles([$rolePlane]);
+        Permission::create(['name' => 'realizarPago', 'description' => 'Realizar el flujo de realizar pago en la solicitud de viaticos.'])->syncRoles([$rolePlane]);
 
-        //$roleDirecControlInterno = Role::create(['name' => 'Rol Director Control Interno']);
-        //Permission::create(['name' => 'gestionarFormularioProveedores', 'description' => 'Permite gestionar los formularios que estan en la pag web para el registro de proveedores.'])->syncRoles([$roleDirecControlInterno]);
+        $roleDirecControlInterno = Role::create(['name' => 'Rol Director Control Interno']);
+        Permission::create(['name' => 'gestionarFormularioProveedores', 'description' => 'Permite gestionar los formularios que estan en la pag web para el registro de proveedores.'])->syncRoles([$roleDirecControlInterno]);
 
         $roleDirecControlInterno = Role::create(['name' => 'Rol Datos Preoperacionales']);
         Permission::create(['name' => 'gestionarFormularioDatosPreoperacionales', 'description' => 'Permite gestionar los formularios de los datos preoperacionales tanto de motos como carros.'])->syncRoles([$roleDirecControlInterno]);

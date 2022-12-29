@@ -27,3 +27,10 @@ https://www.creative-tim.com/product/soft-ui-dashboard
 1. crear un nueva tabla
 * Crear el modelo, la migracion y los campos de la tabla.
 * 
+
+===================================================================================================================================================
+## Instrucciones para configurar entorno de desarrollo
+1. Ejecutar 'composer install'
+2. Crear base de datos en Postgres con el nombre 'metrogas_db'
+3. Descomente del archivo los seeder que desea inicializar DatabaseSeeder.php 
+3. Ejecutar 'php artisan migrate --seeder'
