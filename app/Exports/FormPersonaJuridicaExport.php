@@ -47,6 +47,7 @@ class FormPersonaJuridicaExport implements FromQuery, WithHeadings, ShouldAutoSi
     public function map($invoice): array
     {
         return [
+            $invoice->empresa != null ? $invoice->empresa->nombre : "",
             $invoice->id,
             '',
             '',
@@ -128,6 +129,7 @@ class FormPersonaJuridicaExport implements FromQuery, WithHeadings, ShouldAutoSi
     public function headings(): array
     {
         return [
+            'EMPRESA',
             'ID FORMULARIO',
             'TIPO DE CONTRAPARTE',
             'FASE IDENTIFICADA',

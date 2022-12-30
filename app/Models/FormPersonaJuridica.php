@@ -18,4 +18,8 @@ class FormPersonaJuridica extends Model
     {
         return $this->hasMany(FormBeneficiariosFinalesPJ::class, 'form_persona_juridica_id', 'id');
     }
+
+    public function empresa(){
+        return $this->belongsTo(Empresa::class);
+    }
 }

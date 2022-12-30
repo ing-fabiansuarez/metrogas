@@ -49,6 +49,7 @@ class FormPersonaNaturalExport implements FromQuery, WithHeadings, WithMapping, 
     public function map($invoice): array
     {
         return [
+            $invoice->empresa != null ? $invoice->empresa->nombre : "",
             $invoice->id,
             "",
             "",
@@ -129,6 +130,7 @@ class FormPersonaNaturalExport implements FromQuery, WithHeadings, WithMapping, 
     public function headings(): array
     {
         return [
+            'EMPRESA',
             'ID FORMULARIO',
             'TIPO DE CONTRAPARTE',
             'FASE IDENTIFICADA',

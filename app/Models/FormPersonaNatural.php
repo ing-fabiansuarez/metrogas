@@ -9,9 +9,16 @@ class FormPersonaNatural extends Model
 {
     use HasFactory;
 
-
     public function personasPoliticamenteExpuestas()
     {
-        return $this->hasMany(FormPersonasExpuestasPoliticamentePN::class, 'form_persona_natural_id', 'id');
+        return $this->hasMany(
+            FormPersonasExpuestasPoliticamentePN::class,
+            'form_persona_natural_id',
+            'id'
+        );
+    }
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class);
     }
 }

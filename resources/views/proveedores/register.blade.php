@@ -9,8 +9,10 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-5 text-center mx-auto">
                         <h1 class="text-white mb-1 mt-5">Bienvenido!</h1>
-                        <p class="text-lead text-white">Formulario de registro de proveedores de la empresa MetroGas SA
-                            ESP.</p>
+                        <p class="text-lead text-white">
+                            Formulario de registro de proveedores de las filiales del grupo
+                            Invercolsa
+                        </p>
                     </div>
                 </div>
             </div>
