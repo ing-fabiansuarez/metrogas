@@ -27,6 +27,7 @@ class FormPersonaNatural extends Component
     //SOPORTES
     public $support_formato_viculacion_persona_natural;
     public $support_clausula_cumplimiento_codigo_etica;
+    public $support_antisoborno_anticorrupcion;
     public $support_cedula_ciudadania;
     public $support_cedula_extranjeria;
     public $support_rut;
@@ -97,11 +98,11 @@ class FormPersonaNatural extends Component
 
         'personaNatural.administra_recursos_publicos' => 'required',
         'personaNatural.persona_expuesta_politicamente_extranjera' =>
-            'required',
+        'required',
         'personaNatural.persona_expuesta_politicamente_orga_internacionales' =>
-            'required',
+        'required',
         'personaNatural.tiene_relacionados_cercanos_expuestos_politicamente' =>
-            'required',
+        'required',
 
         'personaNatural.total_ingresos_mensuales' => 'required',
         'personaNatural.total_egresos_mensuales' => 'required',
@@ -145,6 +146,7 @@ class FormPersonaNatural extends Component
 
         'support_formato_viculacion_persona_natural' => '',
         'support_clausula_cumplimiento_codigo_etica' => '',
+        'support_antisoborno_anticorrupcion' => 'required',
         'support_cedula_ciudadania' => 'required',
         'support_cedula_extranjeria' => 'required',
         'support_rut' => 'required',
@@ -170,17 +172,15 @@ class FormPersonaNatural extends Component
         $this->listPersonasExpuestasPoliticamente = [];
         $this->solo_lectura = $solo_lectura;
         if ($this->personaNatural != null) {
-            foreach (
-                $this->personaNatural->personasPoliticamenteExpuestas
-                as $persona
-            ) {
+            foreach ($this->personaNatural->personasPoliticamenteExpuestas
+                as $persona) {
                 array_push($this->listPersonasExpuestasPoliticamente, [
                     'nombre' => $persona->nombre,
                     'grado_de_parentezco' => $persona->grado_de_parentezco,
                     'tipo_de_identificacion' =>
-                        $persona->tipo_de_identificacion,
+                    $persona->tipo_de_identificacion,
                     'numero_de_identificacion' =>
-                        $persona->numero_de_identificacion,
+                    $persona->numero_de_identificacion,
                     'entidad' => $persona->entidad,
                     'cargo' => $persona->cargo,
                     'fecha_vinculacion' => $persona->fecha_vinculacion,
@@ -192,6 +192,8 @@ class FormPersonaNatural extends Component
                 $this->personaNatural->support_formato_viculacion_persona_natural;
             $this->support_clausula_cumplimiento_codigo_etica =
                 $this->personaNatural->support_clausula_cumplimiento_codigo_etica;
+            $this->support_antisoborno_anticorrupcion =
+                $this->personaNatural->support_antisoborno_anticorrupcion;
             $this->support_cedula_ciudadania =
                 $this->personaNatural->support_cedula_ciudadania;
             $this->support_cedula_extranjeria =
@@ -251,6 +253,14 @@ class FormPersonaNatural extends Component
                     '/support_clausula_cumplimiento_codigo_etica/'
             );
         }
+
+        if (!empty($this->support_antisoborno_anticorrupcion)) {
+            $this->personaNatural->support_antisoborno_anticorrupcion = $this->support_antisoborno_anticorrupcion->store(
+                'public/form-proveedores/soportes/persona-natural/' .
+                    $this->personaNatural->id .
+                    '/support_antisoborno_anticorrupcion/'
+            );
+        }
         if (!empty($this->support_cedula_ciudadania)) {
             $this->personaNatural->support_cedula_ciudadania = $this->support_cedula_ciudadania->store(
                 'public/form-proveedores/soportes/persona-natural/' .
@@ -280,9 +290,7 @@ class FormPersonaNatural extends Component
             );
         }
         if (
-            !empty(
-                $this->support_declaracion_de_renta_o_certificacion_no_declarante
-            )
+            !empty($this->support_declaracion_de_renta_o_certificacion_no_declarante)
         ) {
             $this->personaNatural->support_declaracion_de_renta_o_certificacion_no_declarante = $this->support_declaracion_de_renta_o_certificacion_no_declarante->store(
                 'public/form-proveedores/soportes/persona-natural/' .
