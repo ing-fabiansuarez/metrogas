@@ -52,6 +52,7 @@ class FormPersonaJuridica extends Component
 
     //SOPORTES
     public $support_clausula_cumplimiento_codigo;
+    public $support_antisoborno_anticorrupcion;
     public $support_camara_de_comercio;
     public $support_documento_representante_legal;
     public $support_certificacion_bancaria;
@@ -89,7 +90,7 @@ class FormPersonaJuridica extends Component
 
         'personaJuridica.esta_obligada' => 'required',
         'personaJuridica.tiene_implementado_un_sistema_de_administracion_de_riesgo_de_lavado_de_activos' =>
-            'required',
+        'required',
 
         'personaJuridica.rl_nombre' => 'required',
         'personaJuridica.rl_apellido' => 'required',
@@ -98,22 +99,22 @@ class FormPersonaJuridica extends Component
         'personaJuridica.rl_fecha_expedicion' => 'required',
         'personaJuridica.rl_ciudad_expedicion' => 'required',
         'personaJuridica.rl_administra_recursos_publicos_o_es_pep' =>
-            'required',
+        'required',
         'personaJuridica.rl_persona_expuesta_pliticamente_extrajera' =>
-            'required',
+        'required',
         'personaJuridica.rl_persona_expuesta_politicamente_de_organizaciones_internacionales' =>
-            'required',
+        'required',
         'personaJuridica.rl_tiene_relecionados_cercanos_expuestos_politicamente' =>
-            'required',
+        'required',
 
         'personaJuridica.bf_administra_recursos_publicos_o_es_pep' =>
-            'required',
+        'required',
         'personaJuridica.bf_persona_expuesta_pliticamente_extrajera' =>
-            'required',
+        'required',
         'personaJuridica.bf_persona_expuesta_politicamente_de_organizaciones_internacionales' =>
-            'required',
+        'required',
         'personaJuridica.bf_tiene_relecionados_cercanos_expuestos_politicamente' =>
-            'required',
+        'required',
 
         'personaJuridica.if_total_ingresos' => 'required',
         'personaJuridica.if_total_egresos' => 'required',
@@ -179,6 +180,8 @@ class FormPersonaJuridica extends Component
         'personaJuridica.ciudad_infor_solicitante' => 'required',
 
         'support_clausula_cumplimiento_codigo' => '',
+
+        'support_antisoborno_anticorrupcion' => 'required',
         'support_camara_de_comercio' => 'required',
         'support_documento_representante_legal' => 'required',
         'support_certificacion_bancaria' => 'required',
@@ -341,37 +344,35 @@ class FormPersonaJuridica extends Component
         $this->listBeneficiariosFinales = [];
 
         if ($this->personaJuridica != null) {
-            foreach (
-                $this->personaJuridica->personasPoliticamenteExpuestas
-                as $persona
-            ) {
+            foreach ($this->personaJuridica->personasPoliticamenteExpuestas
+                as $persona) {
                 if ($persona->categoria == 1) {
                     array_push($this->listPersonasExpuestasPoliticamenteRL, [
                         'nombre' => $persona->nombre,
                         'grado_de_parentezco' => $persona->grado_de_parentezco,
                         'tipo_de_identificacion' =>
-                            $persona->tipo_de_identificacion,
+                        $persona->tipo_de_identificacion,
                         'numero_de_identificacion' =>
-                            $persona->numero_de_identificacion,
+                        $persona->numero_de_identificacion,
                         'entidad' => $persona->entidad,
                         'cargo' => $persona->cargo,
                         'fecha_vinculacion' => $persona->fecha_vinculacion,
                         'fecha_desvinculacion' =>
-                            $persona->fecha_desvinculacion,
+                        $persona->fecha_desvinculacion,
                     ]);
                 } elseif ($persona->categoria == 2) {
                     array_push($this->listPersonasExpuestasPoliticamenteBF, [
                         'nombre' => $persona->nombre,
                         'grado_de_parentezco' => $persona->grado_de_parentezco,
                         'tipo_de_identificacion' =>
-                            $persona->tipo_de_identificacion,
+                        $persona->tipo_de_identificacion,
                         'numero_de_identificacion' =>
-                            $persona->numero_de_identificacion,
+                        $persona->numero_de_identificacion,
                         'entidad' => $persona->entidad,
                         'cargo' => $persona->cargo,
                         'fecha_vinculacion' => $persona->fecha_vinculacion,
                         'fecha_desvinculacion' =>
-                            $persona->fecha_desvinculacion,
+                        $persona->fecha_desvinculacion,
                     ]);
                 }
             }
@@ -382,13 +383,15 @@ class FormPersonaJuridica extends Component
                     'bf_tipo_identificacion' => $item->tipo_identificacion,
                     'bf_numero_identificacion' => $item->num_identificacion,
                     'bf_participacion_capital' =>
-                        $item->porcentaje_participacion,
+                    $item->porcentaje_participacion,
                 ]);
             }
 
             //Cargar los soportes
             $this->support_clausula_cumplimiento_codigo =
                 $this->personaJuridica->support_clausula_cumplimiento_codigo;
+            $this->support_antisoborno_anticorrupcion =
+                $this->personaJuridica->support_antisoborno_anticorrupcion;
             $this->support_camara_de_comercio =
                 $this->personaJuridica->support_camara_de_comercio;
             $this->support_documento_representante_legal =
@@ -430,6 +433,13 @@ class FormPersonaJuridica extends Component
                 'public/form-proveedores/soportes/persona-juridica/' .
                     $this->personaJuridica->id .
                     '/support_clausula_cumplimiento_codigo/'
+            );
+        }
+        if (!empty($this->support_antisoborno_anticorrupcion)) {
+            $this->personaJuridica->support_antisoborno_anticorrupcion = $this->support_antisoborno_anticorrupcion->store(
+                'public/form-proveedores/soportes/persona-juridica/' .
+                    $this->personaJuridica->id .
+                    '/support_antisoborno_anticorrupcion/'
             );
         }
         if (!empty($this->support_camara_de_comercio)) {

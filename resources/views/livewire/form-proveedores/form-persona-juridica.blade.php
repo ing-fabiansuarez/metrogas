@@ -2400,6 +2400,55 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex px-2">
+                                                            <div class="my-auto">
+                                                                <h6 class="mb-0 text-xs">
+                                                                    Compromiso antisoborno y anticorrupción
+                                                                </h6>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">Diligenciar y
+                                                            Firmar
+                                                        </p>
+                                                        <a target="_blank" style="font-size: 0.7rem; color: green;"
+                                                            href="{{ asset('assets/documentos/compromiso_antisoborno_y_anticorrupcion.pdf') }}">
+                                                            Descargar formato
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+
+                                                            @if (!$solo_lectura)
+                                                                <input
+                                                                    wire:model.defer="support_antisoborno_anticorrupcion"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_antisoborno_anticorrupcion')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            @else
+                                                                @if ($support_antisoborno_anticorrupcion)
+                                                                    <a target="_blank"
+                                                                        href="{{ Storage::url($support_antisoborno_anticorrupcion) }}">
+                                                                        <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                            aria-hidden="true"></i>
+                                                                    </a>
+                                                                @else
+                                                                    No subido
+                                                                @endif
+                                                            @endif
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex px-2">
