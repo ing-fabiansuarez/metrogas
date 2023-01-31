@@ -2372,6 +2372,10 @@
                                                         <p class="text-xs font-weight-bold mb-0">Diligenciar y
                                                             Firmar
                                                         </p>
+                                                        <a target="_blank" style="font-size: 0.7rem; color: green;"
+                                                        href="{{ asset('assets/documentos/anexo_clasula_etica.pdf') }}">
+                                                        Descargar formato
+                                                    </a>
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
