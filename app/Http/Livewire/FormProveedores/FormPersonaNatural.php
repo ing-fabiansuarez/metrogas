@@ -6,6 +6,7 @@ use App\Enums\EEstadoCivil;
 use App\Enums\EGenero;
 use App\Enums\ENivelEducativo;
 use App\Enums\ESiNo;
+use App\Enums\ETipoContrapartePN;
 use App\Enums\ETipoEmpresa;
 use App\Enums\ETipoOcupacion;
 use App\Enums\ETipoVivienda;
@@ -52,6 +53,7 @@ class FormPersonaNatural extends Component
 
     protected $rules = [
         'personaNatural.empresa_id' => 'required',
+        'personaNatural.tipo_contraparte' => 'required',
         'personaNatural.nombres' => 'required',
         'personaNatural.apellidos' => 'required',
         'personaNatural.genero' => 'required',
@@ -229,6 +231,7 @@ class FormPersonaNatural extends Component
             'tiposocupaciones' => ETipoOcupacion::cases(),
             'tiposempresa' => ETipoEmpresa::cases(),
             'empresas' => Empresa::all(),
+            'ETipoContrapartePN' => ETipoContrapartePN::cases()
         ]);
     }
 

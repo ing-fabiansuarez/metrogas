@@ -47,6 +47,24 @@
                                             </span>
                                         </div>
                                     </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label">Tipo de contraparte</label>
+                                            <select wire:model="personaNatural.tipo_contraparte"
+                                                class="form-select form-select-sm"
+                                                @if ($solo_lectura) disabled @endif>
+                                                <option value="">--Seleccione--</option>
+                                                @foreach ($ETipoContrapartePN as $item)
+                                                    <option value="{{ $item->getId() }}">{{ $item->getName() }}</option>
+                                                @endforeach
+                                            </select>
+                                            <span class="error">
+                                                @error('personaNatural.tipo_contraparte')
+                                                    {{ $message }}
+                                                @enderror
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
 
 
@@ -1741,7 +1759,8 @@
                                                             <p class="text-xs font-weight-bold mb-0">Diligenciar y
                                                                 Firmar
                                                             </p>
-                                                            <a target="_blank" style="font-size: 0.7rem; color: green;"
+                                                            <a target="_blank"
+                                                                style="font-size: 0.7rem; color: green;"
                                                                 href="{{ asset('assets/documentos/anexo_clasula_etica.pdf') }}">
                                                                 Descargar formato
                                                             </a>
@@ -1789,7 +1808,8 @@
                                                             <p class="text-xs font-weight-bold mb-0">Diligenciar y
                                                                 Firmar
                                                             </p>
-                                                            <a target="_blank" style="font-size: 0.7rem; color: green;"
+                                                            <a target="_blank"
+                                                                style="font-size: 0.7rem; color: green;"
                                                                 href="{{ asset('assets/documentos/compromiso_antisoborno_y_anticorrupcion.pdf') }}">
                                                                 Descargar formato
                                                             </a>
