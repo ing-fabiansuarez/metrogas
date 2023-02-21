@@ -53,6 +53,7 @@ class FormPersonaJuridica extends Component
     //SOPORTES
     public $support_clausula_cumplimiento_codigo;
     public $support_antisoborno_anticorrupcion;
+    public $support_composicion_accionaria;
     public $support_camara_de_comercio;
     public $support_documento_representante_legal;
     public $support_certificacion_bancaria;
@@ -182,6 +183,7 @@ class FormPersonaJuridica extends Component
         'support_clausula_cumplimiento_codigo' => '',
 
         'support_antisoborno_anticorrupcion' => 'required',
+        'support_composicion_accionaria' => '',
         'support_camara_de_comercio' => 'required',
         'support_documento_representante_legal' => 'required',
         'support_certificacion_bancaria' => 'required',
@@ -392,6 +394,8 @@ class FormPersonaJuridica extends Component
                 $this->personaJuridica->support_clausula_cumplimiento_codigo;
             $this->support_antisoborno_anticorrupcion =
                 $this->personaJuridica->support_antisoborno_anticorrupcion;
+            $this->support_composicion_accionaria =
+                $this->personaJuridica->support_composicion_accionaria;
             $this->support_camara_de_comercio =
                 $this->personaJuridica->support_camara_de_comercio;
             $this->support_documento_representante_legal =
@@ -440,6 +444,13 @@ class FormPersonaJuridica extends Component
                 'public/form-proveedores/soportes/persona-juridica/' .
                     $this->personaJuridica->id .
                     '/support_antisoborno_anticorrupcion/'
+            );
+        }
+        if (!empty($this->support_composicion_accionaria)) {
+            $this->personaJuridica->support_composicion_accionaria = $this->support_composicion_accionaria->store(
+                'public/form-proveedores/soportes/persona-juridica/' .
+                    $this->personaJuridica->id .
+                    '/support_composicion_accionaria/'
             );
         }
         if (!empty($this->support_camara_de_comercio)) {

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('form_persona_juridicas', function (Blueprint $table) {
-            $table->string('support_antisoborno_anticorrupcion')->nullable();
+            $table->string('support_composicion_accionaria')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('form_persona_juridicas', function (Blueprint $table) {
-            $table->dropColumn('support_antisoborno_anticorrupcion');
+            $table->dropColumn('support_composicion_accionaria');
         });
     }
 };

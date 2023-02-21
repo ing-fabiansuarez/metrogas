@@ -2373,9 +2373,9 @@
                                                             Firmar
                                                         </p>
                                                         <a target="_blank" style="font-size: 0.7rem; color: green;"
-                                                        href="{{ asset('assets/documentos/anexo_clasula_etica.pdf') }}">
-                                                        Descargar formato
-                                                    </a>
+                                                            href="{{ asset('assets/documentos/anexo_clasula_etica.pdf') }}">
+                                                            Descargar formato
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         <div class="form-group">
@@ -2442,6 +2442,54 @@
                                                                 @if ($support_antisoborno_anticorrupcion)
                                                                     <a target="_blank"
                                                                         href="{{ Storage::url($support_antisoborno_anticorrupcion) }}">
+                                                                        <i class="cursor-pointer fas fa-eye text-secondary"
+                                                                            aria-hidden="true"></i>
+                                                                    </a>
+                                                                @else
+                                                                    No subido
+                                                                @endif
+                                                            @endif
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex px-2">
+                                                            <div class="my-auto">
+                                                                <h6 class="mb-0 text-xs">
+                                                                    Certificado emitido por contador/revisor fiscal de
+                                                                    la composición accionaria.
+                                                                </h6>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">
+                                                            En caso de no aplicar una certificación
+                                                        </p>
+                                                        {{--  <a target="_blank" style="font-size: 0.7rem; color: green;"
+                                                            href="{{ asset('assets/documentos/compromiso_antisoborno_y_anticorrupcion.pdf') }}">
+                                                            support_composicion_accionaria
+                                                        </a> --}}
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group">
+
+                                                            @if (!$solo_lectura)
+                                                                <input
+                                                                    wire:model.defer="support_composicion_accionaria"
+                                                                    class="form-control form-control-sm pt-1"
+                                                                    type="file" accept="image/*,.pdf" />
+                                                                @error('support_composicion_accionaria')
+                                                                    <span class="text-danger text-message-validation">
+                                                                        {{ $message }}
+                                                                    </span>
+                                                                @enderror
+                                                            @else
+                                                                @if ($support_composicion_accionaria)
+                                                                    <a target="_blank"
+                                                                        href="{{ Storage::url($support_composicion_accionaria) }}">
                                                                         <i class="cursor-pointer fas fa-eye text-secondary"
                                                                             aria-hidden="true"></i>
                                                                     </a>
@@ -2629,7 +2677,8 @@
                                                     <td>
                                                         <div class="d-flex px-2">
                                                             <div class="my-auto">
-                                                                <h6 class="mb-0 text-xs">Estados Financieros comparados
+                                                                <h6 class="mb-0 text-xs">Estados Financieros
+                                                                    comparados
                                                                     - resumidos - sin notas
 
                                                                 </h6>
